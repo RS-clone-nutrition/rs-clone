@@ -1,4 +1,4 @@
-class Fitnes {
+class Fitness {
   main;
 
   constructor(main: Element) {
@@ -10,4 +10,4 @@ class Fitnes {
   }
 }
 
-export { Fitnes };
+export { Fitness };

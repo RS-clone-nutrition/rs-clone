@@ -1,5 +1,5 @@
 import './styles/style.scss';
-import { Fitnes } from './pages/fitness';
+import { Fitness } from './pages/fitness';
 import { Error } from './pages/error';
 import { Foods } from './pages/foods';
 import { MyFatSecret } from './pages/myFatSecret';
@@ -10,7 +10,7 @@ class Server {
   routes = [
     {
       path: '/fitness',
-      data: Fitnes,
+      data: Fitness,
     },
     {
       path: '/foods',
@@ -45,7 +45,7 @@ class Server {
 
     const blockForContent = <HTMLElement>$('.content');
 
-    const page = html?.data as typeof Fitnes | typeof Foods | typeof Recipes | typeof MyFatSecret;
+    const page = html?.data as typeof Fitness | typeof Foods | typeof Recipes | typeof MyFatSecret;
 
     const cl = new page(blockForContent);
     cl.render();
