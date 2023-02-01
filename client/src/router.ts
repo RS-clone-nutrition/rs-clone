@@ -1,0 +1,69 @@
+import './styles/style.scss';
+import { Fitnes } from './pages/fitness';
+import { Error } from './pages/error';
+import { Foods } from './pages/foods';
+import { MyFatSecret } from './pages/myFatSecret';
+import { Recipes } from './pages/recipes';
+import { $ } from './utils/helpers';
+
+class Server {
+  routes = [
+    {
+      path: '/fitness',
+      data: Fitnes,
+    },
+    {
+      path: '/foods',
+      data: Foods,
+    },
+    {
+      path: '/recipes',
+      data: Recipes,
+    },
+    {
+      path: '/',
+      data: MyFatSecret,
+    },
+    {
+      path: '/404',
+      data: Error,
+    },
+  ];
+
+  route = (event: Event) => {
+    event.preventDefault();
+    const block = event.target as HTMLLinkElement;
+
+    window.history.pushState({}, '', block.href);
+    this.handleLocation();
+  };
+
+  handleLocation = (href?: string) => {
+    const html = href
+      ? this.routes.find((route) => route.path === href)
+      : this.routes.find((route) => route.path === window.location.pathname) || this.routes[4];
+
+    const blockForContent = <HTMLElement>$('.content');
+
+    const page = html?.data as typeof Fitnes | typeof Foods | typeof Recipes | typeof MyFatSecret;
+
+    const cl = new page(blockForContent);
+    cl.render();
+
+    window.addEventListener('popstate', () => this.handleLocation());
+    window.addEventListener('DOMContentLoaded', () => this.handleLocation());
+  };
+
+  eventListeners() {
+    const pagesBlock = <HTMLElement>document.querySelector('.nav__menu');
+
+    pagesBlock.addEventListener('click', (e) => {
+      this.route(e);
+    });
+  }
+}
+
+const server = new Server();
+server.handleLocation();
+server.eventListeners();
+export default server;
