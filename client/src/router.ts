@@ -1,6 +1,7 @@
 import './styles/style.scss';
 import { Fitness } from './pages/fitness';
 import { Error } from './pages/error';
+import { About } from './pages/about';
 import { Foods } from './pages/foods';
 import { MyFatSecret } from './pages/myFatSecret';
 import { Recipes } from './pages/recipes';
@@ -8,6 +9,10 @@ import { $ } from './utils/helpers';
 
 class Server {
   routes = [
+    {
+      path: '/',
+      data: About,
+    },
     {
       path: '/fitness',
       data: Fitness,
@@ -21,7 +26,7 @@ class Server {
       data: Recipes,
     },
     {
-      path: '/',
+      path: '/myfatsecret',
       data: MyFatSecret,
     },
     {
