@@ -1,6 +1,6 @@
 import '../styles/singleRecipe.scss';
 
-class About {
+class SingleRecipe {
   main;
 
   constructor(main: Element) {
@@ -8,8 +8,8 @@ class About {
   }
 
   render() {
-    console.log('br');
+    this.main.innerHTML = '<h1>Foods content</h1>';
   }
 }
 
-export { About };
+export { SingleRecipe };

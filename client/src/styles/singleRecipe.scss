@@ -1,0 +1,286 @@
+html {
+  font-size: 1px;
+}
+
+body {
+  font-size: 14rem;
+}
+
+.black {
+  font-weight: bold;
+}
+
+.main {
+
+  &__container {
+    width: 986px;
+    padding: 8px 0;
+    margin: 0 auto;
+  }
+}
+
+.content {}
+
+.crumbs {
+  display: flex;
+  gap: 10rem;
+  color: rgba(178, 200, 226, 1);
+  font-size: 14rem;
+  align-items: center;
+  margin-bottom: 20rem;
+
+  &__home-img {}
+
+  &__recipes {}
+
+  &__single-recipe {}
+}
+
+.recipe {
+
+  &__main {
+    padding: 0 10rem;
+    display: flex;
+    gap: 0 10rem;
+  }
+
+  &__info {}
+
+  &__detail {}
+
+  &__nutrition {}
+}
+
+.info {
+
+  &__left {}
+}
+
+.left-info {
+
+  &__icon {}
+
+  &__img {
+    border: 10rem solid rgba(235, 249, 252, 1);
+    max-width: 130rem;
+    object-fit: cover;
+    margin-bottom: 6rem;
+  }
+
+  &__actions {}
+
+  &__box {
+    display: flex;
+    gap: 5rem;
+    background-color: rgba(235, 249, 252, 1);
+    padding: 10rem;
+    margin-bottom: 10rem;
+  }
+}
+
+.left__viewicon {
+  color: rgba(2, 140, 196, 1);
+  // text-align: right;
+  margin-bottom: 5rem;
+}
+
+.action-left {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  padding: 4rem;
+  color: rgba(2, 140, 196, 1);
+  border-bottom: 2px solid rgba(230, 238, 246, 1);
+  margin-bottom: 10rem;
+  line-height: 12px;
+}
+
+.cookbook {}
+
+.diary {}
+
+.action {
+
+  &__img {}
+
+  &__text {}
+}
+
+.serving {
+
+  &__icon {}
+
+  &__img {}
+
+  &__text {}
+
+  &__title {}
+
+  &__info {}
+}
+
+.left-box {
+
+  &__icon {}
+
+  &__img {
+    width: 20rem;
+  }
+
+  &__text {}
+
+  &__title {}
+
+  &__info {}
+}
+
+.time {
+
+  &__icon {}
+
+  &__img {}
+
+  &__text {}
+
+  &__title {}
+
+  &__info {}
+}
+
+.type {
+
+  &__icon {}
+
+  &__img {}
+
+  &__text {}
+
+  &__title {}
+
+  &__info {}
+}
+
+.detail-recipe {
+
+  &__name {}
+
+  &__undertitle {}
+
+  &__ingridients {}
+
+  &__directions {}
+}
+
+.ingridients {
+
+  &__title {}
+
+  &__list {}
+
+  &__item {}
+}
+
+.directions {
+
+  &__title {}
+
+  &__list {}
+
+  &__item {}
+}
+
+.nutrition {
+
+  &__summary {}
+
+  &__facts {}
+}
+
+.summary {
+
+  &__title {}
+
+  &__text {}
+}
+
+.calorie {}
+
+.percent {}
+
+.facts {
+
+  &__container {}
+
+  &__title {}
+
+  &__size {}
+
+  &__divider-thick {}
+
+  &__amount-left {}
+
+  &__calorie {}
+
+  &__divider-medium {}
+
+  &__category {}
+
+  &__description {}
+}
+
+.size-facts {
+
+  &__text {}
+
+  &__serving {}
+
+  &__number {}
+}
+
+.facts-calorie {
+
+  &__text {}
+
+  &__number {}
+}
+
+.facts-category {
+
+  &__text {}
+
+  &__percent {}
+}
+
+.black {}
+
+.rdi {
+
+  &__container {}
+
+  &__number {}
+
+  &__text {}
+
+  &__text-title {}
+
+  &__text-undertitle {}
+
+  &__info {}
+}
+
+.breakdown {
+
+  &__container {}
+
+  &__number {}
+
+  &__detail {}
+
+  &__item {}
+}
+
+.carbohydrate {}
+
+.fat {}
+
+.protein {}
