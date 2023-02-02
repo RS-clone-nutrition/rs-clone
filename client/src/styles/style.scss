@@ -1,1 +1,11 @@
 @import './null.scss';
+@import './headFoot.scss';
+
+.container{
+  max-width: 1440px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
+button{
+  cursor: pointer;
+}

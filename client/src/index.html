@@ -5,21 +5,50 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/1a64f65040.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 
 <body>
-  <nav class="nav">
-    <ul class="nav__menu">
-      <li><a class="menu__link" href="/fitness">Fitness</a></li>
-      <li><a class="menu__link" href="/foods">Foods</a></li>
-      <li><a class="menu__link" href="/recipes">Recipes</a></li>
-      <li><a class="menu__link" href="/">My fatsecret</a></li>
-    </ul>
-  </nav>
+  <div class="container">
+    <nav class="nav">
+      <a class="logo" href="">
+        <img src="../src/img/logo.svg" alt="logo">
+        <p class="logo__text">fatsecret</p>
+      </a>
+      <ul class="nav__menu">
+        <li><a class="menu__link" href="/fitness">Fitness</a></li>
+        <li><a class="menu__link" href="/foods">Foods</a></li>
+        <li><a class="menu__link" href="/recipes">Recipes</a></li>
+        <li><a class="menu__link" href="/">My fatsecret</a></li>
+        <div class="search">
+          <input class="search__input" type="search" placeholder="Enter search">
+          <button class="search__button"><i class="fa-solid fa-magnifying-glass fa-circle"></i></button>
+        </div>
+      </ul>
+      <ul class="account">
+        <li><a href="" class="account__link">Login Up</a></li>
+        <p>/</p>
+        <li><a href="" class="account__link">Sign Up</a></li>
+      </ul>
+    </nav>
+  </div>
+  
   <main>
-    <div class="content"></div>
+    <div class="container">
+      <div class="content"></div>
+    </div>
   </main>
+  <footer>
+    <div class="container">
+      <div class="footer_inner">
+        <p class="about-product">© 2023 FatSecret</p>
+        <a href=""><img src="../src/img/logo-rsschool.svg" alt=""></a>
+      </div>
+    </div>
+  </footer>
+  <script src="index.js"></script>
 </body>
 
 </html>
