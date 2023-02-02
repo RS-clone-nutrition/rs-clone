@@ -5,6 +5,8 @@ import { About } from './pages/about';
 import { Foods } from './pages/foods';
 import { MyFatSecret } from './pages/myFatSecret';
 import { Recipes } from './pages/recipes';
+import { SignIn } from './pages/signIn';
+import { LogUp } from './pages/logUp';
 import { $ } from './utils/helpers';
 
 class Server {
@@ -28,6 +30,14 @@ class Server {
     {
       path: '/myfatsecret',
       data: MyFatSecret,
+    },
+    {
+      path: '/signup',
+      data: SignIn,
+    },
+    {
+      path: '/login',
+      data: LogUp,
     },
     {
       path: '/404',
