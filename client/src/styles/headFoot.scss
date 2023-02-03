@@ -1,7 +1,10 @@
-.nav {
-  padding: 20px;
-  color: #FFF;
+header {
   background-color: #32B34C;
+  padding: 5px 10px 20px;
+  color: #FFF;
+}
+
+.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +13,15 @@
 
   &__menu {
     display: flex;
-    column-gap: 20px;
+    column-gap: 33px;
+  }
+
+  &__link {
+    color: #FFF;
+
+    &:hover {
+      color: #000;
+    }
   }
 }
 
@@ -19,9 +30,16 @@
   column-gap: 10px;
   align-items: center;
   font-size: 42px;
+
+  &__text {
+    color: #FFF;
+    font-weight: 400;
+  }
 }
 
 .search {
+  text-align: right;
+
   &__input {
     border: 0;
     padding-left: 10px;
@@ -52,9 +70,12 @@
   }
 }
 
+footer {
+  background-color: #32B34C;
+}
+
 .footer_inner {
   padding: 20px;
-  background-color: #32B34C;
   font-weight: 700;
   font-size: 18px;
   display: flex;
