@@ -55,7 +55,6 @@ label,
     border: 1px solid #767676;
 }
 .fit-slider-wrapper{
-    width: 643px;
     border-radius: 10px;
     border: 2px solid #33B34B;
     margin: 0 auto;
@@ -95,4 +94,33 @@ label,
 .exercise-type-title{
     text-align: center;
     padding: 25px 0;
+}
+.type-wrapper{
+    justify-content: space-evenly;
+    margin-bottom: 25px;
+}
+.type-text{
+    text-align: right;
+}
+.type{
+    width: 270px;
+    margin-bottom: 10px;
+}
+.type-table{
+    justify-content: space-between;
+}
+.type-title{
+    background: #33B34B;
+    color: #FFFFFF;
+    padding: 3px;
+}
+.type-text{
+    background: #FCF3E5;
+    padding: 3px;
+}
+
+@media screen and (max-width: 513px){
+    .input-fit-search{
+        width: 300px;
+    }
 }
