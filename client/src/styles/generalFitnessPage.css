@@ -96,3 +96,25 @@ label,
     text-align: center;
     padding: 25px 0;
 }
+.type-wrapper{
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+.type-text{
+    text-align: right;
+}
+.type{
+    width: 270px;
+}
+.type-table{
+    justify-content: space-between;
+}
+.type-title{
+    background: #33B34B;
+    color: #FFFFFF;
+    padding: 3px;
+}
+.type-text{
+    background: #FCF3E5;
+    padding: 3px;
+}
