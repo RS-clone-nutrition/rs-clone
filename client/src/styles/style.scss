@@ -13,3 +13,20 @@
 button {
   cursor: pointer;
 }
+
+.crumbs {
+  display: flex;
+  gap: 8px;
+  color: rgba(178, 200, 226, 1);
+  align-items: center;
+  margin-bottom: 8px;
+
+  .crumbs__sep {
+    font-size: 14px;
+  }
+
+  .crumbs__link {
+    color: rgba(178, 200, 226, 1);
+    font-size: 12px;
+  }
+}
