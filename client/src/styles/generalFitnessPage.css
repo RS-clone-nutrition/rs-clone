@@ -74,8 +74,12 @@ label,
 .slider-descr-title{
     padding-bottom: 25px;
 }
+.slider-time-wrap{
+    width: 250px;
+    justify-content: space-evenly;
+}
 .slider-table{
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .slider-elipse{
     width: 100px;

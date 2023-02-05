@@ -1,4 +1,10 @@
-import { dataExerciseLight, dataExerciseModerate, dataExerciseStrenuous } from '../components/dataFitExercise';
+import {
+  dataExerciseLight,
+  dataExerciseModerate,
+  dataExerciseStrenuous,
+  DataExercise,
+} from '../components/dataFitExercise';
+import { $, $All, randomExercise, burnedCalories } from '../utils/helpers';
 
 class Fitness {
   main;
@@ -73,30 +79,34 @@ class Fitness {
           Estimated Energy Burned
         </h3>
         <div class="slider-table wrap">
-          <ul class="slider-list">
-            <li class="lider-list-item">5 Minutes</li>
-            <li class="lider-list-item">10 Minutes</li>
-            <li class="lider-list-item">15 Minutes</li>
-            <li class="lider-list-item">30 Minutes</li>
-          </ul>
-          <ul class="slider-list">
-            <li class="lider-list-item">6 calories</li>
-            <li class="lider-list-item">11 calories</li>
-            <li class="lider-list-item">17 calories</li>
-            <li class="lider-list-item">34 calories</li>
-          </ul>
-          <ul class="slider-list">
-            <li class="lider-list-item">1 Hour</li>
-            <li class="lider-list-item">2 Hour</li>
-            <li class="lider-list-item">3 Hour</li>
-            <li class="lider-list-item">4 Hour</li>
-          </ul>
-          <ul class="slider-list">
-            <li class="lider-list-item">69 calories</li>
-            <li class="lider-list-item">137 calories</li>
-            <li class="lider-list-item">206 calories</li>
-            <li class="lider-list-item">274 calories</li>
-          </ul>
+          <div class="slider-time-wrap wrap">
+            <ul class="slider-list">
+              <li class="lider-list-item">5 Minutes</li>
+              <li class="lider-list-item">10 Minutes</li>
+              <li class="lider-list-item">15 Minutes</li>
+              <li class="lider-list-item">30 Minutes</li>
+            </ul>
+            <ul class="slider-list">
+              <li class="lider-list-item five-min">6 calories</li>
+              <li class="lider-list-item ten-min">11 calories</li>
+              <li class="lider-list-item fifteen-min">17 calories</li>
+              <li class="lider-list-item therty-min">34 calories</li>
+            </ul>
+          </div>
+          <div class="slider-time-wrap wrap">
+            <ul class="slider-list">
+              <li class="lider-list-item">1 Hour</li>
+              <li class="lider-list-item">2 Hour</li>
+              <li class="lider-list-item">3 Hour</li>
+              <li class="lider-list-item">4 Hour</li>
+            </ul>
+            <ul class="slider-list">
+              <li class="lider-list-item one-hour">69 calories</li>
+              <li class="lider-list-item two-hour">137 calories</li>
+              <li class="lider-list-item tree-hour">206 calories</li>
+              <li class="lider-list-item four-hour">274 calories</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="slider-elipse wrap">
@@ -148,7 +158,60 @@ class Fitness {
         </div>
       </div>
     </div>
-  </div>`;
+    </div>`;
+    this.slider();
+    this.eventLisreners();
+  }
+
+  eventLisreners() {}
+
+  slider() {
+    const allExerciseArray: DataExercise[] = dataExerciseLight
+      .concat(dataExerciseModerate)
+      .concat(dataExerciseStrenuous);
+    const sliderTitle = <HTMLElement>$('.slider-title');
+    const sliderSubtitle = <HTMLElement>$('.slider-subtitle');
+    const sliderImg = <HTMLImageElement>$('.slider-img');
+    const min5Cals = <HTMLElement>$('.five-min');
+    const min10Cals = <HTMLElement>$('.ten-min');
+    const min15Cals = <HTMLElement>$('.fifteen-min');
+    const min30Cals = <HTMLElement>$('.therty-min');
+    const hour1Cals = <HTMLElement>$('.one-hour');
+    const hour2Cals = <HTMLElement>$('.two-hour');
+    const hour3Cals = <HTMLElement>$('.tree-hour');
+    const hour4Cals = <HTMLElement>$('.four-hour');
+    const slider = <HTMLElement>$('.fit-slider-wrapper');
+    const elipseArray = $All('.elipse');
+    let i = 1;
+    function activeElipse() {
+      if (i > 2) {
+        i = 0;
+        elipseArray[i].classList.add('active');
+        elipseArray[elipseArray.length - 1].classList.remove('active');
+      } else {
+        elipseArray[i].classList.add('active');
+        elipseArray[i - 1].classList.remove('active');
+      }
+      i++;
+    }
+    setInterval(() => {
+      const randomExc = randomExercise(allExerciseArray);
+      sliderTitle.innerHTML = randomExc.name;
+      sliderSubtitle.innerHTML = randomExc.type;
+      sliderImg.src = randomExc.image;
+      min5Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 5)} calories`;
+      min10Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 10)} calories`;
+      min15Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 15)} calories`;
+      min30Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 30)} calories`;
+      hour1Cals.innerHTML = `${randomExc.calsInHr} calories`;
+      hour2Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 120)} calories`;
+      hour3Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 180)} calories`;
+      hour4Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 240)} calories`;
+      activeElipse();
+    }, 10000);
+    slider.addEventListener('click', () => {
+      console.log(randomExercise(dataExerciseLight).name);
+    });
   }
 }
 
