@@ -1,0 +1,44 @@
+.about {
+  padding: 25px;
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-indent: 20px;
+    padding: 10px;
+    font-weight: 400;
+  }
+}
+
+.developers {
+  font-family: 'Inter', sans-serif;
+  color: #FFF;
+  background-color: #333333;
+  padding: 30px 0 85px;
+
+  h1 {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  &__block {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 100px;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+  }
+}

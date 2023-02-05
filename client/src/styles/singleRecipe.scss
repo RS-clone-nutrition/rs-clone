@@ -1,0 +1,336 @@
+html {
+  font-size: 1px;
+}
+
+body {
+  font-size: 14rem;
+}
+
+.black {
+  color: rgba(51, 51, 51, 1);
+  font-weight: 900;
+}
+
+.single-recipe {
+  padding: 8rem 7rem;
+  max-width: 1000rem;
+  margin: 0 auto;
+  color: rgba(51, 51, 51, 1);
+}
+
+.recipe {
+
+  &__main {
+    padding: 0 10rem;
+    display: flex;
+    gap: 0 10rem;
+    justify-content: space-between;
+    gap: 10rem;
+  }
+
+  &__info {
+    flex: 0 0 68%;
+    display: flex;
+    gap: 20rem;
+  }
+}
+
+.left-info {
+
+  &__img {
+    border: 10rem solid rgba(235, 249, 252, 1);
+    max-width: 147rem;
+    object-fit: cover;
+    margin-bottom: 6rem;
+  }
+
+
+  &__box {
+    display: flex;
+    gap: 5rem;
+    background-color: rgba(235, 249, 252, 1);
+    padding: 10rem;
+    margin-bottom: 10rem;
+  }
+}
+
+.left__viewicon {
+  color: rgba(2, 140, 196, 1);
+  margin-bottom: 5rem;
+}
+
+.action-left {
+  display: flex;
+  align-items: center;
+  gap: 5rem;
+  padding: 4rem;
+  color: rgba(2, 140, 196, 1);
+  border-bottom: 2px solid rgba(230, 238, 246, 1);
+  margin-bottom: 10rem;
+}
+
+.left-box {
+  &__img {
+    width: 20rem;
+  }
+}
+
+.detail-recipe {
+  display: flex;
+  flex-direction: column;
+  gap: 10rem;
+
+  &__name {
+    border-bottom: 2px solid rgba(230, 238, 246, 1);
+    padding-bottom: 10rem;
+    text-transform: capitalize;
+  }
+
+  &__undertitle {
+    color: #333333;
+  }
+}
+
+.ingridients {
+
+  &__title {
+    border-bottom: 1px solid #E6EEF6;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 10rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+  }
+
+  &__item {
+    color: rgba(2, 140, 196, 1);
+    line-height: 15rem;
+  }
+}
+
+.directions {
+
+  &__title {
+    border-bottom: 1px solid #E6EEF6;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 15rem;
+  }
+
+  &__list {
+    text-align: center;
+  }
+
+  &__item {
+    color: rgba(51, 51, 51, 1);
+  }
+}
+
+.summary {
+  background: #FCF3E5;
+  border-radius: 10px;
+  padding: 6rem 7rem 10rem;
+  margin-bottom: 26rem;
+
+  &__title {
+    margin-bottom: 11rem;
+    font-size: 13rem;
+  }
+
+  &__text {
+    font-size: 10rem;
+    position: relative;
+    padding-left: 10rem;
+
+    &::before {
+      content: '';
+      width: 6rem;
+      height: 6rem;
+      background-color: rgba(2, 140, 196, 0.5);
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
+.facts {
+  background-color: rgba(237, 241, 233, 1);
+  padding: 20rem 25rem;
+
+  &__container {
+    background-color: #fff;
+    border: 2rem solid rgba(188, 188, 188, 1);
+    padding: 15rem 11rem 25rem;
+    margin-bottom: 5rem;
+    border-radius: 10px;
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    color: #333333;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+    padding-bottom: 10rem;
+    margin-bottom: 8rem;
+  }
+
+  &__size {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10rem;
+    font-size: 12rem;
+  }
+
+  &__divider-thick {
+    border-bottom: 11px solid rgba(0, 0, 0, 0.38);
+    height: 11rem;
+  }
+
+  &__amount-left {
+    font-size: 10rem;
+    margin-bottom: 4rem;
+  }
+
+  &__calorie {
+    font-size: 17rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+  }
+
+  &__divider-medium {
+    border-bottom: 4px solid rgba(0, 0, 0, 0.38);
+    height: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  &__percent {
+    font-size: 10px;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+    margin-bottom: 3rem;
+    text-align: right;
+  }
+
+  &__category {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.38);
+    font-size: 10px;
+  }
+
+  &__description {
+    font-size: 8px;
+  }
+}
+
+.size-facts {
+  &__number {
+    padding-left: 10rem;
+  }
+}
+
+.facts-calorie {
+  &__number {
+    font-size: 21rem;
+  }
+}
+
+.rdi {
+  background: #FFFFFF;
+  border: 2px solid #BACFE6;
+  margin-bottom: 5rem;
+  padding: 7rem 12rem 8rem;
+
+  &__container {
+    display: flex;
+    gap: 10rem;
+  }
+
+  &__number {
+    font-size: 30rem;
+  }
+
+  &__text-title {
+    color: rgba(85, 85, 85, 1);
+  }
+
+  &__text-undertitle {
+    color: rgba(153, 153, 153, 1);
+  }
+}
+
+.breakdown {
+  &__item {
+    position: relative;
+    padding-left: 12rem;
+    font-size: 10rem;
+
+    &::before {
+      content: '';
+      width: 8rem;
+      height: 8rem;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(0, -50%);
+    }
+  }
+}
+
+.carbohydrate {
+  &::before {
+    background-color: rgba(75, 184, 154, 1);
+  }
+}
+
+.fat {
+  &::before {
+    background-color: rgba(228, 177, 1, 1);
+  }
+}
+
+.protein {
+  &::before {
+    background-color: rgba(188, 95, 84, 1);
+  }
+}
+
+@media (max-width:900px) {
+  .recipe__info {
+    flex: 0 1 58%;
+  }
+}
+
+.recipe__nutrition.nutrition {
+  min-width: 160rem;
+  flex: 0 1 35%;
+}
+
+@media (max-width:650px) {
+  html {
+    font-size: 1.5px;
+  }
+
+  .recipe__main {
+    display: block;
+  }
+}
+
+@media (max-width:500px) {
+  html {
+    font-size: 1px;
+  }
+}
+
+@media (max-width:350px) {
+  html {
+    font-size: 0.9px;
+  }
+}
