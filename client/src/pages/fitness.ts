@@ -124,11 +124,11 @@ class Fitness {
           <p class="type-title">Light Intensity</p>
           <p class="type-text">calories/hr</p>
           <div class="type-table wrap">
-            <ul class="type-list">
-              ${dataExerciseLight.map((e) => `<li>${e.name}</li>`).join('')}
+            <ul class="type-list-names light">
+              ${dataExerciseLight.map((e) => `<li class="item-btn" id="${e.id}">${e.name}</li>`).join('')}
             </ul>
-            <ul class="type-list">
-              ${dataExerciseLight.map((e) => `<li>${e.calsInHr}</li>`).join('')}
+            <ul class="type-list-cals">
+              ${dataExerciseLight.map((e) => `<li class="item-cals">${e.calsInHr}</li>`).join('')}
             </ul>
           </div>
         </div>
@@ -136,11 +136,11 @@ class Fitness {
           <p class="type-title">Moderate Intensity</p>
           <p class="type-text">calories/hr</p>
           <div class="type-table wrap">
-            <ul class="type-list">
-              ${dataExerciseModerate.map((e) => `<li>${e.name}</li>`).join('')}
+            <ul class="type-list-names moderate">
+              ${dataExerciseModerate.map((e) => `<li class="item-btn" id="${e.id}">${e.name}</li>`).join('')}
             </ul>
-            <ul class="type-list">
-              ${dataExerciseModerate.map((e) => `<li>${e.calsInHr}</li>`).join('')}
+            <ul class="type-list-cals">
+              ${dataExerciseModerate.map((e) => `<li class="item-cals">${e.calsInHr}</li>`).join('')}
             </ul>
           </div>
         </div>
@@ -148,24 +148,24 @@ class Fitness {
           <p class="type-title">Strenuous Intensity</p>
           <p class="type-text">calories/hr</p>
           <div class="type-table wrap">
-            <ul class="type-list">
-              ${dataExerciseStrenuous.map((e) => `<li>${e.name}</li>`).join('')}
+            <ul class="type-list-names strenuous">
+              ${dataExerciseStrenuous.map((e) => `<li class="item-btn" id="${e.id}">${e.name}</li>`).join('')}
             </ul>
-            <ul class="type-list">
-              ${dataExerciseStrenuous.map((e) => `<li>${e.calsInHr}</li>`).join('')}
+            <ul class="type-list-cals">
+              ${dataExerciseStrenuous.map((e) => `<li class="item-cals">${e.calsInHr}</li>`).join('')}
             </ul>
           </div>
         </div>
       </div>
     </div>
     </div>`;
-    this.slider();
+    this.sliderWhitShowCard();
     this.eventLisreners();
   }
 
   eventLisreners() {}
 
-  slider() {
+  sliderWhitShowCard() {
     const allExerciseArray: DataExercise[] = dataExerciseLight
       .concat(dataExerciseModerate)
       .concat(dataExerciseStrenuous);
@@ -180,7 +180,7 @@ class Fitness {
     const hour2Cals = <HTMLElement>$('.two-hour');
     const hour3Cals = <HTMLElement>$('.tree-hour');
     const hour4Cals = <HTMLElement>$('.four-hour');
-    const slider = <HTMLElement>$('.fit-slider-wrapper');
+    const sliderElipses = <HTMLElement>$('.slider-elipse');
     const elipseArray = $All('.elipse');
     let i = 1;
     function activeElipse() {
@@ -194,23 +194,61 @@ class Fitness {
       }
       i++;
     }
-    setInterval(() => {
+    function writeCard(obj: DataExercise) {
+      sliderTitle.innerHTML = obj.name;
+      sliderSubtitle.innerHTML = obj.type;
+      sliderImg.src = obj.image;
+      min5Cals.innerHTML = `${burnedCalories(obj.calsInHr, 5)} calories`;
+      min10Cals.innerHTML = `${burnedCalories(obj.calsInHr, 10)} calories`;
+      min15Cals.innerHTML = `${burnedCalories(obj.calsInHr, 15)} calories`;
+      min30Cals.innerHTML = `${burnedCalories(obj.calsInHr, 30)} calories`;
+      hour1Cals.innerHTML = `${obj.calsInHr} calories`;
+      hour2Cals.innerHTML = `${burnedCalories(obj.calsInHr, 120)} calories`;
+      hour3Cals.innerHTML = `${burnedCalories(obj.calsInHr, 180)} calories`;
+      hour4Cals.innerHTML = `${burnedCalories(obj.calsInHr, 240)} calories`;
+    }
+    const switchSlider = setInterval(() => {
       const randomExc = randomExercise(allExerciseArray);
-      sliderTitle.innerHTML = randomExc.name;
-      sliderSubtitle.innerHTML = randomExc.type;
-      sliderImg.src = randomExc.image;
-      min5Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 5)} calories`;
-      min10Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 10)} calories`;
-      min15Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 15)} calories`;
-      min30Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 30)} calories`;
-      hour1Cals.innerHTML = `${randomExc.calsInHr} calories`;
-      hour2Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 120)} calories`;
-      hour3Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 180)} calories`;
-      hour4Cals.innerHTML = `${burnedCalories(randomExc.calsInHr, 240)} calories`;
+      writeCard(randomExc);
       activeElipse();
     }, 10000);
-    slider.addEventListener('click', () => {
-      console.log(randomExercise(dataExerciseLight).name);
+    function showCardExercise(array: DataExercise[], id: number) {
+      for (let j = 0; j < array.length; j++) {
+        if (array[j].id === id) {
+          writeCard(array[j]);
+        }
+      }
+    }
+    function itemActive(elem: HTMLElement) {
+      const array = $All('.item-btn');
+      for (let j = 0; j < array.length; j++) {
+        array[j].classList.remove('active-item');
+      }
+      elem.classList.add('active-item');
+    }
+    const blockLight = <HTMLElement>$('.light');
+    blockLight.addEventListener('click', (e) => {
+      const elem = <HTMLElement>e.target;
+      sliderElipses.style.display = 'none';
+      clearInterval(switchSlider);
+      showCardExercise(dataExerciseLight, Number(elem.id));
+      itemActive(elem);
+    });
+    const blockModerate = <HTMLElement>$('.moderate');
+    blockModerate.addEventListener('click', (e) => {
+      const elem = <HTMLElement>e.target;
+      sliderElipses.style.display = 'none';
+      clearInterval(switchSlider);
+      showCardExercise(dataExerciseModerate, Number(elem.id));
+      itemActive(elem);
+    });
+    const blockStrenuous = <HTMLElement>$('.strenuous');
+    blockStrenuous.addEventListener('click', (e) => {
+      const elem = <HTMLElement>e.target;
+      sliderElipses.style.display = 'none';
+      clearInterval(switchSlider);
+      showCardExercise(dataExerciseStrenuous, Number(elem.id));
+      itemActive(elem);
     });
   }
 }
