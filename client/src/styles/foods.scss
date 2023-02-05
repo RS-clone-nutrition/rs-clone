@@ -12,13 +12,6 @@ body {
   font-size: 17rem;
 }
 
-.content {
-  max-width: 986px;
-  padding: 8px 10rem;
-  margin: 0 auto;
-  color: rgba(51, 51, 51, 1);
-}
-
 .crumbs {
   display: flex;
   gap: 10rem;
@@ -26,6 +19,13 @@ body {
   font-size: 14rem;
   align-items: center;
   margin-bottom: 20rem;
+}
+
+.foods {
+  padding: 8px 10rem;
+  max-width: 986px;
+  margin: 0 auto;
+  color: rgba(51, 51, 51, 1);
 }
 
 .top-foods {
