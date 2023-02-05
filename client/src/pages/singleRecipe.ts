@@ -72,20 +72,11 @@ class SingleRecipe {
                     <h3 class="ingridients__title">Ingridients</h3>
                     <ul class="ingridients__list">
                       <li class="ingridients__item">6 medium apples</li>
-                      <li class="ingridients__item">6 medium apples</li>
-                      <li class="ingridients__item">6 medium apples</li>
-                      <li class="ingridients__item">6 medium apples</li>
-                      <li class="ingridients__item">6 medium apples</li>
                     </ul>
                   </div>
                   <div class="detail-recipe__directions directions">
                     <h3 class="directions__title">Directions</h3>
                     <ul class="directions__list">
-                      <li class="directions__item">Peel and slice apples</li>
-                      <li class="directions__item">Peel and slice apples</li>
-                      <li class="directions__item">Peel and slice apples</li>
-                      <li class="directions__item">Peel and slice apples</li>
-                      <li class="directions__item">Peel and slice apples</li>
                       <li class="directions__item">Peel and slice apples</li>
                     </ul>
                   </div>

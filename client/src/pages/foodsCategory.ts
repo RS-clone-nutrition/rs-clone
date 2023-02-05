@@ -103,42 +103,6 @@ class FoodsCategory {
                 <a href="#" class="search-similars__link">Low Sodium Baked Beans</a>
               </div>
             </li>
-            <li class="category-search__item">
-              <h2 class="category-search__name">
-                <a href="#" class="category-search__link">Beans</a>
-              </h2>
-              <div class="category-search__similars search-similars">
-                <a href="#" class="search-similars__link">Baked Beans</a>
-                <a href="#" class="search-similars__link">Vegetarian Baked Beans</a>
-                <a href="#" class="search-similars__link">Baked Beans with Pork (Canned)</a>
-                <a href="#" class="search-similars__link">Boston Baked Beans</a>
-                <a href="#" class="search-similars__link">Low Sodium Baked Beans</a>
-              </div>
-            </li>
-            <li class="category-search__item">
-              <h2 class="category-search__name">
-                <a href="#" class="category-search__link">Black Beans</a>
-              </h2>
-              <div class="category-search__similars search-similars">
-                <a href="#" class="search-similars__link">Baked Beans</a>
-                <a href="#" class="search-similars__link">Vegetarian Baked Beans</a>
-                <a href="#" class="search-similars__link">Baked Beans with Pork (Canned)</a>
-                <a href="#" class="search-similars__link">Boston Baked Beans</a>
-                <a href="#" class="search-similars__link">Low Sodium Baked Beans</a>
-              </div>
-            </li>
-            <li class="category-search__item">
-              <h2 class="category-search__name">
-                <a href="#" class="category-search__link">Chickpeas</a>
-              </h2>
-              <div class="category-search__similars search-similars">
-                <a href="#" class="search-similars__link">Baked Beans</a>
-                <a href="#" class="search-similars__link">Vegetarian Baked Beans</a>
-                <a href="#" class="search-similars__link">Baked Beans with Pork (Canned)</a>
-                <a href="#" class="search-similars__link">Boston Baked Beans</a>
-                <a href="#" class="search-similars__link">Low Sodium Baked Beans</a>
-              </div>
-            </li>
           </ul>
         </div>
       </div>

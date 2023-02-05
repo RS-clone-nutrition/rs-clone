@@ -179,35 +179,11 @@ class SingleFood {
                 <li class="category-detail-links__item">
                   <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
                 </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
               </ul>
             </div>
             <div class="detail-links__category category-detail-links">
               <h4 class="category-detail-links__name">Other Types of Avocados::</h4>
               <ul class="category-detail-links__list">
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
-                <li class="category-detail-links__item">
-                  <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
-                </li>
                 <li class="category-detail-links__item">
                   <a href="#" class="category-detail-links__link">Pico de Gallo Guacamole</a>
                 </li>

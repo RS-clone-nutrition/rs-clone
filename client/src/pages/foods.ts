@@ -45,45 +45,6 @@ class Foods {
                     <div class="item-foods__more blue">more</div>
                   </div>
                 </li>
-                <li class="main-foods__item item-foods">
-                  <div class="item-foods__icon">
-                    <img src="../src/img/foods/dish.png" alt="food icon" class="item-foods__img">
-                  </div>
-                  <div class="item-foods__info">
-                    <div class="item-foods__name">
-                      <a href="#" class="item-foods__link blue">Beans & Legumes</a>
-                    </div>
-                    <div class="item-foods__description">All types of beans and legumes like baked beans, green beans,
-                      refried beans and lentils.</div>
-                    <div class="item-foods__more blue">more</div>
-                  </div>
-                </li>
-                <li class="main-foods__item item-foods">
-                  <div class="item-foods__icon">
-                    <img src="../src/img/foods/dish.png" alt="food icon" class="item-foods__img">
-                  </div>
-                  <div class="item-foods__info">
-                    <div class="item-foods__name">
-                      <a href="#" class="item-foods__link blue">Beans & Legumes</a>
-                    </div>
-                    <div class="item-foods__description">All types of beans and legumes like baked beans, green beans,
-                      refried beans and lentils.</div>
-                    <div class="item-foods__more blue">more</div>
-                  </div>
-                </li>
-                <li class="main-foods__item item-foods">
-                  <div class="item-foods__icon">
-                    <img src="../src/img/foods/dish.png" alt="food icon" class="item-foods__img">
-                  </div>
-                  <div class="item-foods__info">
-                    <div class="item-foods__name">
-                      <a href="#" class="item-foods__link blue">Beans & Legumes</a>
-                    </div>
-                    <div class="item-foods__description">All types of beans and legumes like baked beans, green beans,
-                      refried beans and lentils.</div>
-                    <div class="item-foods__more blue">more</div>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
