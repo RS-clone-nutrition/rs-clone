@@ -1,3 +1,5 @@
+import { dataExerciseLight, dataExerciseModerate, dataExerciseStrenuous } from '../components/dataFitExercise';
+
 class Fitness {
   main;
 
@@ -49,7 +51,7 @@ class Fitness {
           <input type="radio" id="whereSearch3" name="fitness" value="strenuous">
           <label for="whereSearch3">Strenuous</label>
 
-          <input type="radio" id="whereSearch4" name="fitness" value="all">
+          <input type="radio" id="whereSearch4" name="fitness" value="all" checked>
           <label for="whereSearch4">All</label>
         </div>
       </div>
@@ -107,6 +109,44 @@ class Fitness {
       <h3 class="exercise-type-title">
         Energy Burned By Exercise Type 
       </h3>
+      <div class="type-wrapper wrap">
+        <div class="type">
+          <p class="type-title">Light Intensity</p>
+          <p class="type-text">calories/hr</p>
+          <div class="type-table wrap">
+            <ul class="type-list">
+              ${dataExerciseLight.map((e) => `<li>${e.name}</li>`).join('')}
+            </ul>
+            <ul class="type-list">
+              ${dataExerciseLight.map((e) => `<li>${e.calsInHr}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        <div class="type">
+          <p class="type-title">Moderate Intensity</p>
+          <p class="type-text">calories/hr</p>
+          <div class="type-table wrap">
+            <ul class="type-list">
+              ${dataExerciseModerate.map((e) => `<li>${e.name}</li>`).join('')}
+            </ul>
+            <ul class="type-list">
+              ${dataExerciseModerate.map((e) => `<li>${e.calsInHr}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+        <div class="type">
+          <p class="type-title">Strenuous Intensity</p>
+          <p class="type-text">calories/hr</p>
+          <div class="type-table wrap">
+            <ul class="type-list">
+              ${dataExerciseStrenuous.map((e) => `<li>${e.name}</li>`).join('')}
+            </ul>
+            <ul class="type-list">
+              ${dataExerciseStrenuous.map((e) => `<li>${e.calsInHr}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>`;
   }
