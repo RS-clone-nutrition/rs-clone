@@ -160,10 +160,7 @@ class Fitness {
     </div>
     </div>`;
     this.sliderWhitShowCard();
-    this.eventLisreners();
   }
-
-  eventLisreners() {}
 
   sliderWhitShowCard() {
     const allExerciseArray: DataExercise[] = dataExerciseLight
@@ -212,17 +209,24 @@ class Fitness {
       writeCard(randomExc);
       activeElipse();
     }, 10000);
+    function updateUrl(query: string, params: string) {
+      const url = new URL(location.href);
+      url.searchParams.set(query, params);
+      if (!params) url.searchParams.delete(query);
+      history.replaceState({}, '', url);
+    }
     function showCardExercise(array: DataExercise[], id: number) {
       for (let j = 0; j < array.length; j++) {
         if (array[j].id === id) {
           writeCard(array[j]);
+          updateUrl('exercise', array[j].name);
         }
       }
     }
+    const arrayItemBtn = $All('.item-btn');
     function itemActive(elem: HTMLElement) {
-      const array = $All('.item-btn');
-      for (let j = 0; j < array.length; j++) {
-        array[j].classList.remove('active-item');
+      for (let j = 0; j < arrayItemBtn.length; j++) {
+        arrayItemBtn[j].classList.remove('active-item');
       }
       elem.classList.add('active-item');
     }
@@ -250,6 +254,40 @@ class Fitness {
       showCardExercise(dataExerciseStrenuous, Number(elem.id));
       itemActive(elem);
     });
+    const sortByQueryParams = () => {
+      const getAllQueryParams = (url: string) => {
+        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+        const params: { [index: string]: string } = {};
+        paramArr.map((param) => {
+          const [key, val] = param.split('=');
+          params[key] = decodeURIComponent(val);
+        });
+        return params;
+      };
+      const params = getAllQueryParams(location.search);
+      for (const key in params) {
+        if (key === 'exercise') {
+          for (let j = 0; j < allExerciseArray.length; j++) {
+            if (params[key].split('+').join(' ') === allExerciseArray[j].name) {
+              sliderElipses.style.display = 'none';
+              clearInterval(switchSlider);
+              writeCard(allExerciseArray[j]);
+              for (let o = 0; o < arrayItemBtn.length; o++) {
+                if (arrayItemBtn[o].innerHTML === params[key].split('+').join(' ')) {
+                  arrayItemBtn[o].classList.add('active-item');
+                }
+              }
+            }
+          }
+        }
+      }
+      const handleLocation = () => {
+        window.addEventListener('popstate', handleLocation);
+        window.addEventListener('DOMContentLoaded', handleLocation);
+      };
+      handleLocation();
+    };
+    sortByQueryParams();
   }
 }
 

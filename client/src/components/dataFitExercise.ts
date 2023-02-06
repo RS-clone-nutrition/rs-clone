@@ -264,7 +264,7 @@ export const dataExerciseModerate = [
   {
     id: 16,
     type: 'Moderate Activity',
-    name: 'Golf',
+    name: 'Golf (moderate)',
     calsInHr: 291,
     image: 'https://i.ibb.co/HHwDpxp/sml-golf-cart.gif',
   },
