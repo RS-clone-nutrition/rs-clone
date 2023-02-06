@@ -137,6 +137,9 @@ label,
 .item-cals{
     text-align: right;
 }
+.not-found{
+    display: none;
+}
 
 @media screen and (max-width: 513px){
     .input-fit-search{

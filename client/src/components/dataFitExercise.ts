@@ -469,6 +469,10 @@ export const dataExerciseStrenuous = [
   },
 ];
 
+export const allExerciseArray: DataExercise[] = dataExerciseLight
+  .concat(dataExerciseModerate)
+  .concat(dataExerciseStrenuous);
+
 export interface DataExercise {
   id: number;
   type: string;

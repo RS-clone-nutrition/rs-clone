@@ -3,6 +3,7 @@ import {
   dataExerciseModerate,
   dataExerciseStrenuous,
   DataExercise,
+  allExerciseArray,
 } from '../components/dataFitExercise';
 import { $, $All, randomExercise, burnedCalories } from '../utils/helpers';
 
@@ -46,18 +47,22 @@ class Fitness {
         <h3 class="search-title">
           Activity and Exercise Finder
         </h3>
-        <input type="text" class="input-fit-search">
+        <input list="search-fitness" type="text" class="input-fit-search">
+        <datalist id="search-fitness">
+          ${allExerciseArray.map((e) => `<option value="${e.name}">`).join('')}
+        </datalist>
+        <p class="not-found">Not Found Exercise</p>
         <div>
-          <input type="radio" id="whereSearch1" name="fitness" value="light">
+          <input type="radio" id="searchLight" name="fitness" value="light" class="input-radio">
           <label for="whereSearch1">Light</label>
       
-          <input type="radio" id="whereSearch2" name="fitness" value="moderate">
+          <input type="radio" id="searchModerate" name="fitness" value="moderate" class="input-radio">
           <label for="whereSearch2">Moderate</label>
       
-          <input type="radio" id="whereSearch3" name="fitness" value="strenuous">
+          <input type="radio" id="searchStrenuous" name="fitness" value="strenuous" class="input-radio">
           <label for="whereSearch3">Strenuous</label>
 
-          <input type="radio" id="whereSearch4" name="fitness" value="all" checked>
+          <input type="radio" id="searchAll" name="fitness" value="all" class="input-radio" checked>
           <label for="whereSearch4">All</label>
         </div>
       </div>
@@ -163,9 +168,6 @@ class Fitness {
   }
 
   sliderWhitShowCard() {
-    const allExerciseArray: DataExercise[] = dataExerciseLight
-      .concat(dataExerciseModerate)
-      .concat(dataExerciseStrenuous);
     const sliderTitle = <HTMLElement>$('.slider-title');
     const sliderSubtitle = <HTMLElement>$('.slider-subtitle');
     const sliderImg = <HTMLImageElement>$('.slider-img');
@@ -254,6 +256,42 @@ class Fitness {
       showCardExercise(dataExerciseStrenuous, Number(elem.id));
       itemActive(elem);
     });
+    const inputSearch = <HTMLInputElement>$('.input-fit-search');
+    //const notFound = <HTMLElement>$('.not-found');
+    function searchExercise(data: DataExercise[]) {
+      inputSearch.addEventListener('change', () => {
+        for (let j = 0; j < data.length; j++) {
+          if (inputSearch.value === data[j].name) {
+            sliderElipses.style.display = 'none';
+            clearInterval(switchSlider);
+            writeCard(data[j]);
+            for (let o = 0; o < arrayItemBtn.length; o++) {
+              arrayItemBtn[o].classList.remove('active-item');
+              if (arrayItemBtn[o].innerHTML === data[j].name) {
+                arrayItemBtn[o].classList.add('active-item');
+              }
+            }
+            //updateUrl('exercise', data[j].name);
+          }
+        }
+      });
+    }
+    const arrInputRadio: HTMLInputElement[] = Array.from(document.querySelectorAll('.input-radio'));
+    const dataListInputSearch = <HTMLElement>document.getElementById('search-fitness');
+    for (let j = 0; j < arrInputRadio.length; j++) {
+      arrInputRadio[j].addEventListener('change', () => {
+        if (arrInputRadio[j].id === 'searchLight') {
+          dataListInputSearch.innerHTML = `${dataExerciseLight.map((e) => `<option value="${e.name}">`).join('')}`;
+        } else if (arrInputRadio[j].id === 'searchModerate') {
+          dataListInputSearch.innerHTML = `${dataExerciseModerate.map((e) => `<option value="${e.name}">`).join('')}`;
+        } else if (arrInputRadio[j].id === 'searchStrenuous') {
+          dataListInputSearch.innerHTML = `${dataExerciseStrenuous.map((e) => `<option value="${e.name}">`).join('')}`;
+        } else {
+          dataListInputSearch.innerHTML = `${allExerciseArray.map((e) => `<option value="${e.name}">`).join('')}`;
+        }
+      });
+    }
+    searchExercise(allExerciseArray);
     const sortByQueryParams = () => {
       const getAllQueryParams = (url: string) => {
         const paramArr = url.slice(url.indexOf('?') + 1).split('&');
