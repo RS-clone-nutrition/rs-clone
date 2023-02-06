@@ -45,7 +45,7 @@ module.exports = {
     historyApiFallback: true,
     historyApiFallback: {
       rewrites: [
-        { from: /./, to: '/index.html' }, // all request to index.html
+        { from: '/*', to: '/index.html' }, // all request to index.html
       ],
     },
   },

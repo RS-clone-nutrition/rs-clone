@@ -7,9 +7,10 @@ import { MyFatSecret } from './pages/myFatSecret';
 import { Recipes } from './pages/recipes';
 import { SignIn } from './pages/signIn';
 import { LogUp } from './pages/logUp';
-import { $ } from './utils/helpers';
+import { FoodsCategory } from './pages/foodsCategory';
+import { $, getMainPath } from './utils/helpers';
 
-class Server {
+class Router {
   routes = [
     {
       path: '/',
@@ -40,27 +41,39 @@ class Server {
       data: LogUp,
     },
     {
+      path: '/foods/group',
+      data: FoodsCategory,
+    },
+    {
       path: '/404',
       data: Error,
     },
   ];
 
-  route = (event: Event) => {
+  route = (event: Event, href?: string) => {
     event.preventDefault();
     const block = event.target as HTMLLinkElement;
+    href = href || block.href;
 
-    window.history.pushState({}, '', block.href);
+    window.history.pushState({}, '', href);
     this.handleLocation();
   };
 
   handleLocation = (href?: string) => {
+    const mainPath = getMainPath(window.location.pathname);
+
     const html = href
       ? this.routes.find((route) => route.path === href)
-      : this.routes.find((route) => route.path === window.location.pathname) || this.routes[4];
+      : this.routes.find((route) => route.path === mainPath) || this.routes[4];
 
     const blockForContent = <HTMLElement>$('.content');
 
-    const page = html?.data as typeof Fitness | typeof Foods | typeof Recipes | typeof MyFatSecret;
+    const page = html?.data as
+      | typeof Fitness
+      | typeof Foods
+      | typeof Recipes
+      | typeof MyFatSecret
+      | typeof FoodsCategory;
 
     const cl = new page(blockForContent);
     cl.render();
@@ -78,7 +91,7 @@ class Server {
   }
 }
 
-const server = new Server();
-server.handleLocation();
-server.eventListeners();
-export default server;
+const router = new Router();
+router.handleLocation();
+router.eventListeners();
+export default router;

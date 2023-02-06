@@ -1,5 +1,3 @@
-import '../styles/SingleFood.scss';
-
 class SingleFood {
   main;
 

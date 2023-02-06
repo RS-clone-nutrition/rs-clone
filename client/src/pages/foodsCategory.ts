@@ -1,3 +1,8 @@
+import groups from '../components/dataGroups';
+import { getURL } from '../utils/helpers';
+import { IGroups } from '../utils/types';
+import api from '../components/api';
+
 class FoodsCategory {
   main;
 
@@ -6,6 +11,9 @@ class FoodsCategory {
   }
 
   render() {
+    const currentURL = <keyof IGroups>getURL().split('/').slice(-1).toString();
+    this.requestsApi(currentURL);
+
     this.main.innerHTML = `
     <div class="foods-category">
     <div class="container">
@@ -109,6 +117,15 @@ class FoodsCategory {
     </div>
   </div>
     `;
+  }
+
+  requestsApi(group: keyof IGroups) {
+    const arr = groups[group];
+
+    arr.forEach(async (item) => {
+      const result = await api.getFoods(item.toString());
+      console.log(result);
+    });
   }
 }
 
