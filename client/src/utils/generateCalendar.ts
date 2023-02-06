@@ -29,9 +29,8 @@ class Cal {
     } else {
       this.currMonth = this.currMonth + 1;
     }
-    console.log(this);
 
-    // this.showcurr();
+    this.showcurr();
   }
   // Переход к предыдущему месяцу
 
@@ -42,9 +41,7 @@ class Cal {
     } else {
       this.currMonth = this.currMonth - 1;
     }
-    console.log(this);
-
-    // this.showcurr();
+    this.showcurr();
   }
   // Показать текущий месяц
 
@@ -127,14 +124,21 @@ class Cal {
 
   createCalendar() {
     setTimeout(() => {
+      const calendar = new Cal('divCal');
       // Начать календарь
       this.showcurr();
 
       // Привязываем кнопки «Следующий» и «Предыдущий»
       const btnNext = document.querySelector('#btnNext') as HTMLElement;
       const btnPrev = document.querySelector('#btnPrev') as HTMLElement;
-      btnNext.addEventListener('click', this.nextMonth);
-      btnPrev.addEventListener('click', this.previousMonth);
+      // btnNext.addEventListener('click', calendar.nextMonth);
+      // btnPrev.addEventListener('click', calendar.previousMonth);
+      btnNext.onclick = function () {
+        calendar.nextMonth();
+      };
+      btnPrev.onclick = function () {
+        calendar.previousMonth();
+      };
     }, 0);
   }
 }
