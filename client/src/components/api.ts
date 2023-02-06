@@ -20,7 +20,8 @@ class Api {
       const response = await fetch(
         `https://api.edamam.com/api/food-database/v2/parser?app_id=${this.food.id}&app_key=${this.food.key}&ingr=${product}&nutrition-type=cooking`
       );
-      return await response.json();
+      const result = await response.json();
+      return result;
     } catch (e) {
       console.log(e);
     }

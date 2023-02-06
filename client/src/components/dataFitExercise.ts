@@ -359,7 +359,7 @@ export const dataExerciseStrenuous = [
     id: 7,
     type: 'Strenuous Activity',
     name: 'Aerobics',
-    calsInHr: 509,
+    calsInHr: 533,
     image: 'https://i.ibb.co/C7f1c9j/sml-other.gif',
   },
   {
@@ -380,7 +380,7 @@ export const dataExerciseStrenuous = [
     id: 10,
     type: 'Strenuous Activity',
     name: 'Weight Training (Bodybuilding)',
-    calsInHr: 582,
+    calsInHr: 610,
     image: 'https://i.ibb.co/C7f1c9j/sml-other.gif',
   },
   {
@@ -468,3 +468,11 @@ export const dataExerciseStrenuous = [
     image: 'https://i.ibb.co/C7f1c9j/sml-other.gif',
   },
 ];
+
+export interface DataExercise {
+  id: number;
+  type: string;
+  name: string;
+  calsInHr: number;
+  image: string;
+}

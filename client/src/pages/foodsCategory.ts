@@ -1,18 +1,26 @@
-import groups from '../components/dataGroups';
+// import groups from '../components/dataGroups';
+// import { getURL } from '../utils/helpers';
+// import { IGroups } from '../utils/types';
+// import api from '../components/api';
+import router from '../router';
+import CategoryExamplesList from '../components/categoryExamplesList';
+import { $All, createPath } from '../utils/helpers';
+import contentHeaderTable from '../components/contentHeaderTable';
 import { getURL } from '../utils/helpers';
 import { IGroups } from '../utils/types';
-import api from '../components/api';
 
 class FoodsCategory {
   main;
 
+  categoryExamplesList;
+
   constructor(main: Element) {
+    this.categoryExamplesList = new CategoryExamplesList();
     this.main = main;
   }
 
   render() {
-    const currentURL = <keyof IGroups>getURL().split('/').slice(-1).toString();
-    this.requestsApi(currentURL);
+    const category = <keyof IGroups>getURL().split('/').slice(-1).toString();
 
     this.main.innerHTML = `
     <div class="foods-category">
@@ -24,16 +32,7 @@ class FoodsCategory {
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Beans & Legumes</a>
       </div>
-      <div class="foods-category__top top-foods-category">
-        <div class="top-foods-category__content">
-          <div class="top-foods-category__icon">
-            <img src="../src/img/foods/dish.png" alt="dishes icon" class="top-foods__img">
-          </div>
-          <div class="top-foods-category__text">
-            <h1 class="top-foods-category__title">Beans & Legumes</h1>
-          </div>
-        </div>
-      </div>
+      ${contentHeaderTable.render(`../src/img/foods/category/${category.toLowerCase()}.jpg`, category, '')}
       <div class="foods-category__content category-content">
         <div class="category-content__all category-all">
           <h2 class="category-all__title">
@@ -41,9 +40,6 @@ class FoodsCategory {
             Foods
           </h2>
           <ul class="category-all__list list-all">
-            <li class="category-all__item">
-              <a href="#" class="category-all__link blue">Beans & Legumes</a>
-            </li>
             <li class="category-all__item">
               <a href="#" class="category-all__link blue">Beans & Legumes</a>
             </li>
@@ -60,7 +56,7 @@ class FoodsCategory {
               <a href="#" class="category-all__link blue">Eggs</a>
             </li>
             <li class="category-all__item">
-              <a href="#" class="category-all__link blue">Fast Food</a>
+              <a href="#" class="category-all__link blue">Fast-Food</a>
             </li>
             <li class="category-all__item">
               <a href="#" class="category-all__link blue">Fish & Seafood</a>
@@ -99,33 +95,38 @@ class FoodsCategory {
         </div>
         <div class="category-content__search category-search">
           <ul class="category-search__list">
-            <li class="category-search__item">
-              <h2 class="category-search__name">
-                <a href="#" class="category-search__link">Baked Beans</a>
-              </h2>
-              <div class="category-search__similars search-similars">
-                <a href="#" class="search-similars__link">Baked Beans</a>
-                <a href="#" class="search-similars__link">Vegetarian Baked Beans</a>
-                <a href="#" class="search-similars__link">Baked Beans with Pork (Canned)</a>
-                <a href="#" class="search-similars__link">Boston Baked Beans</a>
-                <a href="#" class="search-similars__link">Low Sodium Baked Beans</a>
-              </div>
-            </li>
           </ul>
         </div>
       </div>
     </div>
   </div>
     `;
+
+    this.categoryExamplesList.render();
+    // ContentHeaderTable.render('../src/img/foods/fork.svg', category, '');
+    this.eventListeners();
   }
 
-  requestsApi(group: keyof IGroups) {
-    const arr = groups[group];
+  eventListeners() {
+    const categoriesLinks = $All('.category-all__link');
+    const categoriesSimilarsLinks = $All('.search-similars__link');
 
-    arr.forEach(async (item) => {
-      const result = await api.getFoods(item.toString());
-      console.log(result);
+    categoriesLinks.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const elem = <HTMLLinkElement>e.target;
+
+        const name = `/foods/group/${createPath(<string>elem.textContent)}`;
+        router.route(e, name);
+      });
     });
+    // categoriesSimilarsLinks.forEach((item) => {
+    //   item.addEventListener('click', (e) => {
+    //     const elem = <HTMLLinkElement>e.target;
+
+    //     const name = `/foods/group/${createPath(<string>elem.textContent)}`;
+    //     router.route(e, name);
+    //   });
+    // });
   }
 }
 

@@ -18,4 +18,6 @@ interface IGroups {
   Vegetables: string[];
 }
 
-export { IGroups };
+type CategoryArr = [string, string[]];
+
+export { IGroups, CategoryArr };

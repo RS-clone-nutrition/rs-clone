@@ -74,8 +74,12 @@ label,
 .slider-descr-title{
     padding-bottom: 25px;
 }
+.slider-time-wrap{
+    width: 250px;
+    justify-content: space-evenly;
+}
 .slider-table{
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 .slider-elipse{
     width: 100px;
@@ -103,7 +107,7 @@ label,
     text-align: right;
 }
 .type{
-    width: 270px;
+    width: 290px;
     margin-bottom: 10px;
 }
 .type-table{
@@ -117,6 +121,21 @@ label,
 .type-text{
     background: #FCF3E5;
     padding: 3px;
+}
+.item-btn,
+.item-cals{
+    line-height: 30px;
+    padding: 0 5px;
+}
+.item-btn:hover,
+.item-btn:active,
+.item-btn:focus,
+.active-item{
+    background: #33B34B;
+    color: #FFFFFF;
+}
+.item-cals{
+    text-align: right;
 }
 
 @media screen and (max-width: 513px){

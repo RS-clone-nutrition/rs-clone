@@ -1,3 +1,5 @@
+import contentHeaderTable from '../components/contentHeaderTable';
+
 class SingleFood {
   main;
 
@@ -15,14 +17,6 @@ class SingleFood {
         <a href="#" class="crumbs__link">Foods</a>
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Avocado</a>
-      </div>
-      <div class="product__top product-top">
-        <div class="product-top__content">
-          <div class="product-top__description">Food database and calorie counter</div>
-          <div class="product-top__text">
-            <h1 class="product-top__title">Avocado</h1>
-          </div>
-        </div>
       </div>
       <div class="product__content">
         <div class="nutrition__facts facts">
