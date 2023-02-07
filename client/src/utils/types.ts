@@ -20,4 +20,55 @@ interface IGroups {
 
 type CategoryArr = [string, string[]];
 
-export { IGroups, CategoryArr };
+interface INutritionAnalysisResponse {
+  calories: number;
+  totalWeight: number;
+  healthLabels: string[];
+  dietLabels: string[];
+  cautions: string[];
+  totalNutrients: {
+    FAT: { quantity: number };
+    FASAT: { quantity: number };
+    FATRN: { quantity: number };
+    FAPU: { quantity: number };
+    FAMS: { quantity: number };
+    CHOLE: { quantity: number };
+    NA: { quantity: number };
+    CHOCDF: { quantity: number };
+    FIBTG: { quantity: number };
+    SUGAR: { quantity: number };
+    PROCNT: { quantity: number };
+    VITD: { quantity: number };
+    CA: { quantity: number };
+    FE: { quantity: number };
+    K: { quantity: number };
+    VITA_RAE: { quantity: number };
+    VITC: { quantity: number };
+  };
+  totalDaily: {
+    FAT: { quantity: number };
+    FASAT: { quantity: number };
+    FATRN: { quantity: number };
+    FAPU: { quantity: number };
+    FAMS: { quantity: number };
+    CHOLE: { quantity: number };
+    NA: { quantity: number };
+    CHOCDF: { quantity: number };
+    FIBTG: { quantity: number };
+    SUGAR: { quantity: number };
+    PROCNT: { quantity: number };
+    VITD: { quantity: number };
+    CA: { quantity: number };
+    FE: { quantity: number };
+    K: { quantity: number };
+    VITA_RAE: { quantity: number };
+    VITC: { quantity: number };
+  };
+}
+
+interface IFooddataBaseResponse {
+  hints: { map: (arg0: (i: { food: { label: string[]; image: string[] } }) => string[]) => string[] };
+  text: string;
+}
+
+export { IGroups, CategoryArr, INutritionAnalysisResponse, IFooddataBaseResponse };

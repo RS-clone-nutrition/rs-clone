@@ -8,6 +8,7 @@ import { Recipes } from './pages/recipes';
 import { SignIn } from './pages/signIn';
 import { LogUp } from './pages/logUp';
 import { FoodsCategory } from './pages/foodsCategory';
+import { SingleFood } from './pages/singleFood';
 import { $, getMainPath } from './utils/helpers';
 
 class Router {
@@ -43,6 +44,10 @@ class Router {
     {
       path: '/foods/group',
       data: FoodsCategory,
+    },
+    {
+      path: '/foods/product',
+      data: SingleFood,
     },
     {
       path: '/404',

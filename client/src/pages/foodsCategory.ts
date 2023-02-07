@@ -109,7 +109,6 @@ class FoodsCategory {
 
   eventListeners() {
     const categoriesLinks = $All('.category-all__link');
-    const categoriesSimilarsLinks = $All('.search-similars__link');
 
     categoriesLinks.forEach((item) => {
       item.addEventListener('click', (e) => {
@@ -119,14 +118,6 @@ class FoodsCategory {
         router.route(e, name);
       });
     });
-    // categoriesSimilarsLinks.forEach((item) => {
-    //   item.addEventListener('click', (e) => {
-    //     const elem = <HTMLLinkElement>e.target;
-
-    //     const name = `/foods/group/${createPath(<string>elem.textContent)}`;
-    //     router.route(e, name);
-    //   });
-    // });
   }
 }
 

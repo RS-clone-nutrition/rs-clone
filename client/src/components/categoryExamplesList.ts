@@ -1,8 +1,9 @@
-import { $ } from '../utils/helpers';
+import { $, $All, createPath } from '../utils/helpers';
 import groups from '../consts/dataGroups';
 import { getURL } from '../utils/helpers';
 import { IGroups } from '../utils/types';
 import api from './api';
+import router from '../router';
 
 class CategoryExamplesList {
   render() {
@@ -11,9 +12,12 @@ class CategoryExamplesList {
     container.innerHTML = '';
 
     groups[category].forEach(async (item) => {
+      const dataName = item.split(' ').join('-');
       const examplesArr = await this.requestsApi(item);
-      container.innerHTML += `
-  <li class="category-search__item">
+      container.insertAdjacentHTML(
+        'beforeend',
+        `
+  <li data-name = "${dataName}" class="category-search__item">
   <h2 class="category-search__name">
     <a href="#" class="category-search__link">${item}</a>
   </h2>
@@ -25,13 +29,43 @@ class CategoryExamplesList {
     <a href="#" class="search-similars__link">${examplesArr[4]}</a>
   </div>
 </li>
-  `;
+  `
+      );
+
+      this.eventListeners(dataName);
+    });
+  }
+
+  eventListeners(dataName: string) {
+    const parent = <HTMLElement>$(`[data-name = ${dataName}]`);
+    const categoriesSimilarsLinks = $All('.search-similars__link', parent);
+    const mainCategory = <HTMLElement>$('.category-search__link', parent);
+
+    if (!mainCategory) {
+      return;
+    }
+
+    mainCategory.addEventListener('click', (e) => {
+      const elem = <HTMLLinkElement>e.target;
+
+      const name = `/foods/product/${createPath(<string>elem.textContent)}`;
+      router.route(e, name);
+    });
+
+    categoriesSimilarsLinks.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const elem = <HTMLLinkElement>e.target;
+
+        const name = `/foods/product/${createPath(<string>elem.textContent)}`;
+        router.route(e, name);
+      });
     });
   }
 
   async requestsApi(category: string) {
     const result = await api.getFoods(category);
-    const examplesFood: string[] = result.hints.map((i) => i.food.label);
+    console.log(result);
+    const examplesFood: string[] = result.hints.map((i: { food: { label: string[] } }) => i.food.label);
     return examplesFood;
   }
 

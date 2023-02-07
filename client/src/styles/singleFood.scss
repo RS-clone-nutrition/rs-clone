@@ -279,9 +279,11 @@ body {
   }
 
   &__list {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    // display: flex;
+    // flex-direction: column;
+    // gap: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   &__item {
@@ -293,6 +295,11 @@ body {
   }
 }
 
+.facts-photos__img {
+  width: 100rem;
+}
+
+
 @media (max-width:955px) {
   .product__content {
     display: flex;
@@ -300,6 +307,7 @@ body {
   }
 
   .facts-photos {
+
     &__items {
       .facts-photos__img {
         width: 50rem;

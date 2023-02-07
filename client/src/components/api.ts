@@ -26,6 +26,18 @@ class Api {
       console.log(e);
     }
   }
+
+  async getNutritionAnalysis(product: string) {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/api/nutrition-data?app_id=${this.nutrition.id}&app_key=${this.nutrition.key}&nutrition-type=logging&ingr=${product}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 const api = new Api();
