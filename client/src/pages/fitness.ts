@@ -232,6 +232,7 @@ class Fitness {
       }
       elem.classList.add('active-item');
     }
+    const fitSliderWrap = <HTMLElement>$('.fit-slider-wrapper');
     const blockLight = <HTMLElement>$('.light');
     blockLight.addEventListener('click', (e) => {
       const elem = <HTMLElement>e.target;
@@ -239,6 +240,7 @@ class Fitness {
       clearInterval(switchSlider);
       showCardExercise(dataExerciseLight, Number(elem.id));
       itemActive(elem);
+      fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
     });
     const blockModerate = <HTMLElement>$('.moderate');
     blockModerate.addEventListener('click', (e) => {
@@ -247,6 +249,7 @@ class Fitness {
       clearInterval(switchSlider);
       showCardExercise(dataExerciseModerate, Number(elem.id));
       itemActive(elem);
+      fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
     });
     const blockStrenuous = <HTMLElement>$('.strenuous');
     blockStrenuous.addEventListener('click', (e) => {
@@ -255,23 +258,26 @@ class Fitness {
       clearInterval(switchSlider);
       showCardExercise(dataExerciseStrenuous, Number(elem.id));
       itemActive(elem);
+      fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
     });
     const inputSearch = <HTMLInputElement>$('.input-fit-search');
-    //const notFound = <HTMLElement>$('.not-found');
+    const notFound = <HTMLElement>$('.not-found');
     function searchExercise(data: DataExercise[]) {
       inputSearch.addEventListener('change', () => {
+        notFound.style.display = 'block';
         for (let j = 0; j < data.length; j++) {
-          if (inputSearch.value === data[j].name) {
+          if (inputSearch.value.toLocaleLowerCase() === data[j].name.toLowerCase()) {
             sliderElipses.style.display = 'none';
             clearInterval(switchSlider);
             writeCard(data[j]);
+            notFound.style.display = 'none';
             for (let o = 0; o < arrayItemBtn.length; o++) {
               arrayItemBtn[o].classList.remove('active-item');
               if (arrayItemBtn[o].innerHTML === data[j].name) {
                 arrayItemBtn[o].classList.add('active-item');
               }
             }
-            //updateUrl('exercise', data[j].name);
+            updateUrl('exercise', data[j].name);
           }
         }
       });
