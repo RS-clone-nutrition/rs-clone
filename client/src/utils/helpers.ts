@@ -26,4 +26,6 @@ const getMainPath = (path: string) => {
 
 const getURL = () => window.location.href;
 
-export { $, $All, randomExercise, burnedCalories, createPath, getMainPath, getURL };
+const deleteRepeatingItems = (arr: string[]) => Array.from(new Set(arr));
+
+export { $, $All, randomExercise, burnedCalories, createPath, getMainPath, getURL, deleteRepeatingItems };

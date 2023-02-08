@@ -48,7 +48,7 @@ const groups = {
     'Buttermilk',
     'Cheese',
     'Cream',
-    'Half & Half',
+    'Half  Half',
     'Margarine',
     'Milk',
     'Mozzarella Cheese',

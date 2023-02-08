@@ -1,7 +1,3 @@
-// import groups from '../components/dataGroups';
-// import { getURL } from '../utils/helpers';
-// import { IGroups } from '../utils/types';
-// import api from '../components/api';
 import router from '../router';
 import CategoryExamplesList from '../components/categoryExamplesList';
 import { $All, createPath } from '../utils/helpers';

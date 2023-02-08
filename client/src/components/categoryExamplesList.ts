@@ -1,4 +1,4 @@
-import { $, $All, createPath } from '../utils/helpers';
+import { $, $All, createPath, deleteRepeatingItems } from '../utils/helpers';
 import groups from '../consts/dataGroups';
 import { getURL } from '../utils/helpers';
 import { IGroups } from '../utils/types';
@@ -6,14 +6,19 @@ import api from './api';
 import router from '../router';
 
 class CategoryExamplesList {
-  render() {
+  async render() {
     const category = this.getCategoriesArr();
     const container = <HTMLElement>$('.category-search__list');
     container.innerHTML = '';
+    console.log(category);
+    const productsArr = groups[category] || deleteRepeatingItems(await this.requestsApi(category));
+    console.log(productsArr);
 
-    groups[category].forEach(async (item) => {
-      const dataName = item.split(' ').join('-');
-      const examplesArr = await this.requestsApi(item);
+    productsArr.forEach(async (item) => {
+      const dataName = item.replaceAll(' ', '-').replaceAll(',', '-');
+      console.log(item);
+      console.log(dataName);
+      const examplesArr = deleteRepeatingItems(await this.requestsApi(item));
       container.insertAdjacentHTML(
         'beforeend',
         `
@@ -69,7 +74,7 @@ class CategoryExamplesList {
   }
 
   getCategoriesArr() {
-    const category = <keyof IGroups>getURL().split('/').slice(-1).toString();
+    const category = <keyof IGroups>getURL().split('/').slice(-1).toString().replaceAll('_', ' ');
     return category;
   }
 }
