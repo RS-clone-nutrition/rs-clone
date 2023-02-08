@@ -126,6 +126,7 @@ body {
   &__category {
     display: flex;
     justify-content: space-between;
+    gap: 10rem;
     padding-bottom: 4rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.38);
     font-size: 10px;
@@ -279,11 +280,9 @@ body {
   }
 
   &__list {
-    // display: flex;
-    // flex-direction: column;
-    // gap: 4rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    column-gap: 5rem;
   }
 
   &__item {
@@ -297,6 +296,12 @@ body {
 
 .facts-photos__img {
   width: 100rem;
+}
+
+.detail-product__links {
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
 }
 
 

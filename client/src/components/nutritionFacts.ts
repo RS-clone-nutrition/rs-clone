@@ -4,8 +4,14 @@ import { INutritionAnalysisResponse, IFooddataBaseResponse } from '../utils/type
 class NutritionFacts {
   async render(productDate: INutritionAnalysisResponse, productTypes: IFooddataBaseResponse) {
     const productContent = <HTMLElement>$('.product__content');
-    const productImages: string[] = productTypes.hints.map((i) => i.food.image);
-    console.log(productImages);
+    const productArr: string[] = productTypes.hints.map((i) => i.food.image || null);
+    const productImages: string[] = productArr.filter((i) => i != null);
+    const photoOne = productImages[0]
+      ? `<img src="${productImages[0]}" alt="product photo" class="facts-photos__img">`
+      : '';
+    const phototwo = productImages[productImages.length - 1]
+      ? `<img src="${productImages[productImages.length - 1]}" alt="product photo" class="facts-photos__img">`
+      : '';
 
     productContent.insertAdjacentHTML(
       'afterbegin',
@@ -27,92 +33,92 @@ class NutritionFacts {
             <div class="facts__percent black">% Daily Values*</div>
             <div class="facts__category facts-category">
               <p class="facts-category__text black">Total Fat <span class="size-facts__number">
-              ${productDate.totalNutrients.FAT.quantity.toFixed(2)}g</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.FAT.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.FAT?.quantity.toFixed(2) || '0'}g</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FAT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Saturated Fat <span class="size-facts__number">
-              ${productDate.totalNutrients.FASAT.quantity.toFixed(2)}g</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.FASAT.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.FASAT?.quantity.toFixed(2) || '0'}g</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FASAT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Trans Fat <span class="size-facts__number">
-              ${productDate.totalNutrients.FATRN.quantity.toFixed(2)}g</span></p>
-              <p class="facts-category__percent black"></p>
+              ${+productDate.totalNutrients.FATRN?.quantity.toFixed(2) || '0'}g</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FASAT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Polyunsaturated Fat<span class="size-facts__number">
-              ${productDate.totalNutrients.FAPU.quantity.toFixed(2)}g</span></p>
-              <p class="facts-category__percent black"></p>
+              ${+productDate.totalNutrients.FAPU?.quantity.toFixed(2) || '0'}g</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FASAT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Monounsaturated Fat <span class="size-facts__number">
-              ${productDate.totalNutrients.FAMS.quantity.toFixed(2)}g</span>
+              ${+productDate.totalNutrients.FAMS?.quantity.toFixed(2) || '0'}g</span>
               </p>
-              <p class="facts-category__percent black"></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FASAT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text black">Cholesterol<span class="size-facts__number">
-              ${productDate.totalNutrients.CHOLE.quantity.toFixed(2)}mg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.CHOLE.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.CHOLE?.quantity.toFixed(2) || '0'}mg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.CHOLE?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text black">Sodium<span class="size-facts__number">
-              ${productDate.totalNutrients.NA.quantity.toFixed(2)}mg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.NA.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.NA?.quantity.toFixed(2) || '0'}mg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.NA?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text black">Total Carbohydrate<span class="size-facts__number">
-              ${productDate.totalNutrients.CHOCDF.quantity.toFixed(2)}g</span>
+              ${+productDate.totalNutrients.CHOCDF?.quantity.toFixed(2) || '0'}g</span>
               </p>
-              <p class="facts-category__percent black">${productDate.totalDaily.CHOCDF.quantity.toFixed(0)}%</p>
+              <p class="facts-category__percent black">${productDate.totalDaily.CHOCDF?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Dietary Fiber<span class="size-facts__number">
-              ${productDate.totalNutrients.FIBTG.quantity.toFixed(2)}g</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.FIBTG.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.FIBTG?.quantity.toFixed(2) || '0'}g</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FIBTG?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Sugars<span class="size-facts__number">
-              ${productDate.totalNutrients.SUGAR.quantity.toFixed(2)}g</span></p>
-              <p class="facts-category__percent black"></p>
+              ${+productDate.totalNutrients.SUGAR?.quantity.toFixed(2) || '0'}g</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FASAT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text black">Protein<span class="size-facts__number">
-              ${productDate.totalNutrients.PROCNT.quantity.toFixed(2)}g</span>
+              ${+productDate.totalNutrients.PROCNT?.quantity.toFixed(2) || '0'}g</span>
               </p>
-              <p class="facts-category__percent black">${productDate.totalDaily.PROCNT.quantity.toFixed(0)}%</p>
+              <p class="facts-category__percent black">${productDate.totalDaily.PROCNT?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__divider-thick"></div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Vitamin D<span class="size-facts__number">
-              ${productDate.totalNutrients.VITD.quantity.toFixed(2)}µg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.VITD.quantity.toFixed(2)}</p>
+              ${+productDate.totalNutrients.VITD?.quantity.toFixed(2)}µg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.VITD?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Calcium<span class="size-facts__number">
-              ${productDate.totalNutrients.CA.quantity.toFixed(2)}mg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.CA.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.CA?.quantity.toFixed(2) || '0'}mg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.CA?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Iron<span class="size-facts__number">
-              ${productDate.totalNutrients.FE.quantity.toFixed(2)}mg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.FE.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.FE?.quantity.toFixed(2) || '0'}mg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.FE?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Potassium<span class="size-facts__number">
-              ${productDate.totalNutrients.K.quantity.toFixed(2)}mg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.K.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.K?.quantity.toFixed(2) || '0'}mg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.K?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Vitamin A<span class="size-facts__number">
-              ${productDate.totalNutrients.VITA_RAE.quantity.toFixed(2)}µg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.VITA_RAE.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.VITA_RAE?.quantity.toFixed(2)}µg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.VITA_RAE?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__category facts-category">
               <p class="facts-category__text">Vitamin C<span class="size-facts__number">
-              ${productDate.totalNutrients.VITC.quantity.toFixed(2)}mg</span></p>
-              <p class="facts-category__percent black">${productDate.totalDaily.VITC.quantity.toFixed(0)}%</p>
+              ${+productDate.totalNutrients.VITC?.quantity.toFixed(2) || '0'}mg</span></p>
+              <p class="facts-category__percent black">${productDate.totalDaily.VITC?.quantity.toFixed(0) || 0}%</p>
             </div>
             <div class="facts__divider-medium"></div>
             <div class="facts__description">* The % Daily Value (DV) tells you how much a nutrient in a serving of
@@ -129,9 +135,10 @@ class NutritionFacts {
             <div class="breakdown__number black">Calorie Breakdown:</div>
             <div class="breakdown__detail">
               <p class="breakdown__item carbohydrate">Carbohydrate(
-              ${productDate.totalDaily.CHOCDF.quantity.toFixed(0)}%)</p>
-              <p class="breakdown__item fat">Fat (${productDate.totalDaily.FAT.quantity.toFixed(0)}%)</p>
-              <p class="breakdown__item protein">Protein (${productDate.totalDaily.PROCNT.quantity.toFixed(0)}%)</p>
+              ${productDate.totalDaily.CHOCDF?.quantity.toFixed(0) || 0}%)</p>
+              <p class="breakdown__item fat">Fat (${productDate.totalDaily.FAT?.quantity.toFixed(0) || 0}%)</p>
+              <p class="breakdown__item protein">Protein (
+                ${productDate.totalDaily.PROCNT?.quantity.toFixed(0) || 0}%)</p>
             </div>
           </div>
           <div class="rdi__info black">Based on a RDI of 2000 calories</div>
@@ -140,8 +147,8 @@ class NutritionFacts {
             Photos
           </h4>
           <div class="facts-photos__items">
-            <img src="${productImages[0]}" alt="product photo" class="facts-photos__img">
-            <img src="${productImages[productImages.length - 2]}" alt="product photo" class="facts-photos__img">
+            ${photoOne}
+            ${phototwo}
           </div>
         </div>
     `

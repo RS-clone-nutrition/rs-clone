@@ -21,6 +21,8 @@ class SingleFood {
     const product = <string>getURL().split('/').slice(-1).toString();
     const productDate = await this.requestsApi('nutritionAnalysis');
     const productTypes = await this.requestsApi('foods');
+    console.log(productTypes);
+    console.log(productDate);
 
     this.main.innerHTML = `
     <div class="product">
@@ -32,7 +34,7 @@ class SingleFood {
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Avocado</a>
       </div>
-      ${contentHeaderTable.render(``, product, 'Food database and calorie counter')}
+      ${contentHeaderTable.render(``, product.replaceAll('%20', ' '), 'Food database and calorie counter')}
       <div class="product__content">
         <div class="product__detail detail-product">
           <div class="detail-product__summary summary-product">
@@ -41,28 +43,29 @@ class SingleFood {
               <div class="summary-product__pcf pcf-summary">
                 <div class="pcf-summary__item pcf-item calories">
                   <p class="pcf-item__title">Calories</p>
-                  <p class="pcf-item__number">130</p>
+                  <p class="pcf-item__number">${productDate.calories}</p>
                 </div>
                 <div class="pcf-summary__item pcf-item fat">
                   <p class="pcf-item__title">Fat</p>
-                  <p class="pcf-item__number">${productDate.totalNutrients.FAT.quantity.toFixed(0)}g</p>
+                  <p class="pcf-item__number">${productDate.totalNutrients.FAT?.quantity.toFixed(0) || 0}g</p>
                 </div>
                 <div class="pcf-summary__item pcf-item carbs">
                   <p class="pcf-item__title">Carbs</p>
-                  <p class="pcf-item__number">${productDate.totalNutrients.CHOCDF.quantity.toFixed(0)}g</p>
+                  <p class="pcf-item__number">${productDate.totalNutrients.CHOCDF?.quantity.toFixed(0) || 0}g</p>
                 </div>
                 <div class="pcf-summary__item pcf-item protein">
                   <p class="pcf-item__title">Protein</p>
-                  <p class="pcf-item__number">${productDate.totalNutrients.PROCNT.quantity.toFixed(0)}g</p>
+                  <p class="pcf-item__number">${productDate.totalNutrients.PROCNT?.quantity.toFixed(0) || 0}g</p>
                 </div>
               </div>
               <p class="summary-product__calories">There are <b>${productDate.calories} calories</b> 
-              in 1/2 medium avocado (75 g) of Calavo Avocado</p>
+              in ${productDate.totalWeight.toFixed(0) || 0}g of ${productTypes.text}</p>
               <p class="summary-product__fat">Calorie breakdown: <b>
-              ${((productDate.totalNutrientsKCal.CHOCDF_KCAL.quantity / productDate.calories) * 100).toFixed(0)}% 
+              ${Math.floor((productDate.totalNutrientsKCal.FAT_KCAL?.quantity / productDate.calories) * 100) || 0}% 
               fat</b>, 
-              ${((productDate.totalNutrientsKCal.FAT_KCAL.quantity / productDate.calories) * 100).toFixed(0)}% carbs, 
-              ${((productDate.totalNutrientsKCal.PROCNT_KCAL.quantity / productDate.calories) * 100).toFixed(0)}% 
+              ${Math.floor((productDate.totalNutrientsKCal.CHOCDF_KCAL?.quantity / productDate.calories) * 100) || 0}% 
+              carbs, 
+              ${Math.floor((productDate.totalNutrientsKCal.PROCNT_KCAL?.quantity / productDate.calories) * 100) || 0}% 
               protein.</p>
             </div>
           </div>

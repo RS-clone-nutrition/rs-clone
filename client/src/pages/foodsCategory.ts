@@ -103,7 +103,6 @@ class FoodsCategory {
     `;
 
     this.categoryExamplesList.render();
-    // ContentHeaderTable.render('../src/img/foods/fork.svg', category, '');
     this.eventListeners();
   }
 

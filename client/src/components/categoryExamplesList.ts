@@ -64,7 +64,6 @@ class CategoryExamplesList {
 
   async requestsApi(category: string) {
     const result = await api.getFoods(category);
-    console.log(result);
     const examplesFood: string[] = result.hints.map((i: { food: { label: string[] } }) => i.food.label);
     return examplesFood;
   }
