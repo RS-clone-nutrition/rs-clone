@@ -56,7 +56,7 @@ class Server {
   handleLocation = (href?: string) => {
     const html = href
       ? this.routes.find((route) => route.path === href)
-      : this.routes.find((route) => route.path === window.location.pathname) || this.routes[4];
+      : this.routes.find((route) => route.path === window.location.pathname) || this.routes[7];
 
     const blockForContent = <HTMLElement>$('.content');
 
