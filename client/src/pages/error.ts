@@ -6,7 +6,11 @@ class Error {
   }
 
   render() {
-    this.main.innerHTML = '<h1>Error content</h1>';
+    this.main.innerHTML = `<div class="container">
+      <div class="not-found-wrap">
+        <h2 class="not-found-page title">PAGE NOT FOUND (404)</h2>
+      </div>
+    </div>`;
   }
 }
 
