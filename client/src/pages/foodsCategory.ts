@@ -2,8 +2,9 @@ import router from '../router';
 import CategoryExamplesList from '../components/categoryExamplesList';
 import { $All, createPath } from '../utils/helpers';
 import contentHeaderTable from '../components/contentHeaderTable';
-import { getURL } from '../utils/helpers';
+import { getLastURLPart } from '../utils/helpers';
 import { IGroups } from '../utils/types';
+import groups from '../consts/dataGroups';
 
 class FoodsCategory {
   main;
@@ -16,7 +17,8 @@ class FoodsCategory {
   }
 
   render() {
-    const category = <keyof IGroups>getURL().split('/').slice(-1).toString();
+    const category = <keyof IGroups>getLastURLPart();
+    const iconFood = groups[category] ? `../src/img/foods/category/${category.toLowerCase()}.jpg` : '';
 
     this.main.innerHTML = `
     <div class="foods-category">
@@ -28,7 +30,7 @@ class FoodsCategory {
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Beans & Legumes</a>
       </div>
-      ${contentHeaderTable.render(`../src/img/foods/category/${category.toLowerCase()}.jpg`, category, '')}
+      ${contentHeaderTable.render(iconFood, category, '')}
       <div class="foods-category__content category-content">
         <div class="category-content__all category-all">
           <h2 class="category-all__title">

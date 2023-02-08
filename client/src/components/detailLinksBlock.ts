@@ -28,7 +28,6 @@ class DetailLinksBlock {
     if (arr.length === 0) {
       return '';
     }
-    console.log(arr.length);
 
     const result = [];
     for (let i = 0; i < arr.length && i < 10; i++) {
@@ -39,7 +38,7 @@ class DetailLinksBlock {
     return `
     <div class="detail-links__category">
     <h4 class="category-detail-links__name">${title}</h4>
-    <ul class="category-detail-links__list foods-data-base">
+    <ul class="category-detail-links__list">
     ${result.join('')}
     </ul>
     </div>

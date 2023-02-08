@@ -1,5 +1,5 @@
 import '../styles/foods.scss';
-import { $All, createPath } from '../utils/helpers';
+import { $, $All, createPath } from '../utils/helpers';
 import router from '../router';
 import contentHeaderTable from '../components/contentHeaderTable';
 
@@ -267,7 +267,7 @@ class Foods {
                     spring rolls and grits.
                   </div>
                   <div class="item-foods__more blue">more</div>
-                </div>
+                </div>__more
               </li>
               </ul>
             </div>
@@ -281,12 +281,23 @@ class Foods {
 
   eventListeners() {
     const categoryLinks = $All('.item-foods__link');
+    const moreBtns = $All('.item-foods__more');
 
     categoryLinks.forEach((item) => {
       item.addEventListener('click', (e) => {
         const elem = <HTMLLinkElement>e.target;
 
         const name = `/foods/group/${createPath(<string>elem.textContent)}`;
+        router.route(e, name);
+      });
+    });
+    moreBtns.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const elem = <HTMLLinkElement>e.target;
+        const parentBtn = <HTMLElement>elem.parentElement;
+        const nameFood = <string>$('.item-foods__link', parentBtn)?.textContent;
+
+        const name = `/foods/group/${createPath(nameFood)}`;
         router.route(e, name);
       });
     });

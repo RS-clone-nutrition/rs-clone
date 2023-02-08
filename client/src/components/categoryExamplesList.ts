@@ -1,6 +1,6 @@
 import { $, $All, createPath, deleteRepeatingItems } from '../utils/helpers';
 import groups from '../consts/dataGroups';
-import { getURL } from '../utils/helpers';
+import { getLastURLPart } from '../utils/helpers';
 import { IGroups } from '../utils/types';
 import api from './api';
 import router from '../router';
@@ -9,20 +9,14 @@ class CategoryExamplesList {
   async render() {
     const category = this.getCategoriesArr();
     const container = <HTMLElement>$('.category-search__list');
-    container.innerHTML = '';
-    console.log(category);
     const productsArr = groups[category] || deleteRepeatingItems(await this.requestsApi(category));
-    console.log(productsArr);
 
-    productsArr.forEach(async (item) => {
-      const dataName = item.replaceAll(' ', '-').replaceAll(',', '-');
-      console.log(item);
-      console.log(dataName);
+    container.innerHTML = '';
+
+    for (const item of productsArr) {
       const examplesArr = deleteRepeatingItems(await this.requestsApi(item));
-      container.insertAdjacentHTML(
-        'beforeend',
-        `
-  <li data-name = "${dataName}" class="category-search__item">
+      container.innerHTML += `
+  <li class="category-search__item">
   <h2 class="category-search__name">
     <a href="#" class="category-search__link">${item}</a>
   </h2>
@@ -34,27 +28,26 @@ class CategoryExamplesList {
     <a href="#" class="search-similars__link">${examplesArr[4]}</a>
   </div>
 </li>
-  `
-      );
-
-      this.eventListeners(dataName);
-    });
+  `;
+      this.eventListeners();
+    }
   }
 
-  eventListeners(dataName: string) {
-    const parent = <HTMLElement>$(`[data-name = ${dataName}]`);
-    const categoriesSimilarsLinks = $All('.search-similars__link', parent);
-    const mainCategory = <HTMLElement>$('.category-search__link', parent);
+  eventListeners() {
+    const categoriesSimilarsLinks = $All('.search-similars__link');
+    const mainCategory = $All('.category-search__link');
 
     if (!mainCategory) {
       return;
     }
 
-    mainCategory.addEventListener('click', (e) => {
-      const elem = <HTMLLinkElement>e.target;
+    mainCategory.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        const elem = <HTMLLinkElement>e.target;
 
-      const name = `/foods/product/${createPath(<string>elem.textContent)}`;
-      router.route(e, name);
+        const name = `/foods/product/${createPath(<string>elem.textContent)}`;
+        router.route(e, name);
+      });
     });
 
     categoriesSimilarsLinks.forEach((item) => {
@@ -74,7 +67,7 @@ class CategoryExamplesList {
   }
 
   getCategoriesArr() {
-    const category = <keyof IGroups>getURL().split('/').slice(-1).toString().replaceAll('_', ' ');
+    const category = <keyof IGroups>getLastURLPart();
     return category;
   }
 }

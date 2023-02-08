@@ -3,6 +3,7 @@ const contentHeaderTable = {
     const img = icon
       ? `<div class="top-foods__icon"><img src="${icon}" alt="dishes icon" class="top-foods__img"></div>`
       : '';
+
     return `
     <div class="foods__top top-foods">
     <div class="top-foods__content">

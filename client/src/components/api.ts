@@ -15,10 +15,12 @@ class Api {
     key: '0d731e2a8f9f149112f74f1a2056f39b',
   };
 
-  async getFoods(product: string) {
+  async getFoods(product: string, health?: string) {
     try {
       const response = await fetch(
-        `https://api.edamam.com/api/food-database/v2/parser?app_id=${this.food.id}&app_key=${this.food.key}&ingr=${product}&nutrition-type=cooking`
+        !health
+          ? `https://api.edamam.com/api/food-database/v2/parser?app_id=${this.food.id}&app_key=${this.food.key}&ingr=${product}&nutrition-type=cooking`
+          : `https://api.edamam.com/api/food-database/v2/parser?app_id=${this.food.id}&app_key=${this.food.key}&nutrition-type=cooking&health=${health}`
       );
       const result = await response.json();
       return result;

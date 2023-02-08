@@ -65,6 +65,7 @@ class Router {
   };
 
   handleLocation = (href?: string) => {
+    console.log('br');
     const mainPath = getMainPath(window.location.pathname);
 
     const html = href
@@ -84,7 +85,6 @@ class Router {
     cl.render();
 
     window.addEventListener('popstate', () => this.handleLocation());
-    window.addEventListener('DOMContentLoaded', () => this.handleLocation());
   };
 
   eventListeners() {

@@ -1,5 +1,5 @@
 import contentHeaderTable from '../components/contentHeaderTable';
-import { getURL } from '../utils/helpers';
+import { getLastURLPart } from '../utils/helpers';
 import NutritionFacts from '../components/nutritionFacts';
 import DetailLinksBlock from '../components/detailLinksBlock';
 import api from '../components/api';
@@ -18,11 +18,9 @@ class SingleFood {
   }
 
   async render() {
-    const product = <string>getURL().split('/').slice(-1).toString();
+    const product = getLastURLPart();
     const productDate = await this.requestsApi('nutritionAnalysis');
     const productTypes = await this.requestsApi('foods');
-    console.log(productTypes);
-    console.log(productDate);
 
     this.main.innerHTML = `
     <div class="product">
@@ -80,7 +78,7 @@ class SingleFood {
   }
 
   async requestsApi(servise: string) {
-    const product = <string>getURL().split('/').slice(-1).toString();
+    const product = <string>getLastURLPart();
     const result =
       servise === 'nutritionAnalysis' ? await api.getNutritionAnalysis(product) : await api.getFoods(product);
 
