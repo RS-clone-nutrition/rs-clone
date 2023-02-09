@@ -30,6 +30,14 @@ const deleteRepeatingItems = (arr: string[]) => Array.from(new Set(arr));
 
 const getLastURLPart = () => <string>getURL().split('/').slice(-1).toString().replaceAll('_', '-');
 
+const preload = (block: Element, time: number) => {
+  console.log(block);
+  block.classList.add('loaded_hiding');
+  window.setTimeout(function () {
+    block.classList.remove('loaded_hiding');
+  }, time);
+};
+
 export {
   $,
   $All,
@@ -40,4 +48,5 @@ export {
   getURL,
   deleteRepeatingItems,
   getLastURLPart,
+  preload,
 };

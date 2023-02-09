@@ -1,4 +1,4 @@
-import { $, $All, createPath, deleteRepeatingItems } from '../utils/helpers';
+import { $, $All, createPath, deleteRepeatingItems, preload } from '../utils/helpers';
 import groups from '../consts/dataGroups';
 import { getLastURLPart } from '../utils/helpers';
 import { IGroups } from '../utils/types';
@@ -11,6 +11,8 @@ class CategoryExamplesList {
     const container = <HTMLElement>$('.category-search__list');
     const productsArr = groups[category] || deleteRepeatingItems(await this.requestsApi(category));
 
+    preload(container, 1700);
+
     container.innerHTML = '';
 
     for (const item of productsArr) {
@@ -21,11 +23,7 @@ class CategoryExamplesList {
     <a href="#" class="category-search__link">${item}</a>
   </h2>
   <div class="category-search__similars search-similars">
-    <a href="#" class="search-similars__link">${examplesArr[0]}</a>
-    <a href="#" class="search-similars__link">${examplesArr[1]}</a>
-    <a href="#" class="search-similars__link">${examplesArr[2]}</a>
-    <a href="#" class="search-similars__link">${examplesArr[3]}</a>
-    <a href="#" class="search-similars__link">${examplesArr[4]}</a>
+  ${this.createLinks(examplesArr)}
   </div>
 </li>
   `;
@@ -69,6 +67,17 @@ class CategoryExamplesList {
   getCategoriesArr() {
     const category = <keyof IGroups>getLastURLPart();
     return category;
+  }
+
+  createLinks(examplesArr: string[]) {
+    const linksArr: string[] = [];
+    const shortExamplesArr = examplesArr.slice(0, 5);
+
+    shortExamplesArr.forEach((item) => {
+      linksArr.push(`<a href="#" class="search-similars__link">${item.replaceAll(',', '')}</a>`);
+    });
+
+    return linksArr.join(',');
   }
 }
 
