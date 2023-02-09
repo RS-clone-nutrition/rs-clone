@@ -313,7 +313,12 @@ body {
   .product__content {
     display: flex;
     gap: 10rem;
+
+    .nutrition__facts.facts {
+      padding: 10rem 10rem;
+    }
   }
+
 
   .facts-photos {
 
@@ -335,8 +340,8 @@ body {
   }
 
   .pcf-item {
-    width: 60rem;
-    height: 48rem;
+    width: 70rem;
+    height: 50rem;
     text-align: center;
     padding: 3rem;
 
@@ -351,7 +356,7 @@ body {
   }
 }
 
-@media (max-width:505px) {
+@media (max-width:530px) {
   .category-detail-links {
     &__list {
       display: block;
@@ -370,7 +375,7 @@ body {
 
 @media (max-width:390px) {
   .facts {
-    min-width: 200rem;
+    min-width: 210rem;
   }
 
   html {

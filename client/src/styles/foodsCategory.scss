@@ -118,6 +118,15 @@ body {
   }
 }
 
+@media (max-width: 515px) {
+  .search-similars {
+
+    &__link {
+      word-break: break-all;
+    }
+  }
+}
+
 .loaded_hiding {
   display: none;
 }
