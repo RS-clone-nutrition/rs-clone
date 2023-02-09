@@ -7,12 +7,14 @@ header {
 .nav {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   font-weight: 700;
   font-size: 18px;
 
   &__menu {
     display: flex;
+    flex-wrap: wrap;
     column-gap: 33px;
   }
 
@@ -63,9 +65,14 @@ header {
 
 .account {
   display: flex;
+  flex-wrap: wrap;
   column-gap: 5px;
 
   p {
+    color: #fff;
+  }
+
+  a:hover {
     color: #000;
   }
 }
@@ -81,4 +88,91 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.account__link{
+  color: #fff;
+}
+
+.active-link{
+  color: #000;
+}
+
+.header_burger {
+  width: 36px;
+  height: 20px;
+  position: relative;
+  display: none;
+  margin-right: 5px;
+}
+
+.burger_line {
+  display: block;
+  width: 36px;
+  height: 4px;
+  background: #fff;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+}
+
+.burger_line_first {
+  top: 0px;
+}
+
+.burger_line_second {
+  top: 8px;
+}
+
+.burger_line_third {
+  bottom: 0px;
+}
+.main_open_menu {
+  background-color: #000;
+  opacity: 0.9;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 100vh;
+  width: 100%;
+}
+.nav_menu_close{
+  display: none;
+}
+
+@media (max-width: 951px) {
+  .nav__menu{
+    width: 100%;
+    background: #32B34C;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 12;
+    flex-wrap: wrap;
+    padding: 10px;
+    transform: translateX(100%);
+    transition: .2s all linear;
+  }
+  .nav__menu li {
+    width: 100%;
+    padding-left: 20px;
+  }
+  .account li:nth-child(2){
+    display: none;
+  }
+  .header-nav-active {
+    transform: translateX(0);
+  }
+  .header_burger {
+    display: block;
+    z-index: 10;
+  }
+  .nav_menu_close{
+    width: 25px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
 }

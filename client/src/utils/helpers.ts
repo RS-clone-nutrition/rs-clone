@@ -18,4 +18,33 @@ function burnedCalories(calsHour: number, minutes: number): number {
   return burnedCals;
 }
 
-export { $, $All, randomExercise, burnedCalories };
+function activePage(path: string) {
+  const arrayHeaderLinks = document.querySelectorAll('.nav__link');
+  for (let i = 0; i < arrayHeaderLinks.length; i++) {
+    arrayHeaderLinks[i].classList.remove('active-link');
+  }
+  switch (path) {
+    case '/':
+      arrayHeaderLinks[0].classList.add('active-link');
+      break;
+    case '/fitness':
+      arrayHeaderLinks[1].classList.add('active-link');
+      break;
+    case '/foods':
+      arrayHeaderLinks[2].classList.add('active-link');
+      break;
+    case '/recipes':
+      arrayHeaderLinks[3].classList.add('active-link');
+      break;
+    case '/myfatsecret':
+      arrayHeaderLinks[4].classList.add('active-link');
+      break;
+    case '/signup':
+      arrayHeaderLinks[6].classList.add('active-link');
+      break;
+    case '/login':
+      arrayHeaderLinks[5].classList.add('active-link');
+      break;
+  }
+}
+export { $, $All, randomExercise, burnedCalories, activePage };
