@@ -90,7 +90,23 @@ footer {
   align-items: center;
 }
 
-.account__link{
+.footer-github-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.git-link{
+  text-align: center;
+  color: #000;
+}
+
+.github-logo{
+  width: 70px;
+}
+
+.account__link,
+.git-link a:hover{
   color: #fff;
 }
 
@@ -127,6 +143,7 @@ footer {
 .burger_line_third {
   bottom: 0px;
 }
+
 .main_open_menu {
   background-color: #000;
   opacity: 0.9;
@@ -137,6 +154,7 @@ footer {
   height: 100vh;
   width: 100%;
 }
+
 .nav_menu_close{
   display: none;
 }
