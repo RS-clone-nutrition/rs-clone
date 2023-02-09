@@ -9,7 +9,7 @@ import { SignIn } from './pages/signIn';
 import { LogUp } from './pages/logUp';
 import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
-import { $, getMainPath } from './utils/helpers';
+import { $, activePage, getMainPath } from './utils/helpers';
 
 class Router {
   routes = [
@@ -71,6 +71,8 @@ class Router {
       ? this.routes.find((route) => route.path === href)
       : this.routes.find((route) => route.path === mainPath) || this.routes[this.routes.length - 1];
 
+    if (html) activePage(html.path);
+
     const blockForContent = <HTMLElement>$('.content');
 
     const page = html?.data as
@@ -92,6 +94,23 @@ class Router {
 
     pagesBlock.addEventListener('click', (e) => {
       this.route(e);
+    });
+
+    const burgerMenu = <HTMLElement>document.querySelector('.header_burger');
+    const headerMenu = <HTMLElement>document.querySelector('.nav__menu');
+    const mainOpen = <HTMLElement>document.querySelector('.main-open');
+    const burgerClose = <HTMLElement>document.querySelector('.nav_menu_close');
+    burgerMenu.addEventListener('click', () => {
+      headerMenu.classList.add('header-nav-active');
+      mainOpen.classList.add('main_open_menu');
+    });
+    burgerClose.addEventListener('click', () => {
+      headerMenu.classList.remove('header-nav-active');
+      mainOpen.classList.remove('main_open_menu');
+    });
+    mainOpen.addEventListener('click', () => {
+      headerMenu.classList.remove('header-nav-active');
+      mainOpen.classList.remove('main_open_menu');
     });
   }
 }
