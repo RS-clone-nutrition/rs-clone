@@ -102,6 +102,10 @@ body {
   }
 }
 
+.item-foods__more {
+  cursor: pointer;
+}
+
 @media (max-width:720px) {
   html {
     font-size: 0.8px;

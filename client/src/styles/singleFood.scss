@@ -352,6 +352,12 @@ body {
 }
 
 @media (max-width:505px) {
+  .category-detail-links {
+    &__list {
+      display: block;
+    }
+  }
+
   .summary-product {
 
     &__pcf {
@@ -364,10 +370,10 @@ body {
 
 @media (max-width:390px) {
   .facts {
-    min-width: 160rem;
+    min-width: 200rem;
   }
 
   html {
-    font-size: 0.9.1px;
+    font-size: 0.8px;
   }
 }

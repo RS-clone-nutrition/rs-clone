@@ -7,13 +7,13 @@ class DetailLinksBlock {
   render(productdata: INutritionAnalysisResponse, productTypes: IFooddataBaseResponse) {
     const detailProduct = <HTMLElement>$('.detail-product');
     const relatedTypesArrInitial: string[] = productTypes.hints.map((i: { food: { label: string[] } }) => i.food.label);
-    const relatedTypes = Array.from(new Set(relatedTypesArrInitial));
+    const relatedTypesClear = Array.from(new Set(relatedTypesArrInitial));
 
     detailProduct.insertAdjacentHTML(
       'beforeend',
       `
     <div class="detail-product__links">
-          ${this.addLinks(relatedTypes, 'nutrition-analysis', `Related Types of ${productTypes.text}:`)}
+          ${this.addLinks(relatedTypesClear, 'nutrition-analysis', `Related Types of ${productTypes.text}:`)}
           ${this.addLinks(productdata.healthLabels, 'foods-data-base', `Health Labels:`)}
         ${this.addLinks(productdata.dietLabels, 'foods-data-base', 'Diet Labels:')}
         ${this.addLinks(productdata.cautions, 'no-link', 'Cautions Labels:')}

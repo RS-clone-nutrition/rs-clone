@@ -150,8 +150,9 @@ class NutritionFacts {
 
   addIcons(productTypes: IFooddataBaseResponse) {
     const iconsContainer = <HTMLElement>$('.facts-photos__items');
-    const productArr: string[] = productTypes.hints.map((i) => i.food.image || null);
-    const productImagesLinks: string[] = productArr.filter((i) => i != null);
+    const productArrImages: string[] = productTypes.hints.map((i) => i.food.image || null);
+    const productImagesLinks: string[] = productArrImages.filter((i) => i != null);
+
     const photoOne = new Image();
     const photoTwo = new Image();
     photoOne.src = productImagesLinks[0];

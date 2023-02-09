@@ -1,5 +1,5 @@
 import contentHeaderTable from '../components/contentHeaderTable';
-import { getLastURLPart } from '../utils/helpers';
+import { getLastURLPart, getPercent } from '../utils/helpers';
 import NutritionFacts from '../components/nutritionFacts';
 import DetailLinksBlock from '../components/detailLinksBlock';
 import api from '../api/api';
@@ -18,7 +18,7 @@ class SingleFood {
   }
 
   async render() {
-    const product = getLastURLPart();
+    const product = getLastURLPart().replaceAll('%20', ' ');
     const productDate = await this.requestsApi('nutritionAnalysis');
     const productTypes = await this.requestsApi('foods');
 
@@ -32,7 +32,7 @@ class SingleFood {
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Avocado</a>
       </div>
-      ${contentHeaderTable.render(``, product.replaceAll('%20', ' '), 'Food database and calorie counter')}
+      ${contentHeaderTable.render(``, product, 'Food database and calorie counter')}
       <div class="product__content">
         <div class="product__detail detail-product">
           <div class="detail-product__summary summary-product">
@@ -59,11 +59,11 @@ class SingleFood {
               <p class="summary-product__calories">There are <b>${productDate.calories} calories</b> 
               in ${productDate.totalWeight.toFixed(0) || 0}g of ${productTypes.text}</p>
               <p class="summary-product__fat">Calorie breakdown: <b>
-              ${Math.floor((productDate.totalNutrientsKCal.FAT_KCAL?.quantity / productDate.calories) * 100) || 0}% 
+              ${getPercent(productDate.totalNutrientsKCal.FAT_KCAL?.quantity, productDate.calories)}% 
               fat</b>, 
-              ${Math.floor((productDate.totalNutrientsKCal.CHOCDF_KCAL?.quantity / productDate.calories) * 100) || 0}% 
+              ${getPercent(productDate.totalNutrientsKCal.CHOCDF_KCAL?.quantity, productDate.calories)}% 
               carbs, 
-              ${Math.floor((productDate.totalNutrientsKCal.PROCNT_KCAL?.quantity / productDate.calories) * 100) || 0}% 
+              ${getPercent(productDate.totalNutrientsKCal.PROCNT_KCAL?.quantity, productDate.calories)}% 
               protein.</p>
             </div>
           </div>
@@ -79,6 +79,7 @@ class SingleFood {
 
   async requestsApi(servise: string) {
     const product = <string>getLastURLPart();
+
     const result =
       servise === 'nutritionAnalysis' ? await api.getNutritionAnalysis(product) : await api.getFoods(product);
 

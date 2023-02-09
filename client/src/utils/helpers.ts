@@ -38,6 +38,8 @@ const preload = (block: Element, time: number) => {
   }, time);
 };
 
+const getPercent = (partNum: number, wholeNum: number) => Math.floor((partNum / wholeNum) * 100) || 0;
+
 export {
   $,
   $All,
@@ -49,4 +51,5 @@ export {
   deleteRepeatingItems,
   getLastURLPart,
   preload,
+  getPercent,
 };

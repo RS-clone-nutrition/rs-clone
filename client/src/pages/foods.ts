@@ -291,6 +291,7 @@ class Foods {
         router.route(e, name);
       });
     });
+
     moreBtns.forEach((item) => {
       item.addEventListener('click', (e) => {
         const elem = <HTMLLinkElement>e.target;

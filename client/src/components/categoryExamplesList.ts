@@ -61,6 +61,7 @@ class CategoryExamplesList {
   async requestsApi(category: string) {
     const result = await api.getFoods(category);
     const examplesFood: string[] = result.hints.map((i: { food: { label: string[] } }) => i.food.label);
+
     return examplesFood;
   }
 
@@ -74,7 +75,9 @@ class CategoryExamplesList {
     const shortExamplesArr = examplesArr.slice(0, 5);
 
     shortExamplesArr.forEach((item) => {
-      linksArr.push(`<a href="#" class="search-similars__link">${item.replaceAll(',', '')}</a>`);
+      item = item.replaceAll(',', '');
+
+      linksArr.push(`<a href="#" class="search-similars__link">${item}</a>`);
     });
 
     return linksArr.join(',');
