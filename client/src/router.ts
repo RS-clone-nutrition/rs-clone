@@ -65,12 +65,11 @@ class Router {
   };
 
   handleLocation = (href?: string) => {
-    console.log('br');
     const mainPath = getMainPath(window.location.pathname);
 
     const html = href
       ? this.routes.find((route) => route.path === href)
-      : this.routes.find((route) => route.path === mainPath) || this.routes[4];
+      : this.routes.find((route) => route.path === mainPath) || this.routes[this.routes.length - 1];
 
     const blockForContent = <HTMLElement>$('.content');
 
@@ -83,12 +82,13 @@ class Router {
 
     const cl = new page(blockForContent);
     cl.render();
-
-    window.addEventListener('popstate', () => this.handleLocation());
   };
 
   eventListeners() {
     const pagesBlock = <HTMLElement>document.querySelector('.nav__menu');
+
+    window.addEventListener('popstate', () => this.handleLocation());
+    // window.addEventListener('DOMContentLoaded', () => this.handleLocation());
 
     pagesBlock.addEventListener('click', (e) => {
       this.route(e);

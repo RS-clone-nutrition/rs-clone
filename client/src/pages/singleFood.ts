@@ -2,7 +2,7 @@ import contentHeaderTable from '../components/contentHeaderTable';
 import { getLastURLPart } from '../utils/helpers';
 import NutritionFacts from '../components/nutritionFacts';
 import DetailLinksBlock from '../components/detailLinksBlock';
-import api from '../components/api';
+import api from '../api/api';
 
 class SingleFood {
   main;

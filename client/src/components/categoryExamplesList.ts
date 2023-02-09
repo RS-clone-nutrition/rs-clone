@@ -2,7 +2,7 @@ import { $, $All, createPath, deleteRepeatingItems } from '../utils/helpers';
 import groups from '../consts/dataGroups';
 import { getLastURLPart } from '../utils/helpers';
 import { IGroups } from '../utils/types';
-import api from './api';
+import api from '../api/api';
 import router from '../router';
 
 class CategoryExamplesList {

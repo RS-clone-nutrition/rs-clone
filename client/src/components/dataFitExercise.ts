@@ -264,7 +264,7 @@ export const dataExerciseModerate = [
   {
     id: 16,
     type: 'Moderate Activity',
-    name: 'Golf',
+    name: 'Golf (moderate)',
     calsInHr: 291,
     image: 'https://i.ibb.co/HHwDpxp/sml-golf-cart.gif',
   },
@@ -468,6 +468,10 @@ export const dataExerciseStrenuous = [
     image: 'https://i.ibb.co/C7f1c9j/sml-other.gif',
   },
 ];
+
+export const allExerciseArray: DataExercise[] = dataExerciseLight
+  .concat(dataExerciseModerate)
+  .concat(dataExerciseStrenuous);
 
 export interface DataExercise {
   id: number;

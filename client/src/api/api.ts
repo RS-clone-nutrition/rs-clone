@@ -1,7 +1,7 @@
 class Api {
   nutrition = {
-    id: '747c153a',
-    key: 'd3375ff9619759fb316dd552bdc60565',
+    id: 'fe1356d4',
+    key: 'de65a7c20df722c53cdbccdd8f25f021',
   };
 
   recipe = {

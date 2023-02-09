@@ -4,14 +4,6 @@ import { INutritionAnalysisResponse, IFooddataBaseResponse } from '../utils/type
 class NutritionFacts {
   async render(productDate: INutritionAnalysisResponse, productTypes: IFooddataBaseResponse) {
     const productContent = <HTMLElement>$('.product__content');
-    const productArr: string[] = productTypes.hints.map((i) => i.food.image || null);
-    const productImages: string[] = productArr.filter((i) => i != null);
-    const photoOne = productImages[0]
-      ? `<img src="${productImages[0]}" alt="product photo" class="facts-photos__img">`
-      : '';
-    const phototwo = productImages[productImages.length - 1]
-      ? `<img src="${productImages[productImages.length - 1]}" alt="product photo" class="facts-photos__img">`
-      : '';
 
     productContent.insertAdjacentHTML(
       'afterbegin',
@@ -147,12 +139,32 @@ class NutritionFacts {
             Photos
           </h4>
           <div class="facts-photos__items">
-            ${photoOne}
-            ${phototwo}
+  
           </div>
         </div>
     `
     );
+
+    this.addIcons(productTypes);
+  }
+
+  addIcons(productTypes: IFooddataBaseResponse) {
+    const iconsContainer = <HTMLElement>$('.facts-photos__items');
+    const productArr: string[] = productTypes.hints.map((i) => i.food.image || null);
+    const productImagesLinks: string[] = productArr.filter((i) => i != null);
+    const photoOne = new Image();
+    const photoTwo = new Image();
+    photoOne.src = productImagesLinks[0];
+    photoOne.src = productImagesLinks[productImagesLinks.length - 1];
+    const iconsArr = [photoOne, photoTwo];
+
+    iconsArr.forEach((item) => {
+      item.onload = () => {
+        item.classList.add('facts-photos__img');
+        item.setAttribute('alt', 'product photo');
+        iconsContainer.append(item);
+      };
+    });
   }
 }
 

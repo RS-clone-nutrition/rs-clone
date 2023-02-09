@@ -6,6 +6,17 @@
     display: flex;
     flex-wrap: wrap;
 }
+.title, 
+.text{
+    font-family: 'Inter';
+    font-style: normal;
+}
+.title{
+    font-weight: 700;
+}
+.text{
+    font-weight: 400;
+}
 .list-item{
     color: #B2C8E2;
     line-height: 28px;
@@ -13,6 +24,10 @@
 }
 .list-item:first-child{
     margin-left: 0;
+}
+.list-item a{
+    color: #B2C8E2;
+    line-height: 28px;
 }
 .bread-crumbs-list{
     align-items: center;
@@ -46,6 +61,11 @@ label,
 .exercise-type-title{
     color: #333333;
 }
+.slider-list li{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+}
 .search-title{
     margin-bottom: 10px;
 }
@@ -53,6 +73,7 @@ label,
     width: 468px;
     border-radius: 10px;
     border: 1px solid #767676;
+    margin-bottom: 5px;
 }
 .fit-slider-wrapper{
     border-radius: 10px;
@@ -136,6 +157,9 @@ label,
 }
 .item-cals{
     text-align: right;
+}
+.not-found{
+    display: none;
 }
 
 @media screen and (max-width: 513px){
