@@ -15,18 +15,18 @@ class Foods {
     <div class="foods">
         <div class="container">
           <div class="crumbs">
-            <img class="crumbs__home-img" src="../src/img/home-icon.svg" alt="home icon">
+            <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
             <span class="crumbs__sep">></span>
             <a href="#" class="crumbs__link">Foods</a>
           </div>
-          ${contentHeaderTable.render(`../src/img/foods/fork.svg`, 'Foods', 'Browse common foods and products.')}
+          ${contentHeaderTable.render(`./img/foods/fork.svg`, 'Foods', 'Browse common foods and products.')}
           <h2 class="foods__title">Browse Common Foods</h2>
           <div class="foods__main main-foods">
             <div class="main-foods__content">
               <ul class="main-foods__list">
                 <li class="main-foods__item item-foods">
                   <div class="item-foods__icon">
-                    <img src="../src/img/foods/category/beans-legumes.jpg" alt="food icon" class="item-foods__img">
+                    <img src="./img/foods/category/beans-legumes.jpg" alt="food icon" class="item-foods__img">
                   </div>
                   <div class="item-foods__info">
                     <div class="item-foods__name">
@@ -39,7 +39,7 @@ class Foods {
                 </li>
                 <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/beverages.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/beverages.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -53,7 +53,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/breads-cereals.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/breads-cereals.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -67,7 +67,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/cheese-milk-dairy.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/cheese-milk-dairy.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -81,7 +81,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/eggs.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/eggs.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -95,7 +95,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/fast-food.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/fast-food.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -109,7 +109,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/fish-seafood.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/fish-seafood.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -123,7 +123,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/fruit.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/fruit.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -137,7 +137,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/meat.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/meat.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -150,7 +150,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/nuts-seeds.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/nuts-seeds.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -164,7 +164,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/pasta-rice-noodles.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/pasta-rice-noodles.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -177,7 +177,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/salad.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/salad.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -191,7 +191,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/sauces-spices-spreads.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/sauces-spices-spreads.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -205,7 +205,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/snacks.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/snacks.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -218,7 +218,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/soups.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/soups.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -231,7 +231,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/sweets-candy-desserts.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/sweets-candy-desserts.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -244,7 +244,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/vegetables.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/vegetables.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">
@@ -257,7 +257,7 @@ class Foods {
               </li>
               <li class="main-foods__item item-foods">
                 <div class="item-foods__icon">
-                  <img src="../src/img/foods/category/other.jpg" alt="food icon" class="item-foods__img">
+                  <img src="./img/foods/category/other.jpg" alt="food icon" class="item-foods__img">
                 </div>
                 <div class="item-foods__info">
                   <div class="item-foods__name">

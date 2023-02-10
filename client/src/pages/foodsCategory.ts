@@ -18,13 +18,13 @@ class FoodsCategory {
 
   render() {
     const category = <keyof IGroups>getLastURLPart();
-    const iconFood = groups[category] ? `../src/img/foods/category/${category.toLowerCase()}.jpg` : '';
+    const iconFood = groups[category] ? `./img/foods/category/${category.toLowerCase()}.jpg` : '';
 
     this.main.innerHTML = `
     <div class="foods-category">
     <div class="container">
       <div class="crumbs">
-        <img class="crumbs__home-img" src="../src/img/home-icon.svg" alt="home icon">
+        <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Foods</a>
         <span class="crumbs__sep">></span>
@@ -34,7 +34,7 @@ class FoodsCategory {
       <div class="foods-category__content category-content">
         <div class="category-content__all category-all">
           <h2 class="category-all__title">
-            <img src="../src/img/foods/bowl.gif" alt="bowl icon" class="category-all__icon">
+            <img src="./img/foods/bowl.gif" alt="bowl icon" class="category-all__icon">
             Foods
           </h2>
           <ul class="category-all__list list-all">

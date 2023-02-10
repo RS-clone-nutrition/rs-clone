@@ -26,7 +26,7 @@ class SingleFood {
     <div class="product">
     <div class="container">
       <div class="crumbs">
-        <img class="crumbs__home-img" src="../src/img/home-icon.svg" alt="home icon">
+        <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
         <span class="crumbs__sep">></span>
         <a href="#" class="crumbs__link">Foods</a>
         <span class="crumbs__sep">></span>

@@ -135,7 +135,7 @@ class NutritionFacts {
           </div>
           <div class="rdi__info black">Based on a RDI of 2000 calories</div>
           <h4 class="facts-photos__title">
-            <img src="../src/img/foods/camer.gif" alt="camer icon" class="facts-icon__img">
+            <img src="./img/foods/camer.gif" alt="camer icon" class="facts-icon__img">
             Photos
           </h4>
           <div class="facts-photos__items">

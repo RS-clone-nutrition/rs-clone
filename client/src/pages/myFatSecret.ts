@@ -14,7 +14,7 @@ class MyFatSecret {
       <ul class="bread-crumbs">
         <li>
           <a href="/">
-            <img src="../src/img/nav_breadcrumb_home.png" alt="">
+            <img src="./img/nav_breadcrumb_home.png" alt="">
           </a>  
         </li>
         <li>></li>
@@ -22,15 +22,15 @@ class MyFatSecret {
       </ul>
       <div class="myfatsecret__tabs">
         <button class="myfatsecret__card calendar">
-          <img src="../src/img/calender-icon.svg" alt="calendar">
+          <img src="./img/calender-icon.svg" alt="calendar">
           <span class="myfatsecret__info-calendar">WED 01</span>
         </button>
         <button class="myfatsecret__card food">
-          <img src="../src/img/food-icon.svg" alt="food">
+          <img src="./img/food-icon.svg" alt="food">
           <span class="myfatsecret__info-food">0 kcal</span>
         </button>
         <button class="myfatsecret__card fitness">
-          <img src="../src/img/fitness-icon.svg" alt="fitness">
+          <img src="./img/fitness-icon.svg" alt="fitness">
           <span class="myfatsecret__info-fitness">0 kcal</span>
         </button>
       </div>
@@ -115,7 +115,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem breakBlock" type="button">
-      <img src="../src/img/additem.svg" alt="additem">
+      <img src="./img/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category lunch">
@@ -140,7 +140,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem lunchBlock" type="button">
-      <img src="../src/img/additem.svg" alt="additem">
+      <img src="./img/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category dinner">
@@ -165,7 +165,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem dinnerBlock" type="button">
-      <img src="../src/img/additem.svg" alt="additem">
+      <img src="./img/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category snacks">
@@ -190,7 +190,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem snacksBlock" type="button">
-      <img src="../src/img/additem.svg" alt="additem">
+      <img src="./img/additem.svg" alt="additem">
       Add Item
     </button>
 
@@ -259,7 +259,7 @@ class MyFatSecret {
     <p class="cals">425</p>
   </div>
     <button class="addItem activityBlock" type="button">
-      <img src="../src/img/additem.svg" alt="additem">
+      <img src="./img/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category sleep">
@@ -284,7 +284,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem sleepBlock" type="button">
-      <img src="../src/img/additem.svg" alt="additem">
+      <img src="./img/additem.svg" alt="additem">
       Add Item
     </button>
     </div>

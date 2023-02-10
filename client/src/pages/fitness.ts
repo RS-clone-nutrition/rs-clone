@@ -20,7 +20,7 @@ class Fitness {
       <ul class="bread-crumbs-list wrap">
         <li class="list-item">
           <a href="/" class="item-link">
-            <img src="../src/img/nav_breadcrumb_home.png" alt="home" class="bread-crumbs-home">
+            <img src="./img/nav_breadcrumb_home.png" alt="home" class="bread-crumbs-home">
           </a>
         </li>
         <li class="list-item item-arrow">></li>
@@ -33,7 +33,7 @@ class Fitness {
     </div>
     <div class="fit-title-wrapper">
       <div class="fit-wrap wrap">
-        <img src="../src/img/icons8-fitness-60.png" alt="icon fitness" class="fit-icon">
+        <img src="./img/icons8-fitness-60.png" alt="icon fitness" class="fit-icon">
         <div class="fit-title-wrap">
           <h2 class="fit-title title">
             Fitness
@@ -79,7 +79,7 @@ class Fitness {
             Sleeping
           </h3>
         </div>
-        <img src="../src/img/sleeping.png" alt="" class="slider-img">
+        <img src="./img/sleeping.png" alt="" class="slider-img">
       </div>
       <div class="slider-description-wrap">
         <h3 class="slider-descr-title title">
@@ -209,7 +209,7 @@ class Fitness {
       hour4Cals.innerHTML = `${burnedCalories(obj.calsInHr, 240)} calories`;
       const addBreadCrumbs = `<li class="list-item">
           <a href="/" class="item-link">
-            <img src="../src/img/nav_breadcrumb_home.png" alt="home" class="bread-crumbs-home">
+            <img src="./img/nav_breadcrumb_home.png" alt="home" class="bread-crumbs-home">
           </a>
         </li>
         <li class="list-item item-arrow">></li>
