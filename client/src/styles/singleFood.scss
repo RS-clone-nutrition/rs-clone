@@ -126,6 +126,7 @@ body {
   &__category {
     display: flex;
     justify-content: space-between;
+    gap: 10rem;
     padding-bottom: 4rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.38);
     font-size: 10px;
@@ -279,9 +280,9 @@ body {
   }
 
   &__list {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 5rem;
   }
 
   &__item {
@@ -293,13 +294,34 @@ body {
   }
 }
 
+.facts-photos__img {
+  width: 100rem;
+}
+
+.detail-product__links {
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+}
+
+.no-link {
+  color: rgba(51, 51, 51, 1);
+}
+
+
 @media (max-width:955px) {
   .product__content {
     display: flex;
     gap: 10rem;
+
+    .nutrition__facts.facts {
+      padding: 10rem 10rem;
+    }
   }
 
+
   .facts-photos {
+
     &__items {
       .facts-photos__img {
         width: 50rem;
@@ -318,8 +340,8 @@ body {
   }
 
   .pcf-item {
-    width: 60rem;
-    height: 48rem;
+    width: 70rem;
+    height: 50rem;
     text-align: center;
     padding: 3rem;
 
@@ -334,7 +356,13 @@ body {
   }
 }
 
-@media (max-width:505px) {
+@media (max-width:530px) {
+  .category-detail-links {
+    &__list {
+      display: block;
+    }
+  }
+
   .summary-product {
 
     &__pcf {
@@ -347,10 +375,10 @@ body {
 
 @media (max-width:390px) {
   .facts {
-    min-width: 160rem;
+    min-width: 210rem;
   }
 
   html {
-    font-size: 0.9.1px;
+    font-size: 0.8px;
   }
 }

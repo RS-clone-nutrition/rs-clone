@@ -45,7 +45,7 @@ module.exports = {
     historyApiFallback: true,
     historyApiFallback: {
       rewrites: [
-        { from: /./, to: '/index.html' }, // all request to index.html
+        { from: '/*', to: '/index.html' }, // all request to index.html
       ],
     },
   },
@@ -58,7 +58,7 @@ module.exports = {
     new EslingPlugin({ extensions: 'ts' }),
     new CopyPlugin({
       patterns: [
-        // { from: "./src/assets/img", to: "img" },
+        { from: "./src/assets/img", to: "img" },
         { from: "netlify.toml", to: "" },
       ]
     }),

@@ -12,7 +12,7 @@ class SingleRecipe {
    <div class="single-recipe">
       <div class="container">
           <div class="crumbs">
-            <img class="crumbs__home-img" src="../src/img/home-icon.svg" alt="home icon">
+            <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
             <span class="crumbs__sep">></span>
             <a href="#" class="crumbs__link">Recipes</a>
             <span class="crumbs__sep">></span>
@@ -23,22 +23,22 @@ class SingleRecipe {
               <div class="recipe__info">
                 <div class="info__left left-info">
                   <div class="left-info__icon">
-                    <img class="left-info__img" src="../src/img/singleRecipe/dish.png" alt="dish icon">
+                    <img class="left-info__img" src="./img/singleRecipe/dish.png" alt="dish icon">
                   </div>
                   <div class="left__viewicon">View photos</div>
                   <div class="left-info__actions">
                     <div class="action-left cookbook">
-                      <img src="../src/img/singleRecipe/icons/plus.svg" alt="add coolbook" class="action__img cookbook">
+                      <img src="./img/singleRecipe/icons/plus.svg" alt="add coolbook" class="action__img cookbook">
                       <span class="action__text cookbook">Add to my cookbook</span>
                     </div>
                     <div class="action-left diary">
-                      <img src="../src/img/singleRecipe/icons/add-to-diary.svg" alt="add diary" class="action__img diary">
+                      <img src="./img/singleRecipe/icons/add-to-diary.svg" alt="add diary" class="action__img diary">
                       <span class="action__text diary">Add to food diary</span>
                     </div>
                   </div>
                   <div class="left-info__box serving">
                     <div class="left-box__icon serving__icon">
-                      <img class="left-box__img serving__img" src="../src/img/singleRecipe/icons/person.svg" alt="person">
+                      <img class="left-box__img serving__img" src="./img/singleRecipe/icons/person.svg" alt="person">
                     </div>
                     <div class="left-box__text serving__text">
                       <p class="left-box__title serving__title black">Yields</p>
@@ -47,7 +47,7 @@ class SingleRecipe {
                   </div>
                   <div class="left-info__box time">
                     <div class="left-box__icon time__icon">
-                      <img class="left-box__img time__img" src="../src/img/singleRecipe/icons/clock.svg" alt="person">
+                      <img class="left-box__img time__img" src="./img/singleRecipe/icons/clock.svg" alt="person">
                     </div>
                     <div class="left-box__text time__text">
                       <p class="left-box__title time__title black">Cook Time:</p>
@@ -56,7 +56,7 @@ class SingleRecipe {
                   </div>
                   <div class="left-info__box type">
                     <div class="left-box__icon type__icon">
-                      <img class="left-box__img type__img" src="../src/img/singleRecipe/icons/fork-spoon.avif"
+                      <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
                         alt="person">
                     </div>
                     <div class="left-box__text type__text">

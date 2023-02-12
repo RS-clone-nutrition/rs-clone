@@ -12,7 +12,7 @@ class Recipes {
     <div class="recipes">
         <div class="container">
           <div class="crumbs">
-            <img class="crumbs__home-img" src="../src/img/home-icon.svg" alt="home icon">
+            <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
             <span class="crumbs__sep">></span>
             <a href="#" class="crumbs__link">Recipes</a>
           </div>
@@ -26,7 +26,7 @@ class Recipes {
                   <h2 class="feautered-example__title">Featured Today</h2>
                   <h3 class="feautered-example__undertitle">Dairy Free Recipes</h3>
                   <div class="feautered-example__icon">
-                    <img src="../src/img/recipes/dish.png" alt="" class="feautered-example__img">
+                    <img src="./img/recipes/dish.png" alt="" class="feautered-example__img">
                   </div>
                   <h2 class="feautered-example__name blue"><a class="feautered-example__name-link" href="#">Asian-style
                       Chicken
@@ -39,7 +39,7 @@ class Recipes {
                 <ul class="variants-recipes__list">
                   <li class="variants-recipes__item">
                     <div class="variants-recipes__icon">
-                      <img src="../src/img/recipes/dish.png" alt="recipe variant" class="variants-recipes__img">
+                      <img src="./img/recipes/dish.png" alt="recipe variant" class="variants-recipes__img">
                     </div>
                     <div class="variants-recipes__text">
                       <h2 class="variants-recipes__name">
@@ -57,7 +57,7 @@ class Recipes {
             <ul class="popular-recipes__list">
               <li class="popular-recipes__item">
                 <div class="popular-recipes__icon">
-                  <img src="../src/img/recipes/dish.png" alt="popular dish" class="popular-recipes__img">
+                  <img src="./img/recipes/dish.png" alt="popular dish" class="popular-recipes__img">
                 </div>
                 <div class="popular-recipes__info info-popular">
                   <h2 class="info-popular__name">

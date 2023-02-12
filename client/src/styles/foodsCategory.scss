@@ -102,6 +102,10 @@ body {
   }
 }
 
+.item-foods__more {
+  cursor: pointer;
+}
+
 @media (max-width:720px) {
   html {
     font-size: 0.8px;
@@ -112,4 +116,17 @@ body {
       gap: 10rem;
     }
   }
+}
+
+@media (max-width: 515px) {
+  .search-similars {
+
+    &__link {
+      word-break: break-all;
+    }
+  }
+}
+
+.loaded_hiding {
+  display: none;
 }

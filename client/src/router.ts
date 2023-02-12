@@ -7,9 +7,11 @@ import { MyFatSecret } from './pages/myFatSecret';
 import { Recipes } from './pages/recipes';
 import { SignIn } from './pages/signIn';
 import { LogUp } from './pages/logUp';
-import { $ } from './utils/helpers';
+import { FoodsCategory } from './pages/foodsCategory';
+import { SingleFood } from './pages/singleFood';
+import { $, activePage, getMainPath } from './utils/helpers';
 
-class Server {
+class Router {
   routes = [
     {
       path: '/',
@@ -40,45 +42,80 @@ class Server {
       data: LogUp,
     },
     {
+      path: '/foods/group',
+      data: FoodsCategory,
+    },
+    {
+      path: '/foods/product',
+      data: SingleFood,
+    },
+    {
       path: '/404',
       data: Error,
     },
   ];
 
-  route = (event: Event) => {
+  route = (event: Event, href?: string) => {
     event.preventDefault();
     const block = event.target as HTMLLinkElement;
+    href = href || block.href;
 
-    window.history.pushState({}, '', block.href);
+    window.history.pushState({}, '', href);
     this.handleLocation();
   };
 
   handleLocation = (href?: string) => {
+    const mainPath = getMainPath(window.location.pathname);
+
     const html = href
       ? this.routes.find((route) => route.path === href)
-      : this.routes.find((route) => route.path === window.location.pathname) || this.routes[4];
+      : this.routes.find((route) => route.path === mainPath) || this.routes[this.routes.length - 1];
+
+    if (html) activePage(html.path);
 
     const blockForContent = <HTMLElement>$('.content');
 
-    const page = html?.data as typeof Fitness | typeof Foods | typeof Recipes | typeof MyFatSecret;
+    const page = html?.data as
+      | typeof Fitness
+      | typeof Foods
+      | typeof Recipes
+      | typeof MyFatSecret
+      | typeof FoodsCategory;
 
     const cl = new page(blockForContent);
     cl.render();
-
-    window.addEventListener('popstate', () => this.handleLocation());
-    window.addEventListener('DOMContentLoaded', () => this.handleLocation());
   };
 
   eventListeners() {
     const pagesBlock = <HTMLElement>document.querySelector('.nav__menu');
 
+    window.addEventListener('popstate', () => this.handleLocation());
+    // window.addEventListener('DOMContentLoaded', () => this.handleLocation());
+
     pagesBlock.addEventListener('click', (e) => {
       this.route(e);
+    });
+
+    const burgerMenu = <HTMLElement>document.querySelector('.header_burger');
+    const headerMenu = <HTMLElement>document.querySelector('.nav__menu');
+    const mainOpen = <HTMLElement>document.querySelector('.main-open');
+    const burgerClose = <HTMLElement>document.querySelector('.nav_menu_close');
+    burgerMenu.addEventListener('click', () => {
+      headerMenu.classList.add('header-nav-active');
+      mainOpen.classList.add('main_open_menu');
+    });
+    burgerClose.addEventListener('click', () => {
+      headerMenu.classList.remove('header-nav-active');
+      mainOpen.classList.remove('main_open_menu');
+    });
+    mainOpen.addEventListener('click', () => {
+      headerMenu.classList.remove('header-nav-active');
+      mainOpen.classList.remove('main_open_menu');
     });
   }
 }
 
-const server = new Server();
-server.handleLocation();
-server.eventListeners();
-export default server;
+const router = new Router();
+router.handleLocation();
+router.eventListeners();
+export default router;

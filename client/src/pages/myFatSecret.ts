@@ -1,5 +1,6 @@
 import Item from '../utils/addItem';
 import Cal from '../utils/generateCalendar';
+import { IRecipeData, IInputCheckbox } from '../utils/types';
 // import Item from '../utils/addItem';
 const calendar = new Cal('divCal');
 class MyFatSecret {
@@ -16,7 +17,7 @@ class MyFatSecret {
       <ul class="bread-crumbs">
         <li>
           <a href="/">
-            <img src="../src/img/nav_breadcrumb_home.png" alt="">
+            <img src="./img/nav_breadcrumb_home.png" alt="">
           </a>  
         </li>
         <li>></li>
@@ -24,15 +25,15 @@ class MyFatSecret {
       </ul>
       <div class="myfatsecret__tabs">
         <button class="myfatsecret__card calendar">
-          <img src="../src/img/myfatsecret/calender-icon.svg" alt="calendar">
+          <img src="./img/myfatsecret/calender-icon.svg" alt="calendar">
           <span class="myfatsecret__info-calendar">WED 01</span>
         </button>
         <button class="myfatsecret__card food">
-          <img src="../src/img/myfatsecret/food-icon.svg" alt="food">
+          <img src="./img/myfatsecret/food-icon.svg" alt="food">
           <span class="myfatsecret__info-food">0 kcal</span>
         </button>
         <button class="myfatsecret__card fitness">
-          <img src="../src/img/myfatsecret/fitness-icon.svg" alt="fitness">
+          <img src="./img/myfatsecret/fitness-icon.svg" alt="fitness">
           <span class="myfatsecret__info-fitness">0 kcal</span>
         </button>
       </div>
@@ -46,14 +47,14 @@ class MyFatSecret {
           <div class="popup__body">
             <div class="popup__block">
               <button class="popup__addItem">
-                <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+                <img src="./img/myfatsecret/additem.svg" alt="additem">
                 Add Item
               </button>
               <div class="search">
                 <input class="search__input" type="text" placeholder="Enter search">
                 <button class="search__button"><i class="fa-solid fa-magnifying-glass fa-circle"></i></button>
               </div>
-              <button class="popup__exit"><img src="../src/img/myfatsecret/exit-button.svg" alt="additem"></button>
+              <button class="popup__exit"><img src="./img/myfatsecret/exit-button.svg" alt="additem"></button>
             </div>
             <div class="popup__products-table">
               <div class="popup__products-table__header">
@@ -68,23 +69,14 @@ class MyFatSecret {
                 </span>
               </div>
               <div class="popup__products-table__add-block">
-                <span class="popup__products-table__food">
-                  Coffe
-                </span>
-                <span class="popup__products-table__amount">
-                  2
-                </span>
-                <span class="popup__products-table__calories">
-                  800
-                </span>
-              </div>
+                
+                </div>
             </div>
           </div>
         </div>
       </div>
   </div>
     `;
-    this.eventListener();
     const tabs = document.querySelectorAll('.myfatsecret__card');
     tabs.forEach((el) =>
       el.addEventListener('click', (e) => {
@@ -161,7 +153,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem breakBlock" type="button">
-      <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+      <img src="./img/myfatsecret/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category lunch">
@@ -186,7 +178,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem lunchBlock" type="button">
-      <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+      <img src="./img/myfatsecret/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category dinner">
@@ -211,7 +203,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem dinnerBlock" type="button">
-      <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+      <img src="./img/myfatsecret/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category snacks">
@@ -236,7 +228,7 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem snacksBlock" type="button">
-      <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+      <img src="./img/myfatsecret/additem.svg" alt="additem">
       Add Item
     </button>
 
@@ -305,7 +297,7 @@ class MyFatSecret {
     <p class="cals">425</p>
   </div>
     <button class="addItem activityBlock" type="button">
-      <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+      <img src="./img/myfatsecret/additem.svg" alt="additem">
       Add Item
     </button>
     <div class="myfatsecret-food-fitness__row-category sleep">
@@ -330,38 +322,81 @@ class MyFatSecret {
       <p class="cals">4</p>
     </div>
     <button class="addItem sleepBlock" type="button">
-      <img src="../src/img/myfatsecret/additem.svg" alt="additem">
+      <img src="./img/myfatsecret/additem.svg" alt="additem">
       Add Item
     </button>
     </div>
     `;
   }
 
-  eventListener() {
-    const addItemExitBtn = document.querySelector('.popup__exit');
-    const addItemBtn = document.querySelectorAll('.addItem');
-    const searchElement = document.querySelectorAll('.search__input');
-    console.log(searchElement);
+  searchItem(arr: IRecipeData) {
+    const calories: number[] = [];
+    const label: string[] = [];
+    arr.forEach((el) => calories.push(el.recipe.calories));
+    arr.forEach((el) => label.push(el.recipe.label));
+    const block = document.querySelector('.popup__products-table__add-block') as HTMLElement;
+    block.innerHTML = ``;
+    for (let i = 0; i < label.length; i++) {
+      this.getItem(Math.round(calories[i]), label[i]);
+    }
+  }
 
-    searchElement.forEach((el) =>
-      el.addEventListener('input', async (e) => {
-        const target = e.target as HTMLInputElement;
-        const value = target.value;
+  getItem(cal: number, label: string) {
+    const block = document.querySelector('.popup__products-table__add-block') as HTMLElement;
+    block.innerHTML += `
+    <div class = "popup__products-table__add-block__add-item">
+      <span class="popup__products-table__food">
+      <input type="checkbox" class="checkbox-addItem">
+      ${label}
+      </span>
+      <span class="popup__products-table__amount">
+      1
+      </span>
+      <span class="popup__products-table__calories">
+      ${cal}
+      </span>
+    </div>
+    `;
+  }
+
+  drawItem(el: string) {
+    console.log(el);
+  }
+
+  eventListener() {
+    const exitPopup = document.querySelector('.popup__exit');
+    const openPopup = document.querySelectorAll('.addItem');
+    const searchBtn = document.querySelectorAll('.search__button');
+    const addItem = document.querySelector('.popup__addItem');
+
+    searchBtn.forEach((el) =>
+      el.addEventListener('click', async (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const inputTarget = target.previousElementSibling as HTMLInputElement;
+        const value = inputTarget.value;
         const item = new Item(value);
         const result = await item.createItem();
-        console.log(result);
+        this.searchItem(result.hits);
       })
     );
-
-    addItemBtn.forEach((el) =>
+    openPopup.forEach((el) =>
       el.addEventListener('click', () => {
         const popupContainer = document.querySelector('.popup') as HTMLElement;
         popupContainer.style.display = 'block';
       })
     );
-    addItemExitBtn?.addEventListener('click', () => {
+    exitPopup?.addEventListener('click', () => {
       const popupContainer = document.querySelector('.popup') as HTMLElement;
       popupContainer.style.display = 'none';
+    });
+
+    addItem?.addEventListener('click', () => {
+      const item: IInputCheckbox = document.querySelectorAll('.checkbox-addItem');
+      item.forEach((el) => {
+        if (el.checked) {
+          console.log(el.parentElement?.parentElement);
+        }
+      });
     });
   }
 }
