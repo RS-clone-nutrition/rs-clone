@@ -65,6 +65,16 @@ class Api {
       console.log(e);
     }
   }
+
+  async getNextPageRecipes(path: string) {
+    try {
+      const response = await fetch(path);
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 const api = new Api();

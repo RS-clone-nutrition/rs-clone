@@ -17,7 +17,9 @@ class Recipes {
     <div class="recipes">
         <div class="container">
           <div class="crumbs">
-            <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+            <a href="/" class="crumbs__link">
+              <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+            </a>
             <span class="crumbs__sep">></span>
             <a href="/recipes" class="crumbs__link">Recipes</a>
           </div>
@@ -33,7 +35,7 @@ class Recipes {
                 <ul class="popular-recipes__list">
                   
                 </ul>
-                <a href="#" class="popular-recipes__more">view more recipes</a>
+                <p class="popular-recipes__more">view more recipes</p>
               </div>
             </div>
             <div class="recipes-category">
@@ -87,10 +89,19 @@ class Recipes {
     const arrayItemCategory: HTMLElement[] = Array.from(document.querySelectorAll('.item-btn'));
     const titleCategory = <HTMLElement>$('.popular-recipes__title');
     const breadCrumbs = <HTMLElement>$('.crumbs');
+    const viewMore = <HTMLElement>$('.popular-recipes__more');
+    let viewMoreLink: string;
+    function updateUrl(query: string, params: string) {
+      const url = new URL(location.href);
+      url.searchParams.set(query, params);
+      if (!params) url.searchParams.delete(query);
+      history.replaceState({}, '', url);
+    }
     async function showCategoryRecipes(category: string, type: string) {
       const typeResipes = await api.getRecipesType(category, type);
       const listRecipes = <HTMLElement>$('.popular-recipes__list');
       const arrayRecipes = typeResipes.hits;
+      viewMoreLink = typeResipes._links.next.href;
       const blocksRecipes = arrayRecipes
         .map((e: IRecipe) =>
           blockRecipe(
@@ -105,12 +116,34 @@ class Recipes {
         )
         .join('');
       listRecipes.innerHTML = blocksRecipes;
-      breadCrumbs.innerHTML = `<img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+      breadCrumbs.innerHTML = `<a href="/" class="crumbs__link">
+                                <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+                              </a>
                               <span class="crumbs__sep">></span>
                               <a href="/recipes" class="crumbs__link">Recipes</a>
                               <span class="crumbs__sep">></span>
                               <p class="crumbs__link">${type}</p>`;
       titleCategory.innerHTML = `${type.toUpperCase()} RECIPES`;
+    }
+    async function showNextRecipes(path: string) {
+      const typeResipes = await api.getNextPageRecipes(path);
+      const listRecipes = <HTMLElement>$('.popular-recipes__list');
+      const arrayRecipes = typeResipes.hits;
+      viewMoreLink = typeResipes._links.next.href;
+      const blocksRecipes = arrayRecipes
+        .map((e: IRecipe) =>
+          blockRecipe(
+            e.recipe.image,
+            e.recipe.label,
+            e.recipe.ingredientLines,
+            e.recipe.calories,
+            e.recipe.totalNutrients.FAT.quantity,
+            e.recipe.totalNutrients.CHOCDF.quantity,
+            e.recipe.totalNutrients.PROCNT.quantity
+          )
+        )
+        .join('');
+      listRecipes.innerHTML += blocksRecipes;
     }
     blockCategory.addEventListener('click', (e) => {
       const itemCategory = <HTMLElement>e.target;
@@ -119,10 +152,43 @@ class Recipes {
           arrayItemCategory[i].classList.remove('active-item');
         }
         itemCategory.classList.add('active-item');
-        console.log(itemCategory.id, itemCategory.innerHTML);
         showCategoryRecipes(itemCategory.id, itemCategory.innerHTML);
+        viewMore.style.display = 'block';
+        updateUrl('type', itemCategory.innerHTML);
       }
     });
+    viewMore.addEventListener('click', () => {
+      showNextRecipes(viewMoreLink);
+    });
+    const sortByQueryParams = () => {
+      const getAllQueryParams = (url: string) => {
+        const paramArr = url.slice(url.indexOf('?') + 1).split('&');
+        const params: { [index: string]: string } = {};
+        paramArr.map((param) => {
+          const [key, val] = param.split('=');
+          params[key] = decodeURIComponent(val);
+        });
+        return params;
+      };
+      const params = getAllQueryParams(location.search);
+      for (const key in params) {
+        if (key === 'type') {
+          for (let j = 0; j < arrayItemCategory.length; j++) {
+            if (params[key].split('+').join(' ') === arrayItemCategory[j].innerHTML) {
+              arrayItemCategory[j].classList.add('active-item');
+              viewMore.style.display = 'block';
+              showCategoryRecipes(arrayItemCategory[j].id, arrayItemCategory[j].innerHTML);
+            }
+          }
+        }
+      }
+      const handleLocation = () => {
+        window.addEventListener('popstate', handleLocation);
+        window.addEventListener('DOMContentLoaded', handleLocation);
+      };
+      handleLocation();
+    };
+    sortByQueryParams();
   }
 }
 
