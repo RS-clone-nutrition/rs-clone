@@ -70,6 +70,20 @@ interface IFooddataBaseResponse {
   hints: { map: (arg0: (i: { food: { label: string[]; image: string[] } }) => string[]) => string[] };
   text: string;
 }
+interface IRecipeData {
+  forEach(
+    arg0: (el: {
+      recipe: {
+        calories: number;
+        label: string;
+      };
+    }) => any
+  ): unknown;
+}
+
+interface IInputCheckbox {
+  forEach(arg0: (el: HTMLInputElement) => any): unknown;
+}
 
 interface IRecipe {
   recipe: {
@@ -209,4 +223,4 @@ interface IRecipe {
 
 }
 
-export { IGroups, CategoryArr, INutritionAnalysisResponse, IFooddataBaseResponse, IRecipe };
+export { IGroups, CategoryArr, INutritionAnalysisResponse, IFooddataBaseResponse, IRecipeData, IInputCheckbox, IRecipe };

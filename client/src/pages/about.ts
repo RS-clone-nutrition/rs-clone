@@ -31,19 +31,19 @@ class About {
           <h1>DEVELOPERS</h1>
           <div class="developers__block">
             <div class="developers__card">
-              <img src="./img/evgeniy-photo.svg" alt="">
+              <img src="./img/about/evgeniy-photo.svg" alt="">
               <h2>Evgeniy Onishchenko</h2>
               <h3>Team Lead, Frontend developer</h3>
               <p>description of the work done in the project</p>
             </div>
             <div class="developers__card">
-              <img src="./img/svitlana-photo.svg" alt="">
+              <img src="./img/about/svitlana-photo.svg" alt="">
               <h2>Svitlana Ponlratenko</h2>
               <h3>Frontend developer</h3>
               <p>description of the work done in the project</p>
             </div>
             <div class="developers__card">
-              <img src="./img/uladzislau-photo.svg" alt="">
+              <img src="./img/about/uladzislau-photo.svg" alt="">
               <h2>Uladzislau Loikuts</h2>
               <h3>Frontend developer</h3>
               <p>description of the work done in the project</p>
