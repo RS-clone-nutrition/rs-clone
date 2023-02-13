@@ -164,7 +164,25 @@ interface IRecipe {
       VITA_RAE: { quantity: number };
       VITC: { quantity: number };
     },
-    totalDaily: {},
+    totalDaily: {
+      FAT: { quantity: number };
+      FASAT: { quantity: number };
+      FATRN: { quantity: number };
+      FAPU: { quantity: number };
+      FAMS: { quantity: number };
+      CHOLE: { quantity: number };
+      NA: { quantity: number };
+      CHOCDF: { quantity: number };
+      FIBTG: { quantity: number };
+      SUGAR: { quantity: number };
+      PROCNT: { quantity: number };
+      VITD: { quantity: number };
+      CA: { quantity: number };
+      FE: { quantity: number };
+      K: { quantity: number };
+      VITA_RAE: { quantity: number };
+      VITC: { quantity: number };
+    },
     digest: [
       {
         label: string,

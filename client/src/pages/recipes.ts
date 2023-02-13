@@ -77,7 +77,8 @@ class Recipes {
           e.recipe.calories,
           e.recipe.totalNutrients.FAT.quantity,
           e.recipe.totalNutrients.CHOCDF.quantity,
-          e.recipe.totalNutrients.PROCNT.quantity
+          e.recipe.totalNutrients.PROCNT.quantity,
+          e.recipe.uri.split('#')[1]
         )
       )
       .join('');
@@ -111,7 +112,8 @@ class Recipes {
             e.recipe.calories,
             e.recipe.totalNutrients.FAT.quantity,
             e.recipe.totalNutrients.CHOCDF.quantity,
-            e.recipe.totalNutrients.PROCNT.quantity
+            e.recipe.totalNutrients.PROCNT.quantity,
+            e.recipe.uri.split('#')[1]
           )
         )
         .join('');
@@ -139,7 +141,8 @@ class Recipes {
             e.recipe.calories,
             e.recipe.totalNutrients.FAT.quantity,
             e.recipe.totalNutrients.CHOCDF.quantity,
-            e.recipe.totalNutrients.PROCNT.quantity
+            e.recipe.totalNutrients.PROCNT.quantity,
+            e.recipe.uri.split('#')[1]
           )
         )
         .join('');

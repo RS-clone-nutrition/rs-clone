@@ -75,6 +75,18 @@ class Api {
       console.log(e);
     }
   }
+
+  async getSingleRecipe(idRecipe: string) {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/api/recipes/v2/${idRecipe}?type=public&app_id=f3e1d102&app_key=f0579006ea485c2daed2ae4396032b36`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 const api = new Api();

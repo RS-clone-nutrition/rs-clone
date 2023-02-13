@@ -52,15 +52,12 @@ function activePage(path: string) {
       arrayHeaderLinks[1].classList.add('active-link');
       break;
     case '/foods':
-      arrayHeaderLinks[2].classList.add('active-link');
-      break;
     case '/foods/product':
-      arrayHeaderLinks[2].classList.add('active-link');
-      break;
     case '/foods/group':
       arrayHeaderLinks[2].classList.add('active-link');
       break;
     case '/recipes':
+    case '/recipe':
       arrayHeaderLinks[3].classList.add('active-link');
       break;
     case '/myfatsecret':

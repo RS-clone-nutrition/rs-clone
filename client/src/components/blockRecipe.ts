@@ -5,7 +5,8 @@ const blockRecipe = (
   kcal: number,
   fat: number,
   carbs: number,
-  prot: number
+  prot: number,
+  id: string
 ) => {
   return `<li class="popular-recipes__item">
             <div class="popular-recipes__icon">
@@ -13,7 +14,7 @@ const blockRecipe = (
             </div>
             <div class="popular-recipes__info info-popular">
               <h2 class="info-popular__name">
-                  <a class="info-popular__link blue" href="#">${title}</a>
+                  <a class="info-popular__link blue" href="/recipe/${id}">${title}</a>
               </h2>
               <ul class="info-popular__description description-popular">
               ${inredients.map((el) => `<li>${el}</li>`).join('')} 

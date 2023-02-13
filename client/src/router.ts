@@ -10,6 +10,7 @@ import { LogUp } from './pages/logUp';
 import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
 import { $, activePage, getMainPath } from './utils/helpers';
+import { SingleRecipe } from './pages/singleRecipe';
 
 class Router {
   routes = [
@@ -28,6 +29,10 @@ class Router {
     {
       path: '/recipes',
       data: Recipes,
+    },
+    {
+      path: '/recipe',
+      data: SingleRecipe,
     },
     {
       path: '/myfatsecret',
