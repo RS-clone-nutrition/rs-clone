@@ -5,8 +5,9 @@ class Api {
   };
 
   recipe = {
+    url: 'https://api.edamam.com/api/recipes/v2',
     id: 'f3e1d102',
-    key: 'f0579006ea485c2daed2ae4396032b36	',
+    key: 'f0579006ea485c2daed2ae4396032b36',
   };
 
   food = {
@@ -33,6 +34,30 @@ class Api {
     try {
       const response = await fetch(
         `https://api.edamam.com/api/nutrition-data?app_id=${this.nutrition.id}&app_key=${this.nutrition.key}&nutrition-type=logging&ingr=${product}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getRecipesType(category: string, type: string) {
+    try {
+      const response = await fetch(
+        `${this.recipe.url}?type=public&app_id=${this.recipe.id}&app_key=${this.recipe.key}&${category}=${type}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getRandomRecipes() {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=f3e1d102&app_key=f0579006ea485c2daed2ae4396032b36&diet=balanced&health=sugar-conscious&random=true`
       );
       const result = await response.json();
       return result;

@@ -144,10 +144,10 @@ body {
 .info-popular {
   width: 100%;
 
-  &__description {
-    display: flex;
-    justify-content: space-between;
-  }
+  //&__description {
+  //  display: flex;
+  //  justify-content: space-between;
+  //}
 
   &__details {
     color: rgba(187, 187, 187, 1);
@@ -176,8 +176,26 @@ body {
   color: rgba(2, 140, 196, 1);
   font-size: 10rem;
   text-align: right;
-  display: block;
+  display: none;
 }
+
+.recipes-main-wrapper{
+  display: flex;
+}
+.recipes-category{
+  background: #EDF1E9;
+  border-radius: 10px;
+  margin-left: 10px;
+  padding: 10px;
+}
+.category-title{
+  color: #fff;
+  background: #33B34B;
+  text-align: right;
+  padding: 3px;
+  min-width: 220px;
+}
+
 
 @media (max-width:820px) {
 
