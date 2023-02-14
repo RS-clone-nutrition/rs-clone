@@ -17,7 +17,6 @@ const blockRecipe = (
   prot: number,
   id: string
 ) => {
-  console.log([...new Set(inredients)][0]);
   return `<li class="popular-recipes__item">
             <div class="popular-recipes__icon">
               <img src="${img}" alt="popular dish" class="popular-recipes__img">
