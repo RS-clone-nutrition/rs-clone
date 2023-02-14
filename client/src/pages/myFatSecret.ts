@@ -359,7 +359,9 @@ class MyFatSecret {
     `;
   }
 
-  drawItem(el: string) {}
+  drawItem(el: string) {
+    console.log(el);
+  }
 
   eventListener() {
     const exitPopup = document.querySelector('.popup__exit');
@@ -374,8 +376,7 @@ class MyFatSecret {
         const value = inputTarget.value;
         console.log(value);
         const result = await api.getRecipeFoodSearch(value);
-        console.log(result.hits);
-        // this.searchItem(result.hits);
+        this.searchItem(result.hits);
       })
     );
 
@@ -395,9 +396,11 @@ class MyFatSecret {
       const item: IInputCheckbox = document.querySelectorAll('.checkbox-addItem');
       item.forEach((el) => {
         if (el.checked) {
-          console.log(el.parentElement?.parentElement);
+          console.log(el.parentElement?.innerHTML);
         }
       });
+      const popupContainer = document.querySelector('.popup') as HTMLElement;
+      popupContainer.style.display = 'none';
     });
   }
 }
