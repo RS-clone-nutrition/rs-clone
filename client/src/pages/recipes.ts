@@ -73,11 +73,11 @@ class Recipes {
         blockRecipe(
           e.recipe.image,
           e.recipe.label,
-          e.recipe.ingredientLines,
-          e.recipe.calories,
-          e.recipe.totalNutrients.FAT.quantity,
-          e.recipe.totalNutrients.CHOCDF.quantity,
-          e.recipe.totalNutrients.PROCNT.quantity,
+          e.recipe.ingredients,
+          e.recipe.calories / e.recipe.yield,
+          e.recipe.totalNutrients.FAT.quantity / e.recipe.yield,
+          e.recipe.totalNutrients.CHOCDF.quantity / e.recipe.yield,
+          e.recipe.totalNutrients.PROCNT.quantity / e.recipe.yield,
           e.recipe.uri.split('#')[1]
         )
       )
@@ -108,11 +108,11 @@ class Recipes {
           blockRecipe(
             e.recipe.image,
             e.recipe.label,
-            e.recipe.ingredientLines,
-            e.recipe.calories,
-            e.recipe.totalNutrients.FAT.quantity,
-            e.recipe.totalNutrients.CHOCDF.quantity,
-            e.recipe.totalNutrients.PROCNT.quantity,
+            e.recipe.ingredients,
+            e.recipe.calories / e.recipe.yield,
+            e.recipe.totalNutrients.FAT.quantity / e.recipe.yield,
+            e.recipe.totalNutrients.CHOCDF.quantity / e.recipe.yield,
+            e.recipe.totalNutrients.PROCNT.quantity / e.recipe.yield,
             e.recipe.uri.split('#')[1]
           )
         )
@@ -137,11 +137,11 @@ class Recipes {
           blockRecipe(
             e.recipe.image,
             e.recipe.label,
-            e.recipe.ingredientLines,
-            e.recipe.calories,
-            e.recipe.totalNutrients.FAT.quantity,
-            e.recipe.totalNutrients.CHOCDF.quantity,
-            e.recipe.totalNutrients.PROCNT.quantity,
+            e.recipe.ingredients,
+            e.recipe.calories / e.recipe.yield,
+            e.recipe.totalNutrients.FAT.quantity / e.recipe.yield,
+            e.recipe.totalNutrients.CHOCDF.quantity / e.recipe.yield,
+            e.recipe.totalNutrients.PROCNT.quantity / e.recipe.yield,
             e.recipe.uri.split('#')[1]
           )
         )

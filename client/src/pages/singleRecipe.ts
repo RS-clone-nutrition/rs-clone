@@ -13,7 +13,6 @@ class SingleRecipe {
   async render() {
     const idRecipe = <string>getURL().split('/').slice(-1).toString();
     const oneRecipe: IRecipe = await api.getSingleRecipe(idRecipe);
-    console.log(oneRecipe.recipe);
 
     this.main.innerHTML = `
    <div class="single-recipe">
@@ -103,10 +102,9 @@ class SingleRecipe {
                   <div class="detail-recipe__ingridients ingridients">
                     <h3 class="ingridients__title">Ingridients</h3>
                     <ul class="ingridients__list">
-                      ${oneRecipe.recipe.ingredientLines
+                      ${[...new Set(oneRecipe.recipe.ingredients)]
                         .map(
-                          (e, i) =>
-                            `<li class="ingridients__item"><a href="/foods/product/${oneRecipe.recipe.ingredients[i].food}">${e}</a></li>`
+                          (e) => `<li class="ingridients__item"><a href="/foods/product/${e.food}">${e.text}</a></li>`
                         )
                         .join('')}
                     </ul>
