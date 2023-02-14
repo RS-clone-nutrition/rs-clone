@@ -66,6 +66,18 @@ class Api {
     }
   }
 
+  async getRecipeFoodSearch(product: string) {
+    try {
+      const response = await fetch(
+        `${this.recipe.url}?type=public&q=${product}&app_id=${this.recipe.id}&app_key=${this.recipe.key}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async getNextPageRecipes(path: string) {
     try {
       const response = await fetch(path);

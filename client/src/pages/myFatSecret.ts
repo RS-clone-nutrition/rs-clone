@@ -373,7 +373,7 @@ class MyFatSecret {
         const inputTarget = target.previousElementSibling as HTMLInputElement;
         const value = inputTarget.value;
         console.log(value);
-        const result = await api.getRecipeFood(value);
+        const result = await api.getRecipeFoodSearch(value);
         console.log(result.hits);
         // this.searchItem(result.hits);
       })
