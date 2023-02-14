@@ -359,7 +359,7 @@ class MyFatSecret {
     `;
   }
 
-  drawItem(el: string) {}
+  //drawItem(el: string) {}
 
   eventListener() {
     const exitPopup = document.querySelector('.popup__exit');
