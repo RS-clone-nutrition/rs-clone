@@ -1,4 +1,4 @@
-import Item from '../utils/addItem';
+import api from '../api/api';
 import Cal from '../utils/generateCalendar';
 import { IRecipeData, IInputCheckbox } from '../utils/types';
 // import Item from '../utils/addItem';
@@ -359,9 +359,7 @@ class MyFatSecret {
     `;
   }
 
-  drawItem(el: string) {
-    console.log(el);
-  }
+  drawItem(el: string) {}
 
   eventListener() {
     const exitPopup = document.querySelector('.popup__exit');
@@ -374,17 +372,20 @@ class MyFatSecret {
         const target = e.currentTarget as HTMLElement;
         const inputTarget = target.previousElementSibling as HTMLInputElement;
         const value = inputTarget.value;
-        const item = new Item(value);
-        const result = await item.createItem();
-        this.searchItem(result.hits);
+        console.log(value);
+        const result = await api.getRecipeFoodSearch(value);
+        console.log(result.hits);
+        // this.searchItem(result.hits);
       })
     );
+
     openPopup.forEach((el) =>
       el.addEventListener('click', () => {
         const popupContainer = document.querySelector('.popup') as HTMLElement;
         popupContainer.style.display = 'block';
       })
     );
+
     exitPopup?.addEventListener('click', () => {
       const popupContainer = document.querySelector('.popup') as HTMLElement;
       popupContainer.style.display = 'none';
