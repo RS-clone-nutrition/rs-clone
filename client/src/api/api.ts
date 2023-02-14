@@ -5,8 +5,8 @@ class Api {
   };
 
   recipe = {
-    id: 'f3e1d102',
-    key: 'f0579006ea485c2daed2ae4396032b36	',
+    id: '4fcfc438',
+    key: '28966d2be84cfb19774545f5a0afb3f5',
   };
 
   food = {
@@ -33,6 +33,18 @@ class Api {
     try {
       const response = await fetch(
         `https://api.edamam.com/api/nutrition-data?app_id=${this.nutrition.id}&app_key=${this.nutrition.key}&nutrition-type=logging&ingr=${product}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getRecipeFood(product: string) {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/api/recipes/v2?type=public&q=${product}&app_id=${this.recipe.id}&app_key=${this.recipe.key}`
       );
       const result = await response.json();
       return result;
