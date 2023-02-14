@@ -5,8 +5,9 @@ class Api {
   };
 
   recipe = {
-    id: '4fcfc438',
-    key: '28966d2be84cfb19774545f5a0afb3f5',
+    url: 'https://api.edamam.com/api/recipes/v2',
+    id: 'f3e1d102',
+    key: 'f0579006ea485c2daed2ae4396032b36',
   };
 
   food = {
@@ -41,10 +42,44 @@ class Api {
     }
   }
 
-  async getRecipeFood(product: string) {
+  async getRecipesType(category: string, type: string) {
     try {
       const response = await fetch(
-        `https://api.edamam.com/api/recipes/v2?type=public&q=${product}&app_id=${this.recipe.id}&app_key=${this.recipe.key}`
+        `${this.recipe.url}?type=public&app_id=${this.recipe.id}&app_key=${this.recipe.key}&${category}=${type}`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getRandomRecipes() {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/api/recipes/v2?type=public&app_id=f3e1d102&app_key=f0579006ea485c2daed2ae4396032b36&diet=balanced&health=sugar-conscious&random=true`
+      );
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getNextPageRecipes(path: string) {
+    try {
+      const response = await fetch(path);
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getSingleRecipe(idRecipe: string) {
+    try {
+      const response = await fetch(
+        `https://api.edamam.com/api/recipes/v2/${idRecipe}?type=public&app_id=f3e1d102&app_key=f0579006ea485c2daed2ae4396032b36`
       );
       const result = await response.json();
       return result;

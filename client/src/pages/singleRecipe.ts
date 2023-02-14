@@ -1,4 +1,7 @@
 import '../styles/singleRecipe.scss';
+import { getURL } from '../utils/helpers';
+import api from '../api/api';
+import { IRecipe } from '../utils/types';
 
 class SingleRecipe {
   main;
@@ -7,25 +10,30 @@ class SingleRecipe {
     this.main = main;
   }
 
-  render() {
+  async render() {
+    const idRecipe = <string>getURL().split('/').slice(-1).toString();
+    const oneRecipe: IRecipe = await api.getSingleRecipe(idRecipe);
+    console.log(oneRecipe.recipe);
+
     this.main.innerHTML = `
    <div class="single-recipe">
       <div class="container">
           <div class="crumbs">
-            <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+            <a href="/" class="crumbs__link">  
+              <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+            </a>
             <span class="crumbs__sep">></span>
-            <a href="#" class="crumbs__link">Recipes</a>
+            <a href="/recipes" class="crumbs__link">Recipes</a>
             <span class="crumbs__sep">></span>
-            <a href="#" class="crumbs__link">Apple Crisp</a>
+            <p class="crumbs__link">${oneRecipe.recipe.label}</p>
           </div>
           <div class="recipe">
             <div class="recipe__main">
               <div class="recipe__info">
                 <div class="info__left left-info">
                   <div class="left-info__icon">
-                    <img class="left-info__img" src="./img/singleRecipe/dish.png" alt="dish icon">
+                    <img class="left-info__img" src="${oneRecipe.recipe.image}" alt="dish icon">
                   </div>
-                  <div class="left__viewicon">View photos</div>
                   <div class="left-info__actions">
                     <div class="action-left cookbook">
                       <img src="./img/singleRecipe/icons/plus.svg" alt="add coolbook" class="action__img cookbook">
@@ -42,16 +50,7 @@ class SingleRecipe {
                     </div>
                     <div class="left-box__text serving__text">
                       <p class="left-box__title serving__title black">Yields</p>
-                      <p class="left-box__info serving__info">6 servings</p>
-                    </div>
-                  </div>
-                  <div class="left-info__box time">
-                    <div class="left-box__icon time__icon">
-                      <img class="left-box__img time__img" src="./img/singleRecipe/icons/clock.svg" alt="person">
-                    </div>
-                    <div class="left-box__text time__text">
-                      <p class="left-box__title time__title black">Cook Time:</p>
-                      <p class="left-box__info time__info">30 mins</p>
+                      <p class="left-box__info serving__info">${oneRecipe.recipe.yield} servings</p>
                     </div>
                   </div>
                   <div class="left-info__box type">
@@ -61,23 +60,61 @@ class SingleRecipe {
                     </div>
                     <div class="left-box__text type__text">
                       <p class="left-box__title type__title black">Meal Type:</p>
-                      <p class="left-box__info type__info">Desserts</p>
+                      ${oneRecipe.recipe.mealType.map((e) => `<p class="left-box__info type__info">${e}</p>`).join('')}
+                    </div>
+                  </div>
+                  <div class="left-info__box type">
+                    <div class="left-box__icon type__icon">
+                      <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
+                        alt="person">
+                    </div>
+                    <div class="left-box__text type__text">
+                      <p class="left-box__title type__title black">Dish Type:</p>
+                      ${oneRecipe.recipe.dishType.map((e) => `<p class="left-box__info type__info">${e}</p>`).join('')}
+                    </div>
+                  </div>
+                  <div class="left-info__box type">
+                    <div class="left-box__icon type__icon">
+                      <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
+                        alt="person">
+                    </div>
+                    <div class="left-box__text type__text">
+                      <p class="left-box__title type__title black">Cuisine Type:</p>
+                      ${oneRecipe.recipe.cuisineType
+                        .map((e) => `<p class="left-box__info type__info">${e}</p>`)
+                        .join('')}
+                    </div>
+                  </div>
+                  <div class="left-info__box type">
+                    <div class="left-box__icon type__icon">
+                      <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
+                        alt="person">
+                    </div>
+                    <div class="left-box__text type__text">
+                      <p class="left-box__title type__title black">Diet Type:</p>
+                      ${oneRecipe.recipe.dietLabels
+                        .map((e) => `<p class="left-box__info type__info">${e}</p>`)
+                        .join('')}
                     </div>
                   </div>
                 </div>
                 <div class="recipe__detail detail-recipe">
-                  <h2 class="detail-recipe__name black">Apple Crisp</h2>
-                  <div class="detail-recipe__undertitle">Delicious sweet baked apple crisp</div>
+                  <h2 class="detail-recipe__name black">${oneRecipe.recipe.label}</h2>
                   <div class="detail-recipe__ingridients ingridients">
                     <h3 class="ingridients__title">Ingridients</h3>
                     <ul class="ingridients__list">
-                      <li class="ingridients__item">6 medium apples</li>
+                      ${oneRecipe.recipe.ingredientLines
+                        .map(
+                          (e, i) =>
+                            `<li class="ingridients__item"><a href="/foods/product/${oneRecipe.recipe.ingredients[i].food}">${e}</a></li>`
+                        )
+                        .join('')}
                     </ul>
                   </div>
                   <div class="detail-recipe__directions directions">
-                    <h3 class="directions__title">Directions</h3>
+                    <h3 class="directions__title">Health label</h3>
                     <ul class="directions__list">
-                      <li class="directions__item">Peel and slice apples</li>
+                        ${oneRecipe.recipe.healthLabels.map((e) => `<li class="directions__item">${e}</li>`).join('')}
                     </ul>
                   </div>
                 </div>
@@ -85,117 +122,166 @@ class SingleRecipe {
               <div class="recipe__nutrition nutrition">
                 <div class="nutrition__summary summary">
                   <h3 class="summary__title black">Nutrition summary:</h3>
-                  <div class="summary__text calorie">There are <span class="summary__calories-number black">263
+                  <div class="summary__text calorie">There are <span class="summary__calories-number black">${Math.round(
+                    oneRecipe.recipe.calories
+                  )}
                       calories</span>
-                    in 1 serving of Apple Crisp.</div>
-                  <div class="summary__text percent">Calorie break-down: <span class="summary__fat-percent black">13%
-                      fat</span>, 80% carbs, 7% protein.</div>
+                    in ${oneRecipe.recipe.yield} serving of ${oneRecipe.recipe.label}.</div>
+                  <div class="summary__text percent">Calorie break-down: <span class="summary__fat-percent black">${Math.round(
+                    oneRecipe.recipe.totalDaily.FAT.quantity
+                  )}%
+                      fat</span>, ${Math.round(oneRecipe.recipe.totalDaily.CHOCDF.quantity)}% carbs, ${Math.round(
+      oneRecipe.recipe.totalDaily.PROCNT.quantity
+    )}% protein.</div>
                 </div>
                 <div class="nutrition__facts facts">
                   <div class="facts__container">
                     <div class="facts__title black">Nutrition Facts</div>
                     <div class="facts__size">
                       <span class="size-facts__text black">Serving Size</span>
-                      <span class="size-facts__serving black">1 serving</span>
+                      <span class="size-facts__serving black">${oneRecipe.recipe.yield} serving</span>
                     </div>
                     <div class="facts__divider-thick"></div>
                     <div class="facts__amount-left black">Amount Per Serving</div>
                     <div class="facts__calorie facts-calorie">
                       <span class="facts-calorie__text black">Calories</span>
-                      <span class="facts-calorie__number black">263</span>
+                      <span class="facts-calorie__number black">${Math.round(oneRecipe.recipe.calories)}</span>
                     </div>
                     <div class="facts__divider-medium"></div>
                     <div class="facts__percent black">% Daily Values*</div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text black">Total Fat <span class="size-facts__number">4.02g</span></p>
-                      <p class="facts-category__percent black">5%</p>
+                      <p class="facts-category__text black">Total Fat <span class="size-facts__number">${oneRecipe.recipe.totalNutrients.FAT.quantity.toFixed(
+                        2
+                      )}g</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.FAT.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Saturated Fat <span class="size-facts__number">0.65g</span></p>
-                      <p class="facts-category__percent black">3%</p>
+                      <p class="facts-category__text">Saturated Fat <span class="size-facts__number">${oneRecipe.recipe.totalNutrients.FASAT.quantity.toFixed(
+                        2
+                      )}g</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.FASAT.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
                       <p class="facts-category__text">Trans Fat <span class="size-facts__number">-</span></p>
                       <p class="facts-category__percent black"></p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Polyunsaturated Fat<span class="size-facts__number">1.54g</span></p>
-                      <p class="facts-category__percent black"></p>
+                      <p class="facts-category__text black">Cholesterol<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.CHOLE.quantity.toFixed(
+                        2
+                      )}mg</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.CHOLE.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Monounsaturated Fat <span class="size-facts__number">1.33g</span>
-                      </p>
-                      <p class="facts-category__percent black"></p>
-                    </div>
-                    <div class="facts__category facts-category">
-                      <p class="facts-category__text black">Cholesterol<span class="size-facts__number">0mg</span></p>
-                      <p class="facts-category__percent black">0%</p>
-                    </div>
-                    <div class="facts__category facts-category">
-                      <p class="facts-category__text black">Sodium<span class="size-facts__number">83mg</span></p>
-                      <p class="facts-category__percent black">4%</p>
+                      <p class="facts-category__text black">Sodium<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.NA.quantity.toFixed(
+                        2
+                      )}mg</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.NA.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
                       <p class="facts-category__text black">Total Carbohydrate<span
-                          class="size-facts__number">55.08g</span>
+                          class="size-facts__number">-</span>
                       </p>
-                      <p class="facts-category__percent black">20%</p>
+                      <p class="facts-category__percent black">-</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Dietary Fiber<span class="size-facts__number">6.7g</span></p>
-                      <p class="facts-category__percent black">24%</p>
+                      <p class="facts-category__text">Dietary Fiber<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.FIBTG.quantity.toFixed(
+                        2
+                      )}g</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.FIBTG.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Sugars<span class="size-facts__number">32g</span></p>
+                      <p class="facts-category__text">Sugars<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.SUGAR.quantity.toFixed(
+                        2
+                      )}g</span></p>
                       <p class="facts-category__percent black"></p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text black">Protein<span class="size-facts__number">4.79g</span>
+                      <p class="facts-category__text black">Protein<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.PROCNT.quantity.toFixed(
+                        2
+                      )}g</span>
                       </p>
-                      <p class="facts-category__percent black">4%</p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.PROCNT.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__divider-thick"></div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Vitamin D<span class="size-facts__number">52mg</span></p>
+                      <p class="facts-category__text">Vitamin D<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.VITD.quantity.toFixed(
+                        2
+                      )}mg</span></p>
                       <p class="facts-category__percent black"></p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Calcium<span class="size-facts__number">2.17mg</span></p>
-                      <p class="facts-category__percent black">7%</p>
+                      <p class="facts-category__text">Calcium<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.CA.quantity.toFixed(
+                        2
+                      )}mg</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.CA.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Iron<span class="size-facts__number">2.17mg</span></p>
-                      <p class="facts-category__percent black">12%</p>
+                      <p class="facts-category__text">Iron<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.FE.quantity.toFixed(
+                        2
+                      )}mg</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.FE.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Potassium<span class="size-facts__number">86mcg</span></p>
-                      <p class="facts-category__percent black">10%</p>
+                      <p class="facts-category__text">Potassium<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.K.quantity.toFixed(
+                        2
+                      )}mg</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.K.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Vitamin A<span class="size-facts__number">32g</span></p>
+                      <p class="facts-category__text">Vitamin A<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.VITA_RAE.quantity.toFixed(
+                        2
+                      )}µg</span></p>
                       <p class="facts-category__percent black"></p>
                     </div>
                     <div class="facts__category facts-category">
-                      <p class="facts-category__text">Vitamin C<span class="size-facts__number">6.7mg</span></p>
-                      <p class="facts-category__percent black">7%</p>
+                      <p class="facts-category__text">Vitamin C<span class="size-facts__number">${oneRecipe.recipe.totalNutrients.VITC.quantity.toFixed(
+                        2
+                      )}mg</span></p>
+                      <p class="facts-category__percent black">${Math.round(
+                        oneRecipe.recipe.totalDaily.VITC.quantity
+                      )}%</p>
                     </div>
                     <div class="facts__divider-medium"></div>
                     <div class="facts__description">* The % Daily Value (DV) tells you how much a nutrient in a serving of
                       food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.</div>
                   </div>
                   <div class="rdi__container rdi">
-                    <div class="rdi__number black">13%</div>
+                    <div class="rdi__number black">${Math.round(
+                      (Math.round(oneRecipe.recipe.calories) / 2000) * 100
+                    )}%</div>
                     <div class="rdi__text">
                       <p class="rdi__text-title">of RDI*</p>
-                      <p class="rdi__text-undertitle">(263 calories)</p>
+                      <p class="rdi__text-undertitle">(${Math.round(oneRecipe.recipe.calories)} calories)</p>
                     </div>
                   </div>
                   <div class="breakdown__container rdi">
                     <div class="breakdown__number black">Calorie Breakdown:</div>
                     <div class="breakdown__detail">
-                      <p class="breakdown__item carbohydrate">Carbohydrate (80%)</p>
-                      <p class="breakdown__item fat">Fat (13%)</p>
-                      <p class="breakdown__item protein">Protein (7%)</p>
+                      <p class="breakdown__item carbohydrate">Carbohydrate (${Math.round(
+                        oneRecipe.recipe.totalDaily.CHOCDF.quantity
+                      )}%)</p>
+                      <p class="breakdown__item fat">Fat (${Math.round(oneRecipe.recipe.totalDaily.FAT.quantity)}%)</p>
+                      <p class="breakdown__item protein">Protein (${Math.round(
+                        oneRecipe.recipe.totalDaily.PROCNT.quantity
+                      )}%)</p>
                     </div>
                   </div>
                   <div class="rdi__info black">Based on a RDI of 2000 calories</div>
