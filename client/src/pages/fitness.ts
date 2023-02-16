@@ -349,11 +349,16 @@ class Fitness {
               sliderElipses.style.display = 'none';
               clearInterval(switchSlider);
               writeCard(allExerciseArray[j]);
+              notFound.style.display = 'none';
+              fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
               for (let o = 0; o < arrayItemBtn.length; o++) {
                 if (arrayItemBtn[o].innerHTML === params[key].split('+').join(' ')) {
                   arrayItemBtn[o].classList.add('active-item');
                 }
               }
+              break;
+            } else {
+              notFound.style.display = 'block';
             }
           }
         }

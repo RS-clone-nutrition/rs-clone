@@ -11,6 +11,7 @@ import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
 import { $, activePage, getMainPath } from './utils/helpers';
 import { SingleRecipe } from './pages/singleRecipe';
+import { allExerciseArray } from './components/dataFitExercise';
 
 class Router {
   routes = [
@@ -119,30 +120,37 @@ class Router {
     });
 
     const searchSelect = <HTMLSelectElement>document.getElementById('search-select');
+    const searchInput = <HTMLInputElement>$('.search__input');
+    const dataListExercise = document.getElementById('search-header-fitness');
     let searchValueDefault = 'food';
     searchSelect.onchange = function () {
       if (searchSelect.value === 'food') {
         searchValueDefault = 'food';
+        if (dataListExercise) dataListExercise.remove();
       }
       if (searchSelect.value === 'recipe') {
         searchValueDefault = 'recipe';
+        if (dataListExercise) dataListExercise.remove();
       }
       if (searchSelect.value === 'exercise') {
         searchValueDefault = 'exercise';
+        const createDataListExercise = document.createElement('datalist');
+        createDataListExercise.id = 'search-header-fitness';
+        createDataListExercise.innerHTML = `${allExerciseArray.map((e) => `<option value="${e.name}">`).join('')}`;
+        searchInput.after(createDataListExercise);
       }
     };
 
-    const searchInput = <HTMLInputElement>$('.search__input');
     searchInput.addEventListener('change', async () => {
       if (searchValueDefault === 'food') {
-        window.location.pathname = `/foods/product/${searchInput.value}`;
+        window.location.href = `/foods/product/${searchInput.value}`;
       }
       if (searchValueDefault === 'recipe') {
-        window.location.pathname = `/recipes/${searchInput.value}`;
+        window.location.href = `/recipes/${searchInput.value}`;
       }
-      //if (searchValueDefault === 'exercise') {
-      //  window.location.pathname = `/fitness/${searchInput.value}`;
-      //}
+      if (searchValueDefault === 'exercise') {
+        window.location.href = `/fitness?exercise=${searchInput.value}`;
+      }
     });
   }
 }
