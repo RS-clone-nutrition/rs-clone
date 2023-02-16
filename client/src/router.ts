@@ -11,6 +11,7 @@ import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
 import { $, activePage, getMainPath } from './utils/helpers';
 import { SingleRecipe } from './pages/singleRecipe';
+import api from './api/api';
 
 class Router {
   routes = [
@@ -116,6 +117,32 @@ class Router {
     mainOpen.addEventListener('click', () => {
       headerMenu.classList.remove('header-nav-active');
       mainOpen.classList.remove('main_open_menu');
+    });
+
+    const searchSelect = <HTMLSelectElement>document.getElementById('search-select');
+    let searchValueDefault = 'food';
+    searchSelect.onchange = function () {
+      if (searchSelect.value === 'food') {
+        searchValueDefault = 'food';
+      }
+      if (searchSelect.value === 'recipe') {
+        searchValueDefault = 'recipe';
+      }
+      if (searchSelect.value === 'exercise') {
+        searchValueDefault = 'exercise';
+      }
+    };
+
+    const searchInput = <HTMLInputElement>$('.search__input');
+    searchInput.addEventListener('change', async () => {
+      //if (searchValueDefault === 'food') {
+      //}
+      if (searchValueDefault === 'recipe') {
+        console.log(await api.getRecipeFoodSearch(searchInput.value));
+        window.location.pathname = `/recipes/${searchInput.value}`;
+      }
+      //if (searchValueDefault === 'exercise') {
+      //}
     });
   }
 }

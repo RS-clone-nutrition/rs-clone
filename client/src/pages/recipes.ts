@@ -1,6 +1,6 @@
 import '../styles/recipes.scss';
 import api from '../api/api';
-import { $ } from '../utils/helpers';
+import { $, getURL } from '../utils/helpers';
 import groupsRecipes from '../consts/dataGroupsRecipes';
 import blockRecipe from '../components/blockRecipe';
 import { IRecipe } from '../utils/types';
@@ -13,6 +13,9 @@ class Recipes {
   }
 
   render() {
+    const searchValue = <string>getURL().split('/').slice(-1).toString();
+    console.log(searchValue);
+
     this.main.innerHTML = `
     <div class="recipes">
         <div class="container">
@@ -60,8 +63,40 @@ class Recipes {
         </div>
       </div>
     `;
-    this.fill();
+    if (searchValue === 'recipes') {
+      this.fill();
+    } else {
+      this.searchRecipes(searchValue);
+    }
     this.eventListener();
+  }
+
+  async searchRecipes(value: string) {
+    const titleSearch = <HTMLElement>$('.popular-recipes__title');
+    const listRecipes = <HTMLElement>$('.popular-recipes__list');
+    const foundRecipes = await api.getRecipeFoodSearch(value);
+    console.log(foundRecipes);
+    if (foundRecipes.count === 0) {
+      titleSearch.innerHTML = 'NOT FOUND RECIPES';
+    } else {
+      titleSearch.innerHTML = `FOUND RECIPES ON REQUEST '${value.toUpperCase()}'`;
+      const arrayRecipes = foundRecipes.hits;
+      const blocksRecipes = arrayRecipes
+        .map((e: IRecipe) =>
+          blockRecipe(
+            e.recipe.image,
+            e.recipe.label,
+            e.recipe.ingredients,
+            e.recipe.calories / e.recipe.yield,
+            e.recipe.totalNutrients.FAT.quantity / e.recipe.yield,
+            e.recipe.totalNutrients.CHOCDF.quantity / e.recipe.yield,
+            e.recipe.totalNutrients.PROCNT.quantity / e.recipe.yield,
+            e.recipe.uri.split('#')[1]
+          )
+        )
+        .join('');
+      listRecipes.innerHTML = blocksRecipes;
+    }
   }
 
   async fill() {
