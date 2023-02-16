@@ -11,7 +11,6 @@ import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
 import { $, activePage, getMainPath } from './utils/helpers';
 import { SingleRecipe } from './pages/singleRecipe';
-import api from './api/api';
 
 class Router {
   routes = [
@@ -135,13 +134,14 @@ class Router {
 
     const searchInput = <HTMLInputElement>$('.search__input');
     searchInput.addEventListener('change', async () => {
-      //if (searchValueDefault === 'food') {
-      //}
+      if (searchValueDefault === 'food') {
+        window.location.pathname = `/foods/product/${searchInput.value}`;
+      }
       if (searchValueDefault === 'recipe') {
-        console.log(await api.getRecipeFoodSearch(searchInput.value));
         window.location.pathname = `/recipes/${searchInput.value}`;
       }
       //if (searchValueDefault === 'exercise') {
+      //  window.location.pathname = `/fitness/${searchInput.value}`;
       //}
     });
   }

@@ -77,6 +77,11 @@ class SingleFood {
 
     this.nutritionFacts.render(productDate, productTypes);
     this.detailLinksBlock.render(productDate, productTypes);
+
+    if (productTypes.hints.length === 0) {
+      const titleProduct = <HTMLElement>document.querySelector('.top-foods__title');
+      titleProduct.innerHTML = `NOT FOUND PRODUCT '${product}'`;
+    }
   }
 
   async requestsApi(servise: string) {
