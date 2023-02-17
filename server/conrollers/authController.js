@@ -12,7 +12,6 @@ const generateAccessToken = (id) => {
   return jwt.sign(payload, secret.key, { expiresIn: 24 })
 }
 
-
 class authController {
   async registration(req, res) {
     try {
@@ -22,7 +21,8 @@ class authController {
         return res.status(400).json({ message: 'Registration error:' + ' ' + errors.array()[0].msg + '\n Please fill in all fields' })
       }
 
-      const { username, password, weight, height, age, gender } = req.body
+      const { username, password, weight, height, age, gender, goal, aim } = req.body;
+
       const candidate = await User.findOne({ username })
 
       if (candidate) {
@@ -30,7 +30,10 @@ class authController {
       }
 
       const hashPassword = bcrypt.hashSync(password, 3);
-      const user = new User({ username: username, password: hashPassword, weight: weight, goal: goal, height: height, age: age, gender: gender })
+      const user = new User({
+        username: username, password: hashPassword, weight: weight, goal: goal, height: height,
+        age: age, gender: gender, goal: goal, aim: aim
+      })
 
       await user.save()
 
@@ -48,10 +51,8 @@ class authController {
       const { username, password } = req.body
       const user = await User.findOne({ username })
 
-      console.log(user);
-
       if (!user) {
-        return res.status(400).json({ message: `user with ${username} not found` })
+        return res.status(400).json({ message: `user with name ${username} not found` })
       }
 
       const validPassword = bcrypt.compareSync(password, user.password)
@@ -66,6 +67,26 @@ class authController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: 'Login error' })
+    }
+  }
+
+  async updateUser(req, res) {
+    try {
+
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ message: 'Save error:' + ' ' + errors.array()[0].msg + '\n Please fill in all fields' })
+      }
+
+      const { weight, goal, aim, username } = req.body
+      const dataForUpdate = { weight: weight, goal: goal, aim: aim }
+
+      const user = await User.findOneAndUpdate({ name: username }, dataForUpdate, { returnDocument: 'after' });
+
+      return res.status(200).json({ message: 'user successfully updated', user: user });
+    } catch (e) {
+      console.log(e);
     }
   }
 
