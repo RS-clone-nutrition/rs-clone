@@ -19,10 +19,18 @@ class LogUp {
           <h2>Create account using email</h2>
             <form class="form__inputs">
             <div class="form__radio">
-              <input class="radio__choice" type="radio" id="contactChoice1" name="gender" checked value="male">
-              <label for="contactChoice1">Male</label>
-              <input class="radio__choice" type="radio" id="contactChoice2" name="gender" value="female">
-              <label for="contactChoice2">Female</label>
+              <h3 class="info-user__title aim__title">Gender:</h3>
+              <input class="radio__choice" type="radio" id="genderChoice1" name="gender" checked value="male">
+              <label for="genderChoice1">Male</label>
+              <input class="radio__choice" type="radio" id="genderChoice2" name="gender" value="female">
+              <label for="genderChoice2">Female</label>
+            </div>
+            <div class="form__radio">
+              <h3 class="info-user__title aim__title">Weight aim:</h3>
+              <input class="radio__choice" type="radio" id="aimChoice1" name="aim" checked value="lose">
+              <label for="aimChoice1">Lose Weight</label>
+              <input class="radio__choice" type="radio" id="aimChoice2" name="aim" value="gain">
+              <label for="aimChoice2">Gain Weight</label>
             </div>
               <input type="text" name="username" placeholder="Name">
               <input type="number" name="weight"  placeholder="Current weight (kg)">

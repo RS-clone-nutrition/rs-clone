@@ -7,8 +7,11 @@ import headerUser from './headerUser';
 class Auth {
   path: string;
 
+  main: HTMLElement;
+
   constructor(path: string) {
     this.path = path;
+    this.main = <HTMLElement>$('.content');
   }
 
   eventListenres() {
@@ -73,18 +76,20 @@ class Auth {
   }
 
   getAllfields() {
-    const inputs = <NodeListOf<HTMLInputElement>>$All('input');
+    const inputs = <NodeListOf<HTMLInputElement>>$All('input', this.main);
     const user: IUser = {};
 
     if (this.path === 'login') {
       const inputGender = <HTMLInputElement>$('input[name="gender"]:checked');
+      const inputAim = <HTMLInputElement>$('input[name="aim"]:checked');
       user[inputGender.name] = inputGender.value;
+      user[inputAim.name] = inputAim.value;
     }
 
     inputs.forEach((item) => {
       const key = <string>item.getAttribute('name');
 
-      if (key === 'gender') {
+      if (key === 'gender' || key === 'aim') {
         return;
       }
 

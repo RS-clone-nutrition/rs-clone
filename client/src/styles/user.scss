@@ -18,6 +18,7 @@ html {
     margin: 0 auto;
     display: flex;
     align-items: center;
+    gap: 10rem;
     border: 2rem solid #33b34b;
     border-radius: 10rem;
     padding: 17rem 20rem 29rem;
@@ -29,7 +30,7 @@ html {
   text-align: center;
 
   &__img {
-    width: 400rem;
+    width: 300rem;
   }
 
   &__name {
@@ -45,14 +46,14 @@ html {
 
 .info-user__title-main {
   color: rgba(0, 0, 0, .54);
-  font-size: 28rem;
+  font-size: 24rem;
   text-transform: uppercase;
 }
 
 .info-user {
   background-color: #F2F2F2;
-  padding: 50rem 40rem;
-  font-size: 24rem;
+  padding: 20rem 20rem;
+  font-size: 20rem;
   display: flex;
   flex-direction: column;
   gap: 20rem;
@@ -64,7 +65,68 @@ html {
   &__block {
     color: #000;
   }
+
+  &__number {
+    color: rgba(0, 0, 0, .84);
+  }
 }
+
+.info-user__input {
+  width: 80rem;
+}
+
+
+.right-user {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+
+
+  &__calories {}
+}
+
+.calories-user {
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+
+  &__title {
+    color: rgba(0, 0, 0, .54);
+    font-size: 20rem;
+  }
+
+  &__block {}
+
+  &__number {
+    color: rgba(0, 0, 0, .84);
+    font-size: 20rem;
+  }
+}
+
+.maintaining {}
+
+.title-maintaining {}
+
+.number-maintaining {}
+
+.smoothly {}
+
+.title-smoothly {}
+
+.number-smoothly {}
+
+.quickly {}
+
+.title-quickly {}
+
+.number-quickly {}
+
+.extremely {}
+
+.title-extremely {}
+
+.number-extremely {}
+
 
 @media (max-width: 810px) {
   .left-user {
