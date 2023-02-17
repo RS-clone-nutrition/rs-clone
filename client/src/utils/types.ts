@@ -84,4 +84,40 @@ interface IInputCheckbox {
   forEach(arg0: (el: HTMLInputElement) => any): unknown;
 }
 
-export { IGroups, CategoryArr, INutritionAnalysisResponse, IFooddataBaseResponse, IRecipeData, IInputCheckbox };
+type AuthApiMessage = { message: string };
+
+// interface IUser {
+//   username: string;
+//   password: string;
+//   weight: string;
+//   height: string;
+//   age: string;
+//   gender: string;
+// }
+interface IUser {
+  [key: string]: string;
+}
+
+interface IResponseLogin {
+  message: string;
+  token?: string;
+  user?: IUser;
+}
+
+interface IResponseUser {
+  response: IResponseLogin;
+  status: number;
+}
+
+export {
+  IGroups,
+  CategoryArr,
+  INutritionAnalysisResponse,
+  IFooddataBaseResponse,
+  IRecipeData,
+  IInputCheckbox,
+  IUser,
+  AuthApiMessage,
+  IResponseLogin,
+  IResponseUser,
+};
