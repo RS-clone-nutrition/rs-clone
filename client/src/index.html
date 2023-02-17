@@ -39,7 +39,12 @@
         </div>
       </nav>
       <div class="search">
-        <input class="search__input" type="search" placeholder="Enter search">
+        <select name="search-select" id="search-select">
+          <option value="food">&#129361; Food</option>
+          <option value="recipe">&#129367; Recipe</option>
+          <option value="exercise">&#127947; Exercise</option>
+        </select>
+        <input class="search__input" type="search" placeholder="Enter search" list="search-header-fitness">
         <button class="search__button"><i class="fa-solid fa-magnifying-glass fa-circle"></i></button>
       </div>
     </div>

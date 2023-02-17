@@ -8,6 +8,7 @@ const User = new Schema({
   height: { type: String, require: true },
   age: { type: String, require: true },
   gender: { type: String, require: true },
+  aim: { type: String, require: true },
 })
 
 export default model('User', User);

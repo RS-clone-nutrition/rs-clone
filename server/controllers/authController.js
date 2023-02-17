@@ -22,7 +22,7 @@ class authController {
         return res.status(400).json({ message: 'Registration error:' + ' ' + errors.array()[0].msg + '\n Please fill in all fields' })
       }
 
-      const { username, password, weight, height, age, gender } = req.body
+      const { username, password, weight, height, age, gender, aim } = req.body
       const candidate = await User.findOne({ username })
 
       if (candidate) {
@@ -30,7 +30,7 @@ class authController {
       }
 
       const hashPassword = bcrypt.hashSync(password, 3);
-      const user = new User({ username: username, password: hashPassword, weight: weight, goal: goal, height: height, age: age, gender: gender })
+      const user = new User({ username: username, password: hashPassword, weight: weight, goal: goal, height: height, age: age, gender: gender, aim: aim })
 
       await user.save()
 

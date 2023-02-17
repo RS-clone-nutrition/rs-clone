@@ -39,7 +39,7 @@ body {
 
   &__img {
     border: 10rem solid rgba(235, 249, 252, 1);
-    max-width: 147rem;
+    max-width: 217rem;
     object-fit: cover;
     margin-bottom: 6rem;
   }
@@ -105,7 +105,7 @@ body {
     gap: 6rem;
   }
 
-  &__item {
+  &__item a{
     color: rgba(2, 140, 196, 1);
     line-height: 15rem;
   }
@@ -125,6 +125,15 @@ body {
 
   &__item {
     color: rgba(51, 51, 51, 1);
+    display: inline;
+    padding: 0 2px;
+  }
+  &__item::after {
+    color: rgba(51, 51, 51, 1);
+    content: ' •';
+  }
+  &__item:last-child::after {
+    content: none;
   }
 }
 

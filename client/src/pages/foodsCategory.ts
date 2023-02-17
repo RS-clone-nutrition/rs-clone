@@ -24,11 +24,13 @@ class FoodsCategory {
     <div class="foods-category">
     <div class="container">
       <div class="crumbs">
-        <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+        <a href="/" class="crumbs__link">
+          <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+        </a>
         <span class="crumbs__sep">></span>
-        <a href="#" class="crumbs__link">Foods</a>
+        <a href="/foods" class="crumbs__link">Foods</a>
         <span class="crumbs__sep">></span>
-        <a href="#" class="crumbs__link">Beans & Legumes</a>
+        <p class="crumbs__link">${category}</p>
       </div>
       ${contentHeaderTable.render(iconFood, category, '')}
       <div class="foods-category__content category-content">

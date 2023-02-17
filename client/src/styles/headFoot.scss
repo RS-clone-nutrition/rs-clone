@@ -20,6 +20,8 @@ header {
 
   &__link {
     color: #FFF;
+    text-transform: uppercase;
+    font-size: 15px;
 
     &:hover {
       color: #000;
@@ -45,7 +47,7 @@ header {
   &__input {
     border: 0;
     padding-left: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
 
     &::placeholder {
       color: #32B34C;
@@ -54,7 +56,7 @@ header {
 
   &__button {
     border: none;
-    border-radius: 50%;
+    border-radius: 5px;
   }
 }
 
@@ -157,6 +159,13 @@ footer {
 
 .nav_menu_close{
   display: none;
+}
+
+select {
+  background: #FFF;
+  border: none;
+  border-radius: 5px;
+  height: 23px;
 }
 
 @media (max-width: 951px) {

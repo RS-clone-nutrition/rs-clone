@@ -26,11 +26,13 @@ class SingleFood {
     <div class="product">
     <div class="container">
       <div class="crumbs">
-        <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+        <a href="/" class="crumbs__link">
+          <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+        </a>
         <span class="crumbs__sep">></span>
-        <a href="#" class="crumbs__link">Foods</a>
+        <a href="/foods" class="crumbs__link">Foods</a>
         <span class="crumbs__sep">></span>
-        <a href="#" class="crumbs__link">Avocado</a>
+        <p class="crumbs__link">${product}</p>
       </div>
       ${contentHeaderTable.render(``, product, 'Food database and calorie counter')}
       <div class="product__content">
@@ -75,6 +77,11 @@ class SingleFood {
 
     this.nutritionFacts.render(productDate, productTypes);
     this.detailLinksBlock.render(productDate, productTypes);
+
+    if (productTypes.hints.length === 0) {
+      const titleProduct = <HTMLElement>document.querySelector('.top-foods__title');
+      titleProduct.innerHTML = `NOT FOUND PRODUCT '${product}'`;
+    }
   }
 
   async requestsApi(servise: string) {

@@ -15,9 +15,11 @@ class Foods {
     <div class="foods">
         <div class="container">
           <div class="crumbs">
-            <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+            <a href="/" class="crumbs__link">
+              <img class="crumbs__home-img" src="./img/home-icon.svg" alt="home icon">
+            </a>
             <span class="crumbs__sep">></span>
-            <a href="#" class="crumbs__link">Foods</a>
+            <a href="/foods" class="crumbs__link">Foods</a>
           </div>
           ${contentHeaderTable.render(`./img/foods/fork.svg`, 'Foods', 'Browse common foods and products.')}
           <h2 class="foods__title">Browse Common Foods</h2>

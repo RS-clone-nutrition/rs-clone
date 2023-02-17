@@ -12,6 +12,8 @@ import { SingleFood } from './pages/singleFood';
 import User from './pages/user';
 import headerUser from './components/headerUser';
 import { $, activePage, getMainPath } from './utils/helpers';
+import { SingleRecipe } from './pages/singleRecipe';
+import { allExerciseArray } from './components/dataFitExercise';
 
 class Router {
   routes = [
@@ -30,6 +32,10 @@ class Router {
     {
       path: '/recipes',
       data: Recipes,
+    },
+    {
+      path: '/recipe',
+      data: SingleRecipe,
     },
     {
       path: '/myfatsecret',
@@ -117,6 +123,40 @@ class Router {
     mainOpen.addEventListener('click', () => {
       headerMenu.classList.remove('header-nav-active');
       mainOpen.classList.remove('main_open_menu');
+    });
+
+    const searchSelect = <HTMLSelectElement>document.getElementById('search-select');
+    const searchInput = <HTMLInputElement>$('.search__input');
+    const dataListExercise = document.getElementById('search-header-fitness');
+    let searchValueDefault = 'food';
+    searchSelect.onchange = function () {
+      if (searchSelect.value === 'food') {
+        searchValueDefault = 'food';
+        if (dataListExercise) dataListExercise.remove();
+      }
+      if (searchSelect.value === 'recipe') {
+        searchValueDefault = 'recipe';
+        if (dataListExercise) dataListExercise.remove();
+      }
+      if (searchSelect.value === 'exercise') {
+        searchValueDefault = 'exercise';
+        const createDataListExercise = document.createElement('datalist');
+        createDataListExercise.id = 'search-header-fitness';
+        createDataListExercise.innerHTML = `${allExerciseArray.map((e) => `<option value="${e.name}">`).join('')}`;
+        searchInput.after(createDataListExercise);
+      }
+    };
+
+    searchInput.addEventListener('change', async () => {
+      if (searchValueDefault === 'food') {
+        window.location.href = `/foods/product/${searchInput.value}`;
+      }
+      if (searchValueDefault === 'recipe') {
+        window.location.href = `/recipes/${searchInput.value}`;
+      }
+      if (searchValueDefault === 'exercise') {
+        window.location.href = `/fitness?exercise=${searchInput.value}`;
+      }
     });
   }
 }
