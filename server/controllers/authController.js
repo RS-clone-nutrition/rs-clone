@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 import { validationResult } from "express-validator";
-
+import bcrypt from "bcryptjs";
 
 
 class authController {
@@ -33,6 +33,41 @@ class authController {
     }
   }
 
+  async login(req, res) {
+    try {
+      const { username, password } = req.body
+      const user = await User.findOne({ username })
+
+      console.log(user);
+
+      if (!user) {
+        return res.status(400).json({ message: `user with ${username} not found` })
+      }
+
+      const validPassword = bcrypt.compareSync(password, user.password)
+
+      if (!validPassword) {
+        return res.status(400).json({ message: `incorrect password` })
+      }
+
+
+      return res.status(200).json({ message: 'user successfully authorized', user: user });
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: 'Login error' })
+    }
+  }
+
+
+  async getUser(req, res) {
+    try {
+      const users = await User.find();
+      res.json(users)
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: 'get error' })
+    }
+  }
 }
 
 export default new authController();
