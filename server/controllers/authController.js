@@ -1,6 +1,16 @@
 import User from "../models/User.js";
-import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { validationResult } from "express-validator";
+import secret from "../config.js";
+
+const generateAccessToken = (id) => {
+  const payload = {
+    id
+  }
+
+  return jwt.sign(payload, secret.key, { expiresIn: 24 })
+}
 
 
 class authController {
@@ -50,14 +60,14 @@ class authController {
         return res.status(400).json({ message: `incorrect password` })
       }
 
+      const token = generateAccessToken(user._id)
 
-      return res.status(200).json({ message: 'user successfully authorized', user: user });
+      return res.status(200).json({ message: 'user successfully authorized', token: token, user: user });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: 'Login error' })
     }
   }
-
 
   async getUser(req, res) {
     try {
@@ -69,5 +79,6 @@ class authController {
     }
   }
 }
+
 
 export default new authController();
