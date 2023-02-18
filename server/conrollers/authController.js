@@ -21,7 +21,7 @@ class authController {
         return res.status(400).json({ message: 'Registration error:' + ' ' + errors.array()[0].msg + '\n Please fill in all fields' })
       }
 
-      const { username, password, weight, height, age, gender, goal, aim } = req.body;
+      const { username, password, weight, height, age, gender, goal, aim, activity, date } = req.body;
 
       const candidate = await User.findOne({ username })
 
@@ -32,7 +32,7 @@ class authController {
       const hashPassword = bcrypt.hashSync(password, 3);
       const user = new User({
         username: username, password: hashPassword, weight: weight, goal: goal, height: height,
-        age: age, gender: gender, goal: goal, aim: aim
+        age: age, gender: gender, goal: goal, aim: aim, activity: activity, date: date
       })
 
       await user.save()
@@ -79,12 +79,21 @@ class authController {
         return res.status(400).json({ message: 'Save error:' + ' ' + errors.array()[0].msg + '\n Please fill in all fields' })
       }
 
-      const { weight, goal, aim, username } = req.body
-      const dataForUpdate = { weight: weight, goal: goal, aim: aim }
+      const { weight, goal, aim, username, activity } = req.body
+      const dataForUpdate = { weight: weight, goal: goal, aim: aim, activity: activity }
 
-      const user = await User.findOneAndUpdate({ name: username }, dataForUpdate, { returnDocument: 'after' });
+      const user = await User.findOne({ name: username });
 
-      return res.status(200).json({ message: 'user successfully updated', user: user });
+      if (user.weight !== weight) {
+        dataForUpdate.weight = user.weight.concat(weight);
+        dataForUpdate.date = user.date.concat(new Date().toString())
+      }
+
+      const userUpdated = await User.findOneAndUpdate({ name: username }, dataForUpdate, { returnDocument: 'after' });
+
+      console.log(userUpdated);
+
+      return res.status(200).json({ message: 'user successfully updated', user: userUpdated });
     } catch (e) {
       console.log(e);
     }
