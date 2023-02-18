@@ -80,9 +80,6 @@ html {
   display: flex;
   align-items: center;
   gap: 10rem;
-
-
-  &__calories {}
 }
 
 .calories-user {
@@ -92,7 +89,7 @@ html {
 
   &__title {
     color: rgba(0, 0, 0, .54);
-    font-size: 20rem;
+    font-size: 24rem;
   }
 
   &__block {}

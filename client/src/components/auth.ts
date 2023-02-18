@@ -84,18 +84,23 @@ class Auth {
       const inputAim = <HTMLInputElement>$('input[name="aim"]:checked');
       user[inputGender.name] = inputGender.value;
       user[inputAim.name] = inputAim.value;
+      const activityLevel = <HTMLInputElement>$('input[name="activity"]:checked');
+      user[activityLevel.name] = <string>activityLevel.value;
+
+      user.date = String(new Date());
     }
 
     inputs.forEach((item) => {
       const key = <string>item.getAttribute('name');
 
-      if (key === 'gender' || key === 'aim') {
+      if (key === 'gender' || key === 'aim' || key === 'activity') {
         return;
       }
 
       const value = <string>item.value;
       user[key] = value;
     });
+    console.log(user);
 
     return user;
   }

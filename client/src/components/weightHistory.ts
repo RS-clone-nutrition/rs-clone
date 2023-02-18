@@ -1,10 +1,15 @@
 import apiServer from '../api/apiServer';
-import { $, $All } from '../utils/helpers';
-import { IUser } from '../utils/types';
-import { IResponseUser } from '../utils/types';
+import { $, $All, getPercentFromNum } from '../utils/helpers';
+import { IResponseUser, IActivity, IUser } from '../utils/types';
 
 class WeightHistory {
   main: HTMLElement;
+
+  activity: IActivity = {
+    low: 1.375,
+    average: 1.55,
+    high: 1.7,
+  };
 
   render(userObj: IUser) {
     const toGoWeight = userObj.aim === 'lose' ? +userObj.weight - +userObj.goal : +userObj.goal - +userObj.weight;
@@ -70,6 +75,7 @@ class WeightHistory {
 
     this.eventListeners();
     this.changeCalories(userObj);
+    this.addAtributes(userObj);
   }
 
   eventListeners() {
@@ -98,13 +104,15 @@ class WeightHistory {
 
     const inputAim = <HTMLInputElement>$('input[name="aim"]:checked');
     user[inputAim.name] = inputAim.value;
+    const inputActivity = <HTMLInputElement>$('input[name="activity"]:checked');
+    user[inputActivity.name] = inputActivity.value;
     const name = <HTMLElement>$('.left-user__name');
     user.username = <string>name.textContent;
 
     inputs.forEach((item) => {
       const key = <string>item.getAttribute('name');
 
-      if (key === 'gender' || key === 'aim') {
+      if (key === 'gender' || key === 'aim' || key === 'activity') {
         return;
       }
 
@@ -121,15 +129,26 @@ class WeightHistory {
     const quicklyBlock = <HTMLElement>$('.number-quickly');
     const extremelyBlock = <HTMLElement>$('.number-extremely');
 
+    const activityLevel = <keyof IActivity>(<HTMLInputElement>$('input[name="activity"]:checked')).value;
+    const activityNumb = <number>this.activity[activityLevel];
+
     const maintainingNumber =
       userObj.gender === 'male'
-        ? Math.floor((66.5 + 13.75 * +userObj.weight + 5.003 * +userObj.height - 6.775 * +userObj.age) * 1.4)
-        : Math.floor((655.1 + 9.563 * +userObj.weight + 1.85 * +userObj.height - 4.676 * +userObj.age) * 1.4);
+        ? Math.floor((66.5 + 13.75 * +userObj.weight + 5.003 * +userObj.height - 6.775 * +userObj.age) * activityNumb)
+        : Math.floor((655.1 + 9.563 * +userObj.weight + 1.85 * +userObj.height - 4.676 * +userObj.age) * activityNumb);
 
     maintainingBlock.textContent = String(maintainingNumber);
-    smoothlyBlock.textContent = String(Math.floor((maintainingNumber / 100) * 80));
-    quicklyBlock.textContent = String(Math.floor((maintainingNumber / 100) * 70));
-    extremelyBlock.textContent = String(Math.floor((maintainingNumber / 100) * 60));
+    smoothlyBlock.textContent = String(getPercentFromNum(maintainingNumber, 15, userObj.aim));
+    quicklyBlock.textContent = String(getPercentFromNum(maintainingNumber, 25, userObj.aim));
+    extremelyBlock.textContent = String(getPercentFromNum(maintainingNumber, 35, userObj.aim));
+  }
+
+  addAtributes(userObj: IUser) {
+    const inputAim = <HTMLInputElement>$(`input[value="${userObj.aim}"]`);
+    const inputActivity = <HTMLInputElement>$(`input[value="${userObj.activity}"]`);
+
+    inputAim.setAttribute('checked', 'checked');
+    inputActivity.setAttribute('checked', 'checked');
   }
 }
 

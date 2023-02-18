@@ -110,6 +110,12 @@ interface IResponseUser {
   status: number;
 }
 
+interface IActivity {
+  low: 1.375;
+  average: 1.55;
+  high: 1.7;
+}
+
 interface IRecipe {
   recipe: {
     uri: string;
@@ -241,4 +247,5 @@ export {
   AuthApiMessage,
   IResponseLogin,
   IResponseUser,
+  IActivity,
 };

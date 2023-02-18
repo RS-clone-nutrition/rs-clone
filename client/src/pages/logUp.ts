@@ -32,6 +32,15 @@ class LogUp {
               <input class="radio__choice" type="radio" id="aimChoice2" name="aim" value="gain">
               <label for="aimChoice2">Gain Weight</label>
             </div>
+            <div class="info-user__block activity">
+            <h3 class="info-user__title activity__title">Choose your activity level:</h3>
+            <input class="radio__choice" type="radio" id="activityChoice1" name="activity" checked value="low">
+            <label for="activityChoice1">Low</label>
+            <input class="radio__choice" type="radio" id="activityChoice2" name="activity" value="average ">
+            <label for="activityChoice2">Average </label>
+            <input class="radio__choice" type="radio" id="activityChoice3" name="activity" value="high">
+            <label for="activityChoice3">High</label>
+            </div>
               <input type="text" name="username" placeholder="Name">
               <input type="number" name="weight"  placeholder="Current weight (kg)">
               <input type="number" name="goal"  placeholder="Goal weight (kg)">
