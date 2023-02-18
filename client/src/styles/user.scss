@@ -15,7 +15,7 @@ html {
 .main-user {
 
   &__content {
-    margin: 0 auto;
+    margin: 0 auto 40rem;
     display: flex;
     align-items: center;
     gap: 10rem;
@@ -100,36 +100,27 @@ html {
   }
 }
 
-.maintaining {}
+.canvas__container {
+  padding: 20rem;
+  background-color: #EBF9FC;
+}
 
-.title-maintaining {}
-
-.number-maintaining {}
-
-.smoothly {}
-
-.title-smoothly {}
-
-.number-smoothly {}
-
-.quickly {}
-
-.title-quickly {}
-
-.number-quickly {}
-
-.extremely {}
-
-.title-extremely {}
-
-.number-extremely {}
-
+canvas {
+  background-color: #fff;
+}
 
 @media (max-width: 810px) {
   .left-user {
     &__img {
       width: 300rem;
       margin-bottom: 20rem;
+    }
+  }
+
+  .main-user {
+
+    &__content {
+      flex-direction: column;
     }
   }
 
@@ -140,10 +131,7 @@ html {
 }
 
 @media (max-width: 670px) {
-  .main-user {
-
-    &__content {
-      flex-direction: column;
-    }
+  .right-user {
+    display: block;
   }
 }

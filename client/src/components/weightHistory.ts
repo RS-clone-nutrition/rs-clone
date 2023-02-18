@@ -1,6 +1,7 @@
 import apiServer from '../api/apiServer';
 import { $, $All, getPercentFromNum } from '../utils/helpers';
 import { IResponseUser, IActivity, IUser } from '../utils/types';
+import weightGraph from './weightGraph';
 
 class WeightHistory {
   main: HTMLElement;
@@ -12,7 +13,8 @@ class WeightHistory {
   };
 
   render(userObj: IUser) {
-    const toGoWeight = userObj.aim === 'lose' ? +userObj.weight - +userObj.goal : +userObj.goal - +userObj.weight;
+    const userCurrentWeight = userObj.weight[userObj.date.length - 1];
+    const toGoWeight = userObj.aim === 'lose' ? +userCurrentWeight - +userObj.goal : +userObj.goal - +userCurrentWeight;
     this.main = <HTMLElement>$('.right-user');
 
     this.main.innerHTML = `
@@ -59,7 +61,8 @@ class WeightHistory {
         </div>
         <div class="info-user__block current">
           <h3 class="info-user__title current__title">Current Weight:</h3>
-          <input class="info-user__input input-current" type="text" value="${userObj.weight}" name="weight"><span> kg</span>
+          <input class="info-user__input input-current" type="text" 
+          value="${userCurrentWeight}" name="weight"><span> kg</span>
         </div>
         <div class="info-user__block  goal">
           <h3 class="info-user__title goal__title">Goal Weight:</h3>
@@ -76,6 +79,7 @@ class WeightHistory {
     this.eventListeners();
     this.changeCalories(userObj);
     this.addAtributes(userObj);
+    weightGraph.render(userObj);
   }
 
   eventListeners() {
@@ -96,6 +100,7 @@ class WeightHistory {
 
     this.render(userObj);
     this.changeCalories(userObj);
+    weightGraph.render(userObj);
   }
 
   getAllfields() {
@@ -131,11 +136,12 @@ class WeightHistory {
 
     const activityLevel = <keyof IActivity>(<HTMLInputElement>$('input[name="activity"]:checked')).value;
     const activityNumb = <number>this.activity[activityLevel];
+    const userWeight = userObj.weight[userObj.date.length - 1];
 
     const maintainingNumber =
       userObj.gender === 'male'
-        ? Math.floor((66.5 + 13.75 * +userObj.weight + 5.003 * +userObj.height - 6.775 * +userObj.age) * activityNumb)
-        : Math.floor((655.1 + 9.563 * +userObj.weight + 1.85 * +userObj.height - 4.676 * +userObj.age) * activityNumb);
+        ? Math.floor((66.5 + 13.75 * +userWeight + 5.003 * +userObj.height - 6.775 * +userObj.age) * activityNumb)
+        : Math.floor((655.1 + 9.563 * +userWeight + 1.85 * +userObj.height - 4.676 * +userObj.age) * activityNumb);
 
     maintainingBlock.textContent = String(maintainingNumber);
     smoothlyBlock.textContent = String(getPercentFromNum(maintainingNumber, 15, userObj.aim));
