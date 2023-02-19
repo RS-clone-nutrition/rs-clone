@@ -27,6 +27,9 @@ class User {
         <h1 class="left-user__name">${userObj.username}</h1>
         <p class="left-user__date">${userObj.age} years old</p>
         <p class="left-user__date">Joined: ${format(new Date(userObj.date[0]), 'd MMMM y')}</p>
+        <div class="left-user__bio user-bio">
+
+        </div>
       </div>
       <div class="main-user__right right-user">
     </div>

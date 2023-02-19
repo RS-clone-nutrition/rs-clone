@@ -2,6 +2,7 @@ import apiServer from '../api/apiServer';
 import { $, $All, getPercentFromNum } from '../utils/helpers';
 import { IResponseUser, IActivity, IUser } from '../utils/types';
 import weightGraph from './weightGraph';
+import bioTextArea from './bioTextarea';
 
 class WeightHistory {
   main: HTMLElement;
@@ -80,12 +81,14 @@ class WeightHistory {
     this.changeCalories(userObj);
     this.addAtributes(userObj);
     weightGraph.render(userObj);
+    bioTextArea.render(userObj);
   }
 
   eventListeners() {
     const saveBtn = <HTMLButtonElement>$('.button-save');
 
     saveBtn.addEventListener('click', () => {
+      console.log('br');
       this.sendToServer();
     });
   }
@@ -96,7 +99,7 @@ class WeightHistory {
     const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user);
     const userObj = <IUser>serverRsponse.response.user;
 
-    localStorage.setItem('user', JSON.stringify(serverRsponse.response.user));
+    localStorage.setItem('user', JSON.stringify(userObj));
 
     this.render(userObj);
     this.changeCalories(userObj);

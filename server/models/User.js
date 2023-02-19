@@ -11,6 +11,7 @@ const User = new Schema({
   date: { type: Array, require: true },
   activity: { type: String, require: true },
   aim: { type: String, require: true },
+  bio: { type: String },
 })
 
 export default model('User', User);

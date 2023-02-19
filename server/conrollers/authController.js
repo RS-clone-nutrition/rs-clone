@@ -79,8 +79,8 @@ class authController {
         return res.status(400).json({ message: 'Save error:' + ' ' + errors.array()[0].msg + '\n Please fill in all fields' })
       }
 
-      const { weight, goal, aim, username, activity } = req.body
-      const dataForUpdate = { weight: weight, goal: goal, aim: aim, activity: activity }
+      const { weight, goal, aim, username, activity, bio } = req.body
+      const dataForUpdate = { weight: weight, goal: goal, aim: aim, activity: activity, bio: bio }
 
       const user = await User.findOne({ name: username });
 
@@ -91,7 +91,7 @@ class authController {
 
       const userUpdated = await User.findOneAndUpdate({ name: username }, dataForUpdate, { returnDocument: 'after' });
 
-      console.log(userUpdated);
+      console.log('userUpdated');
 
       return res.status(200).json({ message: 'user successfully updated', user: userUpdated });
     } catch (e) {
