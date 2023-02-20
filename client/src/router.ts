@@ -127,15 +127,17 @@ class Router {
 
     const searchSelect = <HTMLSelectElement>document.getElementById('search-select');
     const searchInput = <HTMLInputElement>$('.search__input');
-    const dataListExercise = document.getElementById('search-header-fitness');
+    //const dataListExercise = document.getElementById('search-header-fitness');
     let searchValueDefault = 'food';
     searchSelect.onchange = function () {
       if (searchSelect.value === 'food') {
         searchValueDefault = 'food';
+        const dataListExercise = document.getElementById('search-header-fitness');
         if (dataListExercise) dataListExercise.remove();
       }
       if (searchSelect.value === 'recipe') {
         searchValueDefault = 'recipe';
+        const dataListExercise = document.getElementById('search-header-fitness');
         if (dataListExercise) dataListExercise.remove();
       }
       if (searchSelect.value === 'exercise') {
