@@ -3,7 +3,7 @@ import { IUser, IResponseLogin } from '../utils/types';
 class ApiServer {
   async sendUserServer(user: IUser, path: string) {
     try {
-      const response = await fetch(`https://fatsecret.up.railway.app/${path}`, {
+      const response = await fetch(`https://rs-clone-production.up.railway.app/${path}`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -20,7 +20,7 @@ class ApiServer {
 
   async updateUserServer(user: IUser) {
     try {
-      const response = await fetch(`https://fatsecret.up.railway.app/user`, {
+      const response = await fetch(`https://rs-clone-production.up.railway.app/user`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
