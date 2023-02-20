@@ -1,5 +1,5 @@
 import '../styles/singleRecipe.scss';
-import { getURL } from '../utils/helpers';
+import { $, getURL } from '../utils/helpers';
 import api from '../api/api';
 import { IRecipe } from '../utils/types';
 
@@ -35,11 +35,11 @@ class SingleRecipe {
                   </div>
                   <div class="left-info__actions">
                     <div class="action-left cookbook">
-                      <img src="./img/singleRecipe/icons/plus.svg" alt="add coolbook" class="action__img cookbook">
+                      <img src="./img/singleRecipe/icons/plus.svg" alt="add coolbook" class="action__img-cook cookbook">
                       <span class="action__text cookbook">Add to my cookbook</span>
                     </div>
                     <div class="action-left diary">
-                      <img src="./img/singleRecipe/icons/add-to-diary.svg" alt="add diary" class="action__img diary">
+                      <img src="./img/singleRecipe/icons/add-to-diary.svg" alt="add diary" class="action__img-diary diary">
                       <span class="action__text diary">Add to food diary</span>
                     </div>
                   </div>
@@ -291,6 +291,39 @@ class SingleRecipe {
       </div>
    </div>
     `;
+    this.eventLintener(idRecipe);
+  }
+
+  eventLintener(idRecipe: string) {
+    const btnCookbook = <HTMLElement>$('.cookbook');
+    const imgAddCookbook = <HTMLImageElement>$('.action__img-cook');
+    let arrayIdRecipes: string[];
+    const strLocalStr = localStorage.getItem('arrRecipes');
+    if (strLocalStr) {
+      arrayIdRecipes = JSON.parse(strLocalStr);
+      for (let i = 0; i < arrayIdRecipes.length; i++) {
+        if (arrayIdRecipes[i] === idRecipe) {
+          imgAddCookbook.src = 'https://i.ibb.co/8jxSGCT/icons8-16.png';
+        }
+      }
+    } else {
+      arrayIdRecipes = [];
+    }
+    btnCookbook.addEventListener('click', () => {
+      if (imgAddCookbook.src !== 'https://i.ibb.co/8jxSGCT/icons8-16.png') {
+        imgAddCookbook.src = 'https://i.ibb.co/8jxSGCT/icons8-16.png';
+        arrayIdRecipes.push(idRecipe);
+        localStorage.setItem('arrRecipes', JSON.stringify(arrayIdRecipes));
+      } else {
+        imgAddCookbook.src = './img/singleRecipe/icons/plus.svg';
+        for (let i = 0; i < arrayIdRecipes.length; i++) {
+          if (arrayIdRecipes[i] === idRecipe) {
+            arrayIdRecipes.splice(i, 1);
+          }
+        }
+        localStorage.setItem('arrRecipes', JSON.stringify(arrayIdRecipes));
+      }
+    });
   }
 }
 
