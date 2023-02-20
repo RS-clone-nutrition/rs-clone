@@ -76,6 +76,8 @@ interface IRecipeData {
       recipe: {
         calories: number;
         label: string;
+        uri: string;
+        mealType: string;
       };
     }) => any
   ): unknown;
@@ -233,6 +235,9 @@ interface IRecipe {
       title: string;
     };
   };
+  id: number;
+  name: string;
+  calsInHr: 509;
 }
 
 export {

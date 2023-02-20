@@ -80,7 +80,7 @@ class authController {
       }
 
       const { weight, goal, aim, username, activity, bio } = req.body
-      const dataForUpdate = { weight: weight, goal: goal, aim: aim, activity: activity, bio: bio }
+      const dataForUpdate = { goal: goal, aim: aim, activity: activity, bio: bio }
 
       const user = await User.findOne({ name: username });
 

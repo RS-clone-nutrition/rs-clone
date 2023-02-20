@@ -14,7 +14,8 @@ class WeightHistory {
   };
 
   render(userObj: IUser) {
-    const userCurrentWeight = userObj.weight[userObj.date.length - 1];
+    console.log(userObj.weight.length);
+    const userCurrentWeight = userObj.weight[userObj.weight.length - 1];
     const toGoWeight = userObj.aim === 'lose' ? +userCurrentWeight - +userObj.goal : +userObj.goal - +userCurrentWeight;
     this.main = <HTMLElement>$('.right-user');
 

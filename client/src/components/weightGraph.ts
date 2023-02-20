@@ -24,6 +24,8 @@ class WeightGraph {
 
     const weightsArr = Array.from(userObj.weight);
     const weights = weightsArr.length > 1 ? weightsArr : (weightsArr[0] + ';' + weightsArr[0]).split(';');
+    console.log(weights);
+    console.log(dates);
 
     new Chart(ctx, {
       type: 'line',

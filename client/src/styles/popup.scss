@@ -47,18 +47,25 @@
       font-size: 20px;
       font-weight: 700;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 5fr 1fr 1fr;
       text-align: center;
     }
-    &__add-block__add-item{
-      border: #32B34C 2px solid;
-      font-size: 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 50px;
-      align-items: center;
-      text-align: center;
-      margin-bottom: 2px;
+    &__add-block{
+      &__add-item{
+        border: #32B34C 2px solid;
+        font-size: 18px;
+        display: grid;
+        grid-template-columns: 5fr 1fr 1fr;
+        grid-template-rows: 50px;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 2px;
+      }
+      &__not-found{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
 }
