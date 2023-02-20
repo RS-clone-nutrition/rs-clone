@@ -84,7 +84,7 @@ class authController {
 
       const user = await User.findOne({ name: username });
 
-      if (user.weight !== weight) {
+      if (user.weight[user.weight.length - 1] !== weight) {
         dataForUpdate.weight = user.weight.concat(weight);
         dataForUpdate.date = user.date.concat(new Date().toString())
       }
