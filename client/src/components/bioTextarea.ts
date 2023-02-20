@@ -9,10 +9,10 @@ class BioTextArea {
 
   render(userObj: IUser) {
     this.main = <HTMLElement>$('.user-bio');
-    this.bio = userObj.bio;
+    this.bio = userObj.bio === 'undefined' ? 'Tell about yourself' : userObj.bio;
 
     this.main.innerHTML = `
-    <p class="user__bio">Bio: ${this.bio || 'Tell about yourself'}</p>
+    <p class="user__bio">Bio: ${this.bio}</p>
     <button class="update-btn">Update your BIO</button>
     `;
 
