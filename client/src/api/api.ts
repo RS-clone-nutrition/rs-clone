@@ -1,5 +1,3 @@
-import { IUser, IResponseLogin } from '../utils/types';
-
 class Api {
   nutrition = {
     id: 'fe1356d4',
@@ -39,23 +37,6 @@ class Api {
       );
       const result = await response.json();
       return result;
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async sendUserServer(user: IUser, path: string) {
-    try {
-      const response = await fetch(`http://localhost:5000/${path}`, {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      });
-      const result = <IResponseLogin>await response.json();
-      return { response: result, status: response.status };
     } catch (e) {
       console.log(e);
     }

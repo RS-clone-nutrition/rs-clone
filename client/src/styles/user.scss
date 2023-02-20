@@ -92,8 +92,6 @@ html {
     font-size: 24rem;
   }
 
-  &__block {}
-
   &__number {
     color: rgba(0, 0, 0, .84);
     font-size: 20rem;
@@ -112,14 +110,10 @@ canvas {
 .user-bio {
   margin-top: 10rem;
 
-  .update-btn {}
-
   .user__bio {
     font-size: 20rem;
     margin-bottom: 20rem;
   }
-
-  &__field {}
 }
 
 @media (max-width: 810px) {
