@@ -74,6 +74,8 @@ label,
     border-radius: 10px;
     border: 1px solid #767676;
     margin-bottom: 5px;
+    padding: 5px;
+    font-family: sans-serif;
 }
 .fit-slider-wrapper{
     border-radius: 10px;
@@ -154,6 +156,7 @@ label,
 .active-item{
     background: #33B34B;
     color: #FFFFFF;
+    cursor: pointer;
 }
 .item-cals{
     text-align: right;
@@ -165,5 +168,11 @@ label,
 @media screen and (max-width: 513px){
     .input-fit-search{
         width: 300px;
+    }
+}
+
+@media (max-width: 360px) {
+    .input-fit-search {
+        width: 235px;
     }
 }

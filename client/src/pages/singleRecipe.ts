@@ -52,7 +52,7 @@ class SingleRecipe {
                       <p class="left-box__info serving__info">${oneRecipe.recipe.yield} servings</p>
                     </div>
                   </div>
-                  <div class="left-info__box type">
+                  <div class="left-info__box">
                     <div class="left-box__icon type__icon">
                       <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
                         alt="person">
@@ -62,7 +62,7 @@ class SingleRecipe {
                       ${oneRecipe.recipe.mealType.map((e) => `<p class="left-box__info type__info">${e}</p>`).join('')}
                     </div>
                   </div>
-                  <div class="left-info__box type">
+                  <div class="left-info__box">
                     <div class="left-box__icon type__icon">
                       <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
                         alt="person">
@@ -72,7 +72,7 @@ class SingleRecipe {
                       ${oneRecipe.recipe.dishType.map((e) => `<p class="left-box__info type__info">${e}</p>`).join('')}
                     </div>
                   </div>
-                  <div class="left-info__box type">
+                  <div class="left-info__box">
                     <div class="left-box__icon type__icon">
                       <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
                         alt="person">
@@ -84,7 +84,7 @@ class SingleRecipe {
                         .join('')}
                     </div>
                   </div>
-                  <div class="left-info__box type">
+                  <div class="left-info__box">
                     <div class="left-box__icon type__icon">
                       <img class="left-box__img type__img" src="./img/singleRecipe/icons/fork-spoon.avif"
                         alt="person">

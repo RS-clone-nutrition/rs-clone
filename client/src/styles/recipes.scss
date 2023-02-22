@@ -1,6 +1,3 @@
-html {
-  font-size: 1px;
-}
 
 body {
   font-size: 14rem;
@@ -195,6 +192,12 @@ body {
   text-align: right;
   padding: 3px;
   min-width: 220px;
+  position: sticky;
+  top: 0;
+}
+.diet-list:last-child{
+  position: sticky;
+  top: 30px;
 }
 
 
@@ -209,15 +212,31 @@ body {
     max-width: 270rem;
     margin: 0 auto;
   }
+
+  .category-title{
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 600px){
+
+  .recipes-main-wrapper{
+    flex-wrap: wrap;
+  }
+
+  .category-title{
+    min-width: 220px;
+  }
+
+  .recipes-category{
+    margin: 0 auto;
+  }
+
 }
 
 @media (max-width:470px) {
   .main-recipes {
     padding: 17rem 10rem 29rem;
-  }
-
-  html {
-    font-size: 0.8px;
   }
 
   .description-popular {

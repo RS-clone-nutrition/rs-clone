@@ -28,6 +28,7 @@ class About {
       </div>
     </div>
     <div class="developers">
+      <div class="container">
           <h1>DEVELOPERS</h1>
           <div class="developers__block">
             <div class="developers__card">
@@ -48,6 +49,7 @@ class About {
               <h3>Frontend developer</h3>
               <p>description of the work done in the project</p>
             </div>
+          </div>
           </div>
         </div>
         

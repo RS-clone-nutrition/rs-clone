@@ -41,6 +41,10 @@ header {
   }
 }
 
+.header-logo{
+  width: 60px;
+}
+
 .search {
   text-align: right;
 
@@ -58,6 +62,16 @@ header {
     border: none;
     border-radius: 5px;
   }
+
+  &__button:hover{
+    background: #FFF;
+  }
+}
+
+.search__select,
+.search__input,
+.search__button {
+  height: 25px;
 }
 
 .fa-magnifying-glass {
@@ -121,7 +135,7 @@ footer {
   height: 20px;
   position: relative;
   display: none;
-  margin-right: 5px;
+  cursor: pointer;
 }
 
 .burger_line {
@@ -169,6 +183,9 @@ select {
 }
 
 @media (max-width: 951px) {
+  .wrapper{
+    margin: 0 5px;
+  }
   .nav__menu{
     width: 100%;
     background: #32B34C;
@@ -194,12 +211,21 @@ select {
   .header_burger {
     display: block;
     z-index: 10;
+    margin-top: 10px;
   }
   .nav_menu_close{
-    width: 25px;
+    width: 35px;
     display: block;
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
   }
 }
+
+@media (max-width: 406px) {
+  .search__input{
+    max-width: 150px;
+  }
+}
+
