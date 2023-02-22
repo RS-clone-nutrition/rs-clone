@@ -2,6 +2,7 @@ import WeightHistory from '../components/weightHistory';
 import { IUser } from '../utils/types';
 import format from 'date-fns/format';
 import weightGraph from '../components/weightGraph';
+import userAvatar from '../components/userAvatar';
 
 class User {
   main;
@@ -21,8 +22,9 @@ class User {
     <div class="user__main main-user">
     <div class="main-user__content">
       <div class="main-user__left left-user">
-        <div class="left-user__icon">
-          <img src="./img/user/user-default.jpg" alt="user icon" class="left-user__img">
+        <div class="left-user__container">
+          <div class="left-user__icon">
+          </div>
         </div>
         <h1 class="left-user__name">${userObj.username}</h1>
         <p class="left-user__date">${userObj.age} years old</p>
@@ -39,6 +41,7 @@ class User {
   </div>
     `;
 
+    userAvatar.render();
     weightGraph.render(userObj);
     this.weightHistory.render(userObj);
   }

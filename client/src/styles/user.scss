@@ -29,6 +29,29 @@ html {
 .left-user {
   text-align: center;
 
+  &__icon {
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 50%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 30%;
+        left: 34%;
+        width: 40%;
+        height: 40%;
+        z-index: 3;
+        background: url('/src/assets/img/user/camera2.png') no-repeat;
+        ;
+      }
+    }
+  }
+
+
   &__img {
     width: 300rem;
   }
@@ -115,6 +138,112 @@ canvas {
     margin-bottom: 20rem;
   }
 }
+
+
+
+// .popup__form-avatar {
+//   margin-top: 10rem;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, 0);
+
+//   width: 200px;
+//   height: 200px;
+//   background-color: #ccc;
+//   margin: 0px auto;
+//   padding: 10px;
+//   font-size: 18px;
+//   color: #fff;
+// }
+
+// .avatar-form__input-container {
+//   margin: 40px auto 0px auto;
+//   width: 100px;
+//   height: 40px;
+//   padding: 10px;
+//   background-color: #c5c5c5;
+//   border-radius: 5px;
+//   box-shadow: 0px 0px 10px #000;
+//   display: none;
+// }
+
+.popup-avatar {
+
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &__body {
+    background-color: #edf1e9;
+    width: 600rem;
+    padding: 15rem 20rem;
+    border-radius: 20rem;
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &__content {}
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10rem;
+    border-bottom: 1px solid #000;
+    margin-bottom: 20rem;
+  }
+
+  &__close {}
+
+  &__title {}
+
+  &__form-container {
+    display: flex;
+    padding: 0px 25rem;
+    margin-bottom: 20rem;
+    padding-bottom: 30rem;
+    border-bottom: 1px solid #000;
+    text-align: center;
+  }
+
+  .form__button {
+    text-align: center;
+  }
+
+  .avatar-form__input {
+    margin-left: 10rem;
+  }
+
+  .avatar-form__label {}
+
+  .avatar-button {
+    background-color: #32B34C;
+    width: 100rem;
+    border-radius: 15rem;
+    color: #EBF9FC;
+  }
+
+  &__footer {}
+}
+
+.popup {
+
+  &__form-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20rem;
+  }
+}
+
+
+
 
 @media (max-width: 810px) {
   .left-user {
