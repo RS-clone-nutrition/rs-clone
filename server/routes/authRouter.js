@@ -1,5 +1,5 @@
 import Router from "express";
-import authController from "../conrollers/authController.js";
+import authController from "../controllers/authController.js";
 import { check } from "express-validator";
 import authMiddleware from "../middleware/authMiddleware.js";
 
