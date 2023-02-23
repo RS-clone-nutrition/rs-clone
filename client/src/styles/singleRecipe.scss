@@ -1,6 +1,3 @@
-html {
-  font-size: 1px;
-}
 
 body {
   font-size: 14rem;
@@ -36,6 +33,7 @@ body {
 }
 
 .left-info {
+  max-width: 230px;
 
   &__img {
     border: 10rem solid rgba(235, 249, 252, 1);
@@ -67,6 +65,7 @@ body {
   color: rgba(2, 140, 196, 1);
   border-bottom: 2px solid rgba(230, 238, 246, 1);
   margin-bottom: 10rem;
+  cursor: pointer;
 }
 
 .left-box {
@@ -322,24 +321,18 @@ body {
   flex: 0 1 35%;
 }
 
-@media (max-width:650px) {
-  html {
-    font-size: 1.5px;
-  }
-
+@media (max-width:724px) {
   .recipe__main {
     display: block;
   }
 }
 
-@media (max-width:500px) {
-  html {
-    font-size: 1px;
+@media (max-width:470px) {
+  .recipe__info{
+    flex-wrap: wrap;
+  }
+  .left-info {
+    margin: 0 auto;
   }
 }
 
-@media (max-width:350px) {
-  html {
-    font-size: 0.9px;
-  }
-}

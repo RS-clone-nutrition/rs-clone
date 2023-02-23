@@ -56,16 +56,16 @@ class Fitness {
         <p class="not-found text">Not Found Exercise</p>
         <div>
           <input type="radio" id="searchLight" name="fitness" value="light" class="input-radio">
-          <label for="whereSearch1">Light</label>
+          <label for="searchLight">Light</label>
       
           <input type="radio" id="searchModerate" name="fitness" value="moderate" class="input-radio">
-          <label for="whereSearch2">Moderate</label>
+          <label for="searchModerate">Moderate</label>
       
           <input type="radio" id="searchStrenuous" name="fitness" value="strenuous" class="input-radio">
-          <label for="whereSearch3">Strenuous</label>
+          <label for="searchStrenuous">Strenuous</label>
 
           <input type="radio" id="searchAll" name="fitness" value="all" class="input-radio" checked>
-          <label for="whereSearch4">All</label>
+          <label for="searchAll">All</label>
         </div>
       </div>
     </div>
