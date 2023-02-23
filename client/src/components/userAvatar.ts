@@ -1,5 +1,7 @@
 import { $ } from '../utils/helpers';
 import userPopup from './userPopup';
+import apiServer from '../api/apiServer';
+
 class UserAvatar {
   render(link?: string) {
     const iconContainer = <HTMLElement>$('.left-user__icon');
@@ -15,6 +17,16 @@ class UserAvatar {
     iconContainer.addEventListener('click', () => {
       userPopup.render();
     });
+  }
+
+  updateUserAvatar(avatarLink: string) {
+    const token = <string>JSON.parse(<string>localStorage.getItem('token'));
+
+    if (!token) {
+      alert('Error: please re-login. Sorry for the inconvenience');
+    }
+
+    apiServer.updateUserAvatar(avatarLink, token);
   }
 }
 

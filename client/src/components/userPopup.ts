@@ -73,8 +73,10 @@ class UserPopup {
   async sendAvatar(formAvatar: HTMLFormElement) {
     const result = await apiServer.sendAvatar(new FormData(formAvatar));
 
+    userAvatar.updateUserAvatar(result.secure_url);
     localStorage.setItem('avatar', result.secure_url);
-    //userAvatar.render(result.secure_url);
+
+    userAvatar.render(result.secure_url);
     this.popupBlock.remove();
   }
 }
