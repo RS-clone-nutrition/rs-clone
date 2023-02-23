@@ -4,7 +4,7 @@
   margin-bottom: 25px;
 
   &__block {
-    padding: 60px 0;
+    padding: 60px 10px;
     row-gap: 35px;
     display: flex;
     flex-direction: column;
@@ -22,6 +22,7 @@
 
   &__inputs {
     max-width: 385px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
@@ -61,19 +62,19 @@
   }
 }
 
-@media (max-width:390px) {
-  .form {
-    &__submit {
-      button {
-        width: 100%;
-        margin-top: 15px;
-      }
-    }
+// @media (max-width:390px) {
+//   .form {
+//     &__submit {
+//       button {
+//         width: 100%;
+//         margin-top: 15px;
+//       }
+//     }
 
-    &__inputs {
-      input {
-        width: 100%;
-      }
-    }
-  }
-}
+//     &__inputs {
+//       input {
+//         width: 100%;
+//       }
+//     }
+//   }
+// }
