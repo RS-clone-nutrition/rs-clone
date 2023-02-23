@@ -1,7 +1,7 @@
 import { Chart, registerables } from 'chart.js';
-import { IUser } from '../utils/types';
+import { IUser } from '../../utils/types';
 import format from 'date-fns/format';
-import { $ } from '../utils/helpers';
+import { $ } from '../../utils/helpers';
 
 Chart.register(...registerables);
 

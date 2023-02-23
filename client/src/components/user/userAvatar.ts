@@ -1,6 +1,6 @@
-import { $ } from '../utils/helpers';
-import userPopup from './userPopup';
-import apiServer from '../api/apiServer';
+import { $ } from '../../utils/helpers';
+import userPopup from './userPopupAvatar';
+import apiServer from '../../api/apiServer';
 
 class UserAvatar {
   render(link?: string) {

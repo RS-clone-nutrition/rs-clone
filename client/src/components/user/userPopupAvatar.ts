@@ -1,5 +1,5 @@
-import { $ } from '../utils/helpers';
-import apiServer from '../api/apiServer';
+import { $ } from '../../utils/helpers';
+import apiServer from '../../api/apiServer';
 import userAvatar from './userAvatar';
 
 class UserPopup {
@@ -74,7 +74,11 @@ class UserPopup {
     const result = await apiServer.sendAvatar(new FormData(formAvatar));
 
     userAvatar.updateUserAvatar(result.secure_url);
-    localStorage.setItem('avatar', result.secure_url);
+
+    const userObj = JSON.parse(<string>localStorage.getItem('user'));
+    userObj.avatar = result.secure_url;
+
+    localStorage.setItem('user', userObj);
 
     userAvatar.render(result.secure_url);
     this.popupBlock.remove();

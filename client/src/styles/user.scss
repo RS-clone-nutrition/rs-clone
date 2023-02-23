@@ -13,6 +13,15 @@ html {
 }
 
 .main-user {
+  button {
+    background-color: rgba(50, 179, 76, 1);
+    color: #edf1e9;
+    border-radius: 20rem;
+
+    &:hover {
+      background-color: rgba(51, 111, 63, 1)
+    }
+  }
 
   &__content {
     margin: 0 auto 40rem;
@@ -35,9 +44,8 @@ html {
 
     &:hover {
       cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.9);
       border-radius: 50%;
-      filter: grayscale(100%);
+      filter: brightness(70%);
 
       &::after {
         content: '';
@@ -143,34 +151,10 @@ canvas {
   }
 }
 
-
-
-// .popup__form-avatar {
-//   margin-top: 10rem;
-//   position: absolute;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, 0);
-
-//   width: 200px;
-//   height: 200px;
-//   background-color: #ccc;
-//   margin: 0px auto;
-//   padding: 10px;
-//   font-size: 18px;
-//   color: #fff;
-// }
-
-// .avatar-form__input-container {
-//   margin: 40px auto 0px auto;
-//   width: 100px;
-//   height: 40px;
-//   padding: 10px;
-//   background-color: #c5c5c5;
-//   border-radius: 5px;
-//   box-shadow: 0px 0px 10px #000;
-//   display: none;
-// }
+.textarea__btn,
+.update-btn {
+  width: 150rem;
+}
 
 .popup-avatar {
 
@@ -193,8 +177,6 @@ canvas {
     transform: translate(-50%, 0);
   }
 
-  &__content {}
-
   &__header {
     display: flex;
     justify-content: space-between;
@@ -202,10 +184,6 @@ canvas {
     border-bottom: 1px solid #000;
     margin-bottom: 20rem;
   }
-
-  &__close {}
-
-  &__title {}
 
   &__form-container {
     display: flex;
@@ -224,16 +202,12 @@ canvas {
     margin-left: 10rem;
   }
 
-  .avatar-form__label {}
-
   .avatar-button {
     background-color: #32B34C;
     width: 100rem;
     border-radius: 15rem;
     color: #EBF9FC;
   }
-
-  &__footer {}
 }
 
 .popup {
@@ -245,9 +219,6 @@ canvas {
     gap: 20rem;
   }
 }
-
-
-
 
 @media (max-width: 810px) {
   .left-user {

@@ -1,8 +1,8 @@
-import WeightHistory from '../components/weightHistory';
+import WeightHistory from '../components/user/weightHistory';
 import { IUser } from '../utils/types';
 import format from 'date-fns/format';
-import weightGraph from '../components/weightGraph';
-import userAvatar from '../components/userAvatar';
+import weightGraph from '../components/user/weightGraph';
+import userAvatar from '../components/user/userAvatar';
 
 class User {
   main;
