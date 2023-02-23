@@ -9,7 +9,7 @@ const generateAccessToken = (id) => {
     id
   }
 
-  return jwt.sign(payload, secret.key, { expiresIn: 24 })
+  return jwt.sign(payload, secret.key)
 }
 
 class authController {
@@ -91,23 +91,43 @@ class authController {
 
       const userUpdated = await User.findOneAndUpdate({ name: username }, dataForUpdate, { returnDocument: 'after' });
 
-      console.log('userUpdated');
-
       return res.status(200).json({ message: 'user successfully updated', user: userUpdated });
     } catch (e) {
       console.log(e);
     }
   }
 
-  async getUser(req, res) {
+  async updateAvatar(req, res) {
     try {
-      const users = await User.find();
-      res.json(users)
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ message: 'Update error:' + ' ' + errors.array()[0].msg })
+      }
+
+      const avatar = req.body.avatar;
+      const id = req.user.id;
+
+      const userUpdated = await User.findOneAndUpdate({ _id: id }, { avatar: avatar }, { returnDocument: 'after' });
+
+      console.log(userUpdated);
+
+      return res.status(200).json({ message: 'user avatar successfully updated' });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: 'get error' })
+      res.send(e);
     }
   }
+
+  // async getUser(req, res) {
+  //   try {
+  //     const users = await User.find(req.user);
+  //     res.json(users)
+  //   } catch (e) {
+  //     console.log(e);
+  //     res.status(400).json({ message: 'get error' })
+  //   }
+  // }
 }
 
 export default new authController();

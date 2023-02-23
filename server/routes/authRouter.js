@@ -17,13 +17,22 @@ router.post('/login', [
   check('date', "date can't be empty").notEmpty(),
   check('password', "password must be longer than 4 and shorter than 10 characters").isLength({ min: 4, max: 10 }),
 ], authController.registration)
+
+router.post('/signup', authController.login)
+
 router.put('/user', [
   check('weight', "weight can't be empty").notEmpty(),
   check('goal', "goal can't be empty").notEmpty(),
   check('aim', "aim can't be empty").notEmpty(),
   check('activity', "activity can't be empty").notEmpty(),
 ], authController.updateUser)
-router.post('/signup', authController.login)
-router.get('/users', authMiddleware, authController.getUser)
+
+router.put('/avatar', [
+  check('avatar', "Please upload your photo").notEmpty(),
+], authMiddleware, authController.updateAvatar)
+
+//router.get('/user', authMiddleware, authController.getUser)
+
+//router.get('/users', authMiddleware, authController.getUser)
 
 export default router;
