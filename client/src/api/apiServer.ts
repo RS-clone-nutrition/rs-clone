@@ -1,10 +1,11 @@
 import { IUser, IResponseLogin } from '../utils/types';
 
 class ApiServer {
-  URL: 'https://timely-travesseiro-fbc406.netlify.app/';
+  URL = 'https://rs-clone-production-0788.up.railway.app/';
 
   async sendUserServer(user: IUser, path: string) {
     try {
+      console.log(`${this.URL}${path}`);
       const response = await fetch(`${this.URL}${path}`, {
         method: 'POST',
         mode: 'cors',
