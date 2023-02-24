@@ -1,5 +1,6 @@
 // import { $ } from '../utils/helpers';
 import { $, $All } from '../utils/helpers';
+import { updateLocalStorageFood } from '../utils/updateLocalStorage';
 import popup from './popup';
 const blockFood = {
   render() {
@@ -9,6 +10,7 @@ const blockFood = {
     <h2>My Food Diary</h2>
     <div class="myfatsecret-food-fitness__col-category">
       <div></div>
+      <p>Amount,g</p>
       <p>Fat</p>
       <p>Carbs</p>
       <p>Prot</p>
@@ -17,6 +19,7 @@ const blockFood = {
     <div class="myfatsecret-food-fitness__row-category breakfast">
       <div class="myfatsecret-food-fitness__row-category__header">
         <h2>Breakfast</h2>
+        <p class="amount-all"></p>
         <p class="fat-all">0</p>
         <p class="carbs-all">0</p>
         <p class="prot-all">0</p>
@@ -33,6 +36,7 @@ const blockFood = {
     <div class="myfatsecret-food-fitness__row-category lunch">
       <div class="myfatsecret-food-fitness__row-category__header">
         <h2>Lunch</h2>
+        <p class="amount-all"></p>
         <p class="fat-all">0</p>
         <p class="carbs-all">0</p>
         <p class="prot-all">0</p>
@@ -48,6 +52,7 @@ const blockFood = {
     <div class="myfatsecret-food-fitness__row-category dinner">
       <div class="myfatsecret-food-fitness__row-category__header">
         <h2>Dinner</h2>
+        <p class="amount-all"></p>
         <p class="fat-all">4222</p>
         <p class="carbs-all">4</p>
         <p class="prot-all">4</p>
@@ -63,6 +68,7 @@ const blockFood = {
     <div class="myfatsecret-food-fitness__row-category snack">
       <div class="myfatsecret-food-fitness__row-category__header">
         <h2>Snacks</h2>
+        <p class="amount-all"></p>
         <p class="fat-all">4222</p>
         <p class="carbs-all">4</p>
         <p class="prot-all">4</p>
@@ -81,27 +87,27 @@ const blockFood = {
       <div class="day-summary__category">
         <div class="day-summary__block cal">
           <h3>Calories</h3>
-          <p>130</p>
+          <p>0</p>
         </div>
         <div class="day-summary__block fat">
           <h3>Fat</h3>
-          <p>130</p>
+          <p>0</p>
         </div>
         <div class="day-summary__block carbs">
           <h3>Carbs</h3>
-          <p>130</p>
+          <p>0</p>
         </div>
         <div class="day-summary__block protein">
           <h3>Protein</h3>
-          <p>130</p>
+          <p>0</p>
         </div>
         <div class="day-summary__block RDI">
-          <h4>75%</h4>
+          <h4>0</h4>
           <div class="rdi-block">
             <p>of RDI*</p>
           </div>
         </div>
-        <p>* Based on your RDI of 1491 calories</p>
+        <p>* Based on your RDI of <span>1491</span> calories</p>
       </div>
     </div>
     `;
@@ -119,6 +125,7 @@ const blockFood = {
         block.innerHTML += `
           <div class="new-item__cart">
             <h3>${arr.label}</h3>
+            <p class="amount">${arr.gramm}</p>
             <p class="fat">${arr.fat}</p>
             <p class="carbs">${arr.carb}</p>
             <p class="prot">${arr.prot}</p>
@@ -131,6 +138,7 @@ const blockFood = {
       }
     }
     this.getDaySummary();
+    this.changeGramm();
   },
   deleteItem() {
     document.onclick = function (e) {
@@ -150,10 +158,10 @@ const blockFood = {
   },
   getAllInformation(mealType: string) {
     const block = document.getElementsByClassName(`myfatsecret-food-fitness__row-category ${mealType}`)[0];
-    const allFatText = block.children[0].children[1];
-    const allCarbsText = block.children[0].children[2];
-    const allProtText = block.children[0].children[3];
-    const allCalText = block.children[0].children[4];
+    const allFatText = block.children[0].children[2];
+    const allCarbsText = block.children[0].children[3];
+    const allProtText = block.children[0].children[4];
+    const allCalText = block.children[0].children[5];
     let allFat = 0;
     let allCarbs = 0;
     let allProt = 0;
@@ -165,10 +173,10 @@ const blockFood = {
       allProt += storage.food[`${mealType}`][i].prot;
       allCal += storage.food[`${mealType}`][i].cal;
     }
-    allFatText.innerHTML = `${allFat}`;
-    allCarbsText.innerHTML = `${allCarbs}`;
-    allProtText.innerHTML = `${allProt}`;
-    allCalText.innerHTML = `${allCal}`;
+    allFatText.innerHTML = `${allFat.toFixed(2)}`;
+    allCarbsText.innerHTML = `${allCarbs.toFixed(2)}`;
+    allProtText.innerHTML = `${allProt.toFixed(2)}`;
+    allCalText.innerHTML = `${allCal.toFixed(2)}`;
   },
   getDaySummary() {
     const arr = [$All('.fat-all'), $All('.carbs-all'), $All('.prot-all'), $All('.cals-all'), $All('.cals-all')];
@@ -184,8 +192,37 @@ const blockFood = {
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
-      dayCount[i]!.innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(2) * 100}%` : `0%`;
+      dayCount[i]!.innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
     }
+  },
+  changeGramm() {
+    const textP = $All('.amount');
+    textP.forEach((el) =>
+      el.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const mealFood = target.parentElement?.lastElementChild?.id.split(' ')[0] as string;
+        const id = target.parentElement?.lastElementChild?.id.split(' ')[1] as string;
+        const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+        const paragraph = e.target as HTMLElement;
+        const section = paragraph.parentNode;
+        const name = paragraph.className;
+        const input = document.createElement('input');
+        input.name = name;
+        input.type = 'text';
+        input.value = `${paragraph.textContent}`;
+        section?.replaceChild(input, paragraph);
+        input.focus();
+        input.addEventListener('keydown', function (elem) {
+          if (elem.code == 'Enter') {
+            paragraph.textContent = input.value;
+            localStorage.setItem('storage', JSON.stringify(storage));
+            updateLocalStorageFood(mealFood, id, input);
+            section?.replaceChild(paragraph, input);
+            blockFood.drawItem();
+          }
+        });
+      })
+    );
   },
 };
 export default blockFood;

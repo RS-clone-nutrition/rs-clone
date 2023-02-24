@@ -1,4 +1,6 @@
 import popup from './popup';
+import { $All } from '../utils/helpers';
+import { updateLocalStorageFitness } from '../utils/updateLocalStorage';
 const blockFitness = {
   render() {
     popup.changeLabel('Fitness');
@@ -9,7 +11,7 @@ const blockFitness = {
       <div></div>
       <p></p>
       <p></p>
-      <p>Time spent</p>
+      <p>Time spent,min</p>
       <p>Cals</p>
     </div>
     <div class="myfatsecret-food-fitness__row-category activity">
@@ -63,13 +65,15 @@ const blockFitness = {
             <h3>${arr.label}</h3>
             <p class="fat"></p>
             <p class="carbs"></p>
-            <p class="prot">1 hour</p>
+            <p class="amount">${arr.time}</p>
             <p class="cals">${arr.cal}</p>
             <button class="new-item__delete" id ="${subType[y] + ' ' + [i]}">
               <i class="fa-sharp fa-solid fa-circle-xmark"></i>
             </button>
           </div>
+          
     `;
+        this.changeHour();
       }
     }
   },
@@ -100,8 +104,39 @@ const blockFitness = {
       allTime += storage.fitness[`${mealType}`][i].time;
       allCal += storage.fitness[`${mealType}`][i].cal;
     }
-    allTimeText.innerHTML = `${allTime} hour`;
+    allTimeText.innerHTML = `${allTime} min`;
     allCalText.innerHTML = `${allCal}`;
+  },
+  changeHour() {
+    const textP = $All('.amount');
+    textP.forEach((el) =>
+      el.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        console.log(target);
+        const mealFood = target.parentElement?.lastElementChild?.id.split(' ')[0] as string;
+        const id = target.parentElement?.lastElementChild?.id.split(' ')[1] as string;
+        const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+        const paragraph = e.target as HTMLElement;
+        const section = paragraph.parentNode;
+        const name = paragraph.className;
+        const input = document.createElement('input');
+        input.name = name;
+        input.type = 'text';
+        input.value = `${paragraph.textContent}`;
+        section?.replaceChild(input, paragraph);
+        input.focus();
+        input.onkeydown = function (elem) {
+          if (elem.code == 'Enter') {
+            paragraph.textContent = input.value;
+            storage.fitness[`${mealFood}`][`${id}`].time = +input.value;
+            localStorage.setItem('storage', JSON.stringify(storage));
+            section?.replaceChild(paragraph, input);
+            updateLocalStorageFitness(mealFood, id);
+            blockFitness.drawItem();
+          }
+        };
+      })
+    );
   },
 };
 export default blockFitness;

@@ -78,13 +78,14 @@ interface IRecipeData {
         label: string;
         uri: string;
         mealType: string;
+        yield: number;
       };
-    }) => any
+    }) => void
   ): unknown;
 }
 
 interface IInputCheckbox {
-  forEach(arg0: (el: HTMLInputElement) => any): unknown;
+  forEach(arg0: (el: HTMLInputElement) => void): unknown;
 }
 
 type AuthApiMessage = { message: string };

@@ -66,11 +66,13 @@ const popup = {
     const calories: number[] = [];
     const label: string[] = [];
     const uri: string[] = [];
+    const amount: number[] = [];
     arr.forEach((el) => calories.push(el.recipe.calories));
     arr.forEach((el) => label.push(el.recipe.label));
     arr.forEach((el) => uri.push(el.recipe.uri));
+    arr.forEach((el) => amount.push(el.recipe.yield));
     for (let i = 0; i < label.length; i++) {
-      this.getItem(Math.round(calories[i]), label[i], uri[i]);
+      this.getItem(Math.round(calories[i]), label[i], uri[i], amount[i]);
     }
   },
   searchItemFitness(arr: DataExercise[]) {
@@ -87,7 +89,7 @@ const popup = {
     }
   },
 
-  getItem(cal: number, label: string, uri: string) {
+  getItem(cal: number, label: string, uri: string, amount?: number) {
     const block = document.querySelector('.popup__products-table__add-block') as HTMLElement;
     block.innerHTML += `
     <div class = "popup__products-table__add-block__add-item">
@@ -99,13 +101,12 @@ const popup = {
       1
       </span>
       <span class="popup__products-table__calories">
-      ${cal}
+      ${amount ? Math.round(cal / amount) : cal}
       </span>
     </div>
     `;
   },
   async setLocalStorage(arr: IRecipe) {
-    console.log(arr);
     const storage = JSON.parse(`${localStorage.getItem('storage')}`);
     const input = <HTMLElement>$('.search__popup-input');
     const type = input.id.split(' ')[1];
@@ -114,16 +115,18 @@ const popup = {
       storage[`${type}`][`${mealType}`].push({
         id: arr.id,
         label: arr.name,
-        time: 1,
+        time: 60,
         cal: arr.calsInHr,
       });
     } else {
       storage[`${type}`][`${mealType}`].push({
         label: arr.recipe.label,
-        cal: Math.round(arr.recipe.calories),
-        fat: Math.round(arr.recipe.totalNutrients.FAT.quantity),
-        carb: Math.round(arr.recipe.totalNutrients.CA.quantity),
-        prot: Math.round(arr.recipe.totalNutrients.PROCNT.quantity),
+        cal: Math.round((arr.recipe.calories * 100) / arr.recipe.totalWeight),
+        fat: Math.round((arr.recipe.totalNutrients.FAT.quantity * 100) / arr.recipe.totalWeight),
+        carb: Math.round((arr.recipe.totalNutrients.CA.quantity * 100) / arr.recipe.totalWeight),
+        prot: Math.round((arr.recipe.totalNutrients.PROCNT.quantity * 100) / arr.recipe.totalWeight),
+        totalWeight: arr.recipe.totalWeight,
+        gramm: 100,
       });
     }
     localStorage.setItem('storage', JSON.stringify(storage));
@@ -157,6 +160,7 @@ const popup = {
       if (searchInput.id.split(' ')[1] != 'fitness') {
         result = await api.getRecipeFoodSearch(searchInput.value, searchInput.id.split(' ')[0]);
         popup.searchItemFood(result.hits);
+        console.log(result.hits);
         if (result.hits.length == 0) {
           popup.renderNotFoundPage();
         }
@@ -174,9 +178,9 @@ const popup = {
       item.forEach(async (el) => {
         if (el.checked) {
           const id = el.parentElement?.children[0].id as string;
-          console.log(id);
           if (Number.isNaN(+id)) {
             const result = await api.getSingleRecipe(id);
+            console.log(result);
             await popup.setLocalStorage(result);
             blockFood.drawItem();
           } else {
