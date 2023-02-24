@@ -82,14 +82,15 @@ class authController {
       const { weight, goal, aim, username, activity, bio } = req.body
       const dataForUpdate = { goal: goal, aim: aim, activity: activity, bio: bio }
 
-      const user = await User.findOne({ name: username });
+      const id = req.user.id;
+      const user = await User.findOne({ _id: id });
 
       if (user.weight[user.weight.length - 1] !== weight) {
         dataForUpdate.weight = user.weight.concat(weight);
         dataForUpdate.date = user.date.concat(new Date().toString())
       }
 
-      const userUpdated = await User.findOneAndUpdate({ name: username }, dataForUpdate, { returnDocument: 'after' });
+      const userUpdated = await User.findOneAndUpdate({ _id: id }, dataForUpdate, { returnDocument: 'after' });
 
       return res.status(200).json({ message: 'user successfully updated', user: userUpdated });
     } catch (e) {
@@ -110,8 +111,6 @@ class authController {
 
       const userUpdated = await User.findOneAndUpdate({ _id: id }, { avatar: avatar }, { returnDocument: 'after' });
 
-      console.log(userUpdated);
-
       return res.status(200).json({ message: 'user avatar successfully updated' });
     } catch (e) {
       console.log(e);
@@ -119,15 +118,16 @@ class authController {
     }
   }
 
-  // async getUser(req, res) {
-  //   try {
-  //     const users = await User.find(req.user);
-  //     res.json(users)
-  //   } catch (e) {
-  //     console.log(e);
-  //     res.status(400).json({ message: 'get error' })
-  //   }
-  // }
+  async getUser(req, res) {
+    try {
+      const id = req.user.id;
+      const user = await User.find({ _id: id });
+      res.status(200).json(user)
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: 'get error' })
+    }
+  }
 }
 
 export default new authController();

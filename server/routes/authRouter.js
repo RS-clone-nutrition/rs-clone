@@ -25,13 +25,13 @@ router.put('/user', [
   check('goal', "goal can't be empty").notEmpty(),
   check('aim', "aim can't be empty").notEmpty(),
   check('activity', "activity can't be empty").notEmpty(),
-], authController.updateUser)
+], authMiddleware, authController.updateUser)
 
 router.put('/avatar', [
   check('avatar', "Please upload your photo").notEmpty(),
 ], authMiddleware, authController.updateAvatar)
 
-//router.get('/user', authMiddleware, authController.getUser)
+router.get('/user', authMiddleware, authController.getUser)
 
 //router.get('/users', authMiddleware, authController.getUser)
 
