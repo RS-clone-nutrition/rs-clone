@@ -378,7 +378,8 @@ body {
     min-width: 210rem;
   }
 
-  html {
-    font-size: 0.8px;
+  .product__content {
+    display: block;
+    gap: 100rem;
   }
 }

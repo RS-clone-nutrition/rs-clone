@@ -12,6 +12,7 @@ const User = new Schema({
   activity: { type: String, require: true },
   aim: { type: String, require: true },
   bio: { type: String },
+  avatar: { type: String },
 })
 
 export default model('User', User);

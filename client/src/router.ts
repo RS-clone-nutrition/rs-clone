@@ -117,7 +117,6 @@ class Router {
     }
 
     window.addEventListener('popstate', () => this.handleLocation());
-    // window.addEventListener('DOMContentLoaded', () => this.handleLocation());
 
     pagesBlock.addEventListener('click', (e) => {
       this.route(e);

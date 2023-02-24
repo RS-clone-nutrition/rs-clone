@@ -1,6 +1,6 @@
-import apiServer from '../api/apiServer';
-import { $, $All, getPercentFromNum } from '../utils/helpers';
-import { IResponseUser, IActivity, IUser } from '../utils/types';
+import apiServer from '../../api/apiServer';
+import { $, $All, getPercentFromNum, getTokenStorage } from '../../utils/helpers';
+import { IResponseUser, IActivity, IUser } from '../../utils/types';
 import weightGraph from './weightGraph';
 import bioTextArea from './bioTextarea';
 
@@ -14,7 +14,6 @@ class WeightHistory {
   };
 
   render(userObj: IUser) {
-    console.log(userObj.weight.length);
     const userCurrentWeight = userObj.weight[userObj.weight.length - 1];
     const toGoWeight = userObj.aim === 'lose' ? +userCurrentWeight - +userObj.goal : +userObj.goal - +userCurrentWeight;
     this.main = <HTMLElement>$('.right-user');
@@ -56,8 +55,8 @@ class WeightHistory {
         <h3 class="info-user__title activity__title">Choose your activity level:</h3>
         <input class="radio__choice" type="radio" id="activityChoice1" name="activity" checked value="low">
         <label for="activityChoice1">Low</label>
-        <input class="radio__choice" type="radio" id="activityChoice2" name="activity" value="average ">
-        <label for="activityChoice2">Average </label>
+        <input class="radio__choice" type="radio" id="activityChoice2" name="activity" value="average">
+        <label for="activityChoice2">Average</label>
         <input class="radio__choice" type="radio" id="activityChoice3" name="activity" value="high">
         <label for="activityChoice3">High</label>
         </div>
@@ -89,7 +88,6 @@ class WeightHistory {
     const saveBtn = <HTMLButtonElement>$('.button-save');
 
     saveBtn.addEventListener('click', () => {
-      console.log('br');
       this.sendToServer();
     });
   }
@@ -97,7 +95,9 @@ class WeightHistory {
   async sendToServer() {
     const user = this.getAllfields();
 
-    const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user);
+    const token = getTokenStorage();
+
+    const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user, token);
     const userObj = <IUser>serverRsponse.response.user;
 
     localStorage.setItem('user', JSON.stringify(userObj));
@@ -140,7 +140,7 @@ class WeightHistory {
 
     const activityLevel = <keyof IActivity>(<HTMLInputElement>$('input[name="activity"]:checked')).value;
     const activityNumb = <number>this.activity[activityLevel];
-    const userWeight = userObj.weight[userObj.date.length - 1];
+    const userWeight = userObj.weight[userObj.weight.length - 1];
 
     const maintainingNumber =
       userObj.gender === 'male'
