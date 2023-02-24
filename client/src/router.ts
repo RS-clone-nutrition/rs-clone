@@ -100,18 +100,23 @@ class Router {
 
   eventListeners() {
     const pagesBlock = <HTMLElement>document.querySelector('.nav__menu');
+    const burgerMenu = <HTMLElement>document.querySelector('.header_burger');
+    const headerMenu = <HTMLElement>document.querySelector('.nav__menu');
+    const mainOpen = <HTMLElement>document.querySelector('.main-open');
+    const burgerClose = <HTMLElement>document.querySelector('.nav_menu_close');
 
     window.addEventListener('popstate', () => this.handleLocation());
     // window.addEventListener('DOMContentLoaded', () => this.handleLocation());
 
     pagesBlock.addEventListener('click', (e) => {
       this.route(e);
+      const eventLink = <HTMLElement>e.target;
+      if (eventLink.classList.contains('nav__link')) {
+        headerMenu.classList.remove('header-nav-active');
+        mainOpen.classList.remove('main_open_menu');
+      }
     });
 
-    const burgerMenu = <HTMLElement>document.querySelector('.header_burger');
-    const headerMenu = <HTMLElement>document.querySelector('.nav__menu');
-    const mainOpen = <HTMLElement>document.querySelector('.main-open');
-    const burgerClose = <HTMLElement>document.querySelector('.nav_menu_close');
     burgerMenu.addEventListener('click', () => {
       headerMenu.classList.add('header-nav-active');
       mainOpen.classList.add('main_open_menu');
