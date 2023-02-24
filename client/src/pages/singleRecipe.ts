@@ -35,7 +35,9 @@ class SingleRecipe {
                   </div>
                   <div class="left-info__actions">
                     <div class="action-left cookbook">
-                      <img src="./img/singleRecipe/icons/plus.svg" alt="add coolbook" class="action__img-cook cookbook">
+                      <button class='action__btn'>
+                        <img src="./img/singleRecipe/icons/newplus.png" alt="add coolbook" class="action__img-cook cookbook">
+                      </button>
                       <span class="action__text cookbook">Add to my cookbook</span>
                     </div>
                     <div class="action-left diary">
@@ -292,6 +294,20 @@ class SingleRecipe {
    </div>
     `;
     this.eventLintener(idRecipe);
+    this.changeColor();
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const btnBackgr = <HTMLElement>$('.action__btn');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btnBackgr.style.background = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btnBackgr.style.background = changeColorInput.value;
+    });
   }
 
   eventLintener(idRecipe: string) {
@@ -303,19 +319,19 @@ class SingleRecipe {
       arrayIdRecipes = JSON.parse(strLocalStr);
       for (let i = 0; i < arrayIdRecipes.length; i++) {
         if (arrayIdRecipes[i] === idRecipe) {
-          imgAddCookbook.src = 'https://i.ibb.co/8jxSGCT/icons8-16.png';
+          imgAddCookbook.src = 'https://i.ibb.co/6bFfYMg/icons8-64.png';
         }
       }
     } else {
       arrayIdRecipes = [];
     }
     btnCookbook.addEventListener('click', () => {
-      if (imgAddCookbook.src !== 'https://i.ibb.co/8jxSGCT/icons8-16.png') {
-        imgAddCookbook.src = 'https://i.ibb.co/8jxSGCT/icons8-16.png';
+      if (imgAddCookbook.src !== 'https://i.ibb.co/6bFfYMg/icons8-64.png') {
+        imgAddCookbook.src = 'https://i.ibb.co/6bFfYMg/icons8-64.png';
         arrayIdRecipes.push(idRecipe);
         localStorage.setItem('arrRecipes', JSON.stringify(arrayIdRecipes));
       } else {
-        imgAddCookbook.src = './img/singleRecipe/icons/plus.svg';
+        imgAddCookbook.src = './img/singleRecipe/icons/newplus.png';
         for (let i = 0; i < arrayIdRecipes.length; i++) {
           if (arrayIdRecipes[i] === idRecipe) {
             arrayIdRecipes.splice(i, 1);

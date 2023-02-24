@@ -187,6 +187,11 @@ class Fitness {
     for (let i = 0; i < arrayTypeTitle.length; i++) {
       arrayTypeTitle[i].style.background = changeColorInput.value;
     }
+    for (let j = 0; j < arrayItemBtn.length; j++) {
+      if (arrayItemBtn[j].classList.contains('active-item')) {
+        arrayItemBtn[j].style.background = changeColorInput.value;
+      }
+    }
 
     changeColorInput.addEventListener('change', () => {
       iconSearch.style.color = changeColorInput.value;
