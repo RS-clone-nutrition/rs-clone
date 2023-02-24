@@ -38,7 +38,7 @@ html {
 .left-user {
   text-align: center;
 
-  &__icon {
+  &__icon-container {
     position: relative;
     border-radius: 50%;
 
@@ -107,9 +107,13 @@ html {
 }
 
 .info-user__input {
+  text-align: right;
   width: 80rem;
 }
 
+.still__number {
+  margin-left: 40rem;
+}
 
 .right-user {
   display: flex;
@@ -154,6 +158,7 @@ canvas {
 .textarea__btn,
 .update-btn {
   width: 150rem;
+  font-size: 17rem;
 }
 
 .popup-avatar {

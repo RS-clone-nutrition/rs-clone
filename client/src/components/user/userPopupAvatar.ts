@@ -75,13 +75,13 @@ class UserPopup {
 
     userAvatar.updateUserAvatar(result.secure_url);
 
+    this.popupBlock.remove();
+
     const userObj = JSON.parse(<string>localStorage.getItem('user'));
     userObj.avatar = result.secure_url;
-
-    localStorage.setItem('user', userObj);
+    localStorage.setItem('user', JSON.stringify(userObj));
 
     userAvatar.render(result.secure_url);
-    this.popupBlock.remove();
   }
 }
 

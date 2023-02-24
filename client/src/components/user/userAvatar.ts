@@ -1,4 +1,4 @@
-import { $ } from '../../utils/helpers';
+import { $, getTokenStorage } from '../../utils/helpers';
 import userPopup from './userPopupAvatar';
 import apiServer from '../../api/apiServer';
 
@@ -8,23 +8,23 @@ class UserAvatar {
     const iconSrc = link || localStorage.getItem('avatar') || './img/user/avatar-default.png';
 
     iconContainer.innerHTML = `
-    <img src="${iconSrc}" alt="user icon" class="left-user__img">`;
+    <div class="left-user__icon-container">
+    <img src="${iconSrc}" alt="user icon" class="left-user__img">
+    </div>`;
 
-    this.eventListeners(iconContainer);
+    this.eventListeners();
   }
 
-  eventListeners(iconContainer: HTMLElement) {
-    iconContainer.addEventListener('click', () => {
+  eventListeners() {
+    const avatarImg = <HTMLElement>$('.left-user__icon-container');
+
+    avatarImg.addEventListener('click', () => {
       userPopup.render();
     });
   }
 
   updateUserAvatar(avatarLink: string) {
-    const token = <string>JSON.parse(<string>localStorage.getItem('token'));
-
-    if (!token) {
-      alert('Error: please re-login. Sorry for the inconvenience');
-    }
+    const token = getTokenStorage();
 
     apiServer.updateUserAvatar(avatarLink, token);
   }

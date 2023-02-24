@@ -1,8 +1,8 @@
 import apiServer from '../../api/apiServer';
-import { $, $All, getPercentFromNum } from '../../utils/helpers';
+import { $, $All, getPercentFromNum, getTokenStorage } from '../../utils/helpers';
 import { IResponseUser, IActivity, IUser } from '../../utils/types';
 import weightGraph from './weightGraph';
-import bioTextArea from '../bioTextarea';
+import bioTextArea from './bioTextarea';
 
 class WeightHistory {
   main: HTMLElement;
@@ -88,7 +88,6 @@ class WeightHistory {
     const saveBtn = <HTMLButtonElement>$('.button-save');
 
     saveBtn.addEventListener('click', () => {
-      console.log('br');
       this.sendToServer();
     });
   }
@@ -96,7 +95,9 @@ class WeightHistory {
   async sendToServer() {
     const user = this.getAllfields();
 
-    const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user);
+    const token = getTokenStorage();
+
+    const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user, token);
     const userObj = <IUser>serverRsponse.response.user;
 
     localStorage.setItem('user', JSON.stringify(userObj));
@@ -139,7 +140,7 @@ class WeightHistory {
 
     const activityLevel = <keyof IActivity>(<HTMLInputElement>$('input[name="activity"]:checked')).value;
     const activityNumb = <number>this.activity[activityLevel];
-    const userWeight = userObj.weight[userObj.date.length - 1];
+    const userWeight = userObj.weight[userObj.weight.length - 1];
 
     const maintainingNumber =
       userObj.gender === 'male'

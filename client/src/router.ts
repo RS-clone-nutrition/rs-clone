@@ -102,7 +102,6 @@ class Router {
     const pagesBlock = <HTMLElement>document.querySelector('.nav__menu');
 
     window.addEventListener('popstate', () => this.handleLocation());
-    window.addEventListener('DOMContentLoaded', () => this.handleLocation());
 
     pagesBlock.addEventListener('click', (e) => {
       this.route(e);

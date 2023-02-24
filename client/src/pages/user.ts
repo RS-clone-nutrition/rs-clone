@@ -1,8 +1,8 @@
 import WeightHistory from '../components/user/weightHistory';
-import { IUser } from '../utils/types';
 import format from 'date-fns/format';
 import weightGraph from '../components/user/weightGraph';
 import userAvatar from '../components/user/userAvatar';
+import apiServer from '../api/apiServer';
 
 class User {
   main;
@@ -14,9 +14,13 @@ class User {
     this.weightHistory = new WeightHistory();
   }
 
-  render() {
-    const user = <string>localStorage.getItem('user');
-    const userObj = <IUser>JSON.parse(user);
+  async render() {
+    const userObj = await this.getUser();
+
+    if (!userObj || userObj === 'undefined') {
+      alert('Error: please re-login. Sorry for the inconvenience');
+      return;
+    }
 
     this.main.innerHTML = `
     <div class="user__main main-user">
@@ -24,6 +28,7 @@ class User {
       <div class="main-user__left left-user">
         <div class="left-user__container">
           <div class="left-user__icon">
+        
           </div>
         </div>
         <h1 class="left-user__name">${userObj.username}</h1>
@@ -41,9 +46,25 @@ class User {
   </div>
     `;
 
-    userAvatar.render();
+    userAvatar.render(userObj.avatar);
     weightGraph.render(userObj);
     this.weightHistory.render(userObj);
+  }
+
+  async getUser() {
+    let user = <string>localStorage.getItem('user');
+
+    if (!user || user === 'undefined') {
+      const token = JSON.parse(<string>localStorage.getItem('token'));
+      const response = await apiServer.getUser(token);
+
+      user = response[0];
+
+      localStorage.setItem('user', JSON.stringify(user));
+      return user;
+    }
+
+    return JSON.parse(user);
   }
 }
 

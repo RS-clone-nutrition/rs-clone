@@ -1,9 +1,11 @@
 import { IUser, IResponseLogin } from '../utils/types';
 
 class ApiServer {
+  URL: 'https://timely-travesseiro-fbc406.netlify.app/';
+
   async sendUserServer(user: IUser, path: string) {
     try {
-      const response = await fetch(`http://localhost:5000/${path}`, {
+      const response = await fetch(`${this.URL}${path}`, {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -18,13 +20,14 @@ class ApiServer {
     }
   }
 
-  async updateUserServer(user: IUser) {
+  async updateUserServer(user: IUser, token: string) {
     try {
-      const response = await fetch(`http://localhost:5000/user`, {
+      const response = await fetch(`${this.URL}user`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(user),
       });
@@ -37,7 +40,7 @@ class ApiServer {
 
   async sendAvatar(formElem: FormData) {
     try {
-      const response = await fetch(`http://localhost:5000/avatar`, {
+      const response = await fetch(`${this.URL}avatar`, {
         method: 'POST',
         mode: 'cors',
         body: formElem,
@@ -51,7 +54,7 @@ class ApiServer {
 
   async updateUserAvatar(avatarLink: string, token: string) {
     try {
-      const response = await fetch(`http://localhost:5000/avatar`, {
+      const response = await fetch(`${this.URL}avatar`, {
         method: 'PUT',
         mode: 'cors',
         headers: {
@@ -67,20 +70,20 @@ class ApiServer {
     }
   }
 
-  // async getUsers() {
-  //   try {
-  //     const response = await fetch(`http://localhost:5000/users`, {
-  //       headers: {
-  //         authorization: `Bearer ${JSON.parse(<string>localStorage.getItem('token'))}`,
-  //       },
-  //       mode: 'cors',
-  //     });
-  //     const result = await response.json();
-  //     return result;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }
+  async getUser(token: string) {
+    try {
+      const response = await fetch(`${this.URL}user`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        mode: 'cors',
+      });
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 
 const apiServer = new ApiServer();

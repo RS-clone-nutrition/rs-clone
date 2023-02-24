@@ -77,7 +77,6 @@ class Auth {
       const value = <string>item.value;
       user[key] = value;
     });
-    console.log(user);
 
     return user;
   }

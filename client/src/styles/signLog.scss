@@ -62,19 +62,10 @@
   }
 }
 
-// @media (max-width:390px) {
-//   .form {
-//     &__submit {
-//       button {
-//         width: 100%;
-//         margin-top: 15px;
-//       }
-//     }
+.errror {
+  color: red;
+}
 
-//     &__inputs {
-//       input {
-//         width: 100%;
-//       }
-//     }
-//   }
-// }
+.message {
+  color: green;
+}
