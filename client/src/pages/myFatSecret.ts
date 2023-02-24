@@ -382,7 +382,7 @@ class MyFatSecret {
               Fat: ${fat.toFixed(2)}g</span>
           </div>
           <ul class="list-recipes-settings">
-            <li class="list-settings__item">add to food diary</li>
+            <li class="list-settings__item item-add" id='${id}'>add to food diary</li>
             <li class="list-settings__item">|</li>
             <li class="list-settings__item">
               <a href="/recipe/${id}">view recipe</a>
