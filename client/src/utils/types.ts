@@ -76,89 +76,105 @@ interface IRecipeData {
       recipe: {
         calories: number;
         label: string;
+        uri: string;
+        mealType: string;
+        yield: number;
       };
-    }) => any
+    }) => void
   ): unknown;
 }
 
 interface IInputCheckbox {
-  forEach(arg0: (el: HTMLInputElement) => any): unknown;
+  forEach(arg0: (el: HTMLInputElement) => void): unknown;
+}
+
+type AuthApiMessage = { message: string };
+
+// interface IUser {
+//   username: string;
+//   password: string;
+//   weight: string;
+//   height: string;
+//   age: string;
+//   gender: string;
+// }
+interface IUser {
+  [key: string]: string;
+}
+
+interface IResponseLogin {
+  message: string;
+  token?: string;
+  user?: IUser;
+}
+
+interface IResponseUser {
+  response: IResponseLogin;
+  status: number;
+}
+
+interface IActivity {
+  low: 1.375;
+  average: 1.55;
+  high: 1.7;
 }
 
 interface IRecipe {
   recipe: {
-    uri: string,
-    label: string,
-    image: string,
+    uri: string;
+    label: string;
+    image: string;
     images: {
       THUMBNAIL: {
-        url: string,
-        width: number,
-        height: number
-      },
+        url: string;
+        width: number;
+        height: number;
+      };
       SMALL: {
-        url: string,
-        width: number,
-        height: number
-      },
+        url: string;
+        width: number;
+        height: number;
+      };
       REGULAR: {
-        url: string,
-        width: number,
-        height: number
-      },
+        url: string;
+        width: number;
+        height: number;
+      };
       LARGE: {
-        url: string,
-        width: number,
-        height: number
-      }
-    },
-    source: string,
-    url: string,
-    shareAs: string,
-    yield: 0,
-    dietLabels: [
-      string
-    ],
-    healthLabels: [
-      string
-    ],
-    cautions: [
-      string
-    ],
-    ingredientLines: [
-      string
-    ],
+        url: string;
+        width: number;
+        height: number;
+      };
+    };
+    source: string;
+    url: string;
+    shareAs: string;
+    yield: 0;
+    dietLabels: [string];
+    healthLabels: [string];
+    cautions: [string];
+    ingredientLines: [string];
     ingredients: [
       {
-        text: string,
-        quantity: number,
-        measure: string,
-        food: string,
-        weight: number,
-        foodId: string
+        text: string;
+        quantity: number;
+        measure: string;
+        food: string;
+        weight: number;
+        foodId: string;
       }
-    ],
-    calories: number,
-    glycemicIndex: number,
-    totalCO2Emissions: number,
-    co2EmissionsClass: string,
-    totalWeight: number,
-    cuisineType: [
-      string
-    ],
-    mealType: [
-      string
-    ],
-    dishType: [
-      string
-    ],
-    instructions: [
-      string
-    ],
-    tags: [
-      string
-    ],
-    externalId: string,
+    ];
+    calories: number;
+    glycemicIndex: number;
+    totalCO2Emissions: number;
+    co2EmissionsClass: string;
+    totalWeight: number;
+    cuisineType: [string];
+    mealType: [string];
+    dishType: [string];
+    instructions: [string];
+    tags: [string];
+    externalId: string;
     totalNutrients: {
       FAT: { quantity: number };
       FASAT: { quantity: number };
@@ -177,7 +193,7 @@ interface IRecipe {
       K: { quantity: number };
       VITA_RAE: { quantity: number };
       VITC: { quantity: number };
-    },
+    };
     totalDaily: {
       FAT: { quantity: number };
       FASAT: { quantity: number };
@@ -196,31 +212,46 @@ interface IRecipe {
       K: { quantity: number };
       VITA_RAE: { quantity: number };
       VITC: { quantity: number };
-    },
+    };
     digest: [
       {
-        label: string,
-        tag: string,
-        schemaOrgTag: string,
-        total: number,
-        hasRDI: boolean,
-        daily: number,
-        unit: string,
-        sub: {}
+        label: string;
+        tag: string;
+        schemaOrgTag: string;
+        total: number;
+        hasRDI: boolean;
+        daily: number;
+        unit: string;
+        sub: {};
       }
-    ]
-  },
+    ];
+  };
   _links: {
     self: {
-      href: string,
-      title: string
-    },
+      href: string;
+      title: string;
+    };
     next: {
-      href: string,
-      title: string
-    }
-  }
-
+      href: string;
+      title: string;
+    };
+  };
+  id: number;
+  name: string;
+  calsInHr: 509;
 }
 
-export { IGroups, CategoryArr, INutritionAnalysisResponse, IFooddataBaseResponse, IRecipeData, IInputCheckbox, IRecipe };
+export {
+  IGroups,
+  CategoryArr,
+  INutritionAnalysisResponse,
+  IFooddataBaseResponse,
+  IRecipeData,
+  IInputCheckbox,
+  IRecipe,
+  IUser,
+  AuthApiMessage,
+  IResponseLogin,
+  IResponseUser,
+  IActivity,
+};

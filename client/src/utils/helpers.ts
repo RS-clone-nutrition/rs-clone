@@ -39,6 +39,14 @@ const preload = (block: Element, time: number) => {
 
 const getPercent = (partNum: number, wholeNum: number) => Math.floor((partNum / wholeNum) * 100) || 0;
 
+const getPercentFromNum = (wholeNum: number, perCent: number, aim: string) => {
+  const result =
+    aim === 'lose'
+      ? wholeNum - Math.floor((wholeNum / 100) * perCent)
+      : wholeNum + Math.floor((wholeNum / 100) * perCent);
+  return result;
+};
+
 function activePage(path: string) {
   const arrayHeaderLinks = document.querySelectorAll('.nav__link');
   for (let i = 0; i < arrayHeaderLinks.length; i++) {
@@ -85,4 +93,5 @@ export {
   preload,
   getPercent,
   activePage,
+  getPercentFromNum,
 };

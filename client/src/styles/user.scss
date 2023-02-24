@@ -1,0 +1,144 @@
+html {
+  font-size: 1px;
+}
+
+.user {
+
+  &__main {
+    padding: 20rem 7rem;
+    max-width: 1000rem;
+    margin: 0 auto;
+    color: rgba(51, 51, 51, 1);
+  }
+}
+
+.main-user {
+
+  &__content {
+    margin: 0 auto 40rem;
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+    border: 2rem solid #33b34b;
+    border-radius: 10rem;
+    padding: 17rem 20rem 29rem;
+    justify-content: space-between;
+  }
+}
+
+.left-user {
+  text-align: center;
+
+  &__img {
+    width: 300rem;
+  }
+
+  &__name {
+    text-transform: uppercase;
+    font-size: 30rem;
+  }
+
+  &__date {
+    text-transform: capitalize;
+    font-size: 20rem;
+  }
+}
+
+.info-user__title-main {
+  color: rgba(0, 0, 0, .54);
+  font-size: 24rem;
+  text-transform: uppercase;
+}
+
+.info-user {
+  background-color: #F2F2F2;
+  padding: 20rem 20rem;
+  font-size: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+
+  &__title {
+    color: rgba(0, 0, 0, .38);
+  }
+
+  &__block {
+    color: #000;
+  }
+
+  &__number {
+    color: rgba(0, 0, 0, .84);
+  }
+}
+
+.info-user__input {
+  width: 80rem;
+}
+
+
+.right-user {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+}
+
+.calories-user {
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+
+  &__title {
+    color: rgba(0, 0, 0, .54);
+    font-size: 24rem;
+  }
+
+  &__number {
+    color: rgba(0, 0, 0, .84);
+    font-size: 20rem;
+  }
+}
+
+.canvas__container {
+  padding: 20rem;
+  background-color: #EBF9FC;
+}
+
+canvas {
+  background-color: #fff;
+}
+
+.user-bio {
+  margin-top: 10rem;
+
+  .user__bio {
+    font-size: 20rem;
+    margin-bottom: 20rem;
+  }
+}
+
+@media (max-width: 810px) {
+  .left-user {
+    &__img {
+      width: 300rem;
+      margin-bottom: 20rem;
+    }
+  }
+
+  .main-user {
+
+    &__content {
+      flex-direction: column;
+    }
+  }
+
+  .info-user {
+    padding: 20rem;
+    gap: 20rem;
+  }
+}
+
+@media (max-width: 670px) {
+  .right-user {
+    display: block;
+  }
+}

@@ -9,6 +9,8 @@ import { SignIn } from './pages/signIn';
 import { LogUp } from './pages/logUp';
 import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
+import User from './pages/user';
+import headerUser from './components/headerUser';
 import { $, activePage, getMainPath } from './utils/helpers';
 import { SingleRecipe } from './pages/singleRecipe';
 import { allExerciseArray } from './components/dataFitExercise';
@@ -54,6 +56,10 @@ class Router {
     {
       path: '/foods/product',
       data: SingleFood,
+    },
+    {
+      path: '/user',
+      data: User,
     },
     {
       path: '/404',
@@ -160,4 +166,5 @@ class Router {
 const router = new Router();
 router.handleLocation();
 router.eventListeners();
+headerUser.render();
 export default router;

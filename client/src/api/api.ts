@@ -66,10 +66,12 @@ class Api {
     }
   }
 
-  async getRecipeFoodSearch(product: string) {
+  async getRecipeFoodSearch(product: string, type?: string) {
     try {
       const response = await fetch(
-        `${this.recipe.url}?type=public&q=${product}&app_id=${this.recipe.id}&app_key=${this.recipe.key}`
+        type
+          ? `${this.recipe.url}?type=public&q=${product}&app_id=${this.recipe.id}&app_key=${this.recipe.key}&mealType=${type}`
+          : `${this.recipe.url}?type=public&q=${product}&app_id=${this.recipe.id}&app_key=${this.recipe.key}`
       );
       const result = await response.json();
       return result;

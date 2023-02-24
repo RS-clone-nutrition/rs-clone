@@ -1,32 +1,38 @@
-.form{
+.form {
   border: 1px dotted;
   margin-top: 30px;
   margin-bottom: 25px;
-  &__block{
+
+  &__block {
     padding: 60px 0;
     row-gap: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    span{
+
+    span {
       padding: 100px 0 50px;
     }
-    a{
+
+    a {
       font-weight: 700;
       color: #32B34C;
     }
   }
-  &__inputs{
+
+  &__inputs {
     max-width: 385px;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
-    input{
+
+    input {
       padding: 10px;
       border-radius: 10px;
       border: 1px solid #999999;
     }
-    button{
+
+    button {
       color: #FFF;
       padding: 11px 35px;
       border-radius: 10px;
@@ -34,8 +40,9 @@
       border: 1px solid #336F3F;
     }
   }
-  &__submit{
-    button{
+
+  &__submit {
+    button {
       color: #FFF;
       padding: 11px 35px;
       border-radius: 10px;
@@ -43,10 +50,12 @@
       border: 1px solid #336F3F;
     }
   }
-  h1{
+
+  h1 {
     font-size: 21px;
   }
-  h2{
+
+  h2 {
     font-weight: 200;
     font-size: 15px;
   }
@@ -66,4 +75,22 @@
       }
     }
   }
+}
+
+.message {
+  position: absolute;
+  left: 50%;
+  top: 110%;
+  transform: translate(-50%, 0);
+  font-size: 14px;
+  color: green;
+  width: 100%;
+}
+
+.error {
+  color: red;
+}
+
+.form__inputs {
+  position: relative;
 }

@@ -1,5 +1,3 @@
-import '../styles/singleRecipe.scss';
-
 class About {
   main;
 
