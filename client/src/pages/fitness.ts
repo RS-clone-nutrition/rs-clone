@@ -5,7 +5,7 @@ import {
   DataExercise,
   allExerciseArray,
 } from '../components/dataFitExercise';
-import { $, $All, randomExercise, burnedCalories } from '../utils/helpers';
+import { $, randomExercise, burnedCalories } from '../utils/helpers';
 
 class Fitness {
   main;
@@ -167,6 +167,40 @@ class Fitness {
     </div>
     </div>`;
     this.sliderWhitShowCard();
+    this.changeColor();
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    const iconSearch = <HTMLElement>document.querySelector('.fa-solid');
+    const fitTitleWrapperBorder = <HTMLElement>$('.fit-title-wrapper');
+    const fitSearchWrapperBorder = <HTMLElement>$('.fit-slider-wrapper');
+    const arrayTypeTitle: HTMLElement[] = Array.from(document.querySelectorAll('.type-title'));
+    const arrayItemBtn: HTMLElement[] = Array.from(document.querySelectorAll('.item-btn'));
+
+    fitTitleWrapperBorder.style.borderColor = changeColorInput.value;
+    fitSearchWrapperBorder.style.borderColor = changeColorInput.value;
+    for (let i = 0; i < arrayTypeTitle.length; i++) {
+      arrayTypeTitle[i].style.background = changeColorInput.value;
+    }
+
+    changeColorInput.addEventListener('change', () => {
+      iconSearch.style.color = changeColorInput.value;
+      fitTitleWrapperBorder.style.borderColor = changeColorInput.value;
+      fitSearchWrapperBorder.style.borderColor = changeColorInput.value;
+      for (let i = 0; i < arrayTypeTitle.length; i++) {
+        arrayTypeTitle[i].style.background = changeColorInput.value;
+      }
+      for (let j = 0; j < arrayItemBtn.length; j++) {
+        if (arrayItemBtn[j].classList.contains('active-item')) {
+          arrayItemBtn[j].style.background = changeColorInput.value;
+        }
+      }
+    });
   }
 
   sliderWhitShowCard() {
@@ -183,16 +217,18 @@ class Fitness {
     const hour4Cals = <HTMLElement>$('.four-hour');
     const listBreadCrumbs = <HTMLElement>$('.bread-crumbs-list');
     const sliderElipses = <HTMLElement>$('.slider-elipse');
-    const elipseArray = $All('.elipse');
+    const elipseArray: HTMLElement[] = Array.from(document.querySelectorAll('.elipse'));
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    elipseArray[0].style.background = changeColorInput.value;
     let i = 1;
     function activeElipse() {
       if (i > 2) {
         i = 0;
       }
       for (let j = 0; j < elipseArray.length; j++) {
-        elipseArray[j].classList.remove('active');
+        elipseArray[j].style.background = '#767676';
       }
-      elipseArray[i].classList.add('active');
+      elipseArray[i].style.background = changeColorInput.value;
       i++;
     }
     function writeCard(obj: DataExercise) {
@@ -229,7 +265,7 @@ class Fitness {
       writeCard(randomExc);
       activeElipse();
     }
-    let switchSlider = setInterval(randomShowCard, 10000);
+    let switchSlider = setInterval(randomShowCard, 5000);
     sliderElipses.addEventListener('click', (e) => {
       const elem = <HTMLElement>e.target;
       if (elem.classList.contains('elipse')) {
@@ -237,11 +273,11 @@ class Fitness {
         const randomExc = randomExercise(allExerciseArray);
         writeCard(randomExc);
         for (let j = 0; j < elipseArray.length; j++) {
-          elipseArray[j].classList.remove('active');
+          elipseArray[j].style.background = '#767676';
         }
-        elem.classList.add('active');
+        elem.style.background = changeColorInput.value;
         i = Number(elem.id) + 1;
-        switchSlider = setInterval(randomShowCard, 10000);
+        switchSlider = setInterval(randomShowCard, 5000);
       }
     });
     function updateUrl(query: string, params: string) {
@@ -258,12 +294,16 @@ class Fitness {
         }
       }
     }
-    const arrayItemBtn = $All('.item-btn');
-    function itemActive(elem: HTMLElement) {
+    const arrayItemBtn: HTMLElement[] = Array.from(document.querySelectorAll('.item-btn'));
+    function itemActive(elem: HTMLElement, color: string) {
       for (let j = 0; j < arrayItemBtn.length; j++) {
+        arrayItemBtn[j].style.background = '';
+        arrayItemBtn[j].style.color = '#000000';
         arrayItemBtn[j].classList.remove('active-item');
       }
       elem.classList.add('active-item');
+      elem.style.background = color;
+      elem.style.color = '#FFFFFF';
     }
     const fitSliderWrap = <HTMLElement>$('.fit-slider-wrapper');
     const blockLight = <HTMLElement>$('.light');
@@ -272,27 +312,72 @@ class Fitness {
       sliderElipses.style.display = 'none';
       clearInterval(switchSlider);
       showCardExercise(dataExerciseLight, Number(elem.id));
-      itemActive(elem);
+      itemActive(elem, changeColorInput.value);
       fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
     });
+    blockLight.onmouseover = function (e) {
+      const elem = <HTMLElement>e.target;
+      elem.style.background = changeColorInput.value;
+      elem.style.color = '#FFFFFF';
+    };
+    blockLight.onmouseout = function (e) {
+      const elem = <HTMLElement>e.target;
+      if (elem.classList.contains('active-item')) {
+        elem.style.background = changeColorInput.value;
+        elem.style.color = '#FFFFFF';
+      } else {
+        elem.style.background = '';
+        elem.style.color = '#000000';
+      }
+    };
     const blockModerate = <HTMLElement>$('.moderate');
     blockModerate.addEventListener('click', (e) => {
       const elem = <HTMLElement>e.target;
       sliderElipses.style.display = 'none';
       clearInterval(switchSlider);
       showCardExercise(dataExerciseModerate, Number(elem.id));
-      itemActive(elem);
+      itemActive(elem, changeColorInput.value);
       fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
     });
+    blockModerate.onmouseover = function (e) {
+      const elem = <HTMLElement>e.target;
+      elem.style.background = changeColorInput.value;
+      elem.style.color = '#FFFFFF';
+    };
+    blockModerate.onmouseout = function (e) {
+      const elem = <HTMLElement>e.target;
+      if (elem.classList.contains('active-item')) {
+        elem.style.background = changeColorInput.value;
+        elem.style.color = '#FFFFFF';
+      } else {
+        elem.style.background = '';
+        elem.style.color = '#000000';
+      }
+    };
     const blockStrenuous = <HTMLElement>$('.strenuous');
     blockStrenuous.addEventListener('click', (e) => {
       const elem = <HTMLElement>e.target;
       sliderElipses.style.display = 'none';
       clearInterval(switchSlider);
       showCardExercise(dataExerciseStrenuous, Number(elem.id));
-      itemActive(elem);
+      itemActive(elem, changeColorInput.value);
       fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
     });
+    blockStrenuous.onmouseover = function (e) {
+      const elem = <HTMLElement>e.target;
+      elem.style.background = changeColorInput.value;
+      elem.style.color = '#FFFFFF';
+    };
+    blockStrenuous.onmouseout = function (e) {
+      const elem = <HTMLElement>e.target;
+      if (elem.classList.contains('active-item')) {
+        elem.style.background = changeColorInput.value;
+        elem.style.color = '#FFFFFF';
+      } else {
+        elem.style.background = '';
+        elem.style.color = '#000000';
+      }
+    };
     const inputSearch = <HTMLInputElement>$('.input-fit-search');
     const notFound = <HTMLElement>$('.not-found');
     function searchExercise(data: DataExercise[]) {
@@ -306,8 +391,12 @@ class Fitness {
             notFound.style.display = 'none';
             for (let o = 0; o < arrayItemBtn.length; o++) {
               arrayItemBtn[o].classList.remove('active-item');
+              arrayItemBtn[o].style.background = '';
+              arrayItemBtn[o].style.color = '#000000';
               if (arrayItemBtn[o].innerHTML === data[j].name) {
                 arrayItemBtn[o].classList.add('active-item');
+                arrayItemBtn[o].style.background = changeColorInput.value;
+                arrayItemBtn[o].style.color = '#FFFFFF';
               }
             }
             updateUrl('exercise', data[j].name);
@@ -353,6 +442,8 @@ class Fitness {
               fitSliderWrap.scrollIntoView({ behavior: 'smooth' });
               for (let o = 0; o < arrayItemBtn.length; o++) {
                 if (arrayItemBtn[o].innerHTML === params[key].split('+').join(' ')) {
+                  arrayItemBtn[o].style.background = changeColorInput.value;
+                  arrayItemBtn[o].style.color = '#FFFFFF';
                   arrayItemBtn[o].classList.add('active-item');
                 }
               }

@@ -165,6 +165,25 @@ class Router {
         window.location.href = `/fitness?exercise=${searchInput.value}`;
       }
     });
+
+    const header = <HTMLElement>document.querySelector('header');
+    const footer = <HTMLElement>document.querySelector('footer');
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const iconSearch = <HTMLElement>document.querySelector('.fa-solid');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+      header.style.background = changeColorInput.value;
+      footer.style.background = changeColorInput.value;
+      iconSearch.style.color = changeColorInput.value;
+    }
+
+    changeColorInput.addEventListener('change', () => {
+      header.style.background = changeColorInput.value;
+      footer.style.background = changeColorInput.value;
+      iconSearch.style.color = changeColorInput.value;
+      localStorage.setItem('color', `${changeColorInput.value}`);
+    });
   }
 }
 
