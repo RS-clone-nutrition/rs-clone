@@ -309,7 +309,9 @@ body {
     background-color: rgba(188, 95, 84, 1);
   }
 }
-
+.diary{
+  display: none;
+}
 @media (max-width:900px) {
   .recipe__info {
     flex: 0 1 58%;
