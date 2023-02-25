@@ -94,7 +94,7 @@ const popup = {
     block.innerHTML += `
     <div class = "popup__products-table__add-block__add-item">
       <span class="popup__products-table__food">
-      <input type="checkbox" class="checkbox-addItem">
+      <input type="checkbox" class="checkbox-addItem>
       ${label}
       </span>
       <span class="popup__products-table__amount">
