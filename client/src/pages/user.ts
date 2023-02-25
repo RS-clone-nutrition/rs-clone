@@ -49,6 +49,7 @@ class User {
     userAvatar.render(userObj.avatar);
     weightGraph.render(userObj);
     this.weightHistory.render(userObj);
+    this.changeColor();
   }
 
   async getUser() {
@@ -65,6 +66,28 @@ class User {
     }
 
     return JSON.parse(user);
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const borderColor = <HTMLElement>document.querySelector('.main-user__content');
+    const btnSave = <HTMLElement>document.querySelector('.button-save');
+    const btnUpdate = <HTMLElement>document.querySelector('.update-btn');
+    //const btnText = <HTMLElement>document.querySelector('.textarea__btn');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btnSave.style.background = changeColorInput.value;
+    borderColor.style.borderColor = changeColorInput.value;
+    btnUpdate.style.background = changeColorInput.value;
+    //btnText.style.background = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btnSave.style.background = changeColorInput.value;
+      borderColor.style.borderColor = changeColorInput.value;
+      btnUpdate.style.background = changeColorInput.value;
+      //btnText.style.background = changeColorInput.value;
+    });
   }
 }
 

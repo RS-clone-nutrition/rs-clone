@@ -21,6 +21,7 @@ class BioTextArea {
 
   eventListeners() {
     const saveBtn = <HTMLElement>$('.update-btn');
+    this.changeColor(saveBtn);
 
     saveBtn.addEventListener('click', () => {
       this.updateBio();
@@ -37,6 +38,7 @@ class BioTextArea {
       `;
 
     const saveBtn = <HTMLElement>$('.textarea__btn');
+    this.changeColor(saveBtn);
 
     saveBtn.addEventListener('click', () => {
       this.sendBioServer();
@@ -55,6 +57,18 @@ class BioTextArea {
 
     localStorage.setItem('user', JSON.stringify(userObj));
     this.render(userObj);
+  }
+
+  changeColor(btn: HTMLElement) {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btn.style.background = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btn.style.background = changeColorInput.value;
+    });
   }
 }
 

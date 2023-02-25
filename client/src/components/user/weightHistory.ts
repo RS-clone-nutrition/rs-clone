@@ -86,6 +86,7 @@ class WeightHistory {
 
   eventListeners() {
     const saveBtn = <HTMLButtonElement>$('.button-save');
+    this.changeColor(saveBtn);
 
     saveBtn.addEventListener('click', () => {
       this.sendToServer();
@@ -159,6 +160,18 @@ class WeightHistory {
 
     inputAim.setAttribute('checked', 'checked');
     inputActivity.setAttribute('checked', 'checked');
+  }
+
+  changeColor(btn: HTMLElement) {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btn.style.background = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btn.style.background = changeColorInput.value;
+    });
   }
 }
 
