@@ -26,7 +26,7 @@ const blockFitness = {
         
       </div>
       <button class="addItem activity fitness" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -42,7 +42,7 @@ const blockFitness = {
         
       </div>
       <button class="addItem sleep fitness" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -106,6 +106,7 @@ const blockFitness = {
     }
     allTimeText.innerHTML = `${allTime} min`;
     allCalText.innerHTML = `${allCal}`;
+    this.changeColor();
   },
   changeHour() {
     const textP = $All('.amount');
@@ -137,6 +138,35 @@ const blockFitness = {
         };
       })
     );
+  },
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const subtitleColor = <HTMLElement>document.querySelector('.myfatsecret-food-fitness__col-category');
+    const arrBorderBtn: HTMLElement[] = Array.from(
+      document.querySelectorAll('.myfatsecret-food-fitness__row-category')
+    );
+    const arriconColor: HTMLElement[] = Array.from(document.querySelectorAll('.fa-square-plus'));
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+
+    subtitleColor.style.color = changeColorInput.value;
+    for (let i = 0; i < arriconColor.length; i++) {
+      arriconColor[i].style.color = changeColorInput.value;
+    }
+    for (let i = 0; i < arrBorderBtn.length; i++) {
+      arrBorderBtn[i].style.borderColor = changeColorInput.value;
+    }
+    changeColorInput.addEventListener('change', () => {
+      subtitleColor.style.color = changeColorInput.value;
+      for (let i = 0; i < arriconColor.length; i++) {
+        arriconColor[i].style.color = changeColorInput.value;
+      }
+      for (let i = 0; i < arrBorderBtn.length; i++) {
+        arrBorderBtn[i].style.borderColor = changeColorInput.value;
+      }
+    });
   },
 };
 export default blockFitness;

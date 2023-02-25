@@ -12,7 +12,7 @@ const popup = {
       <div class="popup__body">
         <div class="popup__block">
           <button class="popup__addItem">
-            <img src="./img/myfatsecret/additem.svg" alt="additem">
+            <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
             Add Item
           </button>
           <div class="search">
