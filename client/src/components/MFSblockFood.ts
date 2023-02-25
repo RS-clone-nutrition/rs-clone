@@ -182,18 +182,18 @@ const blockFood = {
   getDaySummary() {
     const arr = [$All('.fat-all'), $All('.carbs-all'), $All('.prot-all'), $All('.cals-all'), $All('.cals-all')];
     const dayCount = [
-      $('.day-summary__block.fat p '),
-      $('.day-summary__block.carbs p'),
-      $('.day-summary__block.protein p'),
-      $('.day-summary__block.cal p'),
-      $('.day-summary__block.RDI h4'),
+      <HTMLElement>$('.day-summary__block.fat p '),
+      <HTMLElement>$('.day-summary__block.carbs p'),
+      <HTMLElement>$('.day-summary__block.protein p'),
+      <HTMLElement>$('.day-summary__block.cal p'),
+      <HTMLElement>$('.day-summary__block.RDI h4'),
     ];
     for (let i = 0; i < arr.length; i++) {
       let res = 0;
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
-      dayCount[i]!.innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
+      dayCount[i].innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
     }
   },
   changeGramm() {
