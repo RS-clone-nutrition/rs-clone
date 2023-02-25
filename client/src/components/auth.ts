@@ -2,7 +2,7 @@ import { $, $All } from '../utils/helpers';
 import apiServer from '../api/apiServer';
 import router from '../router';
 import { IUser, IResponseUser } from '../utils/types';
-import headerUser from './headerUser';
+import { headerUser } from './headerUser';
 
 class Auth {
   path: string;

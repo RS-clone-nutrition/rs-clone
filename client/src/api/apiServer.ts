@@ -1,7 +1,7 @@
 import { IUser, IResponseLogin } from '../utils/types';
 
 class ApiServer {
-  URL = 'https://rs-clone-production-0788.up.railway.app/';
+  URL = 'http://localhost:8080/';
 
   async sendUserServer(user: IUser, path: string) {
     try {

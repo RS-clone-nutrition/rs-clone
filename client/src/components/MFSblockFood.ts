@@ -192,6 +192,7 @@ const blockFood = {
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       dayCount[i]!.innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
     }
   },

@@ -52,4 +52,4 @@ class HeaderUser {
 
 const headerUser = new HeaderUser();
 
-export default headerUser;
+export { headerUser };

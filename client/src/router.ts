@@ -9,10 +9,11 @@ import { SignIn } from './pages/signIn';
 import { LogUp } from './pages/logUp';
 import { FoodsCategory } from './pages/foodsCategory';
 import { SingleFood } from './pages/singleFood';
-import User from './pages/user';
-import headerUser from './components/headerUser';
+import { User } from './pages/user';
+import { headerUser } from './components/headerUser';
 import { $, activePage, getMainPath } from './utils/helpers';
 import { SingleRecipe } from './pages/singleRecipe';
+import { Community } from './pages/community';
 import { allExerciseArray } from './components/dataFitExercise';
 
 class Router {
@@ -60,6 +61,10 @@ class Router {
     {
       path: '/user',
       data: User,
+    },
+    {
+      path: '/community',
+      data: Community,
     },
     {
       path: '/404',
