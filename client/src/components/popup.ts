@@ -94,7 +94,6 @@ const popup = {
     block.innerHTML += `
     <div class = "popup__products-table__add-block__add-item">
       <span class="popup__products-table__food">
-      <input type="checkbox" class="checkbox-addItem" id="${!Number.isNaN(+uri) ? uri : uri.match(/(?<=#).*/gi)}">
       ${label}
       </span>
       <span class="popup__products-table__amount">
