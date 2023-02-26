@@ -87,7 +87,7 @@ class Community {
 
     if (!user || user === 'undefined') {
       const token = JSON.parse(<string>localStorage.getItem('token'));
-      const response = await apiServer.getUser(token);
+      const response = await apiServer.getCurrentUser(token);
 
       user = response[0];
 

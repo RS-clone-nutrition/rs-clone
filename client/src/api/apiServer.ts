@@ -71,9 +71,25 @@ class ApiServer {
     }
   }
 
-  async getUser(token: string) {
+  async getCurrentUser(token: string) {
     try {
       const response = await fetch(`${this.URL}user`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        mode: 'cors',
+      });
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getUser(id: string, token: string) {
+    try {
+      console.log(`${this.URL}user?${id}`);
+      const response = await fetch(`${this.URL}user:${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

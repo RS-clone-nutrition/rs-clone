@@ -4,6 +4,7 @@ import authRouter from "./routes/authRouter.js";
 import cors from "cors";
 import loaderRouter from "./routes/loaderRouter.js"
 import postRouter from "./routes/postRouter.js"
+import commentRouter from "./routes/commentRouter.js"
 
 const PORT = process.env.PORT || 5000;
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use(authRouter)
 app.use(loaderRouter)
 app.use(postRouter)
+app.use(commentRouter)
 
 
 const start = async () => {

@@ -65,16 +65,12 @@
     margin-bottom: 10rem;
   }
 
-  &__icon {}
-
   &__img {
     width: 60rem;
     height: 60rem;
     object-fit: cover;
     border-radius: 50%;
   }
-
-  &__info {}
 
   &__comments {
     padding: 0px 47px;
@@ -251,6 +247,4 @@
     transform: translate(0, -50%);
     cursor: pointer;
   }
-
-  &__button {}
 }

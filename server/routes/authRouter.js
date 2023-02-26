@@ -31,7 +31,8 @@ router.put('/avatar', [
   check('avatar', "Please upload your photo").notEmpty(),
 ], authMiddleware, authController.updateAvatar)
 
-router.get('/user', authMiddleware, authController.getUser)
+router.get('/user', authMiddleware, authController.getCurrentUser)
+router.get('/user:id', authMiddleware, authController.getUser)
 
 //router.get('/users', authMiddleware, authController.getUser)
 

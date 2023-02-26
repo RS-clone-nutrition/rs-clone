@@ -1,7 +1,8 @@
 import { $, $All, getFromLocalStorage, getTokenStorage } from '../utils/helpers';
 import apiServer from '../api/apiServer';
-import { IResponsePost } from '../utils/types';
+import { IComment, IPost, IResponsePost } from '../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
+import postComment from './postComment';
 
 class PostItem {
   async render() {
@@ -11,7 +12,7 @@ class PostItem {
     const posts = await apiServer.getPosts();
     posts.reverse();
 
-    posts.forEach(({ post, user }: IResponsePost) => {
+    posts.forEach(async ({ post, user }: IResponsePost) => {
       const postCreateDate = formatDistanceToNowStrict(new Date(post.createdDate), { addSuffix: true });
       const iconPost = post.icon
         ? `<div class="info-posts__icon"><img src="${post.icon}" alt="icon for post" class="info-posts__img"></div>`
@@ -21,6 +22,7 @@ class PostItem {
         cuurentUserName.username === user.username
           ? `<i style='color:#333' class="fa fa-trash item-post__deletebtn" aria-hidden="true"></i>`
           : '';
+      const comments = await this.getComments(post);
 
       postsContainer.innerHTML += `
       <div class="list-posts__item item-posts" id="${post._id}">
@@ -39,7 +41,24 @@ class PostItem {
       
     <span class="info-posts__icon-time">${postCreateDate}</span>
     </div>
-      </div>`;
+    <div class="item-posts__comments comments-posts">
+  <div class="comments-posts__header">
+    <p class="comments-posts__amount blue">${comments.length} comments</p>
+    <p class="comments-posts__likes">44 Likes</p>
+    <img class="comments-posts__button-like" src="./img/heart-like.png" alt="like button">
+  </div>
+  <ul class="comments-posts__list list-comments">
+  ${comments.block}
+  </ul>
+  <div class="comments-posts__field field-comments">
+    <div class="field-comments__icon">
+      <img src="./img/sleeping.png" alt="commetn user photo" class="field-comments__img">
+    </div>
+    <textarea class="field-comments__input" type="text" placeholder="Write comment"></textarea>
+  </div>
+</div>
+
+    </div>`;
     });
 
     this.eventlisteners();
@@ -64,6 +83,15 @@ class PostItem {
 
     const response = await apiServer.deletePost(idPost, token);
     console.log(response);
+  }
+
+  async getComments(post: IPost) {
+    if (!post.comments || post.comments.length < 1) {
+      return { comments: '', length: 0 };
+    }
+    const comments = await Promise.all(post.comments.map((comment) => postComment.render(comment)));
+
+    return { block: comments.join(''), length: comments.length };
   }
 }
 

@@ -118,10 +118,21 @@ class authController {
     }
   }
 
-  async getUser(req, res) {
+  async getCurrentUser(req, res) {
     try {
       const id = req.user.id;
       const user = await User.find({ _id: id });
+      res.status(200).json(user)
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: 'get error' })
+    }
+  }
+
+  async getUser(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await User.findOne({ _id: id.slice(1) });
       res.status(200).json(user)
     } catch (e) {
       console.log(e);

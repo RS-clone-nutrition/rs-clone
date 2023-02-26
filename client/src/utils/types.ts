@@ -106,15 +106,25 @@ interface IResponseUser {
 }
 
 interface IResponsePost {
-  post: {
-    _id: string;
-    id: string;
-    text: string;
-    user: string;
-    createdDate: string;
-    icon?: string;
-  };
+  post: IPost;
   user: IUser;
+}
+
+interface IPost {
+  _id: string;
+  id: string;
+  text: string;
+  user: string;
+  createdDate: string;
+  icon?: string;
+  comments?: [IComment];
+}
+
+interface IComment {
+  text: string;
+  _id: string;
+  user: string;
+  createdDate: string;
 }
 
 interface IBodyRequestPost {
@@ -265,4 +275,6 @@ export {
   IActivity,
   IResponsePost,
   IBodyRequestPost,
+  IComment,
+  IPost,
 };
