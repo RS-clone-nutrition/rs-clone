@@ -34,6 +34,25 @@ class SignIn {
     `;
 
     this.auth.eventListenres();
+    this.changeColor();
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const btnRegister = <HTMLElement>document.querySelector('.form__submit button');
+    const linkSingin = <HTMLElement>document.querySelector('.form__block a');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btnRegister.style.background = changeColorInput.value;
+    btnRegister.style.borderColor = changeColorInput.value;
+    linkSingin.style.color = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btnRegister.style.background = changeColorInput.value;
+      btnRegister.style.borderColor = changeColorInput.value;
+      linkSingin.style.color = changeColorInput.value;
+    });
   }
 }
 

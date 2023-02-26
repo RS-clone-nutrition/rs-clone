@@ -279,6 +279,7 @@ class Foods {
     `;
 
     this.eventListeners();
+    this.changeColor();
   }
 
   eventListeners() {
@@ -303,6 +304,19 @@ class Foods {
         const name = `/foods/group/${createPath(nameFood)}`;
         router.route(e, name);
       });
+    });
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const borderTitle = <HTMLElement>$('.top-foods');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    borderTitle.style.borderColor = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      borderTitle.style.borderColor = changeColorInput.value;
     });
   }
 }

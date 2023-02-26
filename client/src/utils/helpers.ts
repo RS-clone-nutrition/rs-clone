@@ -80,6 +80,16 @@ function activePage(path: string) {
   }
 }
 
+const getTokenStorage = () => {
+  const token = <string>JSON.parse(<string>localStorage.getItem('token'));
+
+  if (!token) {
+    alert('Error: please re-login. Sorry for the inconvenience');
+  }
+
+  return token;
+};
+
 export {
   $,
   $All,
@@ -94,4 +104,5 @@ export {
   getPercent,
   activePage,
   getPercentFromNum,
+  getTokenStorage,
 };

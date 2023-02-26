@@ -100,21 +100,37 @@ class Router {
 
   eventListeners() {
     const pagesBlock = <HTMLElement>document.querySelector('.nav__menu');
-
-    window.addEventListener('popstate', () => this.handleLocation());
-    // window.addEventListener('DOMContentLoaded', () => this.handleLocation());
-
-    pagesBlock.addEventListener('click', (e) => {
-      this.route(e);
-    });
-
     const burgerMenu = <HTMLElement>document.querySelector('.header_burger');
     const headerMenu = <HTMLElement>document.querySelector('.nav__menu');
     const mainOpen = <HTMLElement>document.querySelector('.main-open');
     const burgerClose = <HTMLElement>document.querySelector('.nav_menu_close');
+    const header = <HTMLElement>document.querySelector('header');
+    const footer = <HTMLElement>document.querySelector('footer');
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const iconSearch = <HTMLElement>document.querySelector('.fa-solid');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+      header.style.background = changeColorInput.value;
+      footer.style.background = changeColorInput.value;
+      iconSearch.style.color = changeColorInput.value;
+    }
+
+    window.addEventListener('popstate', () => this.handleLocation());
+
+    pagesBlock.addEventListener('click', (e) => {
+      this.route(e);
+      const eventLink = <HTMLElement>e.target;
+      if (eventLink.classList.contains('nav__link')) {
+        headerMenu.classList.remove('header-nav-active');
+        mainOpen.classList.remove('main_open_menu');
+      }
+    });
+
     burgerMenu.addEventListener('click', () => {
       headerMenu.classList.add('header-nav-active');
       mainOpen.classList.add('main_open_menu');
+      headerMenu.style.background = changeColorInput.value;
     });
     burgerClose.addEventListener('click', () => {
       headerMenu.classList.remove('header-nav-active');
@@ -159,6 +175,13 @@ class Router {
       if (searchValueDefault === 'exercise') {
         window.location.href = `/fitness?exercise=${searchInput.value}`;
       }
+    });
+
+    changeColorInput.addEventListener('change', () => {
+      header.style.background = changeColorInput.value;
+      footer.style.background = changeColorInput.value;
+      iconSearch.style.color = changeColorInput.value;
+      localStorage.setItem('color', `${changeColorInput.value}`);
     });
   }
 }

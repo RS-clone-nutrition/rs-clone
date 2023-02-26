@@ -90,14 +90,6 @@ interface IInputCheckbox {
 
 type AuthApiMessage = { message: string };
 
-// interface IUser {
-//   username: string;
-//   password: string;
-//   weight: string;
-//   height: string;
-//   age: string;
-//   gender: string;
-// }
 interface IUser {
   [key: string]: string;
 }

@@ -154,8 +154,6 @@ label,
 .item-btn:active,
 .item-btn:focus,
 .active-item{
-    background: #33B34B;
-    color: #FFFFFF;
     cursor: pointer;
 }
 .item-cals{

@@ -117,5 +117,17 @@ const blockCookBook = {
       })
     );
   },
+  changeColorFindLink() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const findLink = <HTMLElement>$('.find-recipes__link');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    findLink.style.color = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      findLink.style.color = changeColorInput.value;
+    });
+  },
 };
 export default blockCookBook;

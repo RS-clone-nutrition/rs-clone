@@ -13,7 +13,7 @@ const authMiddleware = (req, res, next) => {
       return res.status(403).json({ message: 'user is not authorized' })
     }
 
-    const decodateData = jwt.verify(token, secret.key)
+    const decodateData = jwt.verify(token, secret.key);
 
     req.user = decodateData
     next()

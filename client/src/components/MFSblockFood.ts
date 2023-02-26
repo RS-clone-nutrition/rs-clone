@@ -29,7 +29,7 @@ const blockFood = {
         
       </div>
       <button class="addItem breakfast food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -45,7 +45,7 @@ const blockFood = {
       <div class="new-item lunch">
       </div>
       <button class="addItem lunch food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -61,7 +61,7 @@ const blockFood = {
       <div class="new-item dinner">
       </div>
       <button class="addItem dinner food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -77,7 +77,7 @@ const blockFood = {
       <div class="new-item snack">
       </div>
       <button class="addItem snack food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -177,22 +177,23 @@ const blockFood = {
     allCarbsText.innerHTML = `${allCarbs.toFixed(2)}`;
     allProtText.innerHTML = `${allProt.toFixed(2)}`;
     allCalText.innerHTML = `${allCal.toFixed(2)}`;
+    this.changeColor();
   },
   getDaySummary() {
     const arr = [$All('.fat-all'), $All('.carbs-all'), $All('.prot-all'), $All('.cals-all'), $All('.cals-all')];
     const dayCount = [
-      $('.day-summary__block.fat p '),
-      $('.day-summary__block.carbs p'),
-      $('.day-summary__block.protein p'),
-      $('.day-summary__block.cal p'),
-      $('.day-summary__block.RDI h4'),
+      <HTMLElement>$('.day-summary__block.fat p '),
+      <HTMLElement>$('.day-summary__block.carbs p'),
+      <HTMLElement>$('.day-summary__block.protein p'),
+      <HTMLElement>$('.day-summary__block.cal p'),
+      <HTMLElement>$('.day-summary__block.RDI h4'),
     ];
     for (let i = 0; i < arr.length; i++) {
       let res = 0;
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
-      dayCount[i]!.innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
+      dayCount[i].innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
     }
   },
   changeGramm() {
@@ -223,6 +224,35 @@ const blockFood = {
         });
       })
     );
+  },
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const subtitleColor = <HTMLElement>document.querySelector('.myfatsecret-food-fitness__col-category');
+    const arrBorderBtn: HTMLElement[] = Array.from(
+      document.querySelectorAll('.myfatsecret-food-fitness__row-category')
+    );
+    const arriconColor: HTMLElement[] = Array.from(document.querySelectorAll('.fa-square-plus'));
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+
+    subtitleColor.style.color = changeColorInput.value;
+    for (let i = 0; i < arriconColor.length; i++) {
+      arriconColor[i].style.color = changeColorInput.value;
+    }
+    for (let i = 0; i < arrBorderBtn.length; i++) {
+      arrBorderBtn[i].style.borderColor = changeColorInput.value;
+    }
+    changeColorInput.addEventListener('change', () => {
+      subtitleColor.style.color = changeColorInput.value;
+      for (let i = 0; i < arriconColor.length; i++) {
+        arriconColor[i].style.color = changeColorInput.value;
+      }
+      for (let i = 0; i < arrBorderBtn.length; i++) {
+        arrBorderBtn[i].style.borderColor = changeColorInput.value;
+      }
+    });
   },
 };
 export default blockFood;

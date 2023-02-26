@@ -12,7 +12,7 @@ const popup = {
       <div class="popup__body">
         <div class="popup__block">
           <button class="popup__addItem">
-            <img src="./img/myfatsecret/additem.svg" alt="additem">
+            <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
             Add Item
           </button>
           <div class="search">
@@ -90,11 +90,15 @@ const popup = {
   },
 
   getItem(cal: number, label: string, uri: string, amount?: number) {
+    const from = uri.search('#');
+    const to = uri.length;
+    const newstr = uri.substring(from + 1, to);
+
     const block = document.querySelector('.popup__products-table__add-block') as HTMLElement;
     block.innerHTML += `
     <div class = "popup__products-table__add-block__add-item">
       <span class="popup__products-table__food">
-      <input type="checkbox" class="checkbox-addItem" id="${!Number.isNaN(+uri) ? uri : uri.match(/(?<=#).*/gi)}">
+      <input type="checkbox" class="checkbox-addItem" id="${!Number.isNaN(+uri) ? uri : [newstr]}">
       ${label}
       </span>
       <span class="popup__products-table__amount">

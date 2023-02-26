@@ -82,6 +82,7 @@ class SingleFood {
       const titleProduct = <HTMLElement>document.querySelector('.top-foods__title');
       titleProduct.innerHTML = `NOT FOUND PRODUCT '${product}'`;
     }
+    this.changeColor();
   }
 
   async requestsApi(servise: string) {
@@ -91,6 +92,19 @@ class SingleFood {
       servise === 'nutritionAnalysis' ? await api.getNutritionAnalysis(product) : await api.getFoods(product);
 
     return result;
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const borderTitle = <HTMLElement>document.querySelector('.top-foods');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    borderTitle.style.borderColor = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      borderTitle.style.borderColor = changeColorInput.value;
+    });
   }
 }
 

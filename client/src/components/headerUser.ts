@@ -10,11 +10,10 @@ class HeaderUser {
     this.signLink = <HTMLLinkElement>$('.sign');
   }
 
-  render() {
-    const user = <string>localStorage.getItem('user');
-    const userObj = JSON.parse(user);
+  async render() {
+    const userObj = await this.getUser();
 
-    if (!user) {
+    if (!userObj) {
       return;
     }
 
@@ -38,6 +37,16 @@ class HeaderUser {
       this.signLink.textContent = 'Sign Up';
       this.signLink.href = '/signup';
     });
+  }
+
+  async getUser() {
+    const user = <string>localStorage.getItem('user');
+
+    if (!user || user === 'undefined') {
+      return;
+    }
+
+    return JSON.parse(user);
   }
 }
 

@@ -1,6 +1,6 @@
-import { $ } from '../utils/helpers';
-import apiServer from '../api/apiServer';
-import { IUser, IResponseUser } from '../utils/types';
+import { $, getTokenStorage } from '../../utils/helpers';
+import apiServer from '../../api/apiServer';
+import { IUser, IResponseUser } from '../../utils/types';
 
 class BioTextArea {
   main: HTMLElement;
@@ -9,7 +9,7 @@ class BioTextArea {
 
   render(userObj: IUser) {
     this.main = <HTMLElement>$('.user-bio');
-    this.bio = userObj.bio === 'undefined' ? 'Tell about yourself' : userObj.bio;
+    this.bio = userObj.bio === undefined ? 'Tell about yourself' : userObj.bio;
 
     this.main.innerHTML = `
     <p class="user__bio">Bio: ${this.bio}</p>
@@ -21,6 +21,7 @@ class BioTextArea {
 
   eventListeners() {
     const saveBtn = <HTMLElement>$('.update-btn');
+    this.changeColor(saveBtn);
 
     saveBtn.addEventListener('click', () => {
       this.updateBio();
@@ -37,6 +38,7 @@ class BioTextArea {
       `;
 
     const saveBtn = <HTMLElement>$('.textarea__btn');
+    this.changeColor(saveBtn);
 
     saveBtn.addEventListener('click', () => {
       this.sendBioServer();
@@ -48,11 +50,25 @@ class BioTextArea {
     const user = <IUser>JSON.parse(<string>localStorage.getItem('user'));
     user.bio = textarea;
 
-    const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user);
+    const token = getTokenStorage();
+
+    const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user, token);
     const userObj = <IUser>serverRsponse.response.user;
 
     localStorage.setItem('user', JSON.stringify(userObj));
     this.render(userObj);
+  }
+
+  changeColor(btn: HTMLElement) {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btn.style.background = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btn.style.background = changeColorInput.value;
+    });
   }
 }
 

@@ -26,19 +26,19 @@ class MyFatSecret {
       </ul>
       <div class="myfatsecret__tabs">
         <button class="myfatsecret__card calendar">
-          <img src="./img/myfatsecret/calender-icon.svg" alt="calendar">
+          <p class="myfatsecret__card-title title">Calendar</p>
           <span class="myfatsecret__info-calendar">WED 01</span>
         </button>
         <button class="myfatsecret__card food">
-          <img src="./img/myfatsecret/food-icon.svg" alt="food">
+          <p class="myfatsecret__card-title title">Food diary</p>
           <span class="myfatsecret__info-food">0 kcal</span>
         </button>
         <button class="myfatsecret__card fitness">
-          <img src="./img/myfatsecret/fitness-icon.svg" alt="fitness">
+          <p class="myfatsecret__card-title title">Exercise diary</p>
           <span class="myfatsecret__info-fitness">0 kcal</span>
         </button>
         <button class="myfatsecret__card cookbook">
-          <img src="./img/myfatsecret/cookbook.png" alt="cook book">
+          <p class="myfatsecret__card-title title">Cookbook</p>
           <span class="myfatsecret__info-cookbook">0 recipes</span>
         </button>
       </div>
@@ -56,6 +56,7 @@ class MyFatSecret {
         this.showBlock(e);
       })
     );
+    this.changeColor();
   }
 
   async showBlock(e: Event) {
@@ -79,6 +80,7 @@ class MyFatSecret {
       case 'cookbook':
         block.innerHTML = `${blockCookBook.render()}`;
         blockCookBook.fillCookBook();
+        blockCookBook.changeColorFindLink();
         break;
     }
   }
@@ -97,6 +99,27 @@ class MyFatSecret {
       },
     };
     localStorage.setItem('storage', JSON.stringify(storage));
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const borderTitle = <HTMLElement>document.querySelector('.myfatsecret__block');
+    const arrBtnFatsecret: HTMLElement[] = Array.from(document.querySelectorAll('.myfatsecret__card'));
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+
+    borderTitle.style.borderColor = changeColorInput.value;
+    for (let i = 0; i < arrBtnFatsecret.length; i++) {
+      arrBtnFatsecret[i].style.background = changeColorInput.value;
+    }
+    changeColorInput.addEventListener('change', () => {
+      borderTitle.style.borderColor = changeColorInput.value;
+      for (let i = 0; i < arrBtnFatsecret.length; i++) {
+        arrBtnFatsecret[i].style.background = changeColorInput.value;
+      }
+    });
   }
 }
 

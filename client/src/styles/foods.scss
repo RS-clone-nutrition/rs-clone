@@ -91,17 +91,7 @@ body {
   }
 }
 
-@media (max-width:700px) {
-  html {
-    font-size: 0.8px;
-  }
-}
-
 @media (max-width:600px) {
-  html {
-    font-size: 1px;
-  }
-
   .main-foods {
     &__content {
       padding: 20rem 10rem;
