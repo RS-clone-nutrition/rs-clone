@@ -1,3 +1,4 @@
+import { json } from 'express';
 import { DataExercise } from '../components/dataFitExercise';
 
 const $ = (selector: string, parent?: Element) => {
@@ -90,6 +91,11 @@ const getTokenStorage = () => {
   return token;
 };
 
+const getFromLocalStorage = (key: string) => {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : null;
+};
+
 export {
   $,
   $All,
@@ -105,4 +111,5 @@ export {
   activePage,
   getPercentFromNum,
   getTokenStorage,
+  getFromLocalStorage,
 };

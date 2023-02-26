@@ -1,4 +1,5 @@
 import { IUser, IResponseLogin } from '../utils/types';
+import { IBodyRequestPost } from '../utils/types';
 
 class ApiServer {
   URL = 'http://localhost:5000/';
@@ -85,7 +86,7 @@ class ApiServer {
     }
   }
 
-  async sendPostServer(text: string, token: string) {
+  async sendPostServer(post: IBodyRequestPost, token: string) {
     try {
       const response = await fetch(`${this.URL}post`, {
         method: 'POST',
@@ -94,7 +95,7 @@ class ApiServer {
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify(post),
       });
       const result = await response.json();
       return { result, status: response.status };

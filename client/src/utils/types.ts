@@ -111,8 +111,14 @@ interface IResponsePost {
     text: string;
     user: string;
     createdDate: string;
+    icon?: string;
   };
   user: IUser;
+}
+
+interface IBodyRequestPost {
+  text: string;
+  icon?: string;
 }
 
 interface IActivity {
@@ -257,4 +263,5 @@ export {
   IResponseUser,
   IActivity,
   IResponsePost,
+  IBodyRequestPost,
 };

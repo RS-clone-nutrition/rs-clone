@@ -1,9 +1,10 @@
-import { $ } from '../utils/helpers';
 import apiServer from '../api/apiServer';
-import { getTokenStorage } from '../utils/helpers';
+import { getTokenStorage, $ } from '../utils/helpers';
 import userPopupAvatar from './user/userPopupAvatar';
 
 class PostCreate {
+  icon: string;
+
   render() {
     const createPostContainer = <HTMLElement>$('.field-posts');
 
@@ -28,15 +29,23 @@ class PostCreate {
   }
 
   async sendPost() {
-    const textPost = <string>(<HTMLTextAreaElement>$('.field-posts__input')).value;
+    const text = <string>(<HTMLTextAreaElement>$('.field-posts__input')).value;
     const token = getTokenStorage();
 
-    if (textPost) {
-      const response = await apiServer.sendPostServer(textPost, token);
+    if (text) {
+      const response = this.icon
+        ? await apiServer.sendPostServer({ text, icon: this.icon }, token)
+        : await apiServer.sendPostServer({ text }, token);
       console.log(response);
     } else {
       alert('Please fill post field');
     }
+  }
+
+  addIconLink(iconLink: string) {
+    const addIconBtn = <HTMLImageElement>$('.field-posts__icon-button');
+    addIconBtn.src = './img/community/check.svg';
+    this.icon = iconLink;
   }
 }
 

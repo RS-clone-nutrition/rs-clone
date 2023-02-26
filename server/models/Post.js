@@ -10,6 +10,9 @@ const Post = new Schema({
     ref: 'user',
     required: true
   },
+  icon: {
+    type: String
+  },
   // likes: [
   //   {
   //     user: {

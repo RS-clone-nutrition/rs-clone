@@ -1,6 +1,7 @@
-import { $ } from '../../utils/helpers';
+import { $, getLastURLPart } from '../../utils/helpers';
 import apiServer from '../../api/apiServer';
 import userAvatar from './userAvatar';
+import postCreateBlock from '../postCreateBlock';
 
 class UserPopup {
   popupBlock: HTMLElement;
@@ -73,15 +74,14 @@ class UserPopup {
   async sendAvatar(formAvatar: HTMLFormElement) {
     const result = await apiServer.sendAvatar(new FormData(formAvatar));
 
-    userAvatar.updateUserAvatar(result.secure_url);
+    const page = <string>getLastURLPart();
+    if (page === 'user') {
+      userAvatar.updateUserAvatar(result.secure_url);
+    } else if (page === 'community') {
+      postCreateBlock.addIconLink(result.secure_url);
+    }
 
     this.popupBlock.remove();
-
-    const userObj = JSON.parse(<string>localStorage.getItem('user'));
-    userObj.avatar = result.secure_url;
-    localStorage.setItem('user', JSON.stringify(userObj));
-
-    userAvatar.render(result.secure_url);
   }
 }
 

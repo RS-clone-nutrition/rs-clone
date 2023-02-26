@@ -27,6 +27,12 @@ class UserAvatar {
     const token = getTokenStorage();
 
     apiServer.updateUserAvatar(avatarLink, token);
+
+    const userObj = JSON.parse(<string>localStorage.getItem('user'));
+    userObj.avatar = avatarLink;
+    localStorage.setItem('user', JSON.stringify(userObj));
+
+    this.render(avatarLink);
   }
 }
 

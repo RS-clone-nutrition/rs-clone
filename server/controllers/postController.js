@@ -12,10 +12,10 @@ class PostController {
         return res.status(400).json({ message: 'Send post error:' + ' ' + errors.array()[0].msg + '\n Please try it again' })
       }
 
-      const { text } = req.body;
+      const { text, icon } = req.body;
       const user = req.user.id;
 
-      const post = new Post({ text, user });
+      const post = new Post({ text, user, icon });
 
       const savedPost = await post.save();
 
