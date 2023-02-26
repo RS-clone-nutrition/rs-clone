@@ -1,5 +1,6 @@
 import postCreate from '../components/postCreateBlock';
 import postItemBlock from '../components/postItemBlock';
+import apiServer from '../api/apiServer';
 class Community {
   main;
 
@@ -7,7 +8,9 @@ class Community {
     this.main = main;
   }
 
-  render() {
+  async render() {
+    const user = await this.getUser();
+
     this.main.innerHTML = `
     <div class="community">
     <div class="community__container">
@@ -75,8 +78,24 @@ class Community {
   </div>
     `;
 
-    postCreate.render();
+    postCreate.render(user);
     postItemBlock.render();
+  }
+
+  async getUser() {
+    let user = <string>localStorage.getItem('user');
+
+    if (!user || user === 'undefined') {
+      const token = JSON.parse(<string>localStorage.getItem('token'));
+      const response = await apiServer.getUser(token);
+
+      user = response[0];
+
+      localStorage.setItem('user', JSON.stringify(user));
+      return user;
+    }
+
+    return JSON.parse(user);
   }
 }
 

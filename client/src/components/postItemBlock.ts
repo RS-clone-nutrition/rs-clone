@@ -1,4 +1,4 @@
-import { $, getFromLocalStorage } from '../utils/helpers';
+import { $, $All, getFromLocalStorage, getTokenStorage } from '../utils/helpers';
 import apiServer from '../api/apiServer';
 import { IResponsePost } from '../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
@@ -6,6 +6,7 @@ import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 class PostItem {
   async render() {
     const postsContainer = <HTMLElement>$('.list-posts');
+    postsContainer.innerHTML = '';
     const cuurentUserName = getFromLocalStorage('user');
     const posts = await apiServer.getPosts();
     posts.reverse();
@@ -18,11 +19,11 @@ class PostItem {
       const iconUser = user.avatar || './img/user/avatar-default.png';
       const removeBtn =
         cuurentUserName.username === user.username
-          ? `<i style='color:#333' class="fa fa-trash" aria-hidden="true"></i>`
+          ? `<i style='color:#333' class="fa fa-trash item-post__deletebtn" aria-hidden="true"></i>`
           : '';
 
       postsContainer.innerHTML += `
-      <div class="list-posts__item item-posts">
+      <div class="list-posts__item item-posts" id="${post._id}">
         <div class="item-posts__header">
           <div class="item-posts__author">
             <div class="item-posts__icon">
@@ -35,10 +36,34 @@ class PostItem {
     <div class="item-posts__info info-posts">
     <p class="info-posts__description">${post.text}</p>
       ${iconPost}
+      
     <span class="info-posts__icon-time">${postCreateDate}</span>
     </div>
       </div>`;
     });
+
+    this.eventlisteners();
+  }
+
+  eventlisteners() {
+    const deletesBtns = $All('.item-post__deletebtn');
+
+    deletesBtns.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        this.deletePost(<HTMLElement>e.target);
+      });
+    });
+  }
+
+  async deletePost(button: HTMLElement) {
+    const postForDelete = <HTMLElement>button.closest('.item-posts');
+    const idPost = <string>postForDelete.getAttribute('id');
+    const token = getTokenStorage();
+
+    postForDelete.remove();
+
+    const response = await apiServer.deletePost(idPost, token);
+    console.log(response);
   }
 }
 

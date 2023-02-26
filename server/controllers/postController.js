@@ -4,7 +4,6 @@ import User from '../models/User.js';
 
 class PostController {
   async createPost(req, res) {
-
     try {
       const errors = validationResult(req);
 
@@ -42,6 +41,20 @@ class PostController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: 'get posts error' })
+    }
+  }
+
+  async deletePost(req, res) {
+    try {
+      const { id } = req.body;
+      const post = await Post.deleteOne({ _id: id });
+
+      return res.status(200).json({
+        message: 'post successfully deleted'
+      })
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: 'Post delete error' })
     }
   }
 }

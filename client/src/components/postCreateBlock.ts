@@ -1,16 +1,22 @@
 import apiServer from '../api/apiServer';
 import { getTokenStorage, $ } from '../utils/helpers';
 import userPopupAvatar from './user/userPopupAvatar';
+import { IUser } from '../utils/types';
+import postItemBlock from './postItemBlock';
 
 class PostCreate {
   icon: string;
 
-  render() {
+  currentUser: IUser;
+
+  render(user: IUser) {
     const createPostContainer = <HTMLElement>$('.field-posts');
+    this.currentUser = user;
+    const iconUser = user.avatar || './img/user/avatar-default.png';
 
     createPostContainer.innerHTML = ` 
     <div class="field-posts__icon">
-    <img src="./img/sleeping.png" alt="user photo" class="field-posts__img">
+    <img src="${iconUser}" alt="user photo" class="field-posts__img">
   </div>
   <textarea class="field-posts__input" type="text" placeholder="Anything new?"></textarea>
   <img src="./img/user/camera.svg" alt="user photo" class="field-posts__icon-button">
@@ -36,7 +42,10 @@ class PostCreate {
       const response = this.icon
         ? await apiServer.sendPostServer({ text, icon: this.icon }, token)
         : await apiServer.sendPostServer({ text }, token);
-      console.log(response);
+
+      postItemBlock.render();
+      this.render(this.currentUser);
+      return response;
     } else {
       alert('Please fill post field');
     }

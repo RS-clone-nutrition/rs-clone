@@ -107,6 +107,7 @@ interface IResponseUser {
 
 interface IResponsePost {
   post: {
+    _id: string;
     id: string;
     text: string;
     user: string;

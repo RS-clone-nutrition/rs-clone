@@ -1,4 +1,3 @@
-import { json } from 'express';
 import { DataExercise } from '../components/dataFitExercise';
 
 const $ = (selector: string, parent?: Element) => {

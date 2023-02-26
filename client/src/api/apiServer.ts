@@ -113,8 +113,25 @@ class ApiServer {
         mode: 'cors',
       });
       const result = await response.json();
-      console.log(result);
       return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async deletePost(id: string, token: string) {
+    try {
+      const response = await fetch(`${this.URL}post`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const result = await response.json();
+      return { result, status: response.status };
     } catch (e) {
       console.log(e);
     }
