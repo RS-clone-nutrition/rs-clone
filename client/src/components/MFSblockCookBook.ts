@@ -1,5 +1,6 @@
-import { $ } from '../utils/helpers';
+import { $, $All } from '../utils/helpers';
 import api from '../api/api';
+import { IRecipe, IRecipeData } from '../utils/types';
 const blockCookBook = {
   render() {
     return `
@@ -92,6 +93,29 @@ const blockCookBook = {
         });
       }
     }
+    this.eventListener();
+  },
+  eventListener() {
+    const addFoodDiary = $All('.item-add');
+    addFoodDiary.forEach((el) =>
+      el.addEventListener('click', async (e) => {
+        const target = e.target as HTMLElement;
+        const result: IRecipe = await api.getSingleRecipe(target.id);
+        const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+        console.log(result.recipe.mealType);
+
+        //   storage.food[`${result.recipe.cuisineType}`].push({
+        //     label: arr.recipe.label,
+        //     cal: Math.round((arr.recipe.calories * 100) / arr.recipe.totalWeight),
+        //     fat: Math.round((arr.recipe.totalNutrients.FAT.quantity * 100) / arr.recipe.totalWeight),
+        //     carb: Math.round((arr.recipe.totalNutrients.CA.quantity * 100) / arr.recipe.totalWeight),
+        //     prot: Math.round((arr.recipe.totalNutrients.PROCNT.quantity * 100) / arr.recipe.totalWeight),
+        //     totalWeight: arr.recipe.totalWeight,
+        //     gramm: 100,
+        //   });
+        // localStorage.setItem('storage', JSON.stringify(storage));
+      })
+    );
   },
 };
 export default blockCookBook;

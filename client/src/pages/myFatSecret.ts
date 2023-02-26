@@ -58,7 +58,7 @@ class MyFatSecret {
     );
   }
 
-  showBlock(e: Event) {
+  async showBlock(e: Event) {
     const block = document.querySelector('.myfatsecret__block') as HTMLElement;
     const target = e.currentTarget as HTMLElement;
     const nameTab = target.className.split(' ')[1];
