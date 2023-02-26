@@ -35,15 +35,18 @@
   }
 }
 
-.list-posts {
+// .list-posts {
 
-  &__item {
-    background-color: #FFF;
-    border: 1px solid #D3D6DB;
-  }
-}
+//   &__item {
+//     background-color: #FFF;
+//     border: 1px solid #D3D6DB;
+//   }
+// }
 
 .item-posts {
+  background-color: #FFF;
+  border: 1px solid #D3D6DB;
+  padding: 5rem;
 
   &__author {
     display: flex;
@@ -52,12 +55,14 @@
 
   &__icon {
     flex: 0 0 60px;
+    padding-top: 10rem;
   }
 
   &__img {
     width: 60rem;
     height: 60rem;
     object-fit: cover;
+    border-radius: 50%;
   }
 
   &__info {
@@ -91,6 +96,11 @@
   &__img {
     width: 100%;
     object-fit: cover;
+  }
+
+  &__name.blue {
+    text-transform: capitalize;
+    font-size: 20rem;
   }
 }
 
@@ -213,6 +223,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 5rem;
+  position: relative;
 
   &__icon {
     width: 40rem;
@@ -225,7 +236,17 @@
   &__input {
     flex-grow: 1;
     border-radius: 20rem;
-    padding: 15rem 0 0 5rem;
+    padding: 15rem 8% 0 5rem;
+  }
+
+  &__icon-button {
+    position: absolute;
+    width: 10%;
+    height: 50%;
+    top: 50%;
+    left: 77%;
+    transform: translate(0, -50%);
+    cursor: pointer;
   }
 
   &__button {}

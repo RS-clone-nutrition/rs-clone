@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import authRouter from "./routes/authRouter.js";
 import cors from "cors";
 import loaderRouter from "./routes/loaderRouter.js"
+import postRouter from "./routes/postRouter.js"
 
 const PORT = process.env.PORT || 5000;
 
@@ -12,6 +13,7 @@ app.use(cors())
 app.use(express.json())
 app.use(authRouter)
 app.use(loaderRouter)
+app.use(postRouter)
 
 
 const start = async () => {

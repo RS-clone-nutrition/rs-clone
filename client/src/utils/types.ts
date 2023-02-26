@@ -105,6 +105,16 @@ interface IResponseUser {
   status: number;
 }
 
+interface IResponsePost {
+  post: {
+    id: string;
+    text: string;
+    user: string;
+    createdDate: string;
+  };
+  user: IUser;
+}
+
 interface IActivity {
   low: 1.375;
   average: 1.55;
@@ -246,4 +256,5 @@ export {
   IResponseLogin,
   IResponseUser,
   IActivity,
+  IResponsePost,
 };

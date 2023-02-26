@@ -1,6 +1,6 @@
 import Router from "express";
 import loader from "../middleware/loaderMiddleware.js";
-import loaderContoller from "../controllers/loaderContoller.js";
+import loaderContoller from "../controllers/loaderController.js";
 
 const router = new Router();
 

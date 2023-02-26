@@ -1,4 +1,6 @@
 import Post from '../models/Post.js'
+import { validationResult } from "express-validator";
+import User from '../models/User.js';
 
 class PostController {
   async createPost(req, res) {
@@ -17,8 +19,6 @@ class PostController {
 
       const savedPost = await post.save();
 
-      console.log(savedPost);
-
       return res.status(200).json({
         message: 'post successfully loaded'
       })
@@ -26,8 +26,23 @@ class PostController {
       console.log(e);
       res.status(400).json({ message: 'Post load error' })
     }
+  }
 
+  async getPosts(req, res) {
+    try {
+      const posts = await Post.find();
+      const user = await User.findOne({ _id: posts[0].user })
 
+      const postsWithUser = await Promise.all(posts.map(async (post) => {
+        const user = await User.findOne({ _id: post.user });
+        return { post, user };
+      }))
+
+      res.status(200).json(postsWithUser)
+    } catch (e) {
+      console.log(e);
+      res.status(400).json({ message: 'get posts error' })
+    }
   }
 }
 

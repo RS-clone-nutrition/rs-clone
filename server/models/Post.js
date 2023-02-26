@@ -1,7 +1,6 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import { Schema, model } from "mongoose";
 
-const postSchema = new Schema({
+const Post = new Schema({
   text: {
     type: String,
     required: true

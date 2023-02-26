@@ -1,11 +1,10 @@
 import { IUser, IResponseLogin } from '../utils/types';
 
 class ApiServer {
-  URL = 'http://localhost:8080/';
+  URL = 'http://localhost:5000/';
 
   async sendUserServer(user: IUser, path: string) {
     try {
-      console.log(`${this.URL}${path}`);
       const response = await fetch(`${this.URL}${path}`, {
         method: 'POST',
         mode: 'cors',
@@ -80,6 +79,40 @@ class ApiServer {
         mode: 'cors',
       });
       const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async sendPostServer(text: string, token: string) {
+    try {
+      const response = await fetch(`${this.URL}post`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text }),
+      });
+      const result = await response.json();
+      return { result, status: response.status };
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async getPosts() {
+    try {
+      const response = await fetch(`${this.URL}posts`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'cors',
+      });
+      const result = await response.json();
+      console.log(result);
       return result;
     } catch (e) {
       console.log(e);
