@@ -1,6 +1,7 @@
 import postCreate from '../components/postCreateBlock';
 import postItemBlock from '../components/postItemBlock';
 import apiServer from '../api/apiServer';
+import router from '../router';
 class Community {
   main;
 
@@ -49,6 +50,13 @@ class Community {
       const response = await apiServer.getCurrentUser(token);
 
       user = response[0];
+
+      if (!user) {
+        setTimeout(() => {
+          alert('Please login to your account. Sorry for the inconvenience');
+          router.route(new Event('click'), 'signup');
+        }, 500);
+      }
 
       localStorage.setItem('user', JSON.stringify(user));
       return user;
