@@ -64,7 +64,7 @@ class PostItem {
       );
 
       if (post.comments && post.comments.length > 0) {
-        postComment.render(post, this.currentUser, postsContainer);
+        postComment.render(post.comments, this.currentUser, postsContainer);
       }
       commentCreateBlock.render(this.currentUser, post);
     });

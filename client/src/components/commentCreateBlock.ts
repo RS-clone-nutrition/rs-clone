@@ -8,16 +8,19 @@ class CommentCreate {
 
   currentPost: IPost;
 
+  postContainerBlock: HTMLElement;
+
   icon: string;
 
   render(user: IUser, post: IPost) {
     this.currentUser = user;
     this.currentPost = post;
+    this.postContainerBlock = <HTMLElement>$(`[id="${this.currentPost._id}"]`);
 
     const createCommentContainer = <HTMLElement>$('.field-comments');
     const iconUser = user.avatar || './img/user/avatar-default.png';
 
-    createCommentContainer.innerHTML += ` 
+    createCommentContainer.innerHTML = ` 
     <div class="field-comments__icon">
       <img src="${iconUser}" alt="commetn user photo" class="field-comments__img">
     </div>
@@ -28,16 +31,15 @@ class CommentCreate {
   }
 
   eventListeners() {
-    const textareaComment = <HTMLElement>$('.field-comments__form');
-    // const addIconBtn = <HTMLElement>$('.field-posts__icon-button');
+    const textareaCommentBlock = <HTMLTextAreaElement>$('.field-comments__form', this.postContainerBlock);
 
-    textareaComment.addEventListener('keydown', (e) => this.submitOnEnter(e));
-    textareaComment.addEventListener('submit', () => this.sendCommentServer());
-    // addIconBtn.addEventListener('click', () => userPopupAvatar.render());
+    textareaCommentBlock.addEventListener('keydown', (e: KeyboardEvent) => this.submitOnEnter(e));
+    textareaCommentBlock.addEventListener('submit', (e) => this.sendCommentServer(e));
   }
 
-  async sendCommentServer() {
-    const textareaBlock = <HTMLTextAreaElement>$('.field-comments__input');
+  async sendCommentServer(e: Event) {
+    console.log(e.target);
+    const textareaBlock = <HTMLTextAreaElement>e.target;
     const postContainerBlock = <HTMLTextAreaElement>$('.item-posts');
     const text = <string>textareaBlock.value;
     const postId = this.currentPost._id;
@@ -47,10 +49,11 @@ class CommentCreate {
       const response = await apiServer.sendComment(text, postId, token);
 
       if (response) {
-        postComment.render(response.result.post, this.currentUser, postContainerBlock);
+        const lastComment = response.result.post.comments[response.result.post.comments.length - 1];
+        postComment.render([lastComment], this.currentUser, postContainerBlock);
+
+        textareaBlock.value = '';
       }
-      textareaBlock.value = '';
-      // this.render(this.currentUser, response?.result.post);
       return response;
     } else {
       alert('Please fill comment field');

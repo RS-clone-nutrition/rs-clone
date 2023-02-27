@@ -1,25 +1,26 @@
-import { IUser, IPost } from '../utils/types';
+import { IUser, IComment } from '../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import apiServer from '../api/apiServer';
 import { getTokenStorage, $, $All } from '../utils/helpers';
 
 class PostComment {
-  async render(post: IPost, currentUser: IUser, postContainer: HTMLElement) {
-    if (!post.comments) {
+  async render(comments: [IComment], currentUser: IUser, postContainer: HTMLElement) {
+    if (!comments) {
       return;
     }
 
     const commentsContainer = <HTMLElement>$('.list-comments', postContainer);
-    commentsContainer.innerHTML = '';
     const token = getTokenStorage();
 
-    for await (const comment of post.comments) {
+    for await (const comment of comments) {
       const commentCreateDate = formatDistanceToNowStrict(new Date(comment.createdDate), { addSuffix: true });
       const user = await apiServer.getUser(comment.user, token);
       const avatar = user.avatar || './img/user/avatar-default.png';
       const deleteBtn = this.addDeleteBtn(user.username, currentUser.username);
 
-      commentsContainer.innerHTML += `
+      commentsContainer.insertAdjacentHTML(
+        'beforeend',
+        `
       <li class="list-comments__item item-comments" id="${comment._id}">
         <div class="item-comments__icon">
           <img src="${avatar}" alt="commetn user photo" class="item-comments__img">
@@ -33,17 +34,16 @@ class PostComment {
           ${deleteBtn}
         </div>
       </li>
-      `;
-      console.log('br');
+      `
+      );
     }
 
-    this.changeAmountComments(post);
+    this.changeAmountComments(comments);
     this.eventListeners();
   }
 
   eventListeners() {
     const deleteCommentBtn = $All('.item-comment__deleteBtn');
-    console.log(deleteCommentBtn);
 
     deleteCommentBtn.forEach((item) => {
       item.addEventListener('click', (e) => {
@@ -69,8 +69,7 @@ class PostComment {
     const idComment = <string>commentForDelete.getAttribute('id');
     const token = getTokenStorage();
     commentForDelete.remove();
-    const response = await apiServer.deleteComment(idComment, idPost, token);
-    console.log(response);
+    await apiServer.deleteComment(idComment, idPost, token);
   }
 
   addDeleteBtn(userComment: string, currentUser: string) {
@@ -80,9 +79,9 @@ class PostComment {
     return deleteBtn;
   }
 
-  changeAmountComments(post: IPost) {
+  changeAmountComments(comments: [IComment]) {
     const amountBlock = <HTMLElement>$('.comments-posts__amount');
-    const amount = <number>post.comments?.length;
+    const amount = <number>comments.length;
     amountBlock.innerHTML = amount === 1 ? `${amount} comments` : `${amount} comment`;
   }
 }
