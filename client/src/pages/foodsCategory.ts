@@ -129,10 +129,10 @@ class FoodsCategory {
       changeColorInput.value = colorLocalStr;
     }
     borderTitle.style.borderColor = changeColorInput.value;
-    backgrCategoryContent.style.background = changeColorInput.value;
+    backgrCategoryContent.style.background = changeColorInput.value + '32';
     changeColorInput.addEventListener('change', () => {
       borderTitle.style.borderColor = changeColorInput.value;
-      backgrCategoryContent.style.background = changeColorInput.value;
+      backgrCategoryContent.style.background = changeColorInput.value + '32';
     });
   }
 }
