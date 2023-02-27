@@ -88,7 +88,6 @@ class ApiServer {
 
   async getUser(id: string, token: string) {
     try {
-      console.log(`${this.URL}user?${id}`);
       const response = await fetch(`${this.URL}user:${id}`, {
         headers: {
           authorization: `Bearer ${token}`,
@@ -138,6 +137,24 @@ class ApiServer {
   async deletePost(id: string, token: string) {
     try {
       const response = await fetch(`${this.URL}post`, {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id }),
+      });
+      const result = await response.json();
+      return { result, status: response.status };
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async deleteComment(id: string, token: string) {
+    try {
+      const response = await fetch(`${this.URL}comment`, {
         method: 'DELETE',
         mode: 'cors',
         headers: {

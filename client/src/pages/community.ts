@@ -79,7 +79,7 @@ class Community {
     `;
 
     postCreate.render(user);
-    postItemBlock.render();
+    postItemBlock.render(user);
   }
 
   async getUser() {

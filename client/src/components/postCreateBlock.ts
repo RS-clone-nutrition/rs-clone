@@ -43,7 +43,7 @@ class PostCreate {
         ? await apiServer.sendPostServer({ text, icon: this.icon }, token)
         : await apiServer.sendPostServer({ text }, token);
 
-      postItemBlock.render();
+      postItemBlock.render(this.currentUser);
       this.render(this.currentUser);
       return response;
     } else {

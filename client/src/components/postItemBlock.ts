@@ -1,11 +1,14 @@
 import { $, $All, getFromLocalStorage, getTokenStorage } from '../utils/helpers';
 import apiServer from '../api/apiServer';
-import { IComment, IPost, IResponsePost } from '../utils/types';
+import { IPost, IResponsePost, IUser } from '../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import postComment from './postComment';
 
 class PostItem {
-  async render() {
+  currentUser: IUser;
+
+  async render(currentUser: IUser) {
+    this.currentUser = currentUser;
     const postsContainer = <HTMLElement>$('.list-posts');
     postsContainer.innerHTML = '';
     const cuurentUserName = getFromLocalStorage('user');
@@ -65,11 +68,18 @@ class PostItem {
   }
 
   eventlisteners() {
-    const deletesBtns = $All('.item-post__deletebtn');
+    const deletesPostsBtns = $All('.item-post__deletebtn');
+    const deletesCommentsBtns = $All('.item-comment__deleteBtn');
+    console.log(deletesCommentsBtns);
 
-    deletesBtns.forEach((item) => {
+    deletesPostsBtns.forEach((item) => {
       item.addEventListener('click', (e) => {
         this.deletePost(<HTMLElement>e.target);
+      });
+    });
+    deletesCommentsBtns.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        postComment.deleteComment(e);
       });
     });
   }
@@ -89,7 +99,7 @@ class PostItem {
     if (!post.comments || post.comments.length < 1) {
       return { comments: '', length: 0 };
     }
-    const comments = await Promise.all(post.comments.map((comment) => postComment.render(comment)));
+    const comments = await Promise.all(post.comments.map((comment) => postComment.render(comment, this.currentUser)));
 
     return { block: comments.join(''), length: comments.length };
   }

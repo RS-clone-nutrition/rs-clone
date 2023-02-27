@@ -10,7 +10,7 @@ router.post('/comment',
     check('text', "text can't be empty").notEmpty(),
   ],
   authMiddleware, commentContoller.createComment)
-// router.delete('/comment', authMiddleware, commentContoller.deleteComment)
+router.delete('/comment', authMiddleware, commentContoller.deleteComment)
 // router.get('/comments', commentContoller.getComments)
 
 export default router;
