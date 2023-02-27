@@ -4,28 +4,28 @@ import User from '../models/User.js';
 
 class CommentController {
   async createComment(req, res) {
-    console.log('br');
     try {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: 'Send post error:' + ' ' + errors.array()[0].msg + '\n Please try it again' })
+        return res.status(400).json({ message: 'Send comment error:' + ' ' + errors.array()[0].msg + '\n Please try it again' })
       }
 
-      const { text, id } = req.body;
+      const { text, postId } = req.body;
       const user = req.user.id;
 
-      const post = await Post.findOne({ _id: id });
+      const post = await Post.findOne({ _id: postId });
       post.comments.push({ text, user });
 
-      const updatedPost = await Post.findOneAndUpdate({ _id: id }, { comments: post.comments }, { returnDocument: 'after', strict: true });
+      const updatedPost = await Post.findOneAndUpdate({ _id: postId }, { comments: post.comments }, { returnDocument: 'after', strict: true });
 
       return res.status(200).json({
-        message: 'post successfully loaded'
+        message: 'Comment successfully loaded',
+        post: updatedPost
       })
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: 'Post load error' })
+      res.status(400).json({ message: 'Comment load error' })
     }
   }
 
@@ -48,8 +48,13 @@ class CommentController {
 
   async deleteComment(req, res) {
     try {
-      const { id } = req.body;
-      const post = await Post.deleteOne({ comments: { _id: id } });
+      const { postId, commentId } = req.body;
+      const post = await Post.findOne({ _id: postId });
+
+      const commentIndex = post.comments.findIndex((item) => item._id.toString() === commentId)
+      post.comments.splice(commentIndex, 1);
+
+      await post.save()
 
       return res.status(200).json({
         message: 'comment successfully deleted'

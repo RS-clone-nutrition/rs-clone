@@ -152,7 +152,25 @@ class ApiServer {
     }
   }
 
-  async deleteComment(id: string, token: string) {
+  async sendComment(text: string, postId: string, token: string) {
+    try {
+      const response = await fetch(`${this.URL}comment`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text, postId }),
+      });
+      const result = await response.json();
+      return { result, status: response.status };
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async deleteComment(commentId: string, postId: string, token: string) {
     try {
       const response = await fetch(`${this.URL}comment`, {
         method: 'DELETE',
@@ -161,7 +179,7 @@ class ApiServer {
           'Content-Type': 'application/json',
           authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id }),
+        body: JSON.stringify({ commentId, postId }),
       });
       const result = await response.json();
       return { result, status: response.status };

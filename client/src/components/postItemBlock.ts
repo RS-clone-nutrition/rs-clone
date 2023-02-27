@@ -1,8 +1,9 @@
 import { $, $All, getFromLocalStorage, getTokenStorage } from '../utils/helpers';
 import apiServer from '../api/apiServer';
-import { IPost, IResponsePost, IUser } from '../utils/types';
+import { IResponsePost, IUser } from '../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import postComment from './postComment';
+import commentCreateBlock from './commentCreateBlock';
 
 class PostItem {
   currentUser: IUser;
@@ -13,7 +14,7 @@ class PostItem {
     postsContainer.innerHTML = '';
     const cuurentUserName = getFromLocalStorage('user');
     const posts = await apiServer.getPosts();
-    posts.reverse();
+    // posts.reverse();
 
     posts.forEach(async ({ post, user }: IResponsePost) => {
       const postCreateDate = formatDistanceToNowStrict(new Date(post.createdDate), { addSuffix: true });
@@ -25,9 +26,10 @@ class PostItem {
         cuurentUserName.username === user.username
           ? `<i style='color:#333' class="fa fa-trash item-post__deletebtn" aria-hidden="true"></i>`
           : '';
-      const comments = await this.getComments(post);
 
-      postsContainer.innerHTML += `
+      postsContainer.insertAdjacentHTML(
+        'afterbegin',
+        `
       <div class="list-posts__item item-posts" id="${post._id}">
         <div class="item-posts__header">
           <div class="item-posts__author">
@@ -46,22 +48,25 @@ class PostItem {
     </div>
     <div class="item-posts__comments comments-posts">
   <div class="comments-posts__header">
-    <p class="comments-posts__amount blue">${comments.length} comments</p>
+    <p class="comments-posts__amount blue">0 comments</p>
     <p class="comments-posts__likes">44 Likes</p>
     <img class="comments-posts__button-like" src="./img/heart-like.png" alt="like button">
   </div>
   <ul class="comments-posts__list list-comments">
-  ${comments.block}
   </ul>
   <div class="comments-posts__field field-comments">
     <div class="field-comments__icon">
-      <img src="./img/sleeping.png" alt="commetn user photo" class="field-comments__img">
-    </div>
-    <textarea class="field-comments__input" type="text" placeholder="Write comment"></textarea>
+
   </div>
 </div>
 
-    </div>`;
+    </div>`
+      );
+
+      if (post.comments && post.comments.length > 0) {
+        postComment.render(post, this.currentUser, postsContainer);
+      }
+      commentCreateBlock.render(this.currentUser, post);
     });
 
     this.eventlisteners();
@@ -69,17 +74,10 @@ class PostItem {
 
   eventlisteners() {
     const deletesPostsBtns = $All('.item-post__deletebtn');
-    const deletesCommentsBtns = $All('.item-comment__deleteBtn');
-    console.log(deletesCommentsBtns);
 
     deletesPostsBtns.forEach((item) => {
       item.addEventListener('click', (e) => {
         this.deletePost(<HTMLElement>e.target);
-      });
-    });
-    deletesCommentsBtns.forEach((item) => {
-      item.addEventListener('click', (e) => {
-        postComment.deleteComment(e);
       });
     });
   }
@@ -93,15 +91,6 @@ class PostItem {
 
     const response = await apiServer.deletePost(idPost, token);
     console.log(response);
-  }
-
-  async getComments(post: IPost) {
-    if (!post.comments || post.comments.length < 1) {
-      return { comments: '', length: 0 };
-    }
-    const comments = await Promise.all(post.comments.map((comment) => postComment.render(comment, this.currentUser)));
-
-    return { block: comments.join(''), length: comments.length };
   }
 }
 

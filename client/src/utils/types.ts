@@ -132,6 +132,11 @@ interface IBodyRequestPost {
   icon?: string;
 }
 
+// interface IBodyPostComment {
+//   text: string;
+//   postId: string;
+// }
+
 interface IActivity {
   low: 1.375;
   average: 1.55;
