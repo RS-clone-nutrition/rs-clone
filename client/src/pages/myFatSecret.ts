@@ -3,6 +3,7 @@ import blockFood from '../components/MFSblockFood';
 import blockFitness from '../components/MFSblockFitness';
 import blockCookBook from '../components/MFSblockCookBook';
 import popup from '../components/popup';
+import { $ } from '../utils/helpers';
 class MyFatSecret {
   main;
 
@@ -25,18 +26,18 @@ class MyFatSecret {
         <li><a href="/myfatsecret">MyFatSecret</a></li>
       </ul>
       <div class="myfatsecret__tabs">
-        <button class="myfatsecret__card calendar">
-          <p class="myfatsecret__card-title title">Calendar</p>
-          <span class="myfatsecret__info-calendar">WED 01</span>
-        </button>
-        <button class="myfatsecret__card food">
-          <p class="myfatsecret__card-title title">Food diary</p>
-          <span class="myfatsecret__info-food">0 kcal</span>
-        </button>
-        <button class="myfatsecret__card fitness">
-          <p class="myfatsecret__card-title title">Exercise diary</p>
-          <span class="myfatsecret__info-fitness">0 kcal</span>
-        </button>
+      <button class="myfatsecret__card food">
+      <p class="myfatsecret__card-title title">Food diary</p>
+      <span class="myfatsecret__info-food">0 kcal</span>
+      </button>
+      <button class="myfatsecret__card fitness">
+      <p class="myfatsecret__card-title title">Exercise diary</p>
+      <span class="myfatsecret__info-fitness">0 kcal</span>
+      </button>
+      <button class="myfatsecret__card calendar">
+        <p class="myfatsecret__card-title title">Calendar</p>
+        <span class="myfatsecret__info-calendar">WED 01</span>
+      </button>
         <button class="myfatsecret__card cookbook">
           <p class="myfatsecret__card-title title">Cookbook</p>
           <span class="myfatsecret__info-cookbook">0 recipes</span>
@@ -50,6 +51,7 @@ class MyFatSecret {
     ${popup.render()}
 </div>
     `;
+    this.getAllInformation();
     const tabs = document.querySelectorAll('.myfatsecret__card');
     tabs.forEach((el) =>
       el.addEventListener('click', (e) => {
@@ -70,16 +72,20 @@ class MyFatSecret {
       case 'food':
         block.innerHTML = `${blockFood.render()}`;
         blockFood.drawItem();
+        this.getAllInformation();
         popup.eventListener();
         break;
       case 'fitness':
         block.innerHTML = `${blockFitness.render()}`;
         popup.eventListener();
+        this.getAllInformation();
+
         blockFitness.drawItem();
         break;
       case 'cookbook':
         block.innerHTML = `${blockCookBook.render()}`;
         blockCookBook.fillCookBook();
+        this.getAllInformation();
         blockCookBook.changeColorFindLink();
         break;
     }
@@ -121,6 +127,14 @@ class MyFatSecret {
         arrBtnFatsecret[i].style.background = changeColorInput.value;
       }
     });
+  }
+
+  getAllInformation() {
+    const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+    const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
+    const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
+    infoFood.innerHTML = `${storage.food.calSum} kcal`;
+    infoFitness.innerHTML = `${storage.fitness.calSum} kcal`;
   }
 }
 

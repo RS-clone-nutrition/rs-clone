@@ -1,5 +1,5 @@
 import popup from './popup';
-import { $All } from '../utils/helpers';
+import { $, $All } from '../utils/helpers';
 import { updateLocalStorage } from '../utils/updateLocalStorage';
 const blockFitness = {
   render() {
@@ -105,6 +105,12 @@ const blockFitness = {
     }
     allTimeText.innerHTML = `${allTime} min`;
     allCalText.innerHTML = `${allCal}`;
+    const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
+    const sumCal: number[] = [];
+    $All('.cals-all').forEach((el) => sumCal.push(+el.innerHTML));
+    infoFitness.innerHTML = `${sumCal.reduce((el, sum) => el + sum, 0)} kcal`;
+    storage.fitness.calSum = `${sumCal.reduce((el, sum) => el + sum, 0)}`;
+    localStorage.setItem('storage', JSON.stringify(storage));
     this.changeColor();
   },
   changeHour() {

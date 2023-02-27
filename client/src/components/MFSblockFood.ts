@@ -1,5 +1,6 @@
 // import { $ } from '../utils/helpers';
 import { $, $All } from '../utils/helpers';
+import { IUser } from '../utils/types';
 import { updateLocalStorage } from '../utils/updateLocalStorage';
 import popup from './popup';
 const blockFood = {
@@ -188,12 +189,27 @@ const blockFood = {
       <HTMLElement>$('.day-summary__block.cal p'),
       <HTMLElement>$('.day-summary__block.RDI h4'),
     ];
+    const basedRDI = <HTMLElement>$('.day-summary__category p span');
+    const user: IUser = JSON.parse(`${localStorage.getItem('user')}`);
+    if (user) {
+      basedRDI.innerHTML = `${
+        user.gender === 'male'
+          ? Math.floor((66.5 + 13.75 * +user.weight[0] + 5.003 * +user.height - 6.775 * +user.age) * 1.55)
+          : Math.floor((655.1 + 9.563 * +user.weight[0] + 1.85 * +user.height - 4.676 * +user.age) * 1.55)
+      }`;
+    }
+
     for (let i = 0; i < arr.length; i++) {
       let res = 0;
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
       dayCount[i].innerHTML = i != 4 ? `${res.toFixed(1)}` : res != 0 ? `${+((res / 1495) * 100).toFixed(1)}%` : `0%`;
+      const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
+      infoFood.innerHTML = `${dayCount[3].innerHTML} kcal`;
+      const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+      storage.food.calSum = dayCount[3].innerHTML;
+      localStorage.setItem('storage', JSON.stringify(storage));
     }
   },
   changeGramm() {

@@ -3,9 +3,6 @@ export const updateLocalStorage = (type: string, id: string, input: HTMLInputEle
   const value = Number.isNaN(parseInt(input.value)) ? 1 : parseInt(input.value) == 0 ? 1 : parseInt(input.value);
   if (type == 'activity' || type == 'sleep') {
     const { cal, time } = storage.fitness[`${type}`][`${id}`];
-    console.log('V' + value);
-    console.log('T' + time);
-    console.log('C' + cal);
     storage.fitness[`${type}`][`${id}`].time = value;
     storage.fitness[`${type}`][`${id}`].cal = +((cal * value) / time).toFixed(2);
   } else {
