@@ -1,6 +1,6 @@
-import { $, $All, getFromLocalStorage, getTokenStorage } from '../utils/helpers';
-import apiServer from '../api/apiServer';
-import { IPost, IResponsePost, IUser } from '../utils/types';
+import { $, $All, getFromLocalStorage, getTokenStorage } from '../../utils/helpers';
+import apiServer from '../../api/apiServer';
+import { IPost, IResponsePost, IUser } from '../../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import postComment from './postComment';
 import commentCreateBlock from './commentCreateBlock';

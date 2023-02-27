@@ -1,6 +1,6 @@
-import apiServer from '../api/apiServer';
-import { getTokenStorage, $ } from '../utils/helpers';
-import { IUser, IPost } from '../utils/types';
+import apiServer from '../../api/apiServer';
+import { getTokenStorage, $ } from '../../utils/helpers';
+import { IUser, IPost } from '../../utils/types';
 import postComment from './postComment';
 
 class CommentCreate {

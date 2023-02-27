@@ -1,7 +1,7 @@
 import { $, getLastURLPart } from '../../utils/helpers';
 import apiServer from '../../api/apiServer';
 import userAvatar from './userAvatar';
-import postCreateBlock from '../postCreateBlock';
+import postCreateBlock from '../community/postCreateBlock';
 
 class UserPopup {
   popupBlock: HTMLElement;

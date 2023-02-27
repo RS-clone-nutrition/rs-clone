@@ -1,7 +1,7 @@
-import { IUser, IComment } from '../utils/types';
+import { IUser, IComment } from '../../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
-import apiServer from '../api/apiServer';
-import { getTokenStorage, $, $All } from '../utils/helpers';
+import apiServer from '../../api/apiServer';
+import { getTokenStorage, $, $All } from '../../utils/helpers';
 
 class PostComment {
   async render(commentsArr: [IComment], currentUser: IUser, postContainer: HTMLElement, all?: boolean) {
@@ -66,7 +66,6 @@ class PostComment {
     const response = await apiServer.deleteComment(idComment, idPost, token);
 
     if (response?.result.post) {
-      console.log(response.result.post.comments);
       this.changeAmountComments(response.result.post.comments, postForDelete);
     }
   }

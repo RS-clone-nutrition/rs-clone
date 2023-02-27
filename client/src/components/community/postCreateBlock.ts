@@ -1,7 +1,7 @@
-import apiServer from '../api/apiServer';
-import { getTokenStorage, $ } from '../utils/helpers';
-import userPopupAvatar from './user/userPopupAvatar';
-import { IUser } from '../utils/types';
+import apiServer from '../../api/apiServer';
+import { getTokenStorage, $ } from '../../utils/helpers';
+import userPopupAvatar from '../user/userPopupAvatar';
+import { IUser } from '../../utils/types';
 import postItemBlock from './postItemBlock';
 
 class PostCreate {

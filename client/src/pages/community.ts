@@ -1,5 +1,5 @@
-import postCreate from '../components/postCreateBlock';
-import postItemBlock from '../components/postItemBlock';
+import postCreate from '../components/community/postCreateBlock';
+import postItemBlock from '../components/community/postItemBlock';
 import apiServer from '../api/apiServer';
 import router from '../router';
 class Community {
