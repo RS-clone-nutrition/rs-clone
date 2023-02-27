@@ -38,7 +38,7 @@ class PostComment {
       );
     }
 
-    this.changeAmountComments(comments);
+    this.changeAmountComments(comments, postContainer);
     this.eventListeners();
   }
 
@@ -52,24 +52,22 @@ class PostComment {
     });
   }
 
-  // async getComments(post: IPost) {
-  //   if (!post.comments || post.comments.length < 1) {
-  //     return { comments: '', length: 0 };
-  //   }
-  //   const comments = await Promise.all(post.comments.map((comment) => postComment.render(comment, this.currentUser)));
-
-  //   return { block: comments.join(''), length: comments.length };
-  // }
-
   async deleteComment(e: Event) {
     const button = <HTMLElement>e.target;
     const postForDelete = <HTMLElement>button.closest('.item-posts');
     const idPost = <string>postForDelete.getAttribute('id');
     const commentForDelete = <HTMLElement>button.closest('.item-comments');
     const idComment = <string>commentForDelete.getAttribute('id');
+
     const token = getTokenStorage();
     commentForDelete.remove();
-    await apiServer.deleteComment(idComment, idPost, token);
+
+    const response = await apiServer.deleteComment(idComment, idPost, token);
+
+    if (response?.result.post) {
+      console.log(response.result.post.comments);
+      this.changeAmountComments(response.result.post.comments, postForDelete);
+    }
   }
 
   addDeleteBtn(userComment: string, currentUser: string) {
@@ -79,8 +77,8 @@ class PostComment {
     return deleteBtn;
   }
 
-  changeAmountComments(comments: [IComment]) {
-    const amountBlock = <HTMLElement>$('.comments-posts__amount');
+  changeAmountComments(comments: [IComment], postBlock: HTMLElement) {
+    const amountBlock = <HTMLElement>$('.comments-posts__amount', postBlock);
     const amount = <number>comments.length;
     amountBlock.innerHTML = amount === 1 ? `${amount} comments` : `${amount} comment`;
   }

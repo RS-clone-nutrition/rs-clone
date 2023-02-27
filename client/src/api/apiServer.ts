@@ -2,7 +2,7 @@ import { IUser, IResponseLogin } from '../utils/types';
 import { IBodyRequestPost } from '../utils/types';
 
 class ApiServer {
-  URL = 'https://rs-clone-production-0788.up.railway.app/';
+  URL = 'http://localhost:5000/';
 
   async sendUserServer(user: IUser, path: string) {
     try {
@@ -182,6 +182,7 @@ class ApiServer {
         body: JSON.stringify({ commentId, postId }),
       });
       const result = await response.json();
+      console.log(result);
       return { result, status: response.status };
     } catch (e) {
       console.log(e);

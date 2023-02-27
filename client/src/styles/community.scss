@@ -147,6 +147,10 @@
     width: 100%;
   }
 
+  &__name {
+    text-transform: capitalize;
+  }
+
   &__info {
     display: flex;
     justify-content: space-between;

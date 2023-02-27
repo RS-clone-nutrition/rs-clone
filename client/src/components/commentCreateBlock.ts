@@ -49,7 +49,8 @@ class CommentCreate {
 
       if (response) {
         const lastComment = response.result.post.comments[response.result.post.comments.length - 1];
-        postComment.render([lastComment], this.currentUser, postContainerBlock);
+        await postComment.render([lastComment], this.currentUser, postContainerBlock);
+        postComment.changeAmountComments(response.result.post.comments, postContainerBlock);
 
         textareaBlock.value = '';
       }

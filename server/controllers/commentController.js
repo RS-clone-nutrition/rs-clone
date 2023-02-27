@@ -57,7 +57,8 @@ class CommentController {
       await post.save()
 
       return res.status(200).json({
-        message: 'comment successfully deleted'
+        message: 'comment successfully deleted',
+        post: post,
       })
     } catch (e) {
       console.log(e);

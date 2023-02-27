@@ -63,7 +63,8 @@ class PostItem {
       );
 
       if (post.comments && post.comments.length > 0) {
-        postComment.render(post.comments, this.currentUser, postsContainer);
+        const postItem = <HTMLElement>$('.item-posts');
+        postComment.render(post.comments, this.currentUser, postItem);
       }
       commentCreateBlock.render(this.currentUser, post);
     });
