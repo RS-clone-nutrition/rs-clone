@@ -82,6 +82,10 @@ class PostComment {
     const amount = <number>comments.length;
     amountBlock.innerHTML = amount === 1 ? `${amount} comments` : `${amount} comment`;
   }
+
+  clear(commentsList: HTMLElement) {
+    commentsList.innerHTML = '';
+  }
 }
 
 export default new PostComment();

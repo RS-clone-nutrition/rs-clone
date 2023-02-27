@@ -87,12 +87,14 @@ class PostItem {
 
     commentsAmout.forEach((item) => {
       const postContainer = <HTMLElement>item.closest('.item-posts');
+      const commentsList = <HTMLElement>$('.list-comments', postContainer);
       const id = <string>postContainer?.getAttribute('id');
       const obj = this.posts.find((i) => i.post._id === id);
 
       if (obj) {
         item.addEventListener('click', () => {
           if (obj.post.comments) {
+            postComment.clear(commentsList);
             postComment.render(obj.post.comments, this.currentUser, postContainer, true);
           }
         });
@@ -113,43 +115,3 @@ class PostItem {
 }
 
 export default new PostItem();
-
-// <div class="item-posts__comments comments-posts">
-//   <div class="comments-posts__header">
-//     <p class="comments-posts__amount blue">5 comments</p>
-//     <p class="comments-posts__likes">44 Likes</p>
-//     <img class="comments-posts__button-like" src="./img/heart-like.png" alt="">
-//   </div>
-//   <ul class="comments-posts__list list-comments">
-//     <li class="list-comments__item item-comments">
-//       <div class="item-comments__icon">
-//         <img src="./img/sleeping.png" alt="commetn user photo" class="item-comments__img">
-//       </div>
-//       <div class="item-comments__info">
-//         <div class="item-comments__info-main">
-//           <h3 class="item-comments__name blue">Petya</h3>
-//           <p class="item-comments__text">I like this picture</p>
-//         </div>
-//         <p class="item-comments__text-time">3 hours ago</p>
-//       </div>
-//     </li>
-//     <li class="list-comments__item item-comments">
-//       <div class="item-comments__icon">
-//         <img src="./img/sleeping.png" alt="commetn user photo" class="item-comments__img">
-//       </div>
-//       <div class="item-comments__info">
-//         <div class="item-comments__info-main">
-//           <h3 class="item-comments__name blue">Petya</h3>
-//           <p class="item-comments__text">I like this picture</p>
-//         </div>
-//         <p class="item-comments__text-time">3 hours ago</p>
-//       </div>
-//     </li>
-//   </ul>
-//   <div class="comments-posts__field field-comments">
-//     <div class="field-comments__icon">
-//       <img src="./img/sleeping.png" alt="commetn user photo" class="field-comments__img">
-//     </div>
-//     <textarea class="field-comments__input" type="text" placeholder="Write comment"></textarea>
-//   </div>
-// </div>

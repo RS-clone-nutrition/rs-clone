@@ -109,7 +109,7 @@
   &__header {
     display: flex;
     align-items: center;
-    width: 100rem;
+    width: 115rem;
     gap: 10rem;
     margin-bottom: 15rem;
     cursor: pointer;
@@ -285,6 +285,10 @@
 
 .fa-angle-down {
   color: #028cc4;
+}
+
+.item-comment__deleteBtn {
+  cursor: pointer;
 }
 
 @media (max-width: 720px) {
