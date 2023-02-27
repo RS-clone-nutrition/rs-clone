@@ -26,28 +26,28 @@ class MyFatSecret {
         <li><a href="/myfatsecret">MyFatSecret</a></li>
       </ul>
       <div class="myfatsecret__tabs">
-        <button class="myfatsecret__card calendar">
-          <p class="myfatsecret__card-title title">Calendar</p>
-          <span class="myfatsecret__info-calendar">WED 01</span>
-        </button>
-        <button class="myfatsecret__card food">
-          <p class="myfatsecret__card-title title">Food diary</p>
-          <span class="myfatsecret__info-food">0 kcal</span>
-        </button>
-        <button class="myfatsecret__card fitness">
-          <p class="myfatsecret__card-title title">Exercise diary</p>
-          <span class="myfatsecret__info-fitness">0 kcal</span>
-        </button>
-        <button class="myfatsecret__card cookbook">
-          <p class="myfatsecret__card-title title">Cookbook</p>
+      <button class="myfatsecret__card food">
+      <p class="myfatsecret__card-title title">Food diary</p>
+      <span class="myfatsecret__info-food">0 kcal</span>
+      </button>
+      <button class="myfatsecret__card fitness">
+      <p class="myfatsecret__card-title title">Exercise diary</p>
+      <span class="myfatsecret__info-fitness">0 kcal</span>
+      </button>
+      <button class="myfatsecret__card calendar">
+        <p class="myfatsecret__card-title title">Calendar</p>
+        <span class="myfatsecret__info-calendar">WED 01</span>
+      </button>
+      <button class="myfatsecret__card cookbook">
+      <p class="myfatsecret__card-title title">Cookbook</p>
           <span class="myfatsecret__info-cookbook">0 recipes</span>
         </button>
       </div>
     </div>
     <div class="myfatsecret__block">
-    ${blockCalendar.render()}
+    ${blockCookBook.render()}
     </div>
-  </div>
+    </div>
     ${popup.render()}
 </div>
     `;
@@ -68,6 +68,7 @@ class MyFatSecret {
     switch (nameTab) {
       case 'calendar':
         block.innerHTML = `${blockCalendar.render()}`;
+        blockCalendar.getInformation();
         break;
       case 'food':
         block.innerHTML = `${blockFood.render()}`;
@@ -131,10 +132,20 @@ class MyFatSecret {
 
   getAllInformation() {
     const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+    const infoCalendar = <HTMLElement>$(`.myfatsecret__info-calendar`);
     const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
     const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
     const infoCookbook = <HTMLElement>$(`.myfatsecret__info-cookbook`);
-    const infoCalendar = <HTMLElement>$(`.myfatsecret__info-calendar`);
+    infoCalendar.innerHTML = `${new Date().toLocaleDateString()}`;
+    if (storage.fitness.calSum) {
+      infoFitness.innerHTML = `${storage.fitness.calSum} kcal`;
+    }
+    if (storage.food.calSum) {
+      infoFood.innerHTML = `${storage.food.calSum} kcal`;
+    } else {
+      infoFood.innerHTML = `0 kcal`;
+      infoFitness.innerHTML = `0 kcal`;
+    }
     const today = new Date();
     const dayNumber = today.getDate();
     const getDayWeek = today.getDay();

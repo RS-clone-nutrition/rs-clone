@@ -65,3 +65,32 @@ td.today {
   color: #28283b;
   font-weight: bold;
 }
+.block-date{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+  &__cart{
+    display: flex;
+    padding: 10px;
+    border-left: 1px solid #dcdcff;
+    border-right: 1px solid #dcdcff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  span{
+    font-size: 20px;
+    text-align: center;
+    @media (max-width:500px) {
+      font-size: 10px;
+    }
+  }
+  h2{
+    text-align: center;
+    @media (max-width:500px) {
+      font-size: 15px;
+    }
+  }
+}
