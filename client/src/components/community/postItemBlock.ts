@@ -1,6 +1,6 @@
 import { $, $All, getFromLocalStorage, getTokenStorage } from '../../utils/helpers';
 import apiServer from '../../api/apiServer';
-import { IPost, IResponsePost, IUser } from '../../utils/types';
+import { IPost, IResponsePost, IUser, IComment } from '../../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import postComment from './postComment';
 import commentCreateBlock from './commentCreateBlock';
@@ -13,7 +13,6 @@ class PostItem {
   async render(currentUser: IUser) {
     this.currentUser = currentUser;
     const postsContainer = <HTMLElement>$('.list-posts');
-    postsContainer.innerHTML = '';
     const cuurentUserName = getFromLocalStorage('user');
     const posts = await apiServer.getPosts();
     this.posts = posts;
@@ -65,42 +64,34 @@ class PostItem {
     </div>`
       );
 
-      if (post.comments && post.comments.length > 0) {
+      if (post.comments) {
         const postItem = <HTMLElement>$('.item-posts');
-        postComment.render(post.comments, this.currentUser, postItem);
+        if (post.comments && post.comments.length > 0) {
+          postComment.render(post.comments, this.currentUser, postItem);
+        }
+        this.eventlisteners(post.comments, this.currentUser, postItem);
       }
       commentCreateBlock.render(this.currentUser, post);
     });
-
-    this.eventlisteners();
   }
 
-  eventlisteners() {
-    const deletesPostsBtns = $All('.item-post__deletebtn');
-    const commentsAmout = $All('.comments-posts__header');
+  eventlisteners(commentsArr: [IComment], currentUser: IUser, postContainer: HTMLElement) {
+    const deletesPostsBtn = <HTMLElement>$('.item-post__deletebtn', postContainer);
+    const commentsAmout = <HTMLElement>$('.comments-posts__header', postContainer);
 
-    deletesPostsBtns.forEach((item) => {
-      item.addEventListener('click', (e) => {
+    if (deletesPostsBtn) {
+      deletesPostsBtn.addEventListener('click', (e) => {
         this.deletePost(<HTMLElement>e.target);
       });
-    });
+    }
 
-    commentsAmout.forEach((item) => {
-      const postContainer = <HTMLElement>item.closest('.item-posts');
-      const commentsList = <HTMLElement>$('.list-comments', postContainer);
-      const id = <string>postContainer?.getAttribute('id');
-      const obj = this.posts.find((i) => i.post._id === id);
+    const commentsList = <HTMLElement>$('.list-comments', postContainer);
 
-      if (obj) {
-        item.addEventListener('click', () => {
-          if (obj.post.comments) {
-            commentsList.style.display = 'none';
-            setTimeout(() => (commentsList.style.display = 'flex'), 500);
-            postComment.clear(commentsList);
-            postComment.render(obj.post.comments, this.currentUser, postContainer, true);
-          }
-        });
-      }
+    commentsAmout.addEventListener('click', () => {
+      commentsList.style.display = 'none';
+      setTimeout(() => (commentsList.style.display = 'flex'), 500);
+      postComment.clear(commentsList);
+      postComment.render(commentsArr, currentUser, postContainer, true);
     });
   }
 
@@ -113,6 +104,12 @@ class PostItem {
 
     const response = await apiServer.deletePost(idPost, token);
     console.log(response);
+  }
+
+  clear() {
+    const postsContainer = <HTMLElement>$('.list-posts');
+
+    postsContainer.innerHTML = '';
   }
 }
 
