@@ -134,6 +134,35 @@ class MyFatSecret {
     const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
     const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
     const infoCookbook = <HTMLElement>$(`.myfatsecret__info-cookbook`);
+    const infoCalendar = <HTMLElement>$(`.myfatsecret__info-calendar`);
+    const today = new Date();
+    const dayNumber = today.getDate();
+    const getDayWeek = today.getDay();
+    let dayWeek = '';
+    switch (getDayWeek) {
+      case 0:
+        dayWeek = 'SUN';
+        break;
+      case 1:
+        dayWeek = 'MON';
+        break;
+      case 2:
+        dayWeek = 'TUE';
+        break;
+      case 3:
+        dayWeek = 'WED';
+        break;
+      case 4:
+        dayWeek = 'THU';
+        break;
+      case 5:
+        dayWeek = 'FRI';
+        break;
+      case 6:
+        dayWeek = 'SAT';
+        break;
+    }
+    infoCalendar.innerHTML = `${dayWeek} ${dayNumber}`;
     const locStrIdRecipes = localStorage.getItem('arrRecipes');
     if (locStrIdRecipes) {
       const arrayIdRecipes = JSON.parse(locStrIdRecipes);
