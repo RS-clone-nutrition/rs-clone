@@ -26,18 +26,18 @@ class MyFatSecret {
         <li><a href="/myfatsecret">MyFatSecret</a></li>
       </ul>
       <div class="myfatsecret__tabs">
-      <button class="myfatsecret__card food">
-      <p class="myfatsecret__card-title title">Food diary</p>
-      <span class="myfatsecret__info-food">0 kcal</span>
-      </button>
-      <button class="myfatsecret__card fitness">
-      <p class="myfatsecret__card-title title">Exercise diary</p>
-      <span class="myfatsecret__info-fitness">0 kcal</span>
-      </button>
-      <button class="myfatsecret__card calendar">
-        <p class="myfatsecret__card-title title">Calendar</p>
-        <span class="myfatsecret__info-calendar">WED 01</span>
-      </button>
+        <button class="myfatsecret__card calendar">
+          <p class="myfatsecret__card-title title">Calendar</p>
+          <span class="myfatsecret__info-calendar">WED 01</span>
+        </button>
+        <button class="myfatsecret__card food">
+          <p class="myfatsecret__card-title title">Food diary</p>
+          <span class="myfatsecret__info-food">0 kcal</span>
+        </button>
+        <button class="myfatsecret__card fitness">
+          <p class="myfatsecret__card-title title">Exercise diary</p>
+          <span class="myfatsecret__info-fitness">0 kcal</span>
+        </button>
         <button class="myfatsecret__card cookbook">
           <p class="myfatsecret__card-title title">Cookbook</p>
           <span class="myfatsecret__info-cookbook">0 recipes</span>
@@ -133,6 +133,12 @@ class MyFatSecret {
     const storage = JSON.parse(`${localStorage.getItem('storage')}`);
     const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
     const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
+    const infoCookbook = <HTMLElement>$(`.myfatsecret__info-cookbook`);
+    const locStrIdRecipes = localStorage.getItem('arrRecipes');
+    if (locStrIdRecipes) {
+      const arrayIdRecipes = JSON.parse(locStrIdRecipes);
+      infoCookbook.innerHTML = `${arrayIdRecipes.length} recipes`;
+    }
     infoFood.innerHTML = `${storage.food.calSum} kcal`;
     infoFitness.innerHTML = `${storage.fitness.calSum} kcal`;
   }
