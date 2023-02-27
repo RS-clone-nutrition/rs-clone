@@ -94,6 +94,8 @@ class PostItem {
       if (obj) {
         item.addEventListener('click', () => {
           if (obj.post.comments) {
+            commentsList.style.display = 'none';
+            setTimeout(() => (commentsList.style.display = 'flex'), 500);
             postComment.clear(commentsList);
             postComment.render(obj.post.comments, this.currentUser, postContainer, true);
           }
