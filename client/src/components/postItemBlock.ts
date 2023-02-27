@@ -1,6 +1,6 @@
 import { $, $All, getFromLocalStorage, getTokenStorage } from '../utils/helpers';
 import apiServer from '../api/apiServer';
-import { IResponsePost, IUser } from '../utils/types';
+import { IPost, IResponsePost, IUser } from '../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import postComment from './postComment';
 import commentCreateBlock from './commentCreateBlock';
@@ -8,12 +8,15 @@ import commentCreateBlock from './commentCreateBlock';
 class PostItem {
   currentUser: IUser;
 
+  posts: [{ post: IPost; user: IUser }];
+
   async render(currentUser: IUser) {
     this.currentUser = currentUser;
     const postsContainer = <HTMLElement>$('.list-posts');
     postsContainer.innerHTML = '';
     const cuurentUserName = getFromLocalStorage('user');
     const posts = await apiServer.getPosts();
+    this.posts = posts;
     // posts.reverse();
 
     posts.forEach(async ({ post, user }: IResponsePost) => {
@@ -49,7 +52,7 @@ class PostItem {
     <div class="item-posts__comments comments-posts">
   <div class="comments-posts__header">
     <p class="comments-posts__amount blue">0 comments</p>
-
+    <i class="fa-solid fa-angle-down"></i>
   </div>
   <ul class="comments-posts__list list-comments">
   </ul>
@@ -74,11 +77,26 @@ class PostItem {
 
   eventlisteners() {
     const deletesPostsBtns = $All('.item-post__deletebtn');
+    const commentsAmout = $All('.comments-posts__header');
 
     deletesPostsBtns.forEach((item) => {
       item.addEventListener('click', (e) => {
         this.deletePost(<HTMLElement>e.target);
       });
+    });
+
+    commentsAmout.forEach((item) => {
+      const postContainer = <HTMLElement>item.closest('.item-posts');
+      const id = <string>postContainer?.getAttribute('id');
+      const obj = this.posts.find((i) => i.post._id === id);
+
+      if (obj) {
+        item.addEventListener('click', () => {
+          if (obj.post.comments) {
+            postComment.render(obj.post.comments, this.currentUser, postContainer, true);
+          }
+        });
+      }
     });
   }
 

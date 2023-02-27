@@ -4,11 +4,12 @@ import apiServer from '../api/apiServer';
 import { getTokenStorage, $, $All } from '../utils/helpers';
 
 class PostComment {
-  async render(comments: [IComment], currentUser: IUser, postContainer: HTMLElement) {
-    if (!comments) {
+  async render(commentsArr: [IComment], currentUser: IUser, postContainer: HTMLElement, all?: boolean) {
+    if (!commentsArr) {
       return;
     }
 
+    const comments = all ? commentsArr : <[IComment]>commentsArr.slice(-3);
     const commentsContainer = <HTMLElement>$('.list-comments', postContainer);
     const token = getTokenStorage();
 
@@ -38,7 +39,7 @@ class PostComment {
       );
     }
 
-    this.changeAmountComments(comments, postContainer);
+    this.changeAmountComments(commentsArr, postContainer);
     this.eventListeners();
   }
 

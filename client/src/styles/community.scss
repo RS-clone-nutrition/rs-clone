@@ -108,8 +108,18 @@
 
   &__header {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    width: 100rem;
+    gap: 10rem;
     margin-bottom: 15rem;
+    cursor: pointer;
+
+    &:hover {
+
+      .comments-posts__amount {
+        text-decoration: underline;
+      }
+    }
   }
 
   .comments-posts__amount {
@@ -271,6 +281,10 @@
   cursor: pointer;
   width: 20rem;
   height: 20rem;
+}
+
+.fa-angle-down {
+  color: #028cc4;
 }
 
 @media (max-width: 720px) {
