@@ -49,8 +49,7 @@ class PostItem {
     <div class="item-posts__comments comments-posts">
   <div class="comments-posts__header">
     <p class="comments-posts__amount blue">0 comments</p>
-    <p class="comments-posts__likes">44 Likes</p>
-    <img class="comments-posts__button-like" src="./img/heart-like.png" alt="like button">
+
   </div>
   <ul class="comments-posts__list list-comments">
   </ul>

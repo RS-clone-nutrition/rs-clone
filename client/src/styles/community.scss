@@ -6,7 +6,7 @@
 
 .community__wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .community {
@@ -18,7 +18,8 @@
 }
 
 .posts-community {
-  flex: 0 0 65%;
+  margin-top: 10rem;
+  flex: 0 0 90%;
 
   &__title {
     color: #5e5e53;
@@ -26,6 +27,7 @@
   }
 
   &__list {
+    border-radius: 20rem;
     display: flex;
     flex-direction: column;
     gap: 10rem;
@@ -36,22 +38,16 @@
   }
 }
 
-// .list-posts {
-
-//   &__item {
-//     background-color: #FFF;
-//     border: 1px solid #D3D6DB;
-//   }
-// }
-
 .item-posts {
   background-color: #FFF;
   border: 1px solid #D3D6DB;
   padding: 10rem 15rem;
 
   &__header {
+    margin-top: 10rem;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 10rem;
 
     .fa {
       width: 20rem;
@@ -74,7 +70,6 @@
 
   &__comments {
     padding: 0px 47px;
-    background-color: #F6F7F8;
   }
 }
 
@@ -84,6 +79,7 @@
   &__description {
     margin-bottom: 5rem;
     padding-left: 5rem;
+    font-size: 18rem;
   }
 
   &__icon {
@@ -104,7 +100,7 @@
 
   &__name.blue {
     text-transform: capitalize;
-    font-size: 20rem;
+    font-size: 25rem;
   }
 }
 
@@ -117,7 +113,7 @@
   }
 
   .comments-posts__amount {
-    font-size: 14rem;
+    font-size: 16rem;
   }
 
   &__likes {
@@ -172,11 +168,17 @@
   padding-bottom: 10rem;
 
   &__icon {
-    width: 25px;
-    height: 25px;
+    width: 35px;
+    height: 35px;
   }
 
   &__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  &__form {
     width: 100%;
   }
 
@@ -184,6 +186,7 @@
     width: 100%;
     border: 1px solid #B4CAE2;
     height: 30rem;
+    padding-left: 5rem;
   }
 }
 
@@ -246,5 +249,54 @@
     left: 77%;
     transform: translate(0, -50%);
     cursor: pointer;
+  }
+}
+
+.field-posts__button {
+  background-color: rgba(50, 179, 76, 0.8);
+  color: #FFF;
+  border-radius: 10rem;
+  padding: 5rem 10rem;
+
+  &:hover {
+    background-color: rgba(51, 111, 63, 1)
+  }
+}
+
+.item-post__deletebtn {
+  cursor: pointer;
+  width: 20rem;
+  height: 20rem;
+}
+
+@media (max-width: 720px) {
+  .field-posts {
+    font-size: 14rem;
+
+    &__icon-button {
+      left: 70%;
+    }
+  }
+
+  .item-posts__comments {
+    padding: 0px 10px;
+  }
+}
+
+@media (max-width: 520px) {
+
+  .field-posts {
+    &__icon-button {
+      left: 65%;
+    }
+  }
+}
+
+@media (max-width: 520px) {
+
+  .field-posts {
+    &__icon-button {
+      left: 60%;
+    }
   }
 }

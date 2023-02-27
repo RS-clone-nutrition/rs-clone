@@ -44,6 +44,8 @@ class CommentCreate {
     const text = <string>textareaBlock.value;
     const postId = this.currentPost._id;
     const token = getTokenStorage();
+    console.log(textareaBlock);
+    console.log(text);
 
     if (text) {
       const response = await apiServer.sendComment(text, postId, token);
@@ -74,7 +76,7 @@ class CommentCreate {
         (<HTMLFormElement>eventTarget.form).dispatchEvent(newEvent);
       }
 
-      event.preventDefault(); // Prevents the addition of a new line in the text field
+      event.preventDefault();
     }
   }
 }
