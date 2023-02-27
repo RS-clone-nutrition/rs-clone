@@ -109,6 +109,7 @@ class Router {
     const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
     const iconSearch = <HTMLElement>document.querySelector('.fa-solid');
     const colorLocalStr = localStorage.getItem('color');
+
     if (colorLocalStr) {
       changeColorInput.value = colorLocalStr;
       header.style.background = changeColorInput.value;

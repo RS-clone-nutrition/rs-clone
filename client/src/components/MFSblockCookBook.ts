@@ -1,6 +1,6 @@
 import { $, $All } from '../utils/helpers';
 import api from '../api/api';
-import { IRecipe, IRecipeData } from '../utils/types';
+import { IRecipe } from '../utils/types';
 const blockCookBook = {
   render() {
     return `
@@ -93,27 +93,43 @@ const blockCookBook = {
         });
       }
     }
-    this.eventListener();
+    await this.eventListener();
   },
-  eventListener() {
+  async eventListener() {
     const addFoodDiary = $All('.item-add');
     addFoodDiary.forEach((el) =>
       el.addEventListener('click', async (e) => {
         const target = e.target as HTMLElement;
         const result: IRecipe = await api.getSingleRecipe(target.id);
         const storage = JSON.parse(`${localStorage.getItem('storage')}`);
-        console.log(result.recipe.mealType);
-
-        //   storage.food[`${result.recipe.cuisineType}`].push({
-        //     label: arr.recipe.label,
-        //     cal: Math.round((arr.recipe.calories * 100) / arr.recipe.totalWeight),
-        //     fat: Math.round((arr.recipe.totalNutrients.FAT.quantity * 100) / arr.recipe.totalWeight),
-        //     carb: Math.round((arr.recipe.totalNutrients.CA.quantity * 100) / arr.recipe.totalWeight),
-        //     prot: Math.round((arr.recipe.totalNutrients.PROCNT.quantity * 100) / arr.recipe.totalWeight),
-        //     totalWeight: arr.recipe.totalWeight,
-        //     gramm: 100,
-        //   });
-        // localStorage.setItem('storage', JSON.stringify(storage));
+        const mealType = [...result.recipe.mealType][0] as string;
+        console.log(mealType);
+        storage.food[`${mealType.split('/')[0]}`].push({
+          label: result.recipe.label,
+          cal: Math.round((result.recipe.calories * 100) / result.recipe.totalWeight),
+          fat: Math.round((result.recipe.totalNutrients.FAT.quantity * 100) / result.recipe.totalWeight),
+          carb: Math.round((result.recipe.totalNutrients.CA.quantity * 100) / result.recipe.totalWeight),
+          prot: Math.round((result.recipe.totalNutrients.PROCNT.quantity * 100) / result.recipe.totalWeight),
+          totalWeight: result.recipe.totalWeight,
+          gramm: 100,
+        });
+        // storage.food[`${mealType.split('/')[0]}}`] = storage.food[`${mealType.split('/')[0]}}`].reduce(
+        //   (
+        //     o: {
+        //       push(i: { label: string }): unknown;
+        //       find(arg0: (v: { label: string }) => boolean): unknown;
+        //       label: string;
+        //     },
+        //     i: { label: string }
+        //   ) => {
+        //     if (!o.find((v) => v.label == i.label)) {
+        //       o.push(i);
+        //     }
+        //     return o;
+        //   },
+        //   []
+        // );
+        localStorage.setItem('storage', JSON.stringify(storage));
       })
     );
   },

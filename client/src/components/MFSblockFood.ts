@@ -1,6 +1,6 @@
 // import { $ } from '../utils/helpers';
 import { $, $All } from '../utils/helpers';
-import { updateLocalStorageFood } from '../utils/updateLocalStorage';
+import { updateLocalStorage } from '../utils/updateLocalStorage';
 import popup from './popup';
 const blockFood = {
   render() {
@@ -193,7 +193,7 @@ const blockFood = {
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
-      dayCount[i].innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
+      dayCount[i].innerHTML = i != 4 ? `${res.toFixed(1)}` : res != 0 ? `${+((res / 1495) * 100).toFixed(1)}%` : `0%`;
     }
   },
   changeGramm() {
@@ -215,9 +215,11 @@ const blockFood = {
         input.focus();
         input.addEventListener('keydown', function (elem) {
           if (elem.code == 'Enter') {
-            paragraph.textContent = input.value;
+            paragraph.textContent = `${
+              Number.isNaN(parseInt(input.value)) ? 1 : parseInt(input.value) == 0 ? 1 : parseInt(input.value)
+            }`;
             localStorage.setItem('storage', JSON.stringify(storage));
-            updateLocalStorageFood(mealFood, id, input);
+            updateLocalStorage(mealFood, id, input);
             section?.replaceChild(paragraph, input);
             blockFood.drawItem();
           }
