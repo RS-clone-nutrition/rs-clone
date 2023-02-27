@@ -31,21 +31,18 @@ class CommentCreate {
   }
 
   eventListeners() {
-    const textareaCommentBlock = <HTMLTextAreaElement>$('.field-comments__form', this.postContainerBlock);
+    const textareaCommentBlock = <HTMLTextAreaElement>$('.field-comments__input', this.postContainerBlock);
 
     textareaCommentBlock.addEventListener('keydown', (e: KeyboardEvent) => this.submitOnEnter(e));
     textareaCommentBlock.addEventListener('submit', (e) => this.sendCommentServer(e));
   }
 
   async sendCommentServer(e: Event) {
-    console.log(e.target);
     const textareaBlock = <HTMLTextAreaElement>e.target;
-    const postContainerBlock = <HTMLTextAreaElement>$('.item-posts');
+    const postContainerBlock = <HTMLTextAreaElement>textareaBlock.closest('.item-posts');
     const text = <string>textareaBlock.value;
-    const postId = this.currentPost._id;
+    const postId = <string>postContainerBlock.getAttribute('id');
     const token = getTokenStorage();
-    console.log(textareaBlock);
-    console.log(text);
 
     if (text) {
       const response = await apiServer.sendComment(text, postId, token);
@@ -73,7 +70,7 @@ class CommentCreate {
       if (!event.repeat) {
         const newEvent = new Event('submit', { cancelable: true });
         const eventTarget = <HTMLTextAreaElement>event.target;
-        (<HTMLFormElement>eventTarget.form).dispatchEvent(newEvent);
+        eventTarget.dispatchEvent(newEvent);
       }
 
       event.preventDefault();
