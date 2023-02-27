@@ -264,7 +264,29 @@ interface IRecipe {
   name: string;
   calsInHr: 509;
 }
-
+interface IDayCalendar {
+  day: string;
+  food: {
+    breakfast: IRecipe[];
+    lunch: IRecipe[];
+    dinner: IRecipe[];
+    snack: IRecipe[];
+  };
+  fitness: {
+    activity: {
+      cal: number;
+      id: number;
+      label: string;
+      time: number;
+    }[];
+    sleep: {
+      cal: number;
+      id: number;
+      label: string;
+      time: number;
+    }[];
+  };
+}
 export {
   IGroups,
   CategoryArr,
@@ -282,4 +304,5 @@ export {
   IBodyRequestPost,
   IComment,
   IPost,
+  IDayCalendar,
 };

@@ -104,6 +104,7 @@ class FoodsCategory {
 
     this.categoryExamplesList.render();
     this.eventListeners();
+    this.changeColor();
   }
 
   eventListeners() {
@@ -116,6 +117,22 @@ class FoodsCategory {
         const name = `/foods/group/${createPath(<string>elem.textContent)}`;
         router.route(e, name);
       });
+    });
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const borderTitle = <HTMLElement>document.querySelector('.top-foods');
+    const backgrCategoryContent = <HTMLElement>document.querySelector('.category-all');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    borderTitle.style.borderColor = changeColorInput.value;
+    backgrCategoryContent.style.background = changeColorInput.value + '32';
+    changeColorInput.addEventListener('change', () => {
+      borderTitle.style.borderColor = changeColorInput.value;
+      backgrCategoryContent.style.background = changeColorInput.value + '32';
     });
   }
 }

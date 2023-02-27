@@ -1,6 +1,7 @@
 // import { $ } from '../utils/helpers';
 import { $, $All } from '../utils/helpers';
-import { updateLocalStorageFood } from '../utils/updateLocalStorage';
+import { IUser } from '../utils/types';
+import { updateLocalStorage } from '../utils/updateLocalStorage';
 import popup from './popup';
 const blockFood = {
   render() {
@@ -29,7 +30,7 @@ const blockFood = {
         
       </div>
       <button class="addItem breakfast food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -45,7 +46,7 @@ const blockFood = {
       <div class="new-item lunch">
       </div>
       <button class="addItem lunch food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -61,7 +62,7 @@ const blockFood = {
       <div class="new-item dinner">
       </div>
       <button class="addItem dinner food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -77,7 +78,7 @@ const blockFood = {
       <div class="new-item snack">
       </div>
       <button class="addItem snack food" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -177,6 +178,7 @@ const blockFood = {
     allCarbsText.innerHTML = `${allCarbs.toFixed(2)}`;
     allProtText.innerHTML = `${allProt.toFixed(2)}`;
     allCalText.innerHTML = `${allCal.toFixed(2)}`;
+    this.changeColor();
   },
   getDaySummary() {
     const arr = [$All('.fat-all'), $All('.carbs-all'), $All('.prot-all'), $All('.cals-all'), $All('.cals-all')];
@@ -187,12 +189,27 @@ const blockFood = {
       <HTMLElement>$('.day-summary__block.cal p'),
       <HTMLElement>$('.day-summary__block.RDI h4'),
     ];
+    const basedRDI = <HTMLElement>$('.day-summary__category p span');
+    const user: IUser = JSON.parse(`${localStorage.getItem('user')}`);
+    if (user) {
+      basedRDI.innerHTML = `${
+        user.gender === 'male'
+          ? Math.floor((66.5 + 13.75 * +user.weight[0] + 5.003 * +user.height - 6.775 * +user.age) * 1.55)
+          : Math.floor((655.1 + 9.563 * +user.weight[0] + 1.85 * +user.height - 4.676 * +user.age) * 1.55)
+      }`;
+    }
+
     for (let i = 0; i < arr.length; i++) {
       let res = 0;
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
-      dayCount[i].innerHTML = i != 4 ? `${res}` : res != 0 ? `${+(res / 1495).toFixed(1) * 100}%` : `0%`;
+      dayCount[i].innerHTML = i != 4 ? `${res.toFixed(1)}` : res != 0 ? `${+((res / 1495) * 100).toFixed(1)}%` : `0%`;
+      const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
+      infoFood.innerHTML = `${dayCount[3].innerHTML} kcal`;
+      const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+      storage.food.calSum = dayCount[3].innerHTML;
+      localStorage.setItem('storage', JSON.stringify(storage));
     }
   },
   changeGramm() {
@@ -214,15 +231,46 @@ const blockFood = {
         input.focus();
         input.addEventListener('keydown', function (elem) {
           if (elem.code == 'Enter') {
-            paragraph.textContent = input.value;
+            paragraph.textContent = `${
+              Number.isNaN(parseInt(input.value)) ? 1 : parseInt(input.value) == 0 ? 1 : parseInt(input.value)
+            }`;
             localStorage.setItem('storage', JSON.stringify(storage));
-            updateLocalStorageFood(mealFood, id, input);
+            updateLocalStorage(mealFood, id, input);
             section?.replaceChild(paragraph, input);
             blockFood.drawItem();
           }
         });
       })
     );
+  },
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const subtitleColor = <HTMLElement>document.querySelector('.myfatsecret-food-fitness__col-category');
+    const arrBorderBtn: HTMLElement[] = Array.from(
+      document.querySelectorAll('.myfatsecret-food-fitness__row-category')
+    );
+    const arriconColor: HTMLElement[] = Array.from(document.querySelectorAll('.fa-square-plus'));
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+
+    subtitleColor.style.color = changeColorInput.value;
+    for (let i = 0; i < arriconColor.length; i++) {
+      arriconColor[i].style.color = changeColorInput.value;
+    }
+    for (let i = 0; i < arrBorderBtn.length; i++) {
+      arrBorderBtn[i].style.borderColor = changeColorInput.value;
+    }
+    changeColorInput.addEventListener('change', () => {
+      subtitleColor.style.color = changeColorInput.value;
+      for (let i = 0; i < arriconColor.length; i++) {
+        arriconColor[i].style.color = changeColorInput.value;
+      }
+      for (let i = 0; i < arrBorderBtn.length; i++) {
+        arrBorderBtn[i].style.borderColor = changeColorInput.value;
+      }
+    });
   },
 };
 export default blockFood;

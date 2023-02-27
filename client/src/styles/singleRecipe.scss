@@ -312,6 +312,15 @@ body {
 .diary{
   display: none;
 }
+.action__img-cook{
+  width: 16px;
+}
+.action__btn{
+  padding: 3px;
+  background: #32B34C;
+  border-radius: 50%;
+  border: none;
+}
 @media (max-width:900px) {
   .recipe__info {
     flex: 0 1 58%;

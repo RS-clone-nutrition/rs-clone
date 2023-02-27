@@ -1,5 +1,6 @@
-import { $ } from '../utils/helpers';
+import { $, $All } from '../utils/helpers';
 import api from '../api/api';
+import { IRecipe } from '../utils/types';
 const blockCookBook = {
   render() {
     return `
@@ -92,6 +93,57 @@ const blockCookBook = {
         });
       }
     }
+    await this.eventListener();
+  },
+  async eventListener() {
+    const addFoodDiary = $All('.item-add');
+    addFoodDiary.forEach((el) =>
+      el.addEventListener('click', async (e) => {
+        const target = e.target as HTMLElement;
+        const result: IRecipe = await api.getSingleRecipe(target.id);
+        const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+        const mealType = [...result.recipe.mealType][0] as string;
+        console.log(mealType);
+        storage.food[`${mealType.split('/')[0]}`].push({
+          label: result.recipe.label,
+          cal: Math.round((result.recipe.calories * 100) / result.recipe.totalWeight),
+          fat: Math.round((result.recipe.totalNutrients.FAT.quantity * 100) / result.recipe.totalWeight),
+          carb: Math.round((result.recipe.totalNutrients.CA.quantity * 100) / result.recipe.totalWeight),
+          prot: Math.round((result.recipe.totalNutrients.PROCNT.quantity * 100) / result.recipe.totalWeight),
+          totalWeight: result.recipe.totalWeight,
+          gramm: 100,
+        });
+        // storage.food[`${mealType.split('/')[0]}}`] = storage.food[`${mealType.split('/')[0]}}`].reduce(
+        //   (
+        //     o: {
+        //       push(i: { label: string }): unknown;
+        //       find(arg0: (v: { label: string }) => boolean): unknown;
+        //       label: string;
+        //     },
+        //     i: { label: string }
+        //   ) => {
+        //     if (!o.find((v) => v.label == i.label)) {
+        //       o.push(i);
+        //     }
+        //     return o;
+        //   },
+        //   []
+        // );
+        localStorage.setItem('storage', JSON.stringify(storage));
+      })
+    );
+  },
+  changeColorFindLink() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const findLink = <HTMLElement>$('.find-recipes__link');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    findLink.style.color = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      findLink.style.color = changeColorInput.value;
+    });
   },
 };
 export default blockCookBook;

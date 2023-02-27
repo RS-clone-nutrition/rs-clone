@@ -69,6 +69,35 @@ class Recipes {
       this.searchRecipes(searchValue);
     }
     this.eventListener();
+    this.changeColor();
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const borderTitle = <HTMLElement>$('.main-recipes');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    const arrCategorTitle: HTMLElement[] = Array.from(document.querySelectorAll('.category-title'));
+    const arrayItemBtn: HTMLElement[] = Array.from(document.querySelectorAll('.item-btn'));
+
+    borderTitle.style.borderColor = changeColorInput.value;
+    for (let i = 0; i < arrCategorTitle.length; i++) {
+      arrCategorTitle[i].style.background = changeColorInput.value;
+    }
+
+    changeColorInput.addEventListener('change', () => {
+      borderTitle.style.borderColor = changeColorInput.value;
+      for (let i = 0; i < arrCategorTitle.length; i++) {
+        arrCategorTitle[i].style.background = changeColorInput.value;
+      }
+      for (let j = 0; j < arrayItemBtn.length; j++) {
+        if (arrayItemBtn[j].classList.contains('active-item')) {
+          arrayItemBtn[j].style.background = changeColorInput.value;
+        }
+      }
+    });
   }
 
   async searchRecipes(value: string) {
@@ -121,6 +150,11 @@ class Recipes {
   }
 
   eventListener() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
     const blockCategory = <HTMLElement>$('.recipes-category');
     const arrayItemCategory: HTMLElement[] = Array.from(document.querySelectorAll('.item-btn'));
     const titleCategory = <HTMLElement>$('.popular-recipes__title');
@@ -188,13 +222,36 @@ class Recipes {
       if (itemCategory.classList.contains('item-btn')) {
         for (let i = 0; i < arrayItemCategory.length; i++) {
           arrayItemCategory[i].classList.remove('active-item');
+          arrayItemCategory[i].style.background = '';
+          arrayItemCategory[i].style.color = '#000000';
         }
         itemCategory.classList.add('active-item');
+        itemCategory.style.background = changeColorInput.value;
+        itemCategory.style.color = '#FFFFFF';
         showCategoryRecipes(itemCategory.id, itemCategory.innerHTML);
         viewMore.style.display = 'block';
         updateUrl('type', itemCategory.innerHTML);
       }
     });
+    blockCategory.onmouseover = function (e) {
+      const elem = <HTMLElement>e.target;
+      if (elem.classList.contains('item-btn')) {
+        elem.style.background = changeColorInput.value;
+        elem.style.color = '#FFFFFF';
+      }
+    };
+    blockCategory.onmouseout = function (e) {
+      const elem = <HTMLElement>e.target;
+      if (elem.classList.contains('item-btn')) {
+        if (elem.classList.contains('active-item')) {
+          elem.style.background = changeColorInput.value;
+          elem.style.color = '#FFFFFF';
+        } else {
+          elem.style.background = '';
+          elem.style.color = '#000000';
+        }
+      }
+    };
     viewMore.addEventListener('click', () => {
       showNextRecipes(viewMoreLink);
     });
@@ -214,6 +271,8 @@ class Recipes {
           for (let j = 0; j < arrayItemCategory.length; j++) {
             if (params[key].split('+').join(' ') === arrayItemCategory[j].innerHTML) {
               arrayItemCategory[j].classList.add('active-item');
+              arrayItemCategory[j].style.background = changeColorInput.value;
+              arrayItemCategory[j].style.color = '#FFFFFF';
               viewMore.style.display = 'block';
               showCategoryRecipes(arrayItemCategory[j].id, arrayItemCategory[j].innerHTML);
             }

@@ -1,6 +1,6 @@
 import popup from './popup';
-import { $All } from '../utils/helpers';
-import { updateLocalStorageFitness } from '../utils/updateLocalStorage';
+import { $, $All } from '../utils/helpers';
+import { updateLocalStorage } from '../utils/updateLocalStorage';
 const blockFitness = {
   render() {
     popup.changeLabel('Fitness');
@@ -26,7 +26,7 @@ const blockFitness = {
         
       </div>
       <button class="addItem activity fitness" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -42,7 +42,7 @@ const blockFitness = {
         
       </div>
       <button class="addItem sleep fitness" type="button">
-        <img src="./img/myfatsecret/additem.svg" alt="additem">
+        <span><i style='color:#32B34C' class="fa-solid fa-square-plus fa-2xl"></i></span>
         Add Item
       </button>
     </div>
@@ -55,7 +55,6 @@ const blockFitness = {
     this.deleteItem();
     for (let y = 0; y < 2; y++) {
       const block = document.getElementsByClassName(`new-item ${subType[y]}`)[0];
-      console.log(block);
       this.getAllInformation(subType[y]);
       block.innerHTML = ``;
       for (let i = 0; i < storage.fitness[`${subType[y]}`].length; i++) {
@@ -106,13 +105,19 @@ const blockFitness = {
     }
     allTimeText.innerHTML = `${allTime} min`;
     allCalText.innerHTML = `${allCal}`;
+    const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
+    const sumCal: number[] = [];
+    $All('.cals-all').forEach((el) => sumCal.push(+el.innerHTML));
+    infoFitness.innerHTML = `${sumCal.reduce((el, sum) => el + sum, 0)} kcal`;
+    storage.fitness.calSum = `${sumCal.reduce((el, sum) => el + sum, 0)}`;
+    localStorage.setItem('storage', JSON.stringify(storage));
+    this.changeColor();
   },
   changeHour() {
     const textP = $All('.amount');
     textP.forEach((el) =>
       el.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
-        console.log(target);
         const mealFood = target.parentElement?.lastElementChild?.id.split(' ')[0] as string;
         const id = target.parentElement?.lastElementChild?.id.split(' ')[1] as string;
         const storage = JSON.parse(`${localStorage.getItem('storage')}`);
@@ -127,16 +132,46 @@ const blockFitness = {
         input.focus();
         input.onkeydown = function (elem) {
           if (elem.code == 'Enter') {
-            paragraph.textContent = input.value;
-            storage.fitness[`${mealFood}`][`${id}`].time = +input.value;
+            paragraph.textContent = `${
+              Number.isNaN(parseInt(input.value)) ? 1 : parseInt(input.value) == 0 ? 1 : parseInt(input.value)
+            }`;
             localStorage.setItem('storage', JSON.stringify(storage));
+            updateLocalStorage(mealFood, id, input);
             section?.replaceChild(paragraph, input);
-            updateLocalStorageFitness(mealFood, id);
             blockFitness.drawItem();
           }
         };
       })
     );
+  },
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const subtitleColor = <HTMLElement>document.querySelector('.myfatsecret-food-fitness__col-category');
+    const arrBorderBtn: HTMLElement[] = Array.from(
+      document.querySelectorAll('.myfatsecret-food-fitness__row-category')
+    );
+    const arriconColor: HTMLElement[] = Array.from(document.querySelectorAll('.fa-square-plus'));
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+
+    subtitleColor.style.color = changeColorInput.value;
+    for (let i = 0; i < arriconColor.length; i++) {
+      arriconColor[i].style.color = changeColorInput.value;
+    }
+    for (let i = 0; i < arrBorderBtn.length; i++) {
+      arrBorderBtn[i].style.borderColor = changeColorInput.value;
+    }
+    changeColorInput.addEventListener('change', () => {
+      subtitleColor.style.color = changeColorInput.value;
+      for (let i = 0; i < arriconColor.length; i++) {
+        arriconColor[i].style.color = changeColorInput.value;
+      }
+      for (let i = 0; i < arrBorderBtn.length; i++) {
+        arrBorderBtn[i].style.borderColor = changeColorInput.value;
+      }
+    });
   },
 };
 export default blockFitness;

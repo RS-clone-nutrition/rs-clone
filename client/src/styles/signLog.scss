@@ -69,3 +69,9 @@
 .message {
   color: green;
 }
+
+@media (max-width: 407px) {
+  .form__submit button{
+    margin-top: 15px;
+  }
+}
