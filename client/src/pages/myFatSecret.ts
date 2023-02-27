@@ -86,6 +86,7 @@ class MyFatSecret {
   }
 
   createLocalStorage() {
+    if (localStorage.getItem('storage') != undefined) return;
     const storage = {
       food: {
         breakfast: [],

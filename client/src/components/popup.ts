@@ -133,6 +133,22 @@ const popup = {
         gramm: 100,
       });
     }
+    storage[`${type}`][`${mealType}`] = storage[`${type}`][`${mealType}`].reduce(
+      (
+        o: {
+          push(i: { label: string }): unknown;
+          find(arg0: (v: { label: string }) => boolean): unknown;
+          label: string;
+        },
+        i: { label: string }
+      ) => {
+        if (!o.find((v) => v.label == i.label)) {
+          o.push(i);
+        }
+        return o;
+      },
+      []
+    );
     localStorage.setItem('storage', JSON.stringify(storage));
   },
 
@@ -164,7 +180,6 @@ const popup = {
       if (searchInput.id.split(' ')[1] != 'fitness') {
         result = await api.getRecipeFoodSearch(searchInput.value, searchInput.id.split(' ')[0]);
         popup.searchItemFood(result.hits);
-        console.log(result.hits);
         if (result.hits.length == 0) {
           popup.renderNotFoundPage();
         }
@@ -184,7 +199,6 @@ const popup = {
           const id = el.parentElement?.children[0].id as string;
           if (Number.isNaN(+id)) {
             const result = await api.getSingleRecipe(id);
-            console.log(result);
             await popup.setLocalStorage(result);
             blockFood.drawItem();
           } else {

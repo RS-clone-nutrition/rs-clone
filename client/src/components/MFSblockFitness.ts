@@ -1,6 +1,6 @@
 import popup from './popup';
 import { $All } from '../utils/helpers';
-import { updateLocalStorageFitness } from '../utils/updateLocalStorage';
+import { updateLocalStorage } from '../utils/updateLocalStorage';
 const blockFitness = {
   render() {
     popup.changeLabel('Fitness');
@@ -55,7 +55,6 @@ const blockFitness = {
     this.deleteItem();
     for (let y = 0; y < 2; y++) {
       const block = document.getElementsByClassName(`new-item ${subType[y]}`)[0];
-      console.log(block);
       this.getAllInformation(subType[y]);
       block.innerHTML = ``;
       for (let i = 0; i < storage.fitness[`${subType[y]}`].length; i++) {
@@ -113,7 +112,6 @@ const blockFitness = {
     textP.forEach((el) =>
       el.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
-        console.log(target);
         const mealFood = target.parentElement?.lastElementChild?.id.split(' ')[0] as string;
         const id = target.parentElement?.lastElementChild?.id.split(' ')[1] as string;
         const storage = JSON.parse(`${localStorage.getItem('storage')}`);
@@ -128,11 +126,12 @@ const blockFitness = {
         input.focus();
         input.onkeydown = function (elem) {
           if (elem.code == 'Enter') {
-            paragraph.textContent = input.value;
-            storage.fitness[`${mealFood}`][`${id}`].time = +input.value;
+            paragraph.textContent = `${
+              Number.isNaN(parseInt(input.value)) ? 1 : parseInt(input.value) == 0 ? 1 : parseInt(input.value)
+            }`;
             localStorage.setItem('storage', JSON.stringify(storage));
+            updateLocalStorage(mealFood, id, input);
             section?.replaceChild(paragraph, input);
-            updateLocalStorageFitness(mealFood, id);
             blockFitness.drawItem();
           }
         };
