@@ -24,6 +24,7 @@ class PostCreate {
 `;
 
     this.eventListeners();
+    this.changeColor();
   }
 
   eventListeners() {
@@ -55,6 +56,19 @@ class PostCreate {
     const addIconBtn = <HTMLImageElement>$('.field-posts__icon-button');
     addIconBtn.src = './img/community/check.svg';
     this.icon = iconLink;
+  }
+
+  changeColor() {
+    const changeColorInput = <HTMLInputElement>document.querySelector('.change_color_input');
+    const colorLocalStr = localStorage.getItem('color');
+    const btncColr = <HTMLElement>$('.field-posts__button');
+    if (colorLocalStr) {
+      changeColorInput.value = colorLocalStr;
+    }
+    btncColr.style.background = changeColorInput.value;
+    changeColorInput.addEventListener('change', () => {
+      btncColr.style.background = changeColorInput.value;
+    });
   }
 }
 
