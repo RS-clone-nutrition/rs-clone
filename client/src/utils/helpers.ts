@@ -71,11 +71,15 @@ function activePage(path: string) {
     case '/myfatsecret':
       arrayHeaderLinks[4].classList.add('active-link');
       break;
-    case '/signup':
-      arrayHeaderLinks[6].classList.add('active-link');
+    case '/community':
+      arrayHeaderLinks[5].classList.add('active-link');
       break;
     case '/login':
-      arrayHeaderLinks[5].classList.add('active-link');
+    case '/user':
+      arrayHeaderLinks[6].classList.add('active-link');
+      break;
+    case '/signup':
+      arrayHeaderLinks[7].classList.add('active-link');
       break;
   }
 }

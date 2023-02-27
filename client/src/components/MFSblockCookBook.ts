@@ -19,6 +19,7 @@ const blockCookBook = {
     const locStrIdRecipes = localStorage.getItem('arrRecipes');
     const listRecipes = <HTMLElement>$('.cookbook-recipes__list');
     const emptyBook = <HTMLElement>$('.empty-cookbook');
+    const infoCookbook = <HTMLElement>$(`.myfatsecret__info-cookbook`);
     let arrayIdRecipes: string[];
     function blockRecipe(
       img: string,
@@ -79,6 +80,7 @@ const blockCookBook = {
                 arrayIdRecipes.splice(i, 1);
               }
             }
+            infoCookbook.innerHTML = `${arrayIdRecipes.length} recipes`;
             localStorage.setItem('arrRecipes', JSON.stringify(arrayIdRecipes));
             const arrayLiRecipes: Array<HTMLElement> = Array.from(document.querySelectorAll('.popular-recipes__item'));
             for (let i = 0; i < arrayLiRecipes.length; i++) {
