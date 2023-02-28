@@ -45,9 +45,9 @@ class MyFatSecret {
       </div>
     </div>
     <div class="myfatsecret__block">
-    ${blockCalendar.render()}
+    ${blockCookBook.render()}
     </div>
-  </div>
+    </div>
     ${popup.render()}
 </div>
     `;
@@ -68,6 +68,7 @@ class MyFatSecret {
     switch (nameTab) {
       case 'calendar':
         block.innerHTML = `${blockCalendar.render()}`;
+        blockCalendar.getInformation();
         break;
       case 'food':
         block.innerHTML = `${blockFood.render()}`;
@@ -131,10 +132,19 @@ class MyFatSecret {
 
   getAllInformation() {
     const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+    const infoCalendar = <HTMLElement>$(`.myfatsecret__info-calendar`);
     const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
     const infoFitness = <HTMLElement>$(`.myfatsecret__info-fitness`);
-    infoFood.innerHTML = `${storage.food.calSum} kcal`;
-    infoFitness.innerHTML = `${storage.fitness.calSum} kcal`;
+    infoCalendar.innerHTML = `${new Date().toLocaleDateString()}`;
+    if (storage.fitness.calSum) {
+      infoFitness.innerHTML = `${storage.fitness.calSum} kcal`;
+    }
+    if (storage.food.calSum) {
+      infoFood.innerHTML = `${storage.food.calSum} kcal`;
+    } else {
+      infoFood.innerHTML = `0 kcal`;
+      infoFitness.innerHTML = `0 kcal`;
+    }
   }
 }
 
