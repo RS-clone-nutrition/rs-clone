@@ -1,4 +1,4 @@
-import { $, $All, getFromLocalStorage, getTokenStorage } from '../../utils/helpers';
+import { $, getFromLocalStorage, getTokenStorage } from '../../utils/helpers';
 import apiServer from '../../api/apiServer';
 import { IPost, IResponsePost, IUser, IComment } from '../../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
@@ -88,8 +88,6 @@ class PostItem {
     const commentsList = <HTMLElement>$('.list-comments', postContainer);
 
     commentsAmout.addEventListener('click', () => {
-      commentsList.style.display = 'none';
-      setTimeout(() => (commentsList.style.display = 'flex'), 500);
       postComment.clear(commentsList);
       postComment.render(commentsArr, currentUser, postContainer, true);
     });

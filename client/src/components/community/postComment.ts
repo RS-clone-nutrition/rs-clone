@@ -14,30 +14,36 @@ class PostComment {
     const token = getTokenStorage();
 
     for await (const comment of comments) {
-      const commentCreateDate = formatDistanceToNowStrict(new Date(comment.createdDate), { addSuffix: true });
-      const user = await apiServer.getUser(comment.user, token);
-      const avatar = user.avatar || './img/user/avatar-default.png';
-      const deleteBtn = this.addDeleteBtn(user.username, currentUser.username);
-
-      commentsContainer.insertAdjacentHTML(
-        'beforeend',
-        `
-      <li class="list-comments__item item-comments" id="${comment._id}">
-        <div class="item-comments__icon">
-          <img src="${avatar}" alt="commetn user photo" class="item-comments__img">
-        </div>
-        <div class="item-comments__info">
-          <div class="item-comments__info-main">
-            <h3 class="item-comments__name blue">${user.username}</h3>
-            <p class="item-comments__text">${comment.text}</p>
-          <p class="item-comments__text-time">${commentCreateDate}</p>
-          </div>
-          ${deleteBtn}
-        </div>
-      </li>
-      `
-      );
+      const user = <IUser>await apiServer.getUser(comment.user, token);
+      comment.userObj = user;
     }
+
+    comments.forEach((comment) => {
+      if (comment.userObj) {
+        const commentCreateDate = formatDistanceToNowStrict(new Date(comment.createdDate), { addSuffix: true });
+        const avatar = comment.userObj.avatar || './img/user/avatar-default.png';
+        const deleteBtn = this.addDeleteBtn(comment.userObj.username, currentUser.username);
+
+        commentsContainer.insertAdjacentHTML(
+          'beforeend',
+          `
+          <li class="list-comments__item item-comments" id="${comment._id}">
+            <div class="item-comments__icon">
+              <img src="${avatar}" alt="commetn user photo" class="item-comments__img">
+            </div>
+            <div class="item-comments__info">
+              <div class="item-comments__info-main">
+                <h3 class="item-comments__name blue">${comment.userObj.username}</h3>
+                <p class="item-comments__text">${comment.text}</p>
+              <p class="item-comments__text-time">${commentCreateDate}</p>
+              </div>
+              ${deleteBtn}
+            </div>
+          </li>
+          `
+        );
+      }
+    });
 
     this.changeAmountComments(commentsArr, postContainer);
     this.eventListeners();

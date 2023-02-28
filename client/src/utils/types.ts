@@ -121,6 +121,7 @@ interface IPost {
 }
 
 interface IComment {
+  userObj?: IUser;
   text: string;
   _id: string;
   user: string;

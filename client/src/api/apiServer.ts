@@ -182,7 +182,6 @@ class ApiServer {
         body: JSON.stringify({ commentId, postId }),
       });
       const result = await response.json();
-      console.log(result);
       return { result, status: response.status };
     } catch (e) {
       console.log(e);
