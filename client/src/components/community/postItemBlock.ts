@@ -10,11 +10,11 @@ class PostItem {
 
   posts: [{ post: IPost; user: IUser }];
 
-  async render(currentUser: IUser) {
+  async render(currentUser: IUser, postForAdd?: IPost) {
     this.currentUser = currentUser;
     const postsContainer = <HTMLElement>$('.list-posts');
     const cuurentUserName = getFromLocalStorage('user');
-    const posts = await apiServer.getPosts();
+    const posts = postForAdd ? [{ post: postForAdd, user: currentUser }] : await apiServer.getPosts();
     this.posts = posts;
     // posts.reverse();
 
