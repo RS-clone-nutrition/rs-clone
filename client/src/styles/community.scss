@@ -7,6 +7,7 @@
 .community__wrapper {
   display: flex;
   justify-content: center;
+  gap: 30rem;
 }
 
 .community {
@@ -19,7 +20,7 @@
 
 .posts-community {
   margin-top: 10rem;
-  flex: 0 0 90%;
+  flex: 0 0 75%;
 
   &__title {
     color: #5e5e53;
@@ -213,7 +214,8 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 80rem);
+    align-items: center;
     gap: 15rem;
   }
 
@@ -224,9 +226,18 @@
 }
 
 .item-members {
+  cursor: pointer;
+
   .item-members__name {
     font-size: 14rem;
     text-align: center;
+    word-wrap: break-word
+  }
+
+  &__img {
+    width: 70rem;
+    height: 70rem;
+    object-fit: cover;
   }
 }
 

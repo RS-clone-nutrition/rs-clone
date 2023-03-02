@@ -19,7 +19,8 @@ class PostController {
       const savedPost = await post.save();
 
       return res.status(200).json({
-        message: 'post successfully loaded'
+        post: savedPost,
+        message: 'post successfully loaded',
       })
     } catch (e) {
       console.log(e);

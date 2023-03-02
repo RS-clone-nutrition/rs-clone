@@ -101,6 +101,21 @@ class ApiServer {
     }
   }
 
+  async getUsers(token: string) {
+    try {
+      const response = await fetch(`${this.URL}members`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        mode: 'cors',
+      });
+      const result = await response.json();
+      return result;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   async sendPostServer(post: IBodyRequestPost, token: string) {
     try {
       const response = await fetch(`${this.URL}post`, {

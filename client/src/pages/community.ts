@@ -2,6 +2,7 @@ import postCreate from '../components/community/postCreateBlock';
 import postItemBlock from '../components/community/postItemBlock';
 import apiServer from '../api/apiServer';
 import router from '../router';
+import membersList from '../components/community/membersList';
 class Community {
   main;
 
@@ -32,7 +33,11 @@ class Community {
           </div>
         </div>
       </div>
-      
+      <div class="community__members members-community">
+        <h2 class="members-community__title">Feautered Members</h2>
+        <ul class="members-community__list">
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -40,6 +45,7 @@ class Community {
 
     postCreate.render(user);
     postItemBlock.render(user);
+    membersList.render(user);
   }
 
   async getUser() {
