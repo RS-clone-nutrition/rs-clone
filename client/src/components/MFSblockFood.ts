@@ -204,10 +204,11 @@ const blockFood = {
       for (const el of arr[i]) {
         res += +el.innerHTML;
       }
-      dayCount[i].innerHTML = i != 4 ? `${res.toFixed(1)}` : res != 0 ? `${+((res / 1495) * 100).toFixed(1)}%` : `0%`;
-      const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
-      infoFood.innerHTML = `${dayCount[3].innerHTML} kcal`;
+      dayCount[i].innerHTML =
+        i != 4 ? `${res.toFixed(1)}` : res != 0 ? `${+((res / +basedRDI.innerHTML) * 100).toFixed(1)}%` : `0%`;
       const storage = JSON.parse(`${localStorage.getItem('storage')}`);
+      const infoFood = <HTMLElement>$(`.myfatsecret__info-food`);
+      infoFood.innerHTML = `${storage.food.calSum} kcal`;
       storage.food.calSum = dayCount[3].innerHTML;
       localStorage.setItem('storage', JSON.stringify(storage));
     }

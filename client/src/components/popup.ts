@@ -52,6 +52,8 @@ const popup = {
 
   changeLabel(label: string) {
     const block = document.querySelector('.popup__products-table__food-text') as HTMLElement;
+    console.log(block);
+
     block.innerHTML = label;
     return block;
   },
@@ -81,7 +83,7 @@ const popup = {
     const calories: number[] = [];
     const label: string[] = [];
     const id: string[] = [];
-    arr.forEach((el) => id.push(`${el.id}`));
+    arr.forEach((el) => id.push(`${el.name}`));
     arr.forEach((el) => label.push(el.name));
     arr.forEach((el) => calories.push(el.calsInHr));
     for (let i = 0; i < label.length; i++) {
@@ -186,6 +188,7 @@ const popup = {
       } else {
         const arr = allExerciseArray.filter((el) => el.name.toLowerCase().includes(searchInput.value));
         result = arr;
+        console.log(arr);
         popup.searchItemFitness(result);
         if (result.length == 0) {
           popup.renderNotFoundPage();
@@ -197,12 +200,15 @@ const popup = {
       item.forEach(async (el) => {
         if (el.checked) {
           const id = el.parentElement?.children[0].id as string;
-          if (Number.isNaN(+id)) {
+          console.log('id:', id);
+          if (id.includes('recipe')) {
             const result = await api.getSingleRecipe(id);
             await popup.setLocalStorage(result);
             blockFood.drawItem();
           } else {
-            const result = allExerciseArray.find((elem) => elem.id == +id) as unknown as IRecipe;
+            const result = allExerciseArray.find((elem) => elem.name == id) as unknown as IRecipe;
+            console.log(result);
+
             await popup.setLocalStorage(result);
             blockFitness.drawItem();
           }
