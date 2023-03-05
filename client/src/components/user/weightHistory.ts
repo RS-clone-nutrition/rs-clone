@@ -18,6 +18,15 @@ class WeightHistory {
     const toGoWeight = userObj.aim === 'lose' ? +userCurrentWeight - +userObj.goal : +userObj.goal - +userCurrentWeight;
     this.main = <HTMLElement>$('.right-user');
 
+    const button = userObj.owner ? `<button class="button button-save">Save</button>` : '';
+    const currentWeigth = userObj.owner
+      ? ` <input class="info-user__input input-current" type="text" 
+    value="${userCurrentWeight}" name="weight"><span> kg</span>`
+      : `<div class="info-user__input input-current">${userCurrentWeight} kg</div>`;
+    const goalWeight = userObj.owner
+      ? `<input class="info-user__input input-goal" type="text" value="${userObj.goal}" name="goal"><span> kg</span>`
+      : `<div class="info-user__input input-goal">${userObj.goal} kg</div>`;
+
     this.main.innerHTML = `
     <div class="right-user__calories calories-user">
     <h2 class="calories-user__title">Daily calorie intake</h2>
@@ -62,22 +71,23 @@ class WeightHistory {
         </div>
         <div class="info-user__block current">
           <h3 class="info-user__title current__title">Current Weight:</h3>
-          <input class="info-user__input input-current" type="text" 
-          value="${userCurrentWeight}" name="weight"><span> kg</span>
+        ${currentWeigth}
         </div>
         <div class="info-user__block  goal">
           <h3 class="info-user__title goal__title">Goal Weight:</h3>
-          <input class="info-user__input input-goal" type="text" value="${userObj.goal}" name="goal"><span> kg</span>
+          ${goalWeight}
         </div>
         <div class="info-user__block  still">
           <h3 class="info-user__title still__title">Still To Go:</h3>
           <div class="info-user__number  still__number"> ${toGoWeight} kg</div>
         </div>
-      <button class="button button-save">Save</button>
+      ${button}
       </div>
       `;
 
-    this.eventListeners();
+    if (userObj.owner) {
+      this.eventListeners();
+    }
     this.changeCalories(userObj);
     this.addAtributes(userObj);
     weightGraph.render(userObj);
@@ -100,7 +110,7 @@ class WeightHistory {
 
     const serverRsponse = <IResponseUser>await apiServer.updateUserServer(user, token);
     const userObj = <IUser>serverRsponse.response.user;
-
+    userObj.owner = 'true';
     localStorage.setItem('user', JSON.stringify(userObj));
 
     this.render(userObj);

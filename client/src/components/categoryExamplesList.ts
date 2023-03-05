@@ -1,23 +1,31 @@
-import { $, $All, createPath, deleteRepeatingItems, preload } from '../utils/helpers';
+import { $, $All, createPath, deleteRepeatingItems } from '../utils/helpers';
 import groups from '../consts/dataGroups';
 import { getLastURLPart } from '../utils/helpers';
 import { IGroups } from '../utils/types';
 import api from '../api/api';
 import router from '../router';
+import loader from './loader';
 
 class CategoryExamplesList {
   async render() {
     const category = this.getCategoriesArr();
-    const container = <HTMLElement>$('.category-search__list');
+    const container = <HTMLElement>$('.category-search');
+    const list = <HTMLElement>$('.category-search__list');
     const productsArr = groups[category] || deleteRepeatingItems(await this.requestsApi(category));
 
-    preload(container, 1700);
+    loader.show(container);
+    list.style.display = 'none';
 
-    container.innerHTML = '';
+    setTimeout(() => {
+      loader.remove(container);
+      list.style.display = 'flex';
+    }, 2000);
+
+    list.innerHTML = '';
 
     for (const item of productsArr) {
       const examplesArr = deleteRepeatingItems(await this.requestsApi(item));
-      container.innerHTML += `
+      list.innerHTML += `
   <li class="category-search__item">
   <h2 class="category-search__name">
     <a href="#" class="category-search__link">${item}</a>
@@ -27,6 +35,7 @@ class CategoryExamplesList {
   </div>
 </li>
   `;
+
       this.eventListeners();
     }
   }

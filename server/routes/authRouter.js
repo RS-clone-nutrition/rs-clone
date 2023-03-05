@@ -32,8 +32,7 @@ router.put('/avatar', [
 ], authMiddleware, authController.updateAvatar)
 
 router.get('/user', authMiddleware, authController.getCurrentUser)
+router.get('/members', authMiddleware, authController.getUsers)
 router.get('/user:id', authMiddleware, authController.getUser)
-
-//router.get('/users', authMiddleware, authController.getUser)
 
 export default router;
