@@ -31,7 +31,7 @@ class WeightGraph {
         labels: dates,
         datasets: [
           {
-            label: 'My Weight History',
+            label: 'Weight History',
             data: weights,
             borderWidth: 1,
           },

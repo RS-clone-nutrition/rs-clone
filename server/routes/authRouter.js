@@ -35,16 +35,4 @@ router.get('/user', authMiddleware, authController.getCurrentUser)
 router.get('/members', authMiddleware, authController.getUsers)
 router.get('/user:id', authMiddleware, authController.getUser)
 
-
 export default router;
-var name;
-let age;
-console.log(name + ' is ' + age); // Nick is undefined
-name = 'Nick';
-age = '21';
-
-var n;
-let g;
-console.log(n + ' is ' + g); // undefined is undefined
-n = 'Bob';
-g = '27';

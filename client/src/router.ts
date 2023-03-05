@@ -62,6 +62,10 @@ class Router {
       path: '/user',
       data: User,
     },
+    // {
+    //   path: '/member',
+    //   data: User,
+    // },
     {
       path: '/community',
       data: Community,
