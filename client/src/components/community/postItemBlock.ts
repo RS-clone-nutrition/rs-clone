@@ -4,6 +4,7 @@ import { IPost, IResponsePost, IUser, IComment } from '../../utils/types';
 import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
 import postComment from './postComment';
 import commentCreateBlock from './commentCreateBlock';
+import loader from '../loader';
 
 class PostItem {
   currentUser: IUser;
@@ -14,9 +15,11 @@ class PostItem {
     this.currentUser = currentUser;
     const postsContainer = <HTMLElement>$('.list-posts');
     const cuurentUserName = getFromLocalStorage('user');
+
+    loader.show(postsContainer);
     const posts = postForAdd ? [{ post: postForAdd, user: currentUser }] : await apiServer.getPosts();
     this.posts = posts;
-    // posts.reverse();
+    loader.remove(postsContainer);
 
     posts.forEach(async ({ post, user }: IResponsePost) => {
       const postCreateDate = formatDistanceToNowStrict(new Date(post.createdDate), { addSuffix: true });

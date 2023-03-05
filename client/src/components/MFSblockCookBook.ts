@@ -105,7 +105,6 @@ const blockCookBook = {
         const result: IRecipe = await api.getSingleRecipe(target.id);
         const storage = JSON.parse(`${localStorage.getItem('storage')}`);
         const mealType = [...result.recipe.mealType][0] as string;
-        console.log(mealType);
         storage.food[`${mealType.split('/')[0]}`].push({
           label: result.recipe.label,
           cal: Math.round((result.recipe.calories * 100) / result.recipe.totalWeight),
@@ -115,22 +114,6 @@ const blockCookBook = {
           totalWeight: result.recipe.totalWeight,
           gramm: 100,
         });
-        // storage.food[`${mealType.split('/')[0]}}`] = storage.food[`${mealType.split('/')[0]}}`].reduce(
-        //   (
-        //     o: {
-        //       push(i: { label: string }): unknown;
-        //       find(arg0: (v: { label: string }) => boolean): unknown;
-        //       label: string;
-        //     },
-        //     i: { label: string }
-        //   ) => {
-        //     if (!o.find((v) => v.label == i.label)) {
-        //       o.push(i);
-        //     }
-        //     return o;
-        //   },
-        //   []
-        // );
         localStorage.setItem('storage', JSON.stringify(storage));
       })
     );

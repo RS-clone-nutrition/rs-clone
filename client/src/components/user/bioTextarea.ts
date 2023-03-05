@@ -10,13 +10,16 @@ class BioTextArea {
   render(userObj: IUser) {
     this.main = <HTMLElement>$('.user-bio');
     this.bio = userObj.bio === undefined ? 'Tell about yourself' : userObj.bio;
+    const button = userObj.owner ? '<button class="update-btn">Update your BIO</button>' : '';
 
     this.main.innerHTML = `
     <p class="user__bio">Bio: ${this.bio}</p>
-    <button class="update-btn">Update your BIO</button>
+    ${button}
     `;
 
-    this.eventListeners();
+    if (userObj.owner) {
+      this.eventListeners();
+    }
   }
 
   eventListeners() {

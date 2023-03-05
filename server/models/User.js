@@ -13,6 +13,7 @@ const User = new Schema({
   aim: { type: String, require: true },
   bio: { type: String },
   avatar: { type: String },
+  owner: { type: Boolean },
 })
 
 export default model('User', User);

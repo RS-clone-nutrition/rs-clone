@@ -1,4 +1,5 @@
 @import './null.scss';
+@import './loader.scss';
 @import './headFoot.scss';
 @import './signLog.scss';
 @import './about.scss';
@@ -18,6 +19,7 @@
   margin: 0 auto;
   font-family: 'Inter', sans-serif;
 }
+
 
 button {
   cursor: pointer;

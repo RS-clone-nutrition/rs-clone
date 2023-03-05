@@ -4,6 +4,7 @@ import { $, getURL } from '../utils/helpers';
 import groupsRecipes from '../consts/dataGroupsRecipes';
 import blockRecipe from '../components/blockRecipe';
 import { IRecipe } from '../utils/types';
+import loader from '../components/loader';
 
 class Recipes {
   main;
@@ -14,7 +15,6 @@ class Recipes {
 
   render() {
     const searchValue = <string>getURL().split('/').slice(-1).toString();
-    console.log(searchValue);
 
     this.main.innerHTML = `
     <div class="recipes">
@@ -35,9 +35,11 @@ class Recipes {
               </div>
               <div class="recipes__popular popular-recipes">
                 <h2 class="popular-recipes__title">Recently Popular Recipes</h2>
-                <ul class="popular-recipes__list">
-                  
-                </ul>
+                <div class="popular-recipes__list-container"}>
+                  <ul class="popular-recipes__list">
+                    
+                  </ul>
+                </div>
                 <p class="popular-recipes__more">view more recipes</p>
               </div>
             </div>
@@ -63,6 +65,7 @@ class Recipes {
         </div>
       </div>
     `;
+
     if (searchValue === 'recipes') {
       this.fill();
     } else {
@@ -101,10 +104,12 @@ class Recipes {
   }
 
   async searchRecipes(value: string) {
+    const container = <HTMLElement>$('.popular-recipes__list-container');
+    loader.show(container);
     const titleSearch = <HTMLElement>$('.popular-recipes__title');
     const listRecipes = <HTMLElement>$('.popular-recipes__list');
     const foundRecipes = await api.getRecipeFoodSearch(value);
-    console.log(foundRecipes);
+    loader.remove(container);
     if (foundRecipes.count === 0) {
       titleSearch.innerHTML = 'NOT FOUND RECIPES';
     } else {
@@ -129,9 +134,12 @@ class Recipes {
   }
 
   async fill() {
+    const container = <HTMLElement>$('.popular-recipes__list-container');
+    loader.show(container);
     const randomRecipes = await api.getRandomRecipes();
     const listRecipes = <HTMLElement>$('.popular-recipes__list');
     const arrayRecipes = randomRecipes.hits;
+    loader.remove(container);
     const blocksRecipes = arrayRecipes
       .map((e: IRecipe) =>
         blockRecipe(
