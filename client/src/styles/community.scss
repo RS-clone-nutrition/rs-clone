@@ -1,0 +1,402 @@
+.blue {
+  color: rgba(2, 140, 196, 1);
+  font-weight: 700;
+  font-size: 17rem;
+}
+
+.community__wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30rem;
+}
+
+.community {
+  padding: 8rem 7rem;
+  max-width: 1000rem;
+  margin: 0 auto;
+  color: rgba(51, 51, 51, 1);
+  font-size: 15rem;
+}
+
+.posts-community {
+  margin-top: 10rem;
+  flex: 0 0 75%;
+
+  &__title {
+    color: #5e5e53;
+    margin-bottom: 5rem;
+  }
+
+  &__list {
+    border-radius: 20rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+    background-color: #fff;
+    border-top: 1px solid #BACFE6;
+    border-bottom: 1px solid #BACFE6;
+    padding: 20rem;
+  }
+}
+
+.item-posts {
+  background-color: #FFF;
+  border: 1px solid #D3D6DB;
+  padding: 10rem 15rem;
+
+  &__header {
+    margin-top: 10rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10rem;
+
+    .fa {
+      width: 20rem;
+    }
+  }
+
+  &__author {
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+    margin-bottom: 10rem;
+  }
+
+  &__img {
+    width: 60rem;
+    height: 60rem;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  &__comments {
+    padding: 0px 47px;
+  }
+}
+
+.info-posts {
+  width: 100%;
+
+  &__description {
+    margin-bottom: 5rem;
+    padding-left: 5rem;
+    font-size: 18rem;
+  }
+
+  &__icon {
+    margin-bottom: 3rem;
+
+    &-time {
+      color: #BBB;
+      text-align: right;
+      display: block;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__name.blue {
+    text-transform: capitalize;
+    font-size: 25rem;
+  }
+}
+
+.comments-posts {
+
+  &__header {
+    display: flex;
+    align-items: center;
+    width: 115rem;
+    gap: 10rem;
+    margin-bottom: 15rem;
+    cursor: pointer;
+
+    &:hover {
+
+      .comments-posts__amount {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .comments-posts__amount {
+    font-size: 16rem;
+  }
+
+  &__likes {
+    color: #BBB;
+    font-size: 14rem;
+  }
+
+  &__button-like {
+    width: 20rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 30rem;
+  }
+}
+
+.item-comments {
+  display: flex;
+  gap: 10rem;
+  padding-bottom: 5rem;
+  border-bottom: 1px solid #000;
+
+  &__icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  &__img {
+    width: 100%;
+  }
+
+  &__name {
+    text-transform: capitalize;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__text {
+    &-time {
+      color: #BBB;
+    }
+  }
+}
+
+.field-comments {
+  padding: 5rem;
+  display: flex;
+  gap: 10rem;
+  margin-top: 20rem;
+  padding-bottom: 10rem;
+
+  &__icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+
+  &__form {
+    width: 100%;
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px solid #B4CAE2;
+    height: 30rem;
+    padding-left: 5rem;
+  }
+}
+
+.members-community {
+
+  &__title {
+    color: #333;
+    margin-bottom: 20rem;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 80rem);
+    align-items: center;
+    gap: 15rem;
+  }
+
+  &__more {
+    text-align: right;
+    margin-top: 5rem;
+  }
+}
+
+.item-members {
+  cursor: pointer;
+
+  .item-members__name {
+    font-size: 14rem;
+    text-align: center;
+    word-wrap: break-word
+  }
+
+  &__img {
+    width: 70rem;
+    height: 70rem;
+    object-fit: cover;
+  }
+}
+
+.field-posts {
+  margin-bottom: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5rem;
+  position: relative;
+
+  &__icon {
+    width: 60rem;
+    height: 60rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__input {
+    flex-grow: 1;
+    border-radius: 20rem;
+    padding: 15rem 8% 0 5rem;
+  }
+
+  &__icon-button {
+    position: absolute;
+    width: 10%;
+    height: 50%;
+    top: 50%;
+    left: 77%;
+    transform: translate(0, -50%);
+    cursor: pointer;
+  }
+}
+
+.field-posts__button {
+  background-color: rgba(50, 179, 76, 0.8);
+  color: #FFF;
+  border-radius: 10rem;
+  padding: 5rem 10rem;
+
+  &:hover {
+    background-color: rgba(51, 111, 63, 1)
+  }
+}
+
+.item-post__deletebtn {
+  cursor: pointer;
+  width: 20rem;
+  height: 20rem;
+}
+
+.fa-angle-down {
+  color: #028cc4;
+}
+
+.item-comment__deleteBtn {
+  cursor: pointer;
+}
+
+@media (max-width: 1050px) {
+  .members-community {
+    .members-community__title{
+      font-size: 18rem;
+    }
+    &__list {
+      gap:5rem;
+      grid-template-columns: repeat(3, 50rem);
+      justify-content: center;
+      .item-members__img{
+        width: 50rem;
+        height: 50rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 720px) {
+  .community__wrapper{
+    gap: 10rem;
+  }
+  .members-community {
+    .item-members__name{
+      font-size: 11rem;
+    }
+    .members-community__title{
+      font-size: 16rem;
+    }
+    &__list {
+      gap:5rem;
+      grid-template-columns: repeat(2, 40rem);
+      justify-content: center;
+      .item-members__img{
+        width: 40rem;
+        height: 40rem;
+      }
+    }
+  }
+  .field-posts {
+    font-size: 14rem;
+
+    &__icon-button {
+      left: 70%;
+    }
+  }
+
+  .item-posts__comments {
+    padding: 0px 10px;
+  }
+}
+
+@media (max-width: 520px) {
+
+  .field-posts {
+    &__icon-button {
+      left: 65%;
+    }
+  }
+}
+@media (max-width: 400px) {
+.posts-community{
+  .field-posts__button{
+    padding: 3rem 3rem;
+    font-size: 11rem;
+  }
+  .field-posts__input{
+    padding: 5rem 8% 0 3rem;
+  }
+  .field-posts__icon{
+    width: 40rem;
+    height: 40rem;
+  }
+}
+  .members-community {
+    .item-members__name{
+      font-size: 10rem;
+    }
+    .members-community__title{
+      font-size: 14rem;
+    }
+    &__list {
+      grid-template-columns: repeat(2, 45rem);
+      .item-members__img{
+        width: 35rem;
+        height: 35rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .members-community {
+    &__list {
+      grid-template-columns: repeat(1, 45rem);
+    }
+  }
+}
