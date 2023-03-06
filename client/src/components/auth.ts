@@ -45,7 +45,7 @@ class Auth {
     form.append(messageBlock);
 
     if (status === 400) {
-      messageBlock.classList.add('errror');
+      messageBlock.classList.add('error');
       return;
     }
 

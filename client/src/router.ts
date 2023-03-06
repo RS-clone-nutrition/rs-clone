@@ -1,7 +1,7 @@
 import './styles/style.scss';
+import { About } from './pages/about';
 import { Fitness } from './pages/fitness';
 import { Error } from './pages/error';
-import { About } from './pages/about';
 import { Foods } from './pages/foods';
 import { MyFatSecret } from './pages/myFatSecret';
 import { Recipes } from './pages/recipes';
@@ -62,6 +62,10 @@ class Router {
       path: '/user',
       data: User,
     },
+    // {
+    //   path: '/member',
+    //   data: User,
+    // },
     {
       path: '/community',
       data: Community,

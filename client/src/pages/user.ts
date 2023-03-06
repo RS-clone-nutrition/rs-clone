@@ -3,6 +3,7 @@ import format from 'date-fns/format';
 import weightGraph from '../components/user/weightGraph';
 import userAvatar from '../components/user/userAvatar';
 import apiServer from '../api/apiServer';
+import { getLastURLPart } from '../utils/helpers';
 
 class User {
   main;
@@ -49,20 +50,28 @@ class User {
     userAvatar.render(userObj.avatar);
     weightGraph.render(userObj);
     this.weightHistory.render(userObj);
-    this.changeColor();
+
+    if (userObj.owner) {
+      this.changeColor();
+    }
   }
 
   async getUser() {
-    let user = <string>localStorage.getItem('user');
+    const id = getLastURLPart();
+    const user = <string>localStorage.getItem('user');
+    const currentId = user ? JSON.parse(user).__id : null;
 
-    if (!user || user === 'undefined') {
+    if (id === 'user') {
+      const userObj = JSON.parse(user);
+      userObj.owner = true;
+      return userObj;
+    }
+
+    if (!user || user === 'undefined' || currentId !== id) {
       const token = JSON.parse(<string>localStorage.getItem('token'));
-      const response = await apiServer.getCurrentUser(token);
+      const response = await apiServer.getUser(id, token);
 
-      user = response[0];
-
-      localStorage.setItem('user', JSON.stringify(user));
-      return user;
+      return response;
     }
 
     return JSON.parse(user);

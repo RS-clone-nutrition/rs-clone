@@ -2,6 +2,7 @@ import '../styles/singleRecipe.scss';
 import { $, getURL } from '../utils/helpers';
 import api from '../api/api';
 import { IRecipe } from '../utils/types';
+import loader from '../components/loader';
 
 class SingleRecipe {
   main;
@@ -12,7 +13,9 @@ class SingleRecipe {
 
   async render() {
     const idRecipe = <string>getURL().split('/').slice(-1).toString();
+    loader.show(this.main);
     const oneRecipe: IRecipe = await api.getSingleRecipe(idRecipe);
+    loader.remove(this.main);
 
     this.main.innerHTML = `
    <div class="single-recipe">

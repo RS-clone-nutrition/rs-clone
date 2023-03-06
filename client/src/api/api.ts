@@ -1,19 +1,19 @@
 class Api {
   nutrition = {
-    id: 'fe1356d4',
-    key: 'de65a7c20df722c53cdbccdd8f25f021',
+    id: 'e6313f32',
+    key: '36b1859d36f1c71900c84c8816b580ff',
   };
 
   recipe = {
     url: 'https://api.edamam.com/api/recipes/v2',
-    id: 'f3e1d102',
-    key: 'f0579006ea485c2daed2ae4396032b36',
+    id: 'd8cb11ec',
+    key: '63f53cd47a582c732ffa8d204f45aba7',
   };
 
   food = {
     url: 'https://api.edamam.com/api/food-database/v2/parser',
-    id: 'c885c4cd',
-    key: '0d731e2a8f9f149112f74f1a2056f39b',
+    id: '771ca52b',
+    key: '4c24c4b471828ae9be9967ef609d77e9',
   };
 
   async getFoods(product: string, health?: string) {
