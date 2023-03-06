@@ -46,12 +46,12 @@ class MyFatSecret {
     </div>
     <div class="myfatsecret__block">
     ${blockCookBook.render()}
-    ${
-      (setTimeout(() => {
+    ${(function cookBook() {
+      setTimeout(() => {
         blockCookBook.fillCookBook();
-      }),
-      0)
-    }
+      }, 0);
+      return '';
+    })()}
     </div>
     </div>
     ${popup.render()}

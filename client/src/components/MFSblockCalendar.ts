@@ -64,14 +64,12 @@ const blockCalendar = {
     fitnessDiary.innerHTML = storage.fitness.calSum ? storage.fitness.calSum : 0;
     const difference =
       +foodDiary.innerHTML - +fitnessDiary.innerHTML < 0 ? 0 : +foodDiary.innerHTML - +fitnessDiary.innerHTML;
-    console.log(difference);
 
     totalDiary.innerHTML = `${+RDI - difference < 0 ? 0 : +RDI - difference} or ${
       +((+RDI - difference) / +RDI).toFixed(1) * 100 < 0 || Number.isNaN(+((+RDI - difference) / +RDI).toFixed(1) * 100)
         ? 0
         : +((+RDI - difference) / +RDI).toFixed(1) * 100
     }% from the daily norm`;
-    console.log(RDI);
   },
 };
 export default blockCalendar;
