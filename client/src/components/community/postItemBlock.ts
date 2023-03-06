@@ -103,8 +103,7 @@ class PostItem {
 
     postForDelete.remove();
 
-    const response = await apiServer.deletePost(idPost, token);
-    console.log(response);
+    await apiServer.deletePost(idPost, token);
   }
 
   clear() {
