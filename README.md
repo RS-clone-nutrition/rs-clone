@@ -1,5 +1,5 @@
 # RS-Clone Fatsecret
-
+Deploy: https://fatsecret-rs-clone.netlify.app/  
 SPA приложение с клиент-серверной архитектурой.    
 Приложение создано на основе https://www.fatsecret.com/, с разработанным собственным [дизайном](https://www.figma.com/file/h9hvafZchgqUmKBK6mG073/RsClone-Fatsecret?node-id=0%3A1&t=XrKNYuyoclewJtUr-1)
 
