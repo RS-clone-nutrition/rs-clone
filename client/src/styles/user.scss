@@ -1,0 +1,253 @@
+html {
+  font-size: 1px;
+}
+
+.user {
+
+  &__main {
+    padding: 20rem 7rem;
+    max-width: 1000rem;
+    margin: 0 auto;
+    color: rgba(51, 51, 51, 1);
+  }
+}
+
+.main-user {
+  button {
+    background-color: rgba(50, 179, 76, 1);
+    color: #edf1e9;
+    border-radius: 20rem;
+
+    &:hover {
+      background-color: rgba(51, 111, 63, 1)
+    }
+  }
+
+  &__content {
+    margin: 0 auto 40rem;
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+    border: 2rem solid #33b34b;
+    border-radius: 10rem;
+    padding: 17rem 20rem 29rem;
+    justify-content: space-between;
+  }
+}
+
+.left-user {
+  text-align: center;
+
+  &__icon-container {
+    position: relative;
+    border-radius: 50%;
+
+    &:hover {
+      cursor: pointer;
+      border-radius: 50%;
+      filter: brightness(70%);
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 30%;
+        left: 34%;
+        width: 40%;
+        height: 40%;
+        z-index: 3;
+        background: url('/src/assets/img/user/camera2.png') no-repeat;
+        ;
+      }
+    }
+  }
+
+
+  &__img {
+    width: 300rem;
+    height: 300rem;
+    border-radius: 50%;
+  }
+
+  &__name {
+    text-transform: uppercase;
+    font-size: 30rem;
+  }
+
+  &__date {
+    text-transform: capitalize;
+    font-size: 20rem;
+  }
+}
+
+.info-user__title-main {
+  color: rgba(0, 0, 0, .54);
+  font-size: 24rem;
+  text-transform: uppercase;
+}
+
+.info-user {
+  background-color: #F2F2F2;
+  padding: 20rem 20rem;
+  font-size: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+
+  &__title {
+    color: rgba(0, 0, 0, .38);
+  }
+
+  &__block {
+    color: #000;
+  }
+
+  &__number {
+    color: rgba(0, 0, 0, .84);
+  }
+}
+
+.info-user__input {
+  text-align: right;
+  width: 80rem;
+}
+
+.still__number {
+  margin-left: 40rem;
+}
+
+.right-user {
+  display: flex;
+  align-items: center;
+  gap: 10rem;
+}
+
+.calories-user {
+  display: flex;
+  flex-direction: column;
+  gap: 20rem;
+
+  &__title {
+    color: rgba(0, 0, 0, .54);
+    font-size: 24rem;
+  }
+
+  &__number {
+    color: rgba(0, 0, 0, .84);
+    font-size: 20rem;
+  }
+}
+
+.canvas__container {
+  padding: 20rem;
+  background-color: #EBF9FC;
+}
+
+canvas {
+  background-color: #fff;
+}
+
+.user-bio {
+  margin-top: 10rem;
+
+  .user__bio {
+    font-size: 20rem;
+    margin-bottom: 20rem;
+  }
+}
+
+.textarea__btn,
+.update-btn {
+  width: 150rem;
+  font-size: 17rem;
+}
+
+.popup-avatar {
+
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  &__body {
+    background-color: #edf1e9;
+    width: 600rem;
+    padding: 15rem 20rem;
+    border-radius: 20rem;
+    color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10rem;
+    border-bottom: 1px solid #000;
+    margin-bottom: 20rem;
+  }
+
+  &__form-container {
+    display: flex;
+    padding: 0px 25rem;
+    margin-bottom: 20rem;
+    padding-bottom: 30rem;
+    border-bottom: 1px solid #000;
+    text-align: center;
+  }
+
+  .form__button {
+    text-align: center;
+  }
+
+  .avatar-form__input {
+    margin-left: 10rem;
+  }
+
+  .avatar-button {
+    background-color: #32B34C;
+    width: 100rem;
+    border-radius: 15rem;
+    color: #EBF9FC;
+  }
+}
+
+.popup {
+
+  &__form-avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20rem;
+  }
+}
+
+@media (max-width: 810px) {
+  .left-user {
+    &__img {
+      width: 300rem;
+      margin-bottom: 20rem;
+    }
+  }
+
+  .main-user {
+
+    &__content {
+      flex-direction: column;
+    }
+  }
+
+  .info-user {
+    padding: 20rem;
+    gap: 20rem;
+  }
+}
+
+@media (max-width: 670px) {
+  .right-user {
+    display: block;
+  }
+}

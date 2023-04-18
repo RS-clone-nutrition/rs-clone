@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/1a64f65040.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="./img/favicon.svg" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <title>MyFatSecret</title>
+  <base href="/" />
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a class="logo" href="">
+          <img src="./img/logo.svg" alt="logo" class="header-logo">
+          <p class="logo__text">fatsecret</p>
+        </a>
+        <ul class="nav__menu">
+          <li><a class="nav__link" href="/">About</a></li>
+          <li><a class="nav__link" href="/fitness">Fitness</a></li>
+          <li><a class="nav__link" href="/foods">Foods</a></li>
+          <li><a class="nav__link" href="/recipes">Recipes</a></li>
+          <li><a class="nav__link" href="/myfatsecret">My fatsecret</a></li>
+          <li><a class="nav__link" href="/community">Community</a></li>
+          <ul class="account">
+            <li><a href="/login" class="nav__link login">Login Up</a></li>
+            <li>|</li>
+            <li><a href="/signup" class="nav__link sign">Sign Up</a></li>
+          </ul>
+          <img src="./img/close-header.png" alt="close-menu" class="nav_menu_close">
+        </ul>
+        <div class="header_burger burger">
+          <span class="burger_line burger_line_first"></span>
+          <span class="burger_line burger_line_second"></span>
+          <span class="burger_line burger_line_third"></span>
+        </div>
+      </nav>
+      <div class="search">
+        <select class="search__select" name="search-select" id="search-select">
+          <option value="food">&#129361; Food</option>
+          <option value="recipe">&#129367; Recipe</option>
+          <option value="exercise">&#127947; Exercise</option>
+        </select>
+        <input class="search__input" type="search" placeholder="Enter search" list="search-header-fitness">
+        <button class="search__button"><i class="fa-solid fa-magnifying-glass fa-circle"></i></button>
+      </div>
+      <div class="change_color wrap">
+        <p class="change_color_text title">Choose a style color: </p>
+        <input type="color" value="#32B34C" class="change_color_input">
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="content">
+
+    </div>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer_inner">
+        <div class="footer-github-wrap">
+          <img src="./img/github-logo.svg" alt="logo-github" class="github-logo">
+          <ul class="github-links">
+            <li class="git-link"><a href="https://github.com/evvgenchik">evvgenchik</a></li>
+            <li class="git-link"><a href="https://github.com/lojkuc">lojkuc</a></li>
+            <li class="git-link"><a href="https://github.com/ullltimate">ullltimate</a></li>
+          </ul>
+        </div>
+        <p class="about-product">© 2023 FatSecret</p>
+        <a href="https://rs.school/js/"><img src="./img/logo-rsschool.svg" alt="rsschool"></a>
+      </div>
+    </div>
+  </footer>
+  <div class="main-open"></div>
+
+  </div>
+  <!-- <div class="loader__container">
+    <div class="loader">loading</div>
+  </div> -->
+</body>
+
+</html>

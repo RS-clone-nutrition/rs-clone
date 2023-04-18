@@ -1,0 +1,46 @@
+.about {
+  padding: 25px 0;
+
+  h1 {
+    text-align: center;
+  }
+
+  p {
+    text-indent: 20px;
+    padding: 10px;
+    font-weight: 400;
+    text-align: justify;
+  }
+}
+
+.developers {
+  font-family: 'Inter', sans-serif;
+  color: #FFF;
+  background-color: #333333;
+  padding: 30px 0 85px;
+
+  h1 {
+    text-align: center;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  &__block {
+    margin-top: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    margin-bottom: 10px;
+  }
+}
